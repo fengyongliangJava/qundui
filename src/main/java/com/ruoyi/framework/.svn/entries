@@ -1,0 +1,49 @@
+10
+
+dir
+474
+svn://gitee.com/teaching_research_bs/RuoYi-fast/src/main/java/com/ruoyi/framework
+svn://gitee.com/teaching_research_bs/RuoYi-fast
+
+
+
+2020-04-01T03:17:18.000Z
+474
+RuoYi <yzz_ivy@163.com>
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+394ffef8-a71d-4585-8b1c-e35be644f3a9
+
+aspectj
+dir
+
+config
+dir
+
+datasource
+dir
+
+interceptor
+dir
+
+manager
+dir
+
+shiro
+dir
+
+web
+dir
+

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+    
+    <style type="text/css">
+	    #tableBox1{margin:30px auto;} 
+		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox1 tr:hover{background:#fff;}
+	</style>
+    
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>                    
+                        	<li>
+								<label>创建日期： </label>
+								<input type="text" class="time-input" id="createTime" name="createTime"  readonly="true"/>
+							</li>
+                        
+                            <li>
+                                <label>组织机构：</label>              
+                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
+                            </li>
+
+
+                            <li>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-sm-12">
+  
+					
+					<table  id="tableBox1"  class="table-hover" border = "1" >
+					
+						 <tr>
+						 	<td colspan="14">牙星公司平均工资明细表 </td>
+						 </tr>
+						 
+			
+						 
+						
+              		 	 <tr>
+              		 	 	<td rowspan="2">类型</td>
+              		 	 	<td rowspan="2">部门</td>
+                    		<td colspan="4">上月工资(元)</td>
+                    		<td rowspan="2">平均工资差</td>
+        				    <td rowspan="2">产量/进米差</td>
+        				    <td colspan="4">本月工资(元)</td>
+        		
+     
+               			 </tr>
+               			 
+             		     <tr>
+		                   <td>总工资</td>
+		                   <td>总人数</td>
+		                   <td>平均工资</td>
+		                   <td>产量/进米</td>
+		      		       <td>总工资</td>
+		                   <td>总人数</td>
+		                   <td>平均工资</td>
+		                   <td>产量/进米</td>
+				  		 </tr>	 
+				  		 
+				  	     <tr>
+				  	       <td rowspan="3">一线</td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  	       <td></td>
+				  		 </tr>	
+				  		 
+				  	     <tr>
+				  	       <td></td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  		 </tr>	
+		  		 			 
+		  		 			 
+		  		 	     <tr>
+				  	       <td></td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  		 </tr>	
+						 <tr>
+						 	<td colspan="13">总工资:     元</td>
+						 </tr>
+			
+					</table>
+		
+		
+                
+            </div>
+
+
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+
+    <script th:inline="javascript">
+
+        var prefix = ctx + "system/yx/tableMM";
+
+
+        
+    </script>
+    
+    
+
+    
+    
+</body>
+</html>

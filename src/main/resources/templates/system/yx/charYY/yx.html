@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+    
+    <style type="text/css">
+	    #tableBox1{margin:30px auto;} 
+		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox1 tr:hover{background:#fff;}
+	</style>
+    
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>                    
+                        	<li>
+								<label>创建日期： </label>
+								<input type="text" class="time-input" id="createTime" name="createTime"  readonly="true"/>
+							</li>
+                        
+                        
+                            <li>
+                                <label>组织机构：</label>              
+                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
+                            </li>
+
+
+
+                            <li>
+                                <label>统计类型：</label>              
+                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
+                            </li>
+
+
+
+                            <li>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-sm-12">
+  
+					
+			 	  <div id="container" style="min-width:400px;height:400px;margin-top:20px;"></div>
+		
+                
+            </div>
+
+
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+
+
+	<div th:fragment="highcharts-js">
+	    <script th:src="@{/ajax/libs/report/highcharts/highcharts.js}"></script>
+	</div>
+
+
+    <script th:inline="javascript">
+
+        var prefix = ctx + "system/yx/charYY";
+
+        
+
+        $(function () {
+
+            var chart = Highcharts.chart('container',{
+        		
+        		chart: {
+        	        type: 'column'
+        	    },
+        	    title: {
+        	        text: '全年工资分析图'
+        	    },
+        	    subtitle: {
+        	        text: '数据来源: www.59jt.com'
+        	    },
+        	    xAxis: {
+        	        categories: [
+        	            '一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'
+        	        ],
+        	        crosshair: true
+        	    },
+        	    yAxis: {
+        	        min:0,
+        	        title: {
+        	            text: '金额(元)'
+        	        }
+        	    },
+        	    tooltip: {
+        	        // head + 每个 point + footer 拼接成完整的 table
+        	        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        	        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        	        '<td style="padding:0"><b>{point.y:.1f}元</b></td></tr>',
+        	        footerFormat: '</table>',
+        	        shared: true,
+        	        useHTML: true
+        	    },
+        	    plotOptions: {
+        	        column: {
+        	            borderWidth: 0
+        	        }
+        	    },
+        	    series: [{
+        	        name: '一线工资',
+        	        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        	    }, {
+        	        name: '二线工资',
+        	        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+        	    }, {
+        	        name: '三线工资',
+        	        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+        	    }]
+        	});
+
+        });
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </script>
+    
+    
+
+    
+    
+</body>
+</html>

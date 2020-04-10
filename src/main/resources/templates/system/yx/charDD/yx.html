@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+    
+    <style type="text/css">
+	    #tableBox1{margin:30px auto;} 
+		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox1 tr:hover{background:#fff;}
+	</style>
+    
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>                    
+                        	<li>
+								<label>创建日期： </label>
+								<input type="text" class="time-input" id="createTime" name="createTime"  readonly="true"/>
+							</li>
+                        
+                            <li>
+                                <label>组织机构：</label>              
+                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
+                            </li>
+                            
+                            
+                            <li>
+                                <label>统计类型：</label>              
+                               	<select id="countType" name="countType" th:with="type=${@dict.getType('countType')}">
+									<option value="">-请选择-</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+                            </li>
+                            
+                            
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-sm-12">
+  
+  
+					   <div id="box" style="min-width:400px;height:400px;margin-top:20px;"></div>
+		
+                
+            </div>
+
+
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+
+
+<div th:fragment="echarts-js">
+    <script th:src="@{/ajax/libs/report/echarts/echarts-all.js}"></script>
+</div>
+
+
+
+    <script th:inline="javascript">
+
+        var prefix = ctx + "system/yx/tableMM";
+
+        $(function () {
+
+        	
+            var myChart = echarts.init(document.getElementById('box'));
+
+            var weatherIcons = {
+                'Sunny': '/static/img/yixian.png',
+                'Cloudy': '/static/img/erxian.png',
+                'Showers': '/static/img/sanxian.png'
+
+            };
+
+            option = {
+                title: {
+                    text: '当日工资分析图表',
+                    subtext: '工资类型总数  9999户 9999元',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    // orient: 'vertical',
+                    // top: 'middle',
+                    bottom: 10,
+                    left: 'center',
+                    data: ['一线工资', '二线工资', '三线工资']
+                },
+                series: [
+                    {
+                        type: 'pie',
+                        radius: '65%',
+                        center: ['50%', '50%'],
+                        selectedMode: 'single',
+                        data: [
+                            {
+                                value: 50,
+                                name: '一线工资',
+                                label: {
+                                    normal: {
+                                        formatter: [
+                                            '{title|{b}}{abg|}',
+                                            '  {weatherHead|类型}{valueHead|户数}{rateHead|金额}',
+                                            '{hr|}',
+                                            '  {Cloudy|}{value|3}{rate|200}',
+                                            '  {Sunny|}{value|4}{rate|300}',
+                                            '  {Showers|}{value|5}{rate|400}'
+                                        ].join('\n'),
+                                        backgroundColor: '#eee',
+                                        borderColor: '#777',
+                                        borderWidth: 1,
+                                        borderRadius: 4,
+                                        rich: {
+                                            title: {
+                                                color: '#eee',
+                                                align: 'center'
+                                            },
+                                            abg: {
+                                                backgroundColor: '#333',
+                                                width: '100%',
+                                                align: 'right',
+                                                height: 25,
+                                                borderRadius: [4, 4, 0, 0]
+                                            },
+                                            Sunny: {
+                                                height: 30,
+                                                align: 'left',
+                                                backgroundColor: {
+                                                    image: weatherIcons.Sunny
+                                                }
+                                            },
+                                            Cloudy: {
+                                                height: 30,
+                                                align: 'left',
+                                                backgroundColor: {
+                                                    image: weatherIcons.Cloudy
+                                                }
+                                            },
+                                            Showers: {
+                                                height: 30,
+                                                align: 'left',
+                                                backgroundColor: {
+                                                    image: weatherIcons.Showers
+                                                }
+                                            },
+                                            weatherHead: {
+                                                color: '#333',
+                                                height: 24,
+                                                align: 'left'
+                                            },
+                                            hr: {
+                                                borderColor: '#777',
+                                                width: '100%',
+                                                borderWidth: 0.5,
+                                                height: 0
+                                            },
+                                            value: {
+                                                width: 20,
+                                                padding: [0, 20, 0, 30],
+                                                align: 'left'
+                                            },
+                                            valueHead: {
+                                                color: '#333',
+                                                width: 20,
+                                                padding: [0, 20, 0, 30],
+                                                align: 'center'
+                                            },
+                                            rate: {
+                                                width: 40,
+                                                align: 'right',
+                                                padding: [0, 10, 0, 0]
+                                            },
+                                            rateHead: {
+                                                color: '#333',
+                                                width: 40,
+                                                align: 'center',
+                                                padding: [0, 10, 0, 0]
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {value: 50, name: '二线工资'},
+                            {value: 50, name: '三线工资'}
+                        ],
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+
+
+            myChart.setOption(option);
+
+
+        });
+        
+    </script>
+    
+    
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+</head>
+
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>                    
+                        	<li>
+								<label>创建日期： </label>
+								<input type="text" class="time-input" id="createTime" name="createTime" />
+							</li>
+                        
+                            <li>
+                                <label>组织机构：</label>              
+                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
+                            </li>
+
+
+                            <li>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;上传</a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+
+    <script th:inline="javascript">
+
+        var prefix = ctx + "system/yx/selectDD";
+
+
+        
+    </script>
+    
+    
+
+    
+    
+</body>
+</html>
