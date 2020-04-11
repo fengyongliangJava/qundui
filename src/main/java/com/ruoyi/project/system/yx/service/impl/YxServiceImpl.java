@@ -1,7 +1,14 @@
 package com.ruoyi.project.system.yx.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.framework.aspectj.lang.annotation.DataScope;
+import com.ruoyi.framework.web.domain.Ztree;
+import com.ruoyi.project.system.dept.domain.Dept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.system.yx.mapper.YxMapper;
@@ -94,4 +101,61 @@ public class YxServiceImpl implements IYxService
     {
         return yxMapper.deleteYxById(id);
     }
+
+    /**
+     * 查询部门管理树
+     *
+     * @param dept 部门信息
+     * @return 所有部门信息
+     */
+    @Override
+    @DataScope(deptAlias = "d")
+    public List<Ztree> selectDeptTree(Dept dept)
+    {
+        List<Dept> deptList = yxMapper.selectDeptList(dept);
+        List<Ztree> ztrees = initZtree(deptList);
+        return ztrees;
+    }
+    /**
+     * 对象转部门树
+     *
+     * @param deptList 部门列表
+     * @return 树结构列表
+     */
+    public List<Ztree> initZtree(List<Dept> deptList)
+    {
+        return initZtree(deptList, null);
+    }
+
+    /**
+     * 对象转部门树
+     *
+     * @param deptList 部门列表
+     * @param roleDeptList 角色已存在菜单列表
+     * @return 树结构列表
+     */
+    public List<Ztree> initZtree(List<Dept> deptList, List<String> roleDeptList)
+    {
+        List<Ztree> ztrees = new ArrayList<Ztree>();
+        boolean isCheck = StringUtils.isNotNull(roleDeptList);
+        for (Dept dept : deptList)
+        {
+            if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()))
+            {
+                Ztree ztree = new Ztree();
+                ztree.setId(dept.getDeptId());
+                ztree.setpId(dept.getParentId());
+                ztree.setName(dept.getDeptName());
+                ztree.setTitle(dept.getDeptName());
+                if (isCheck)
+                {
+                    ztree.setChecked(roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
+                }
+                ztrees.add(ztree);
+            }
+        }
+        return ztrees;
+    }
+
+
 }

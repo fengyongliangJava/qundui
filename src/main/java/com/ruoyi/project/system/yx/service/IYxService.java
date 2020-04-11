@@ -1,6 +1,9 @@
 package com.ruoyi.project.system.yx.service;
 
 import java.util.List;
+
+import com.ruoyi.framework.web.domain.Ztree;
+import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.yx.domain.Yx;
 
 /**
@@ -58,4 +61,6 @@ public interface IYxService
      * @return 结果
      */
     public int deleteYxById(Long id);
+
+    List<Ztree> selectDeptTree(Dept dept);
 }

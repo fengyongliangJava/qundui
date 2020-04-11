@@ -1,6 +1,9 @@
 package com.ruoyi.project.system.yx.controller;
 
 import java.util.List;
+
+import com.ruoyi.framework.web.domain.Ztree;
+import com.ruoyi.project.system.dept.domain.Dept;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,8 +44,25 @@ public class YxselectDDController extends BaseController
         return prefix + "/yx";
     }
 
-    
-    
+    /**
+     * 加载部门列表树
+     */
+    @GetMapping("/treeData")
+    @ResponseBody
+    public List<Ztree> treeData()
+    {
+        List<Ztree> ztrees = yxService.selectDeptTree(new Dept());
+        return ztrees;
+    }
+
+    /**
+     * 选择部门树
+     */
+    @GetMapping("/selectDeptTree")
+    public String selectDeptTree(ModelMap mmap)
+    {
+        return prefix + "/tree";
+    }
     /**
      * 查询牙星公司列表
      */

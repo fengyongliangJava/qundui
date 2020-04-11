@@ -1266,7 +1266,6 @@ var table = {
         		// 保存最后一次搜索名称
         		$.tree._lastValue = value;
         		var nodes = $._tree.getNodes();
-        		// 如果要查空字串，就退出不查了。
         		if (value == "") {
         		    $.tree.showAllNode(nodes);
         		    return;
@@ -1360,12 +1359,12 @@ var table = {
         	// 不允许最后层级节点选择
         	notAllowLastLevel: function(_tree) {
     		    var nodes = _tree.getSelectedNodes();
-    		    for (var i = 0; i < nodes.length; i++) {
+    		    /*for (var i = 0; i < nodes.length; i++) {
                     if (!nodes[i].isParent) {
     		    		$.modal.msgError("不能选择最后层级节点（" + nodes[i].name + "）");
     		            return false;
     		        }
-    		    }
+    		    }*/
         		return true;
         	},
         	// 隐藏/显示搜索栏

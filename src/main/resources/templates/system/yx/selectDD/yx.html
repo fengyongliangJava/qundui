@@ -2,6 +2,23 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('牙星公司列表')" />
+
+    <script type="text/javascript">
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#time',
+                eventElem:".rq",
+                trigger: 'click'
+            });
+        })
+    </script>
+    <style>
+        .input-group-addon{background-color:#fff;border:1px solid #E5E6E7;
+            border-radius:1px;color:inherit;font-size:14px;font-weight:400;
+            line-height:1;padding:6px 12px;text-align:center;}
+    </style>
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,16 +28,23 @@
                     <div class="select-list">
                         <ul>                    
                         	<li>
-								<label>创建日期： </label>
-								<input type="text" class="time-input" id="createTime" name="createTime" />
-							</li>
-                        
-                            <li>
-                                <label>组织机构：</label>              
-                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
-                                
+                                <label>创建日期： </label>
+                                <div class="col-sm-2" >
+                                    <div class="input-group">
+                                        <input type="text" class="time-input" data-format="yyyy" id="createTime" name="createTime" />
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="treeId" name="userOrg" readonly="true"/>
+                                <label>部门：</label>
+                                <div class="col-sm-2" >
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
+                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
                             </li>
-                        
+
                            <li>
                             	<label>员工性别：</label>
 								<select id="sex" name="sex" th:with="type=${@dict.getType('sys_user_sex')}">
@@ -28,7 +52,7 @@
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
                             </li>
-                       
+
                             <li>
                                 <label>工作类型：</label>
                      				<select id="workType" name="workType" th:with="type=${@dict.getType('workType')}">
@@ -36,8 +60,8 @@
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
                             </li>
-                        
-                        
+
+
                             <li>
                                 <label>工资种类：</label>
                                 <select id="workClass" name="workClass" th:with="type=${@dict.getType('workClass')}">
@@ -45,8 +69,8 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                        
-                        
+
+
                             <li>
                                 <label>员工工号：</label>
                                 <input type="text" id="userId" name="userId"  maxlength="7" />
@@ -91,7 +115,28 @@
         var editFlag = [[${@permission.hasPermi('system:yx:selectDD:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:yx:selectDD:remove')}]];
         var prefix = ctx + "system/yx/selectDD";
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url: prefix + "/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
 
+        }
+
+        function doSubmit(index, layero){
+            debugger;
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
         $(function() {
 
         	

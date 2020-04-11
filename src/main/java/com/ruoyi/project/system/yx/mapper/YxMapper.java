@@ -1,6 +1,9 @@
 package com.ruoyi.project.system.yx.mapper;
 
 import java.util.List;
+
+import com.ruoyi.framework.web.domain.Ztree;
+import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.yx.domain.Yx;
 
 /**
@@ -58,4 +61,11 @@ public interface YxMapper
      * @return 结果
      */
     public int deleteYxByIds(String[] ids);
+
+
+    Dept selectDeptById();
+
+    List<Ztree> selectDeptTree(Dept dept);
+
+    List<Dept> selectDeptList(Dept dept);
 }
