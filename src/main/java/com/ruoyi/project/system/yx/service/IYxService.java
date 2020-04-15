@@ -63,4 +63,5 @@ public interface IYxService
     public int deleteYxById(Long id);
 
     List<Ztree> selectDeptTree(Dept dept);
+
 }

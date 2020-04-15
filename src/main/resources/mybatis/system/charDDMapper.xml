@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.charDDMapper">
+    
+
+    <sql id="selectYxVo">
+        select id, user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, work_number, work_price, work_all, work_fen, work_sum, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work, year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day, other, user_cost, create_time, create_by, update_time, update_by, remark from yx
+    </sql>
+
+	<sql id="query_Count_sql_where">
+	  <if test="createTime != null and createTime != ''"> and user_type = #{createTime} </if>
+	  <if test="userOrg != null and userOrg != ''"> and user_org = #{userOrg} </if>
+	</sql>
+	
+    
+<!-- workType -->
+
+	<select id="YxCountWorkType1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_type = 1
+		</where>
+	</select>
+	<select id="YxSumWorkType1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_type = 1
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_type = 2
+		</where>
+	</select>
+	<select id="YxSumWorkType2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_type = 2
+		</where>
+	</select>
+	
+	
+	
+	<select id="YxCountWorkType3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_type = 3
+		</where>
+	</select>
+	<select id="YxSumWorkType3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_type = 3
+		</where>
+	</select>
+	
+<!-- workType -->
+
+
+
+
+
+
+<!-- workClass -->
+
+	<select id="YxCountWorkClass1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_class = 1
+		</where>
+	</select>
+	<select id="YxSumWorkClass1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_class = 1
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_class = 2
+		</where>
+	</select>
+	<select id="YxSumWorkClass2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_class = 2
+		</where>
+	</select>
+	
+	
+	
+	<select id="YxCountWorkClass3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_class = 3
+		</where>
+	</select>
+	<select id="YxSumWorkClass3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			<include refid="query_Count_sql_where"></include>
+			work_class = 3
+		</where>
+	</select>
+	
+<!-- workType -->
+
+</mapper>

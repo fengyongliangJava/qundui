@@ -2,6 +2,8 @@ package com.ruoyi.project.system.yx.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.yx.domain.Yx;
@@ -68,4 +70,5 @@ public interface YxMapper
     List<Ztree> selectDeptTree(Dept dept);
 
     List<Dept> selectDeptList(Dept dept);
+
 }

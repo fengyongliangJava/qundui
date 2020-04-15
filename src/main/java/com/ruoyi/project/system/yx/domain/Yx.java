@@ -19,8 +19,8 @@ public class Yx extends BaseEntity
     private Long id;
 
     /** 员工工号 */
-    @Excel(name = "员工工号")
-    private String userId;
+/*    @Excel(name = "员工工号")
+    private String userId;*/
 
     /** 员工姓名 */
     @Excel(name = "员工姓名")
@@ -31,213 +31,213 @@ public class Yx extends BaseEntity
     private String sex;
 
     /** 联系方式 */
-    @Excel(name = "联系方式")
+  /*  @Excel(name = "联系方式")
     private String tell;
 
-    /** 身份证 */
+    *//** 身份证 *//*
     @Excel(name = "身份证")
     private String card;
 
-    /** 户籍所在地 */
+    *//** 户籍所在地 *//*
     @Excel(name = "户籍所在地")
     private String address;
 
-    /** 单位 */
+    *//** 单位 *//*
     @Excel(name = "单位")
     private String userOrg;
 
-    /** 部门 */
+    *//** 部门 *//*
     @Excel(name = "部门")
     private String userArea;
 
-    /** 区队 */
+    *//** 区队 *//*
     @Excel(name = "区队")
     private String userGroup;
 
-    /** 班组 */
+    *//** 班组 *//*
     @Excel(name = "班组")
     private String userClass;
 
-    /** 岗位 */
+    *//** 岗位 *//*
     @Excel(name = "岗位")
     private String station;
 
-    /** 工资种类 */
+    *//** 工资种类 *//*
     @Excel(name = "工资种类")
     private String workType;
 
-    /** 工资类型 */
+    *//** 工资类型 *//*
     @Excel(name = "工资类型")
     private String workClass;
 
-    /** 产量 */
+    *//** 产量 *//*
     @Excel(name = "产量")
     private Integer workNumber;
 
-    /** 单价 */
+    *//** 单价 *//*
     @Excel(name = "单价")
     private Double workPrice;
 
-    /** 总工分 */
+    *//** 总工分 *//*
     @Excel(name = "总工分")
     private Integer workAll;
 
-    /** 工分 */
+    *//** 工分 *//*
     @Excel(name = "工分")
     private Integer workFen;
 
-    /** 计件工资 */
+    *//** 计件工资 *//*
     @Excel(name = "计件工资")
     private Integer workSum;
 
-    /** 考核 */
+    *//** 考核 *//*
     @Excel(name = "考核")
     private Integer kaohe;
 
-    /** 煤质考核 */
+    *//** 煤质考核 *//*
     @Excel(name = "煤质考核")
     private Integer meiKaohe;
 
-    /** 早会 */
+    *//** 早会 *//*
     @Excel(name = "早会")
     private Integer meeting;
 
-    /** 年休假天数 */
+    *//** 年休假天数 *//*
     @Excel(name = "年休假天数")
     private Integer yearsHolidays;
 
-    /** 年休假工资 */
+    *//** 年休假工资 *//*
     @Excel(name = "年休假工资")
     private Integer yearsCost;
 
-    /** 春节休假天数 */
+    *//** 春节休假天数 *//*
     @Excel(name = "春节休假天数")
     private Integer yearDay;
 
-    /** 春节休假工资 */
+    *//** 春节休假工资 *//*
     @Excel(name = "春节休假工资")
     private Integer yearCost;
 
-    /** 春节上班 */
+    *//** 春节上班 *//*
     @Excel(name = "春节上班")
     private Integer yearWork;
 
-    /** 春节上班工资 */
+    *//** 春节上班工资 *//*
     @Excel(name = "春节上班工资")
     private Integer yearSum;
 
-    /** 春节值班天数 */
+    *//** 春节值班天数 *//*
     @Excel(name = "春节值班天数")
     private Integer yearPlus;
 
-    /** 春节值班工资 */
+    *//** 春节值班工资 *//*
     @Excel(name = "春节值班工资")
     private Integer yearDuty;
 
-    /** 加班天数 */
+    *//** 加班天数 *//*
     @Excel(name = "加班天数")
     private Integer workPlus;
 
-    /** 加班工资 */
+    *//** 加班工资 *//*
     @Excel(name = "加班工资")
     private Integer workCost;
 
-    /** 法定天数 */
+    *//** 法定天数 *//*
     @Excel(name = "法定天数")
     private Integer lawDay;
 
-    /** 法定工资 */
+    *//** 法定工资 *//*
     @Excel(name = "法定工资")
     private Integer lawCost;
 
-    /** 公休天数 */
+    *//** 公休天数 *//*
     @Excel(name = "公休天数")
     private Integer busDay;
 
-    /** 公休工资 */
+    *//** 公休工资 *//*
     @Excel(name = "公休工资")
     private Integer busCost;
 
-    /** 延时加班工资 */
+    *//** 延时加班工资 *//*
     @Excel(name = "延时加班工资")
     private Integer busPlus;
 
-    /** 女工费 */
+    *//** 女工费 *//*
     @Excel(name = "女工费")
     private Integer woman;
 
-    /** 入井费 */
+    *//** 入井费 *//*
     @Excel(name = "入井费")
     private Integer run;
 
-    /** 夜班补助 */
+    *//** 夜班补助 *//*
     @Excel(name = "夜班补助")
     private Integer ye;
 
-    /** 矿井处罚 */
+    *//** 矿井处罚 *//*
     @Excel(name = "矿井处罚")
     private Integer kuangji;
 
-    /** 护理假天数 */
+    *//** 护理假天数 *//*
     @Excel(name = "护理假天数")
     private Integer huliDay;
 
-    /** 护理假工资 */
+    *//** 护理假工资 *//*
     @Excel(name = "护理假工资")
     private Integer huliCost;
 
-    /** 工伤假天数 */
+    *//** 工伤假天数 *//*
     @Excel(name = "工伤假天数")
     private Integer gsDay;
 
-    /** 工伤假工资 */
+    *//** 工伤假工资 *//*
     @Excel(name = "工伤假工资")
     private Integer gsCost;
 
-    /** 探亲假天数 */
+    *//** 探亲假天数 *//*
     @Excel(name = "探亲假天数")
     private Integer tqDay;
 
-    /** 探亲工资 */
+    *//** 探亲工资 *//*
     @Excel(name = "探亲工资")
     private Integer tqCost;
 
-    /** 病假天数 */
+    *//** 病假天数 *//*
     @Excel(name = "病假天数")
     private Integer bingDay;
 
-    /** 病假工资 */
+    *//** 病假工资 *//*
     @Excel(name = "病假工资")
     private Integer bingCost;
 
-    /** 丧假天数 */
+    *//** 丧假天数 *//*
     @Excel(name = "丧假天数")
     private Integer sangDay;
 
-    /** 丧假工资 */
+    *//** 丧假工资 *//*
     @Excel(name = "丧假工资")
     private Integer sangCost;
 
-    /** 事假天数 */
+    *//** 事假天数 *//*
     @Excel(name = "事假天数")
     private Integer sjDay;
 
-    /** 旷工天数 */
+    *//** 旷工天数 *//*
     @Excel(name = "旷工天数")
     private Integer kgDay;
 
-    /** 待岗天数 */
+    *//** 待岗天数 *//*
     @Excel(name = "待岗天数")
     private Integer dgDay;
 
-    /** 其它补助 */
+    *//** 其它补助 *//*
     @Excel(name = "其它补助")
     private Integer other;
 
-    /** 实发工资 */
+    *//** 实发工资 *//*
     @Excel(name = "实发工资")
     private Double userCost;
-
+*/
     public void setId(Long id) 
     {
         this.id = id;
@@ -247,7 +247,9 @@ public class Yx extends BaseEntity
     {
         return id;
     }
-    public void setUserId(String userId) 
+    
+    
+   /* public void setUserId(String userId) 
     {
         this.userId = userId;
     }
@@ -255,7 +257,7 @@ public class Yx extends BaseEntity
     public String getUserId() 
     {
         return userId;
-    }
+    }*/
     public void setUserName(String userName) 
     {
         this.userName = userName;
@@ -274,7 +276,7 @@ public class Yx extends BaseEntity
     {
         return sex;
     }
-    public void setTell(String tell) 
+   /* public void setTell(String tell) 
     {
         this.tell = tell;
     }
@@ -808,5 +810,5 @@ public class Yx extends BaseEntity
             .append("updateBy", getUpdateBy())
             .append("remark", getRemark())
             .toString();
-    }
+    }*/
 }

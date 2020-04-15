@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>  
+                        
+                    		<li>
+			       			   <div class="form-group" style="width:270px;">
+								   <input type="text" id='excelFile' name='excelFile' placeholder="请选择Excel"  style="width:200px;"disabled/><input type="button" id="i-check" style="width:60px;margin-top:-3px;background-color: #1ab394;line-height:13px;"value="浏览" class="btn btn-primary" onclick="$('#file').click();">
+								   <input type="file" id='file' class="form-control" name="file" accept=".xlsx" onchange="$('#excelFile').val($('#file').val());" style="display: none"/> 
+						       </div>
+                       		</li> 
+                                          
+
+
+                            <li>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+
+      var prefix = ctx + "system/yx/userUpload";
+      
+      function importExcel(){
+      		
+      			$.tzLoading({content:'正在上传，请稍等...'});
+      		    
+      		    var file = $('#excelFile').val();
+      			if(file==null){
+      				alert("请选择上传Excel文件！");
+      				LoadingClose();
+      				return;
+      			}
+      			
+      		
+      			var formData = new FormData($('#formId')[0]);
+
+      			$.ajax({
+      				cache : false,
+      				type : "POST",
+      				url :prefix +'/importExcel',
+      				data : formData,
+      				async : true,
+      				processData: false,
+      				contentType: false,
+      			    error : function(xhr,type) {
+      			    },
+      			    success:function(data){
+      			    	 debugger;
+      			    	 alert(data.code);
+                          if(data.code == 0){
+                        	  $.modal.alertSuccess('上传用户信息成功!');
+                          }else{
+                        	  $.modal.alertError('上传用户信息失败!');
+                          }
+                          LoadingClose();
+      			    }
+      			});
+      			
+      }
+
+
+
+      		
+        
+
+        
+    </script>
+    
+    
+
+    
+    
+</body>
+</html>

@@ -9,15 +9,17 @@
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
                     <div class="select-list">
-                        <ul>                    
-                        	<li>
-								<label>创建日期： </label>
-								<input type="text" class="time-input" id="createTime" name="createTime" />
-							</li>
-                        
-                            <li>
+                        <ul>  
+                                          
+                  			<li>
+                                <label>创建日期：</label>
+                                <input readonly="true" type="text" class="time-input" data-format="yyyy-MM" id="createTime" name="createTime" />
+                            </li>
+                            
+    					    <li>
                                 <label>组织机构：</label>
-                                <input type="text" id="userOrg" name="userOrg"/>
+      							<input type="hidden" id="treeId" name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
                             </li>
                         
                            <li>
@@ -89,8 +91,32 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:yx:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:yx:remove')}]];
-        var prefix = ctx + "system/yx";
+        var prefix = ctx + "system/yx/selectMM";
 
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url: "/system/yx/selectDD/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
+
+        }
+
+        function doSubmit(index, layero){
+            debugger;
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+        
+        
         $(function() {
 
         	

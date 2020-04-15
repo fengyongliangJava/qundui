@@ -9,21 +9,30 @@
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
                     <div class="select-list">
-                        <ul>                    
-                        	<li>
-								<label>创建日期： </label>
-								<input type="text" class="time-input" id="createTime" name="createTime" />
-							</li>
+                        <ul>  
                         
-                            <li>
-                                <label>组织机构：</label>              
-                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
+                    		<li>
+			       			   <div class="form-group" style="width:270px;">
+								   <input type="text" id='excelFile' name='excelFile' placeholder="请选择Excel"  style="width:200px;"disabled/><input type="button" id="i-check" style="width:60px;margin-top:-3px;background-color: #1ab394;line-height:13px;"value="浏览" class="btn btn-primary" onclick="$('#file').click();">
+								   <input type="file" id='file' class="form-control" name="file" accept=".xlsx" onchange="$('#excelFile').val($('#file').val());" style="display: none"/> 
+						       </div>
+                       		</li> 
+                                          
+             				<li>
+                                <label>创建日期：</label>
+                                <input readonly="true" type="text" class="time-input"  id="createTime" name="createTime" />
+                            </li>
+                            
+    					    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId"  readonly="true"/>
+                                <input  type="text" id="treeName" name="treeName" onclick="selectDeptTree()" readonly="true">
                             </li>
 
 
                             <li>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;导出</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;上传</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exprotExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
                             </li>
                             
                             
@@ -36,11 +45,121 @@
         </div>
     </div>
     <th:block th:include="include :: footer" />
-
     <script th:inline="javascript">
 
-        var prefix = ctx + "system/yx/selectDD";
+        var prefix = ctx + "system/yx/moneyCount";
+        
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url:"/system/yx/selectDD/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
 
+        }
+
+        function doSubmit(index, layero){
+            debugger;
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+
+      function importExcel(){
+      		
+      			$.tzLoading({content:'正在上传，请稍等...'});
+      			
+      			var createTime = $('#createTime').val();
+      			var userOrg  = $('#treeName').val();
+      		    var file = $('#excelFile').val();
+      		    
+      		    
+      			if(isEmpty(createTime)){
+      				alert("请选择上传时间！");
+      				LoadingClose();
+      				return;
+      			} 
+      			
+      			if(isEmpty(userOrg)){
+      				alert("请选择组织机构！");
+      				LoadingClose();
+      				return;
+      			} 
+      			
+      		    var file = $('#excelFile').val();
+      			if(isEmpty(file)){
+      				alert("请选择上传Excel文件！");
+      				LoadingClose();
+      				return;
+      			}
+      			
+      		
+      			var formData = new FormData($('#formId')[0]);
+
+
+      			$.ajax({
+      				cache : false,
+      				type : "POST",
+      				url :prefix +'/importExcel',
+      				data : formData,
+      				async : true,
+      				processData: false,
+      				contentType: false,
+      			    error : function(xhr,type) {
+      			    },
+      			    success:function(data){
+                          if('success' == data){
+                        	  $.modal.alertSuccess('上传计件工资成功!');
+                          }else if("fail" == data) {
+                        	  $.modal.alertError('上传计件工资失败!');
+                          }else{
+                        	  $.modal.alertWarning('第    行数据不匹配!');
+                          }
+                          LoadingClose();
+      			    }
+      			});
+      			
+      }
+
+
+      function exprotExcel(){
+      	
+      		$.tzLoading({content:'正在导出数据，请稍等...'});
+      	    var createTime = $('#createTime').val();
+      	    var userOrg  = $('#treeName').val();
+      	    
+/*       		if(isEmpty(createTime)){
+      			alert("请选择导出时间！");
+      			LoadingClose();
+      			return;
+      		}  */
+      		
+      		if(isEmpty(userOrg)){
+      			alert("请选择组织机构！");
+      			LoadingClose();
+      			return;
+      		} 
+      	    
+      	    window.location.href = prefix + '/exprotExcel?createTime='+createTime+'&userOrg='+userOrg;
+      	    	LoadingClose();
+      }
+      		
+        
 
         
     </script>

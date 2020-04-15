@@ -1,0 +1,1339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.charMapper">
+    
+
+    <sql id="selectYxVo">
+        select id, user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, work_number, work_price, work_all, work_fen, work_sum, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work, year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day, other, user_cost, create_time, create_by, update_time, update_by, remark from yx
+    </sql>
+
+	<sql id="query_Count_sql_where">
+	  <if test="createTime != null and createTime != ''"> and user_type = #{createTime} </if>
+	  <if test="userOrg != null and userOrg != ''"> and user_org = #{userOrg} </if>
+	</sql>
+	
+	
+    
+<!-- workType111111 -->
+	<select id="YxCountWorkType1yue1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType1yue2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType1yue3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType1yue4"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue4"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType1yue5"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue5"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType1yue6"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	<select id="YxSumWorkType1yue6"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType1yue7"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue7"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType1yue8"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue8"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType1yue9"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue9"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType1yue10"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue10"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType1yue11"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue11"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType1yue12"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType1yue12"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	
+<!-- workType111111 -->	
+	
+	
+	
+
+<!-- workType22222222 -->
+	<select id="YxCountWorkType2yue1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType2yue2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType2yue3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType2yue4"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue4"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType2yue5"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue5"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType2yue6"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	<select id="YxSumWorkType2yue6"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType2yue7"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue7"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType2yue8"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue8"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType2yue9"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue9"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType2yue10"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue10"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType2yue11"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue11"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType2yue12"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType2yue12"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	
+<!-- workType222222 -->	
+
+
+
+
+<!-- workType33333 -->
+	<select id="YxCountWorkType3yue1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType3yue2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType3yue3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType3yue4"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue4"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType3yue5"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue5"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType3yue6"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	<select id="YxSumWorkType3yue6"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType3yue7"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue7"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType3yue8"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue8"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType3yue9"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue9"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkType3yue10"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue10"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType3yue11"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue11"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkType3yue12"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkType3yue12"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_type = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	
+<!-- workType3333333333 -->	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- workClass111111 -->
+	<select id="YxCountWorkClass1yue1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass1yue2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass1yue3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass1yue4"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue4"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass1yue5"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue5"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass1yue6"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	<select id="YxSumWorkClass1yue6"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass1yue7"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue7"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass1yue8"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue8"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass1yue9"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue9"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass1yue10"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue10"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass1yue11"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue11"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass1yue12"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass1yue12"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 1
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	
+<!-- workClass111111 -->	
+	
+	
+	
+
+<!-- workClass22222222 -->
+	<select id="YxCountWorkClass2yue1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass2yue2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass2yue3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass2yue4"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue4"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass2yue5"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue5"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass2yue6"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	<select id="YxSumWorkClass2yue6"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass2yue7"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue7"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass2yue8"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue8"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass2yue9"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue9"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass2yue10"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue10"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass2yue11"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue11"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass2yue12"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass2yue12"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 2
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	
+<!-- workClass222222 -->	
+
+
+
+
+<!-- workClass33333 -->
+	<select id="YxCountWorkClass3yue1"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue1"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-01")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass3yue2"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue2"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-02")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass3yue3"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue3"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-03")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass3yue4"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue4"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-04")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass3yue5"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue5"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-05")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass3yue6"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	<select id="YxSumWorkClass3yue6"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-06")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass3yue7"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue7"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-07")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass3yue8"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue8"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-08")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass3yue9"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue9"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-09")</if>
+		</where>
+	</select>
+	
+	
+	<select id="YxCountWorkClass3yue10"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue10"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-10")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass3yue11"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue11"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-11")</if>
+		</where>
+	</select>
+	
+	<select id="YxCountWorkClass3yue12"  resultType="int">
+		select  COUNT(*) from yx
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	<select id="YxSumWorkClass3yue12"  resultType="java.math.BigDecimal">
+		select  SUM(user_cost) from yx		
+		<where>
+			work_class = 3
+			<include refid="query_Count_sql_where"></include>
+			<if test="createTime != null and createTime != ''"> and  `create_time` like  CONCAT("${createTime}","-12")</if>
+		</where>
+	</select>
+	
+<!-- workClass3333333 -->	
+
+</mapper>

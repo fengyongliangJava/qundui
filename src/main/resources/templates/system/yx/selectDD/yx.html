@@ -3,22 +3,6 @@
 <head>
     <th:block th:include="include :: header('牙星公司列表')" />
 
-    <script type="text/javascript">
-        layui.use('laydate', function(){
-            var laydate = layui.laydate;
-            //常规用法
-            laydate.render({
-                elem: '#time',
-                eventElem:".rq",
-                trigger: 'click'
-            });
-        })
-    </script>
-    <style>
-        .input-group-addon{background-color:#fff;border:1px solid #E5E6E7;
-            border-radius:1px;color:inherit;font-size:14px;font-weight:400;
-            line-height:1;padding:6px 12px;text-align:center;}
-    </style>
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -27,31 +11,25 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>                    
-                        	<li>
-                                <label>创建日期： </label>
-                                <div class="col-sm-2" >
-                                    <div class="input-group">
-                                        <input type="text" class="time-input" data-format="yyyy" id="createTime" name="createTime" />
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="treeId" name="userOrg" readonly="true"/>
-                                <label>部门：</label>
-                                <div class="col-sm-2" >
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
-                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                    </div>
-                                </div>
+             				<li>
+                                <label>创建日期：</label>
+                                <input readonly="true" type="text" class="time-input"  id="createTime" name="createTime" />
                             </li>
-
-                           <li>
+                            
+    					    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId" name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
+                            </li>
+                           
+                            <li>
                             	<label>员工性别：</label>
 								<select id="sex" name="sex" th:with="type=${@dict.getType('sys_user_sex')}">
 									<option value="">-请选择-</option>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
                             </li>
+
 
                             <li>
                                 <label>工作类型：</label>
@@ -81,6 +59,7 @@
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;结算</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;Excel导出</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;结算查询</a>
                             </li>
                         </ul>
                     </div>
@@ -128,7 +107,6 @@
         }
 
         function doSubmit(index, layero){
-            debugger;
             var tree = layero.find("iframe")[0].contentWindow.$._tree;
             if ($.tree.notAllowLastLevel(tree)) {
                 var body = layer.getChildFrame('body', index);
@@ -139,7 +117,6 @@
         }
         $(function() {
 
-        	
             var options = {
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
@@ -177,7 +154,14 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-                    title: '性别'
+                    title: '性别',
+					formatter : function(value, row, index) {
+						if (value == '女') {
+							return '<span class="label label-danger">女</span>';
+						} else if (value == '男') {
+							return '<span class="label label-primary">男</span>';
+						}
+					}
                 },
                 {
                     field: 'tell', 
@@ -571,13 +555,6 @@
         
     </script>
     
-    
 
-    
-    
-    
-    
-    
-    
 </body>
 </html>

@@ -137,132 +137,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectYxVo"/>
         where id = #{id}
     </select>
-        
+    
+   
     <insert id="insertYx" parameterType="Yx" useGeneratedKeys="true" keyProperty="id">
         insert into yx
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userId != null  and userId != ''">user_id,</if>
             <if test="userName != null  and userName != ''">user_name,</if>
             <if test="sex != null  and sex != ''">sex,</if>
-            <if test="tell != null  and tell != ''">tell,</if>
-            <if test="card != null  and card != ''">card,</if>
-            <if test="address != null  and address != ''">address,</if>
-            <if test="userOrg != null  and userOrg != ''">user_org,</if>
-            <if test="userArea != null  and userArea != ''">user_area,</if>
-            <if test="userGroup != null  and userGroup != ''">user_group,</if>
-            <if test="userClass != null  and userClass != ''">user_class,</if>
-            <if test="station != null  and station != ''">station,</if>
-            <if test="workType != null  and workType != ''">work_type,</if>
-            <if test="workClass != null  and workClass != ''">work_class,</if>
-            <if test="workNumber != null ">work_number,</if>
-            <if test="workPrice != null ">work_price,</if>
-            <if test="workAll != null ">work_all,</if>
-            <if test="workFen != null ">work_fen,</if>
-            <if test="workSum != null ">work_sum,</if>
-            <if test="kaohe != null ">kaohe,</if>
-            <if test="meiKaohe != null ">mei_kaohe,</if>
-            <if test="meeting != null ">meeting,</if>
-            <if test="yearsHolidays != null ">years_holidays,</if>
-            <if test="yearsCost != null ">years_cost,</if>
-            <if test="yearDay != null ">year_day,</if>
-            <if test="yearCost != null ">year_cost,</if>
-            <if test="yearWork != null ">year_work,</if>
-            <if test="yearSum != null ">year_sum,</if>
-            <if test="yearPlus != null ">year_plus,</if>
-            <if test="yearDuty != null ">year_duty,</if>
-            <if test="workPlus != null ">work_plus,</if>
-            <if test="workCost != null ">work_cost,</if>
-            <if test="lawDay != null ">law_day,</if>
-            <if test="lawCost != null ">law_cost,</if>
-            <if test="busDay != null ">bus_day,</if>
-            <if test="busCost != null ">bus_cost,</if>
-            <if test="busPlus != null ">bus_plus,</if>
-            <if test="woman != null ">woman,</if>
-            <if test="run != null ">run,</if>
-            <if test="ye != null ">ye,</if>
-            <if test="kuangji != null ">kuangji,</if>
-            <if test="huliDay != null ">huli_day,</if>
-            <if test="huliCost != null ">huli_cost,</if>
-            <if test="gsDay != null ">gs_day,</if>
-            <if test="gsCost != null ">gs_cost,</if>
-            <if test="tqDay != null ">tq_day,</if>
-            <if test="tqCost != null ">tq_cost,</if>
-            <if test="bingDay != null ">bing_day,</if>
-            <if test="bingCost != null ">bing_cost,</if>
-            <if test="sangDay != null ">sang_day,</if>
-            <if test="sangCost != null ">sang_cost,</if>
-            <if test="sjDay != null ">sj_day,</if>
-            <if test="kgDay != null ">kg_day,</if>
-            <if test="dgDay != null ">dg_day,</if>
-            <if test="other != null ">other,</if>
-            <if test="userCost != null ">user_cost,</if>
-            <if test="createTime != null  and createTime != ''">create_time,</if>
-            <if test="createBy != null  and createBy != ''">create_by,</if>
-            <if test="updateTime != null ">update_time,</if>
-            <if test="updateBy != null  and updateBy != ''">update_by,</if>
-            <if test="remark != null  and remark != ''">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="userName != null  and userName != ''">#{userName},</if>
             <if test="sex != null  and sex != ''">#{sex},</if>
-            <if test="tell != null  and tell != ''">#{tell},</if>
-            <if test="card != null  and card != ''">#{card},</if>
-            <if test="address != null  and address != ''">#{address},</if>
-            <if test="userOrg != null  and userOrg != ''">#{userOrg},</if>
-            <if test="userArea != null  and userArea != ''">#{userArea},</if>
-            <if test="userGroup != null  and userGroup != ''">#{userGroup},</if>
-            <if test="userClass != null  and userClass != ''">#{userClass},</if>
-            <if test="station != null  and station != ''">#{station},</if>
-            <if test="workType != null  and workType != ''">#{workType},</if>
-            <if test="workClass != null  and workClass != ''">#{workClass},</if>
-            <if test="workNumber != null ">#{workNumber},</if>
-            <if test="workPrice != null ">#{workPrice},</if>
-            <if test="workAll != null ">#{workAll},</if>
-            <if test="workFen != null ">#{workFen},</if>
-            <if test="workSum != null ">#{workSum},</if>
-            <if test="kaohe != null ">#{kaohe},</if>
-            <if test="meiKaohe != null ">#{meiKaohe},</if>
-            <if test="meeting != null ">#{meeting},</if>
-            <if test="yearsHolidays != null ">#{yearsHolidays},</if>
-            <if test="yearsCost != null ">#{yearsCost},</if>
-            <if test="yearDay != null ">#{yearDay},</if>
-            <if test="yearCost != null ">#{yearCost},</if>
-            <if test="yearWork != null ">#{yearWork},</if>
-            <if test="yearSum != null ">#{yearSum},</if>
-            <if test="yearPlus != null ">#{yearPlus},</if>
-            <if test="yearDuty != null ">#{yearDuty},</if>
-            <if test="workPlus != null ">#{workPlus},</if>
-            <if test="workCost != null ">#{workCost},</if>
-            <if test="lawDay != null ">#{lawDay},</if>
-            <if test="lawCost != null ">#{lawCost},</if>
-            <if test="busDay != null ">#{busDay},</if>
-            <if test="busCost != null ">#{busCost},</if>
-            <if test="busPlus != null ">#{busPlus},</if>
-            <if test="woman != null ">#{woman},</if>
-            <if test="run != null ">#{run},</if>
-            <if test="ye != null ">#{ye},</if>
-            <if test="kuangji != null ">#{kuangji},</if>
-            <if test="huliDay != null ">#{huliDay},</if>
-            <if test="huliCost != null ">#{huliCost},</if>
-            <if test="gsDay != null ">#{gsDay},</if>
-            <if test="gsCost != null ">#{gsCost},</if>
-            <if test="tqDay != null ">#{tqDay},</if>
-            <if test="tqCost != null ">#{tqCost},</if>
-            <if test="bingDay != null ">#{bingDay},</if>
-            <if test="bingCost != null ">#{bingCost},</if>
-            <if test="sangDay != null ">#{sangDay},</if>
-            <if test="sangCost != null ">#{sangCost},</if>
-            <if test="sjDay != null ">#{sjDay},</if>
-            <if test="kgDay != null ">#{kgDay},</if>
-            <if test="dgDay != null ">#{dgDay},</if>
-            <if test="other != null ">#{other},</if>
-            <if test="userCost != null ">#{userCost},</if>
-            <if test="createTime != null  and createTime != ''">#{createTime},</if>
-            <if test="createBy != null  and createBy != ''">#{createBy},</if>
-            <if test="updateTime != null ">#{updateTime},</if>
-            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
-            <if test="remark != null  and remark != ''">#{remark},</if>
          </trim>
     </insert>
 

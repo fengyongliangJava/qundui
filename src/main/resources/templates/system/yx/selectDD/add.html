@@ -410,16 +410,549 @@
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/yx/selectDD:"
-        $("#form-yx-add").validate({
-            focusCleanup: true
+        var prefix = ctx + "system/yx/selectDD"
+        
+        $().ready(function() {
+        	validateRule();
         });
+    
 
         function submitHandler() {
             if ($.validate.form()) {
                 $.operate.save(prefix + "/add", $('#form-yx-add').serialize());
             }
         }
+
+	         var icon = "<i class='fa fa-times-circle'></i> ";
+
+	     	 jQuery.validator.addMethod("isPhone", function(value, element) {
+	          var length = value.length;
+	          var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+	          return this.optional(element) || (length == 11 && mobile.test(value));
+	         }, "请填写正确的手机号码");
+
+
+	      	jQuery.validator.addMethod("isIdCardNo", function(value, element) {
+	      	return this.optional(element) || idCardNoUtil.checkIdCardNo(value);
+	      	}, "请正确输入您的身份证号码");
+
+
+  	      function validateRule() {
+  	      	var icon = "<i class='fa fa-times-circle'></i> ";
+  	      	$("#form-yx-add").validate({
+  	      		rules : {
+  	      			userId : {
+  	      				required : true,
+  	      				digits : true
+  	      			},
+  	      			userName : {
+  	      				required : true
+  	      			},
+  	      			sex : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			tell : {
+  	      				isPhone:true
+  	      			},
+  	      	
+  	      			card : {
+  	      				isIdCardNo:true
+  	      			},
+  	      			
+  	      			address : {
+  	      				required : true
+  	      			},
+
+
+  	      			userOrg : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			userArea : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			userGroup : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			userClass : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			
+  	      			station : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			workType : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			workClass : {
+  	      				required : true
+  	      			},
+
+
+  	      			workNumber : {
+  	      				digits : true
+  	      			},
+
+  	      			workPrice : {
+  	      				number:true   
+  	      			},
+  	      			
+  	      			workAll : {
+  	      				digits : true
+  	      			},
+  	      			
+  	      			workFen : {
+  	      				digits : true
+  	      			},
+  	      			
+  	      			workSum : {
+  	      				number:true   
+  	      			},
+  	      			
+  	      			check : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			meiCheck : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			meeting : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			yearsHolidays : {
+  	      				digits : true 
+  	      			},
+
+  	      			yearsCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			yearDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			yearCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			yearWork : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			yearSum : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			yearPlus : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			yearDuty : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			 workPlus : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			workCost : {
+  	      					digits : true 
+  	      			},
+  	      			
+  	      			lawDay : {
+  	      				digits : true 
+  	      			},
+  	      		
+  	      			lawCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			busDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			busCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			busDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			lawCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			busDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			busCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			busPlus : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			woman : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			run : {
+  	      				digits : true 
+  	      			},
+
+  	      			ye : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			kuangji : {
+  	      				digits : true 
+  	      			},
+  	      	
+  	      			huliDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			gsDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			gsCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			tqDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			tqCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			bingDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			bingCost : {
+  	      				digits : true 
+  	      			},
+
+  	      			sangDay : {
+  	      				digits : true 
+  	      			},
+
+  	      			sangCost : {
+  	      				digits : true 
+  	      			},
+
+  	      			bingDay : {
+  	      				digits : true 
+  	      			},
+
+  	      			bingCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			sangDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			sangCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			sangCost : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			sjDay : {
+  	      				digits : true 
+  	      			},
+
+  	      			 kgDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			dgDay : {
+  	      				digits : true 
+  	      			},
+  	      			
+  	      			userCost : {
+  	      				number:true   
+  	      			}
+  	      			
+  	      			
+  	      	
+  	      		},
+  	      		
+  	      		
+  	      messages : {
+  	      	
+  	      		
+
+  	      		
+  	      		userId : {
+  	      			required : icon + "请输入编号！",
+  	      			required : icon + "只能输入数字！"
+  	      		},
+  	      		userName : {
+  	      			required : icon + "请输入姓名！"
+  	      		},
+  	      		
+  	      		sex : {
+  	      			required : icon + "请输选择！"
+  	      		},
+  	      		
+  	      		tell : {
+  	      			required : icon + "请输正确的手机号码！"
+  	      		},
+  	      		card : {
+  	      			required : icon + "请输正确的身份证号码！"
+  	      		},
+  	      		
+  	      		address : {
+  	      			required : icon + "请输户籍所在地！"
+  	      		},
+
+  	      		userOrg : {
+  	      			required : icon + "请选择单位！"
+  	      		},
+  	      		
+  	      		userArea : {
+  	      			required : icon + "请选择部门！"
+  	      		},
+  	      		
+  	      		userGroup : {
+  	      			required : icon + "请选择区队！"
+  	      		},
+  	      		
+  	      		
+  	      		station : {
+  	      			required : icon + "请填写岗位！"
+  	      		},
+  	      		
+  	      		workType : {
+  	      			required : icon + "请选择工资类型！"
+  	      		},
+  	      		
+  	      		workClass : {
+  	      			required : icon + "请选择工资种类！"
+  	      		},
+
+  	      		workNumber : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		workPrice : {
+  	      			required : icon + "请输入正确的小数！"  
+  	      		},
+  	      		
+  	      		workAll : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		workFen : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		workSum : {
+  	      			required : icon + "请输入正确的小数！" 
+  	      		},
+  	      		
+  	      		check : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		meiCheck : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		meeting : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		yearsHolidays : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		yearsCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		yearDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		yearCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		yearWork : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		yearSum : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		yearPlus : {
+  	      			required : icon + "请输入正确的数字！" 
+  	      		},
+  	      		
+  	      		yearDuty : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		 workPlus : {
+  	      			 required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		workCost : {
+  	      			required : icon + "请输入正确的数字！" 
+  	      		},
+  	      		
+  	      		lawDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      	
+  	      		lawCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		busDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		busCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		busDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		lawCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		busDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		busCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		busPlus : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		woman : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		run : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		ye : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		kuangji : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		huliDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		gsDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		gsCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		tqDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		tqCost : {
+  	      			required : icon + "请输入正确的数字！" 
+  	      		},
+  	      		
+  	      		bingDay : {
+  	      			required : icon + "请输入正确的数字！" 
+  	      		},
+  	      		
+  	      		bingCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		sangDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		sangCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		bingDay : {
+  	      			required : icon + "请输入正确的数字！" 
+  	      		},
+
+  	      		bingCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		sangDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		sangCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		sangCost : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		sjDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+
+  	      		 kgDay : {
+  	      			 required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		dgDay : {
+  	      			required : icon + "请输入正确的数字！"
+  	      		},
+  	      		
+  	      		userCost : {
+  	      			required : icon + "请输入正确的小数！"
+  	      		}
+ 	      		
+  	      		
+ 	      		}
+ 	      	})
+ 	      }
+
+
+        
+        
     </script>
 </body>
 </html>
