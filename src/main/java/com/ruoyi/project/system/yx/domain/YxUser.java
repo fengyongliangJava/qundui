@@ -1,12 +1,9 @@
 package com.ruoyi.project.system.yx.domain;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 牙星公司对象 yx
@@ -14,7 +11,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Excel;
  * @author ruoyi
  * @date 2020-04-07
  */
-public class Yx 
+public class YxUser extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
@@ -72,221 +69,176 @@ public class Yx
     /** 工资类型 */
     @Excel(name = "工资类型")
     private String workClass;
-    
-    /** 出勤状态 */
-    @Excel(name = "出勤状态")
-    private Integer workStart;
 
     /** 产量 */
-    @Excel(name = "产量")
+    //@Excel(name = "产量")
     private Integer workNumber;
 
     /** 单价 */
-    @Excel(name = "单价")
-    private BigDecimal workPrice;
+    //@Excel(name = "单价")
+    private Double workPrice;
 
     /** 总工分 */
-    @Excel(name = "总工分")
+    //@Excel(name = "总工分")
     private Integer workAll;
 
     /** 工分 */
-    @Excel(name = "工分")
+    //@Excel(name = "工分")
     private Integer workFen;
 
    /** 计件工资*/
-    @Excel(name = "计件工资")
-    private BigDecimal workSum;
-    
-    /** 零活工资*/
-    @Excel(name = "计件工资")
-    private BigDecimal workHuo;
+    //@Excel(name = "计件工资")
+    private Integer workSum;
 
    /** 考核*/
-    @Excel(name = "考核")
+    //@Excel(name = "考核")
     private Integer kaohe;
 
    /** 煤质考核*/
-    @Excel(name = "煤质考核")
+    //@Excel(name = "煤质考核")
     private Integer meiKaohe;
 
    /** 早会*/
-    @Excel(name = "早会")
+    //@Excel(name = "早会")
     private Integer meeting;
 
    /** 年休假天数*/
-    @Excel(name = "年休假天数")
+    //@Excel(name = "年休假天数")
     private Integer yearsHolidays;
 
    /** 年休假工资*/
-    @Excel(name = "年休假工资")
+    //@Excel(name = "年休假工资")
     private Integer yearsCost;
 
    /** 春节休假天数*/
-    @Excel(name = "春节休假天数")
+    //@Excel(name = "春节休假天数")
     private Integer yearDay;
 
    /** 春节休假工资*/
-    @Excel(name = "春节休假工资")
+    //@Excel(name = "春节休假工资")
     private Integer yearCost;
 
    /** 春节上班*/
-    @Excel(name = "春节上班")
+    //@Excel(name = "春节上班")
     private Integer yearWork;
 
    /** 春节上班工资*/
-    @Excel(name = "春节上班工资")
+    //@Excel(name = "春节上班工资")
     private Integer yearSum;
 
    /** 春节值班天数*/
-    @Excel(name = "春节值班天数")
+    //@Excel(name = "春节值班天数")
     private Integer yearPlus;
 
    /** 春节值班工资*/
-    @Excel(name = "春节值班工资")
+    //@Excel(name = "春节值班工资")
     private Integer yearDuty;
 
    /** 加班天数*/
-    @Excel(name = "加班天数")
+    //@Excel(name = "加班天数")
     private Integer workPlus;
 
    /** 加班工资*/
-    @Excel(name = "加班工资")
+    //@Excel(name = "加班工资")
     private Integer workCost;
 
    /** 法定天数*/
-    @Excel(name = "法定天数")
+    //@Excel(name = "法定天数")
     private Integer lawDay;
 
    /** 法定工资*/
-    @Excel(name = "法定工资")
+    // @Excel(name = "法定工资")
     private Integer lawCost;
 
    /** 公休天数*/
-    @Excel(name = "公休天数")
+    //@Excel(name = "公休天数")
     private Integer busDay;
 
    /** 公休工资*/
-    @Excel(name = "公休工资")
+    //@Excel(name = "公休工资")
     private Integer busCost;
 
    /** 延时加班工资*/
-    @Excel(name = "延时加班工资")
+    //@Excel(name = "延时加班工资")
     private Integer busPlus;
 
    /** 女工费*/
-    @Excel(name = "女工费")
+    //@Excel(name = "女工费")
     private Integer woman;
 
    /** 入井费*/
-    @Excel(name = "入井费")
+    // @Excel(name = "入井费")
     private Integer run;
 
    /** 夜班补助*/
-    @Excel(name = "夜班补助")
+    // @Excel(name = "夜班补助")
     private Integer ye;
 
    /** 矿井处罚*/
-    @Excel(name = "矿井处罚")
+    // @Excel(name = "矿井处罚")
     private Integer kuangji;
 
    /** 护理假天数*/
-    @Excel(name = "护理假天数")
+    //@Excel(name = "护理假天数")
     private Integer huliDay;
 
    /** 护理假工资*/
-    @Excel(name = "护理假工资")
+    //@Excel(name = "护理假工资")
     private Integer huliCost;
 
    /** 工伤假天数*/
-    @Excel(name = "工伤假天数")
+    // @Excel(name = "工伤假天数")
     private Integer gsDay;
 
    /** 工伤假工资*/
-    @Excel(name = "工伤假工资")
+    //@Excel(name = "工伤假工资")
     private Integer gsCost;
 
    /** 探亲假天数*/
-    @Excel(name = "探亲假天数")
+    //@Excel(name = "探亲假天数")
     private Integer tqDay;
 
    /** 探亲工资*/
-    @Excel(name = "探亲工资")
+    //@Excel(name = "探亲工资")
     private Integer tqCost;
 
    /** 病假天数*/
-    @Excel(name = "病假天数")
+    //@Excel(name = "病假天数")
     private Integer bingDay;
 
    /** 病假工资*/
-    @Excel(name = "病假工资")
+    //@Excel(name = "病假工资")
     private Integer bingCost;
 
    /** 丧假天数*/
-    @Excel(name = "丧假天数")
+    //@Excel(name = "丧假天数")
     private Integer sangDay;
 
    /** 丧假工资*/
-    @Excel(name = "丧假工资")
+    //@Excel(name = "丧假工资")
     private Integer sangCost;
 
    /** 事假天数*/
-    @Excel(name = "事假天数")
+    //@Excel(name = "事假天数")
     private Integer sjDay;
 
    /** 旷工天数*/
-    @Excel(name = "旷工天数")
+    // @Excel(name = "旷工天数")
     private Integer kgDay;
 
    /** 待岗天数*/
-    @Excel(name = "待岗天数")
+    //@Excel(name = "待岗天数")
     private Integer dgDay;
 
    /** 其它补助*/
-    @Excel(name = "其它补助")
+    //@Excel(name = "其它补助")
     private Integer other;
 
-   /** 计算工资*/
-    @Excel(name = "计算工资")
-    private BigDecimal userCost;
-    
-   /** 计划工资*/
-    @Excel(name = "计划工资")
-    private BigDecimal userSum;
-    
-    /** 浮动比*/
-    @Excel(name = "浮动比")
-    private BigDecimal fu;
-    
-    /** 实发工资*/
-    @Excel(name = "实发工资")
-    private BigDecimal userMoney;
+   /** 实发工资*/
+    // @Excel(name = "实发工资")
+    private Double userCost;
 
-    
-    
-    /** 创建时间 */
-    @Excel(name = "创建时间")
-    private String createTime;
-    
-    /** 创建者 */
-    @Excel(name = "创建者")
-    private String createBy;
-    
-    /** 更新时间 */
-    @Excel(name = "更新时间")
-    private Date updateTime;
-    
-    /** 更新者 */
-    @Excel(name = "更新者")
-    private String updateBy;
-
-    /** 备注 */
-    @Excel(name = "备注")
-    private String remark;
-    
-    
-    
-
-	public void setId(Long id) 
+    public void setId(Long id) 
     {
         this.id = id;
     }
@@ -414,18 +366,6 @@ public class Yx
     {
         return workClass;
     }
-    
-    public void setWorkStart(Integer workStart) 
-    {
-        this.workStart = workStart;
-    }
-
-    public Integer getWorkStart() 
-    {
-        return workStart;
-    }
-    
-    
     public void setWorkNumber(Integer workNumber) 
     {
         this.workNumber = workNumber;
@@ -435,12 +375,12 @@ public class Yx
     {
         return workNumber;
     }
-    public void setWorkPrice(BigDecimal workPrice) 
+    public void setWorkPrice(Double workPrice) 
     {
         this.workPrice = workPrice;
     }
 
-    public BigDecimal getWorkPrice() 
+    public Double getWorkPrice() 
     {
         return workPrice;
     }
@@ -462,25 +402,15 @@ public class Yx
     {
         return workFen;
     }
-    public void setWorkSum(BigDecimal workSum) 
+    public void setWorkSum(Integer workSum) 
     {
         this.workSum = workSum;
     }
 
-    public BigDecimal getWorkSum() 
+    public Integer getWorkSum() 
     {
         return workSum;
     }
-    public void setWorkHuo(BigDecimal workHuo) 
-    {
-        this.workHuo = workHuo;
-    }
-
-    public BigDecimal getWorkHuo() 
-    {
-        return workHuo;
-    }
-    
     public void setKaohe(Integer kaohe) 
     {
         this.kaohe = kaohe;
@@ -805,99 +735,17 @@ public class Yx
     {
         return other;
     }
-    public void setUserCost(BigDecimal userCost) 
+    public void setUserCost(Double userCost) 
     {
         this.userCost = userCost;
     }
 
-    public BigDecimal getUserCost() 
+    public Double getUserCost() 
     {
         return userCost;
     }
-    
-    
-    public void setUserSum(BigDecimal userSum) 
-    {
-        this.userSum = userSum;
-    }
 
-    public BigDecimal getUserSum() 
-    {
-        return userSum;
-    }
-    
-    
-    public void setFu(BigDecimal fu) 
-    {
-        this.fu = fu;
-    }
-
-    public BigDecimal getFu() 
-    {
-        return fu;
-    }
-    
-    public void setUserMoney(BigDecimal userMoney) 
-    {
-        this.userMoney = userMoney;
-    }
-
-    public BigDecimal getUserMoney() 
-    {
-        return userMoney;
-    }
-    
-
-    
-    
-    
-    
-    
-    public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	public String getUpdateBy() {
-		return updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
@@ -914,13 +762,11 @@ public class Yx
             .append("station", getStation())
             .append("workType", getWorkType())
             .append("workClass", getWorkClass())
-            .append("workStart", getWorkStart())
             .append("workNumber", getWorkNumber())
             .append("workPrice", getWorkPrice())
             .append("workAll", getWorkAll())
             .append("workFen", getWorkFen())
             .append("workSum", getWorkSum())
-            .append("workHuo", getWorkHuo())
             .append("kaohe", getKaohe())
             .append("meiKaohe", getMeiKaohe())
             .append("meeting", getMeeting())
@@ -958,9 +804,6 @@ public class Yx
             .append("dgDay", getDgDay())
             .append("other", getOther())
             .append("userCost", getUserCost())
-            .append("userSum", getUserSum())
-            .append("fu", getFu())
-            .append("userMoney", getUserMoney())
             .append("createTime", getCreateTime())
             .append("createBy", getCreateBy())
             .append("updateTime", getUpdateTime())
@@ -968,8 +811,4 @@ public class Yx
             .append("remark", getRemark())
             .toString();
     }
-    
-    
-    
-    
 }

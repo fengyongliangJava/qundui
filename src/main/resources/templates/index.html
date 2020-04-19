@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>若依系统首页</title>
+    <title>五九煤炭集团</title>
     <!-- 避免IE使用兼容模式 -->
  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="../static/ruoyi.png" type="image/x-icon"/>
+    <link rel="icon" href="/ruoyi.png" type="image/x-icon"/>
     <link th:href="@{favicon.ico}" rel="stylesheet"/>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/jquery.contextMenu.min.css}" rel="stylesheet"/>
@@ -27,7 +27,7 @@
         </div>
         <a th:href="@{/index}">
             <li class="logo hidden-xs">
-                <span class="logo-lg">五九集团区队管理平台</span> 
+                <span class="logo-lg">五九集团薪酬管理平台</span> 
             </li>
          </a>
         <div class="sidebar-collapse">
@@ -47,12 +47,12 @@
 				        </div>
 				    </div>
             	</li>
-                <li>
+     <!--            <li>
                     <a href="#"><i class="fa fa-home"></i> <span class="nav-label">主页</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a class="menuItem" th:href="@{/system/main}">了解若依</a></li>
                     </ul>
-                </li>
+                </li> -->
                 <li th:each="menu : ${menus}">
                 	<a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
                 		<i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
@@ -182,16 +182,16 @@
                     </a>
                 </div>
                 
-                   <marquee direction="left" behavior="scroll" scrollamount="5" color="#fff" scrolldelay="0" loop="-1"  width="550" height="55"  hspace="20" vspace="10" style="margin:0;">
-						<iframe  src="//www.weaoo.com/cj/index.html?layout=layout1-classic" width="390" height="70" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowTransparency="true"></iframe>
+                   <marquee direction="left" behavior="scroll" scrollamount="5" color="#fff" scrolldelay="0" loop="-1"  width="650" height="55"  hspace="20" vspace="10" style="margin:0;">
+						<iframe  src="//www.weaoo.com/cj/index.html?layout=layout1-classic" width="600" height="55" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowTransparency="true"></iframe>
 				   </marquee> 
                        		
                 
                 
                 <ul class="nav navbar-top-links navbar-right welcome-message">
 
-                    <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
-                    <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
+<!--                     <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
+                    <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li> -->
 	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
@@ -340,41 +340,19 @@ $(function() {
         weekDay[5] = "星期五";
         weekDay[6] = "星期六";
      str+=" "+weekDay[d.getDay()];
+     color16();
 		  return str;
 		}
 		setInterval(function(){$('#time').html(currentTime)},1000);
 		
 		
-		
-		var i = 0;
-			
-		function changeColor(){
-		
-			var color = new Array("AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque", "Black","BlanchedAlmond",
-					"Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Chartreuse","Coral","CornflowerBlue",
-					"Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen",
-					"Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkViolet","DeepPink","DeepSkyBlue",
-					"DimGray","DodgerBlue","Feldspar","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod",
-					"Gray","Green","GreenYellow","HoneyDew","HotPink","DimGray","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen",
-					"LemonChiffon","LightBlue","LightCoral","LightCyan","LawnGreen","LightGoldenRodYellow","LightGrey","LightPink","LightSalmon","LightSeaGreen",
-					"LightSlateGray","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid",
-					"MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise"
-					
-					);
-					
-			
-			document.getElementById("time").style.color = color[i];
-			i++;
-			if(i==color.length)
-			i = 0;
-
+		function color16(){//十六进制颜色随机
+			var r = Math.floor(Math.random()*256);
+			var g = Math.floor(Math.random()*256);
+			var b = Math.floor(Math.random()*256);
+			var color = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+			document.getElementById("time").style.color = color;
 		}
-		
-		setInterval("changeColor()",1000);	
-	
-	
-	
-	
 	
 });
 </script>

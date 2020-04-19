@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxUser;
 import com.ruoyi.project.system.yx.service.IYxService;
 
 /**
@@ -46,15 +46,17 @@ public class YxuserUpload extends BaseController
     @PostMapping("/importExcel")
     @ResponseBody
     public AjaxResult importExcel(MultipartFile file, boolean updateSupport) throws Exception{
-        ExcelUtil<Yx> util = new ExcelUtil<Yx>(Yx.class);
-        List<Yx> userList = util.importExcel(file.getInputStream());
+        ExcelUtil<YxUser> util = new ExcelUtil<YxUser>(YxUser.class);
+        List<YxUser> userList = util.importExcel(file.getInputStream());
+        
+        System.out.print(userList);
         int i = 0;
         String message = null;
         boolean success = true;
-        for(Yx yx : userList) {
+        for(YxUser yxuser : userList) {
         	i++;
         	try {
-        		yxService.insertYx(yx);
+        		yxService.insertYxUser(yxuser);
         	}catch (Exception e) {
         		message ="导入"+i+"条失败";
         		success = false;

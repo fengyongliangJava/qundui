@@ -9,10 +9,11 @@
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
                     <div class="select-list">
-                        <ul>                    
-                            <li>
+                        <ul>  
+                                          
+                  			<li>
                                 <label>创建日期：</label>
-                                <input  readonly="true" type="text" class="time-input" data-format="yyyy" id="createTime" name="createTime" />
+                                <input readonly="true" type="text" class="time-input" data-format="yyyy-MM" id="createTime" name="createTime" />
                             </li>
                             
     					    <li>
@@ -45,7 +46,7 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                        
+                            
                             <li>
                                 <label>出勤状态：</label>
                                 <select id="workStart" name="workStart" th:with="type=${@dict.getType('workStart')}">
@@ -53,7 +54,6 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-                            
                             
                             <li>
                                 <label>员工工号：</label>
@@ -94,11 +94,12 @@
         </div>
     </div>
     <th:block th:include="include :: footer" />
+    <th:block th:include="include :: bootstrap-table-editable-js" />
 
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:yx:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:yx:remove')}]];
-        var prefix = ctx + "system/yx/selectYY";
+        var prefix = ctx + "system/yx/selectMM";
 
         /*部门管理-修改-选择部门树*/
         function selectDeptTree() {
@@ -123,7 +124,6 @@
             }
         }
         
-
         $(function() {
 
             var options = {
@@ -132,6 +132,12 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
+                
+		        showSearch: false,
+		        showRefresh: false,
+		        showToggle: false,
+		        showColumns: false,
+		        showPageGo: true,
                 modalName: "牙星公司",
                 columns: [{
                     checkbox: true
@@ -150,6 +156,7 @@
 					valign : "middle",
 					width:80,
                     title: '员工工号'
+      
                 },
                 {
                     field: 'userName', 
@@ -265,7 +272,8 @@
                     field: 'workNumber', 
 					align : "center",
 					valign : "middle",
-					width:80,
+					width:80,         
+					editable: true,
                     title: '产量'
                 },
                 {
@@ -273,6 +281,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+		            editable: true,
                     title: '单价'
                 },
                 {
@@ -280,6 +289,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+		            editable: true,
                     title: '总工分'
                 },
                 {
@@ -287,6 +297,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+		            editable: true,
                     title: '工分'
                 },
                 {
@@ -294,6 +305,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '计件工资'
                 },
                 {
@@ -301,6 +313,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '零活工资'
                 },
                 {
@@ -308,6 +321,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '考核'
                 },
                 {
@@ -315,6 +329,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '煤质考核'
                 },
                 {
@@ -322,6 +337,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '早会'
                 },
                 {
@@ -329,6 +345,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '年休假天数'
                 },
                 {
@@ -336,6 +353,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '年休假工资'
                 },
                 {
@@ -343,6 +361,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '春节休假天数'
                 },
                 {
@@ -350,6 +369,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '春节休假工资'
                 },
                 {
@@ -358,6 +378,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '春节上班'
                 },
                 {
@@ -365,6 +386,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '春节上班工资'
                 },
                 {
@@ -372,6 +394,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '春节值班天数'
                 },
                 {
@@ -379,6 +402,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '春节值班工资'
                 },
                 {
@@ -386,6 +410,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '加班天数'
                 },
                 {
@@ -393,6 +418,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '加班工资'
                 },
                 {
@@ -400,6 +426,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '法定天数'
                 },
                 {
@@ -407,6 +434,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '法定工资'
                 },
                 {
@@ -414,6 +442,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '公休天数'
                 },
                 {
@@ -421,6 +450,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '公休工资'
                 },
                 {
@@ -428,6 +458,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '延时加班工资'
                 },
                 {
@@ -435,6 +466,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '女工费'
                 },
                 {
@@ -442,6 +474,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '入井费'
                 },
                 {
@@ -449,6 +482,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '夜班补助'
                 },
                 {
@@ -456,6 +490,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '矿井处罚'
                 },
                 {
@@ -463,6 +498,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '护理假天数'
                 },
                 {
@@ -470,6 +506,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '护理假工资'
                 },
                 {
@@ -477,6 +514,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '工伤假天数'
                 },
                 {
@@ -484,6 +522,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '工伤假工资'
                 },
                 {
@@ -491,6 +530,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
+				    editable: true,
                     title: '探亲假天数'
                 },
                 {
@@ -498,6 +538,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '探亲工资'
                 },
                 {
@@ -505,6 +546,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '病假天数'
                 },
                 {
@@ -533,6 +575,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '事假天数'
                 },
                 {
@@ -540,6 +583,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '旷工天数'
                 },
                 {
@@ -547,6 +591,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '待岗天数'
                 },
                 {
@@ -554,6 +599,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '其它补助'
                 },
                 {
@@ -561,6 +607,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '计算工资'
                 },
                 {
@@ -568,6 +615,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '计划工资'
                 },
                 {
@@ -575,6 +623,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '浮动比'
                 },
           
@@ -583,6 +632,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '实发工资'
                 },
                 {
@@ -590,6 +640,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+				    editable: true,
                     title: '备注'
                 },
                 {

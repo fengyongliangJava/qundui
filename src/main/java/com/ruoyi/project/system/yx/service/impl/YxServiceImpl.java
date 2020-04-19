@@ -2,19 +2,23 @@ package com.ruoyi.project.system.yx.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.framework.aspectj.lang.annotation.DataScope;
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.project.system.dept.domain.Dept;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.ruoyi.project.system.yx.mapper.YxMapper;
 import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxUpload;
+import com.ruoyi.project.system.yx.domain.YxUser;
+import com.ruoyi.project.system.yx.mapper.YxMapper;
 import com.ruoyi.project.system.yx.service.IYxService;
-import com.ruoyi.common.utils.text.Convert;
 
 /**
  * 牙星公司Service业务层处理
@@ -25,7 +29,7 @@ import com.ruoyi.common.utils.text.Convert;
 @Service
 public class YxServiceImpl implements IYxService 
 {
-    @Autowired
+	@Autowired
     private YxMapper yxMapper;
 
     /**
@@ -61,9 +65,54 @@ public class YxServiceImpl implements IYxService
     @Override
     public int insertYx(Yx yx)
     {
-        yx.setCreateTime(DateUtils.getNowDate());
+        yx.setUpdateTime(DateUtils.getNowDate());
         return yxMapper.insertYx(yx);
     }
+    
+    /**
+     * 新增牙星公司
+     * 
+     * @param yx 牙星公司
+     * @return 结果
+     */
+    @Override
+    public int insertYxUpload(YxUpload yxupload)
+    {
+    	
+    	yxupload.setUpdateTime(DateUtils.getNowDate());
+    	
+    	Map<String, String> selectYx = yxMapper.selectYx(yxupload.getUserId());
+         yxupload.setSex(selectYx.get("sex"));
+	   	 yxupload.setTell(selectYx.get("tell"));
+	   	 yxupload.setCard(selectYx.get("card"));
+	   	 yxupload.setAddress(selectYx.get("address"));
+	   	 yxupload.setUserOrg(selectYx.get("userOrg"));
+	   	 yxupload.setUserGroup(selectYx.get("userGroup"));
+	   	 yxupload.setUserArea(selectYx.get("userArea"));
+	   	 yxupload.setUserClass(selectYx.get("userClass"));
+	   	 yxupload.setStation(selectYx.get("userClass"));
+	   	 yxupload.setWorkType(selectYx.get("workType"));
+	   	 yxupload.setWorkClass(selectYx.get("workClass"));
+	       return yxMapper.insertYxUpload(yxupload);
+    	
+    }
+    
+    
+    
+    
+    
+    /**
+     * 新增牙星公司
+     * 
+     * @param yx 牙星公司
+     * @return 结果
+     */
+    @Override
+    public int insertYxUser(YxUser yxuser)
+    {
+        return yxMapper.insertYxUser(yxuser);
+    }
+
 
     /**
      * 修改牙星公司
@@ -156,4 +205,14 @@ public class YxServiceImpl implements IYxService
         }
         return ztrees;
     }
+    
+    
+    
+	@Override
+	public String findUserOrgExize(String userOrg, String userId) {
+		return yxMapper.findUserOrgExize(userOrg,userId);
+	}
 }
+    
+    
+    

@@ -1,12 +1,15 @@
 package com.ruoyi.project.system.yx.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxUpload;
+import com.ruoyi.project.system.yx.domain.YxUser;
 
 /**
  * 牙星公司Mapper接口
@@ -39,6 +42,22 @@ public interface YxMapper
      * @return 结果
      */
     public int insertYx(Yx yx);
+    /**
+     * 新增牙星公司
+     * 
+     * @param yx 牙星公司
+     * @return 结果
+     */
+    public int insertYxUser(YxUser yxuser);
+    
+    
+    /**
+     * 新增牙星公司
+     * 
+     * @param yx 牙星公司
+     * @return 结果
+     */
+    public int insertYxUpload(YxUpload yxupload);
 
     /**
      * 修改牙星公司
@@ -70,5 +89,10 @@ public interface YxMapper
     List<Ztree> selectDeptTree(Dept dept);
 
     List<Dept> selectDeptList(Dept dept);
+    
+    
+	public String findUserOrgExize(@Param("userOrg")String userOrg, @Param("userId")String userId);
+
+	public Map<String,String> selectYx(@Param("userId")String userId);
 
 }

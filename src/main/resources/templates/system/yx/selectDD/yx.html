@@ -48,6 +48,13 @@
                                 </select>
                             </li>
 
+                            <li>
+                                <label>出勤状态：</label>
+                                <select id="workStart" name="workStart" th:with="type=${@dict.getType('workStart')}">
+                                    <option value="">-请选择-</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
 
                             <li>
                                 <label>员工工号：</label>
@@ -57,9 +64,7 @@
 
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;结算</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;Excel导出</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;结算查询</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.$.table.exportExcel()"><i class="fa fa-refresh"></i>&nbsp;导出</a>
                             </li>
                         </ul>
                     </div>
@@ -134,6 +139,13 @@
 					valign : "middle",
 					width:50,
                     visible: false
+                },
+                {
+                    field: 'createTime', 
+					align : "center",
+					valign : "middle",
+					width:200,
+                    title: '创建时间'
                 },
                 {
                     field: 'userId', 
@@ -233,6 +245,25 @@
 					width:80,
                     title: '工资类型'
                 },
+                
+                
+                {
+                    field: 'workStart', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '出勤状态',
+	    			formatter : function(value, row, index) {
+						if (value == 0) {
+							return '<span class="label label-danger">未出勤</span>';
+						} else if (value == 1) {
+							return '<span class="label label-primary">出勤</span>';
+						}
+					}
+                
+                
+                },
+                
                 {
                     field: 'workNumber', 
 					align : "center",
@@ -267,6 +298,13 @@
 					valign : "middle",
 					width:80,
                     title: '计件工资'
+                },
+                {
+                    field: 'workHuo', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '零活工资'
                 },
                 {
                     field: 'kaohe', 
@@ -521,13 +559,7 @@
 					width:80,
                     title: '其它补助'
                 },
-                {
-                    field: 'userCost', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '实发工资'
-                },
+
                 {
                     field: 'remark', 
 					align : "center",

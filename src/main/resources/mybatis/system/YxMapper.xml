@@ -19,11 +19,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="station"    column="station"    />
         <result property="workType"    column="work_type"    />
         <result property="workClass"    column="work_class"    />
+        <result property="workStart"    column="work_start"    />
         <result property="workNumber"    column="work_number"    />
         <result property="workPrice"    column="work_price"    />
         <result property="workAll"    column="work_all"    />
         <result property="workFen"    column="work_fen"    />
         <result property="workSum"    column="work_sum"    />
+        <result property="workHuo"    column="work_huo"    />
         <result property="kaohe"    column="kaohe"    />
         <result property="meiKaohe"    column="mei_kaohe"    />
         <result property="meeting"    column="meeting"    />
@@ -69,67 +71,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectYxVo">
-        select id, user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, work_number, work_price, work_all, work_fen, work_sum, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work, year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day, other, user_cost, create_time, create_by, update_time, update_by, remark from yx
+        select distinct(id), user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, work_start,
+        work_number, work_price, work_all, work_fen, work_sum, work_huo, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work,
+         year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, 
+         gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day,other, user_cost,
+        remark from yx
+        
+<!--          create_time, create_by,update_time,update_by, -->
+        
+        
+        left join sys_dept sd on (sd.dept_name = yx.user_org or sd.dept_name = yx.user_area or sd.dept_name = yx.user_group or sd.dept_name = yx.user_class)
     </sql>
 
     <select id="selectYxList" parameterType="Yx" resultMap="YxResult">
         <include refid="selectYxVo"/>
         <where>  
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
-            <if test="tell != null  and tell != ''"> and tell = #{tell}</if>
-            <if test="card != null  and card != ''"> and card = #{card}</if>
-            <if test="address != null  and address != ''"> and address = #{address}</if>
-            <if test="userOrg != null  and userOrg != ''"> and user_org = #{userOrg}</if>
-            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
             <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
             <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
-            <if test="station != null  and station != ''"> and station = #{station}</if>
             <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
             <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
-            <if test="workNumber != null "> and work_number = #{workNumber}</if>
-            <if test="workPrice != null "> and work_price = #{workPrice}</if>
-            <if test="workAll != null "> and work_all = #{workAll}</if>
-            <if test="workFen != null "> and work_fen = #{workFen}</if>
-            <if test="workSum != null "> and work_sum = #{workSum}</if>
-            <if test="kaohe != null "> and kaohe = #{kaohe}</if>
-            <if test="meiKaohe != null "> and mei_kaohe = #{meiKaohe}</if>
-            <if test="meeting != null "> and meeting = #{meeting}</if>
-            <if test="yearsHolidays != null "> and years_holidays = #{yearsHolidays}</if>
-            <if test="yearsCost != null "> and years_cost = #{yearsCost}</if>
-            <if test="yearDay != null "> and year_day = #{yearDay}</if>
-            <if test="yearCost != null "> and year_cost = #{yearCost}</if>
-            <if test="yearWork != null "> and year_work = #{yearWork}</if>
-            <if test="yearSum != null "> and year_sum = #{yearSum}</if>
-            <if test="yearPlus != null "> and year_plus = #{yearPlus}</if>
-            <if test="yearDuty != null "> and year_duty = #{yearDuty}</if>
-            <if test="workPlus != null "> and work_plus = #{workPlus}</if>
-            <if test="workCost != null "> and work_cost = #{workCost}</if>
-            <if test="lawDay != null "> and law_day = #{lawDay}</if>
-            <if test="lawCost != null "> and law_cost = #{lawCost}</if>
-            <if test="busDay != null "> and bus_day = #{busDay}</if>
-            <if test="busCost != null "> and bus_cost = #{busCost}</if>
-            <if test="busPlus != null "> and bus_plus = #{busPlus}</if>
-            <if test="woman != null "> and woman = #{woman}</if>
-            <if test="run != null "> and run = #{run}</if>
-            <if test="ye != null "> and ye = #{ye}</if>
-            <if test="kuangji != null "> and kuangji = #{kuangji}</if>
-            <if test="huliDay != null "> and huli_day = #{huliDay}</if>
-            <if test="huliCost != null "> and huli_cost = #{huliCost}</if>
-            <if test="gsDay != null "> and gs_day = #{gsDay}</if>
-            <if test="gsCost != null "> and gs_cost = #{gsCost}</if>
-            <if test="tqDay != null "> and tq_day = #{tqDay}</if>
-            <if test="tqCost != null "> and tq_cost = #{tqCost}</if>
-            <if test="bingDay != null "> and bing_day = #{bingDay}</if>
-            <if test="bingCost != null "> and bing_cost = #{bingCost}</if>
-            <if test="sangDay != null "> and sang_day = #{sangDay}</if>
-            <if test="sangCost != null "> and sang_cost = #{sangCost}</if>
-            <if test="sjDay != null "> and sj_day = #{sjDay}</if>
-            <if test="kgDay != null "> and kg_day = #{kgDay}</if>
-            <if test="dgDay != null "> and dg_day = #{dgDay}</if>
-            <if test="other != null "> and other = #{other}</if>
-            <if test="userCost != null "> and user_cost = #{userCost}</if>
+            <if test="workStart != null  and workStart != ''"> and work_start = #{workStart}</if>
+            <if test="createTime != null  and createTime != ''">and create_time = #{createTime},</if>
         </where>
     </select>
     
@@ -138,40 +103,195 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
     
-   
-    <insert id="insertYx" parameterType="Yx" useGeneratedKeys="true" keyProperty="id">
+    
+    <select id="findUserOrgExize" resultType="String">
+       select
+          yx.id
+       from 
+          yx 
+          left join sys_dept sd on (sd.dept_name = yx.user_org or sd.dept_name = yx.user_area or sd.dept_name = yx.user_group or sd.dept_name = yx.user_class)   
+       where
+          sd.dept_id = #{userOrg}
+          and yx.user_id = #{userId}
+          limit 1        
+    </select>
+    
+    <select id="selectYx" resultType="java.util.Map">
+       select 
+           sex AS "sex",
+           tell AS "tell",
+           card AS "card",
+           address AS "address",
+           user_org AS "userOrg",
+           user_area AS "userArea",
+           user_group AS "userGroup",
+           user_class AS "userClass",
+           station AS "station",
+           work_type AS "workType",
+           work_class AS "workClass"
+       from 
+           yx
+       where
+           user_id = #{userId}
+           limit 1        
+    </select>
+    
+
+
+
+ <insert id="insertYxUser" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
         insert into yx
+        
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id,</if>
             <if test="userName != null  and userName != ''">user_name,</if>
             <if test="sex != null  and sex != ''">sex,</if>
+            <if test="tell != null  and tell != ''">tell,</if>
+            <if test="card != null  and card != ''">card,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="userOrg != null  and userOrg != ''">user_org,</if>
+            <if test="userArea != null  and userArea != ''">user_area,</if>
+            <if test="userGroup != null  and userGroup != ''">user_group,</if>
+            <if test="userClass != null  and userClass != ''">user_class,</if>
+            <if test="station != null  and station != ''">station,</if>
+            <if test="workType != null  and workType != ''">work_type,</if>
+            <if test="workClass != null  and workClass != ''">work_class,</if>
          </trim>
+         
+         
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="userName != null  and userName != ''">#{userName},</if>
             <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="tell != null  and tell != ''">#{tell},</if>
+            <if test="card != null  and card != ''"> #{card},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="userOrg != null  and userOrg != ''"> #{userOrg},</if>
+            <if test="userArea != null  and userArea != ''">#{userArea},</if>
+            <if test="userGroup != null  and userGroup != ''">#{userGroup},</if>
+            <if test="userClass != null  and userClass != ''">#{userClass},</if>
+            <if test="station != null  and station != ''">#{station},</if>
+            <if test="workType != null  and workType != ''">#{workType},</if>
+            <if test="workClass != null  and workClass != ''">#{workClass},</if>
          </trim>
     </insert>
+
+
+
+ <insert id="insertYx" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
+        insert into yx
+        
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="tell != null  and tell != ''">tell,</if>
+            <if test="card != null  and card != ''">card,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="userOrg != null  and userOrg != ''">user_org,</if>
+            <if test="userArea != null  and userArea != ''">user_area,</if>
+            <if test="userGroup != null  and userGroup != ''">user_group,</if>
+            <if test="userClass != null  and userClass != ''">user_class,</if>
+            <if test="station != null  and station != ''">station,</if>
+            <if test="workType != null  and workType != ''">work_type,</if>
+            <if test="workClass != null  and workClass != ''">work_class,</if>
+            <if test="workStart != null  and workStart != ''">work_start,</if>
+            <if test="createTime != null  and createTime != ''">create_time,</if>
+         </trim>
+         
+         
+         
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+              <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="tell != null  and tell != ''">#{tell},</if>
+            <if test="card != null  and card != ''">#{card},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="userOrg != null  and userOrg != ''">#{userOrg},</if>
+            <if test="userArea != null  and userArea != ''">#{userArea},</if>
+            <if test="userGroup != null  and userGroup != ''">#{userGroup},</if>
+            <if test="userClass != null  and userClass != ''">#{userClass},</if>
+            <if test="station != null  and station != ''">#{station},</if>
+            <if test="workType != null  and workType != ''">#{workType},</if>
+            <if test="workClass != null  and workClass != ''">#{workClass},</if>
+            <if test="workStart != null  and workStart != ''">#{workStart},</if>
+            <if test="createTime != null  and createTime != ''">#{createTime},</if>
+         </trim>
+    </insert>
+
+
+
+    <insert id="insertYxUpload" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
+        insert into yx
+       
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="userId != null  and userId != ''">user_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            work_start,
+            <if test="workNumber != null ">work_number,</if>
+            <if test="workPrice != null ">work_price,</if>
+            <if test="workAll != null ">work_all,</if>
+            <if test="workFen != null ">work_fen,</if>
+            <if test="workHuo != null ">work_huo,</if>
+            <if test="workSum != null ">work_sum,</if>
+            <if test="createTime != null  and createTime != ''">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            update_time,
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="tell != null  and tell != ''">tell,</if>
+            <if test="card != null  and card != ''">card,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="userOrg != null  and userOrg != ''">user_org,</if>
+            <if test="userArea != null  and userArea != ''">user_area,</if>
+            <if test="userGroup != null  and userGroup != ''">user_group,</if>
+            <if test="userClass != null  and userClass != ''">user_class,</if>
+            <if test="station != null  and station != ''">station,</if>
+            <if test="workType != null  and workType != ''">work_type,</if>
+            <if test="workClass != null  and workClass != ''">work_class,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            #{workStart},
+            <if test="workNumber != null ">#{workNumber},</if>
+            <if test="workPrice != null "> #{workPrice},</if>
+            <if test="workAll != null ">#{workAll},</if>
+            <if test="workFen != null ">#{workFen},</if>
+            <if test="workHuo != null ">#{workHuo},</if>
+            <if test="workSum != null ">#{workSum},</if>
+            <if test="createTime != null  and createTime != ''">#{createTimes},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            #{updateTime},
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="tell != null  and tell != ''">#{tell},</if>
+            <if test="card != null  and card != ''">#{card},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="userOrg != null  and userOrg != ''">#{userOrg},</if>
+            <if test="userArea != null  and userArea != ''">#{userArea},</if>
+            <if test="userGroup != null  and userGroup != ''">#{userGroup},</if>
+            <if test="userClass != null  and userClass != ''">#{userClass},</if>
+            <if test="station != null  and station != ''">#{station},</if>
+            <if test="workType != null  and workType != ''">#{workType},</if>
+            <if test="workClass != null  and workClass != ''">#{workClass},</if>
+        </trim>    
+    </insert>
+
+    
 
     <update id="updateYx" parameterType="Yx">
         update yx
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="userName != null  and userName != ''">user_name = #{userName},</if>
-            <if test="sex != null  and sex != ''">sex = #{sex},</if>
-            <if test="tell != null  and tell != ''">tell = #{tell},</if>
-            <if test="card != null  and card != ''">card = #{card},</if>
-            <if test="address != null  and address != ''">address = #{address},</if>
-            <if test="userOrg != null  and userOrg != ''">user_org = #{userOrg},</if>
-            <if test="userArea != null  and userArea != ''">user_area = #{userArea},</if>
-            <if test="userGroup != null  and userGroup != ''">user_group = #{userGroup},</if>
-            <if test="userClass != null  and userClass != ''">user_class = #{userClass},</if>
-            <if test="station != null  and station != ''">station = #{station},</if>
-            <if test="workType != null  and workType != ''">work_type = #{workType},</if>
-            <if test="workClass != null  and workClass != ''">work_class = #{workClass},</if>
+            <if test="workStart != null  and workStart != ''">work_start = #{workStart},</if>
             <if test="workNumber != null ">work_number = #{workNumber},</if>
             <if test="workPrice != null ">work_price = #{workPrice},</if>
             <if test="workAll != null ">work_all = #{workAll},</if>
             <if test="workFen != null ">work_fen = #{workFen},</if>
-            <if test="workSum != null ">work_sum = #{workSum},</if>
+            <if test="workHuo != null ">work_huo = #{workHuo},</if>
             <if test="kaohe != null ">kaohe = #{kaohe},</if>
             <if test="meiKaohe != null ">mei_kaohe = #{meiKaohe},</if>
             <if test="meeting != null ">meeting = #{meeting},</if>

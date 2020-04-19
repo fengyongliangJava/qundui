@@ -209,7 +209,7 @@ public class ExcelUtil<T>
                 for (Map.Entry<Integer, Field> entry : fieldsMap.entrySet())
                 {
                     Object val = this.getCellValue(row, entry.getKey());
-
+                       
                     // 如果不存在实例则新建.
                     entity = (entity == null ? clazz.newInstance() : entity);
                     // 从map中得到对应列的field.

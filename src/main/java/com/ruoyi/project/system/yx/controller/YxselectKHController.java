@@ -30,15 +30,15 @@ import com.ruoyi.project.system.yx.service.IYxService;
  * @date 2020-04-07
  */
 @Controller
-@RequestMapping("/system/yx/selectDD")
-public class YxselectDDController extends BaseController
+@RequestMapping("/system/yx/selectKH")
+public class YxselectKHController extends BaseController
 {
-    private String prefix = "system/yx/selectDD";
+    private String prefix = "system/yx/selectKH";
 
     @Autowired
     private IYxService yxService;
 
-    @RequiresPermissions("system:yx:selectDD:view")
+    @RequiresPermissions("system:yx:selectKH:view")
     @GetMapping()
     public String yx()
     {
@@ -67,7 +67,7 @@ public class YxselectDDController extends BaseController
     /**
      * 查询牙星公司列表
      */
-    @RequiresPermissions("system:yx:selectDD:list")
+    @RequiresPermissions("system:yx:selectKH:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Yx yx)
@@ -80,7 +80,7 @@ public class YxselectDDController extends BaseController
     /**
      * 导出牙星公司列表
      */
-    @RequiresPermissions("system:yx:selectDD:export")
+    @RequiresPermissions("system:yx:selectKH:export")
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
@@ -103,7 +103,7 @@ public class YxselectDDController extends BaseController
     /**
      * 新增保存牙星公司
      */
-    @RequiresPermissions("system:yx:selectDD:add")
+    @RequiresPermissions("system:yx:selectKH:add")
     @Log(title = "牙星公司", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -126,7 +126,7 @@ public class YxselectDDController extends BaseController
     /**
      * 修改保存牙星公司
      */
-    @RequiresPermissions("system:yx:selectDD:edit")
+    @RequiresPermissions("system:yx:selectKH:edit")
     @Log(title = "牙星公司", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -138,7 +138,7 @@ public class YxselectDDController extends BaseController
     /**
      * 删除牙星公司
      */
-    @RequiresPermissions("system:yx:selectDD:remove")
+    @RequiresPermissions("system:yx:selectKH:remove")
     @Log(title = "牙星公司", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody

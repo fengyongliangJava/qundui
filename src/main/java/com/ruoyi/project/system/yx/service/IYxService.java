@@ -5,6 +5,8 @@ import java.util.List;
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxUpload;
+import com.ruoyi.project.system.yx.domain.YxUser;
 
 /**
  * 牙星公司Service接口
@@ -37,6 +39,21 @@ public interface IYxService
      * @return 结果
      */
     public int insertYx(Yx yx);
+    
+    /**
+     * 新增牙星公司用户
+     * 
+     * @param yx 牙星公司
+     * @return 结果
+     */
+	public int insertYxUser(YxUser yxuser);
+	
+    /**
+     * 新增牙星公司用户
+     * @param yx 牙星公司
+     * @return 结果
+     */
+	public int insertYxUpload(YxUpload yxupload);
 
     /**
      * 修改牙星公司
@@ -64,4 +81,6 @@ public interface IYxService
 
     List<Ztree> selectDeptTree(Dept dept);
 
+
+	public String findUserOrgExize(String userOrg, String userId);
 }

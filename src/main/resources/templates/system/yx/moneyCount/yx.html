@@ -25,7 +25,7 @@
                             
     					    <li>
                                 <label>组织机构：</label>
-      							<input type="hidden" id="treeId"  readonly="true"/>
+      							<input type="hidden" id="treeId"  name="userOrg"  readonly="true"/>
                                 <input  type="text" id="treeName" name="treeName" onclick="selectDeptTree()" readonly="true">
                             </li>
 
@@ -62,7 +62,6 @@
         }
 
         function doSubmit(index, layero){
-            debugger;
             var tree = layero.find("iframe")[0].contentWindow.$._tree;
             if ($.tree.notAllowLastLevel(tree)) {
                 var body = layer.getChildFrame('body', index);
@@ -89,20 +88,20 @@
       		    var file = $('#excelFile').val();
       		    
       		    
-      			if(isEmpty(createTime)){
+      			if($.common.isEmpty(createTime)){
       				alert("请选择上传时间！");
       				LoadingClose();
       				return;
       			} 
       			
-      			if(isEmpty(userOrg)){
+      			if($.common.isEmpty(userOrg)){
       				alert("请选择组织机构！");
       				LoadingClose();
       				return;
       			} 
       			
       		    var file = $('#excelFile').val();
-      			if(isEmpty(file)){
+      			if($.common.isEmpty(file)){
       				alert("请选择上传Excel文件！");
       				LoadingClose();
       				return;
@@ -123,14 +122,8 @@
       			    error : function(xhr,type) {
       			    },
       			    success:function(data){
-                          if('success' == data){
-                        	  $.modal.alertSuccess('上传计件工资成功!');
-                          }else if("fail" == data) {
-                        	  $.modal.alertError('上传计件工资失败!');
-                          }else{
-                        	  $.modal.alertWarning('第    行数据不匹配!');
-                          }
-                          LoadingClose();
+      	              $.modal.alertSuccess(data.msg);
+                      LoadingClose();
       			    }
       			});
       			

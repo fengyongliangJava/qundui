@@ -1,9 +1,6 @@
 package com.ruoyi.project.demo.domain;
 
-import java.util.Date;
-import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
-import com.ruoyi.framework.aspectj.lang.annotation.Excel.Type;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 public class UserOperateModel extends BaseEntity
@@ -33,9 +30,6 @@ public class UserOperateModel extends BaseEntity
     @Excel(name = "用户状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss", type = Type.EXPORT)
-    private Date createTime;
-
     public UserOperateModel()
     {
 
@@ -52,7 +46,6 @@ public class UserOperateModel extends BaseEntity
         this.userEmail = userEmail;
         this.userBalance = userBalance;
         this.status = status;
-        this.createTime = DateUtils.getNowDate();
     }
 
     public int getUserId()
@@ -135,15 +128,5 @@ public class UserOperateModel extends BaseEntity
         this.status = status;
     }
 
-    @Override
-    public Date getCreateTime()
-    {
-        return createTime;
-    }
 
-    @Override
-    public void setCreateTime(Date createTime)
-    {
-        this.createTime = createTime;
-    }
 }

@@ -1,6 +1,9 @@
 package com.ruoyi.project.system.yx.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxUpload;
 import com.ruoyi.project.system.yx.service.IYxService;
 
 /**
@@ -56,4 +62,58 @@ public class YxmoneyCountController extends BaseController
     }
 
   
+    
+    
+    /**
+     * 导入当日工资
+     */
+    @PostMapping("/importExcel")
+    @ResponseBody
+    public AjaxResult importExcel(MultipartFile file, boolean updateSupport,HttpServletRequest request) throws Exception{
+    	
+		 
+		String createTime = request.getParameter("createTime");
+		String userOrg = request.getParameter("userOrg");
+    	
+        ExcelUtil<YxUpload> util = new ExcelUtil<YxUpload>(YxUpload.class);
+        List<YxUpload> userList = util.importExcel(file.getInputStream());
+        
+        int i = 0;
+        for(YxUpload yxuser : userList) {
+        	i++;
+        	if(yxuser.getUserId().isEmpty() 
+                || yxuser.getUserName().isEmpty()
+                || yxuser.getWorkStart() == null
+                || yxuser.getWorkNumber() == null
+                || yxuser.getWorkPrice() == null
+                || yxuser.getWorkAll() == null
+                || yxuser.getWorkFen() == null) {
+                   return AjaxResult.success("导入第"+i+"条有空数据");
+                }
+    		if(yxService.findUserOrgExize(userOrg,yxuser.getUserId()) == null) {
+    			    return AjaxResult.success("导入第"+i+"条员工编号不匹配");
+    		}
+        }
+        for(YxUpload yxuser : userList) {
+        	yxuser.setCreateTime(createTime);
+    		yxuser.setUserOrg(userOrg);
+    		yxuser.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+    		yxuser.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+    		yxuser.setWorkSum(new BigDecimal(yxuser.getWorkNumber()).multiply(yxuser.getWorkPrice()).divide(new BigDecimal(yxuser.getWorkAll()),3, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(yxuser.getWorkFen())));
+    		yxService.insertYxUpload(yxuser);
+        }
+       return AjaxResult.success("上传 "+createTime+"工资信息成功！！！");
+
+    }
+       
+
+    
 }
+    
+    
+    
+    
+    
+    
+    
+    
