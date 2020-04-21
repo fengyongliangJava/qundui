@@ -32,8 +32,9 @@
 
 
                             <li>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;导出</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-upload"></i>&nbsp;上传</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exprotExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="exprotModel()"><i class="fa fa-download"></i>&nbsp;模板</a>
                             </li>
                             
                         </ul>
@@ -157,6 +158,13 @@
     		
     
     
+    
+    function exprotModel(){
+   		$.tzLoading({content:'正在导出模板，请稍等...'});
+	    window.location.href = prefix + '/exprotModel';
+	    LoadingClose();
+	}
+	
     
     </script>
     

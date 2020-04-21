@@ -2,6 +2,8 @@ package com.ruoyi.project.system.yx.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
@@ -16,6 +19,7 @@ import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxYue;
 import com.ruoyi.project.system.yx.service.IYxService;
 
 /**
@@ -40,9 +44,8 @@ public class YxmoneyYueController extends BaseController
         return prefix + "/yx";
     }
 
-
     /**
-     * 导出牙星公司列表
+                * 导出牙星公司列表
      */
     @RequiresPermissions("system:yx:moneyYue:export")
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
@@ -55,5 +58,53 @@ public class YxmoneyYueController extends BaseController
         return util.exportExcel(list, "yx");
     }
 
+    
+    
+    
+    
+    /**
+     * 导入当日工资
+     */
+    @PostMapping("/importExcel")
+    @ResponseBody
+    public AjaxResult importExcel(MultipartFile file, boolean updateSupport,HttpServletRequest request) throws Exception{
+    	
+		 
+		String createTime = request.getParameter("createTime");
+		String userOrg = request.getParameter("userOrg");
+    	
+        ExcelUtil<YxYue> util = new ExcelUtil<YxYue>(YxYue.class);
+        List<YxYue> userList = util.importExcel(file.getInputStream());
+        
+        int i = 0;
+        for(YxYue yxuser : userList) {
+        	i++;
+        	if(yxuser.getUserId().isEmpty() 
+                || yxuser.getUserName().isEmpty()
+                || yxuser.getMoneyType() == null
+                || yxuser.getUserMoney() == null) {
+                   return AjaxResult.success("导入第"+i+"条有空数据");   
+                   
+                }
+        	
+        	
+/*        	if(yxuser.MoneyType() == 1) {
+        		
+        		
+        	}else if(yxuser.MoneyType() == 2){
+        		
+        		
+        	}else if(yxuser.MoneyType() == 3){
+        	
+        	}*/
+ 
+        }
+
+       return AjaxResult.success("上传 "+createTime+"工资信息成功！！！");
+
+    }
+       
+
+    
   
 }

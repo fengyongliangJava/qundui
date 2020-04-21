@@ -63,8 +63,7 @@
 
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;结算</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;Excel导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-refresh"></i>&nbsp;结算</a>
                             </li>
                         </ul>
                     </div>
@@ -149,6 +148,14 @@
 					valign : "middle",
 					width:50,
                     visible: false
+                },
+                {
+                    field: 'createTime', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '创建时间'
+      
                 },
                 {
                     field: 'userId', 
@@ -609,31 +616,6 @@
 					width:80,
 				    editable: true,
                     title: '计算工资'
-                },
-                {
-                    field: 'userSum', 
-					align : "center",
-					valign : "middle",
-					width:80,
-				    editable: true,
-                    title: '计划工资'
-                },
-                {
-                    field: 'fu', 
-					align : "center",
-					valign : "middle",
-					width:80,
-				    editable: true,
-                    title: '浮动比'
-                },
-          
-                {
-                    field: 'userMoney', 
-					align : "center",
-					valign : "middle",
-					width:80,
-				    editable: true,
-                    title: '实发工资'
                 },
                 {
                     field: 'remark', 
