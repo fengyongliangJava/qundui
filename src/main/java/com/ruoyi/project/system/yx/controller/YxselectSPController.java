@@ -17,9 +17,7 @@ import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.yx.domain.Yx;
 import com.ruoyi.project.system.yx.service.IYxService;
 
@@ -30,44 +28,26 @@ import com.ruoyi.project.system.yx.service.IYxService;
  * @date 2020-04-07
  */
 @Controller
-@RequestMapping("/system/yx/selectKH")
-public class YxselectKHController extends BaseController
+@RequestMapping("/system/yx/selectSP")
+public class YxselectSPController extends BaseController
 {
-    private String prefix = "system/yx/selectKH";
+    private String prefix = "system/yx/selectSP";
 
     @Autowired
     private IYxService yxService;
 
-    @RequiresPermissions("system:yx:selectKH:view")
+    @RequiresPermissions("system:yx:selectSP:view")
     @GetMapping()
     public String yx()
     {
         return prefix + "/yx";
     }
 
-    /**
-     * 加载部门列表树
-     */
-    @GetMapping("/treeData")
-    @ResponseBody
-    public List<Ztree> treeData()
-    {
-        List<Ztree> ztrees = yxService.selectDeptTree(new Dept());
-        return ztrees;
-    }
-
-    /**
-     * 选择部门树
-     */
-    @GetMapping("/selectDeptTree")
-    public String selectDeptTree(ModelMap mmap)
-    {
-        return prefix + "/tree";
-    }
+   
     /**
      * 查询牙星公司列表
      */
-    @RequiresPermissions("system:yx:selectKH:list")
+    @RequiresPermissions("system:yx:selectSP:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Yx yx)
@@ -80,7 +60,7 @@ public class YxselectKHController extends BaseController
     /**
      * 导出牙星公司列表
      */
-    @RequiresPermissions("system:yx:selectKH:export")
+    @RequiresPermissions("system:yx:selectSP:export")
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
@@ -103,7 +83,7 @@ public class YxselectKHController extends BaseController
     /**
      * 新增保存牙星公司
      */
-    @RequiresPermissions("system:yx:selectKH:add")
+    @RequiresPermissions("system:yx:selectSP:add")
     @Log(title = "牙星公司", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
@@ -126,7 +106,7 @@ public class YxselectKHController extends BaseController
     /**
      * 修改保存牙星公司
      */
-    @RequiresPermissions("system:yx:selectKH:edit")
+    @RequiresPermissions("system:yx:selectSP:edit")
     @Log(title = "牙星公司", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
@@ -138,7 +118,7 @@ public class YxselectKHController extends BaseController
     /**
      * 删除牙星公司
      */
-    @RequiresPermissions("system:yx:selectKH:remove")
+    @RequiresPermissions("system:yx:selectSP:remove")
     @Log(title = "牙星公司", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody

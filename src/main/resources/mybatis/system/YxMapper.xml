@@ -75,14 +75,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         work_number, work_price, work_all, work_fen, work_sum, work_huo, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work,
          year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, 
          gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day,other, user_cost,
-        remark from yx
+        yx.create_time, yx.create_by,yx.update_time,yx.update_by, remark from yx
         
-<!--          create_time, create_by,update_time,update_by, -->
+<!--          yx.create_time, yx.create_by,yx.update_time,yx.update_by, -->
         
         
         left join sys_dept sd on (sd.dept_name = yx.user_org or sd.dept_name = yx.user_area or sd.dept_name = yx.user_group or sd.dept_name = yx.user_class)
     </sql>
 
+    <select id="selectYxKHList" parameterType="Yx" resultMap="YxResult">
+        select  user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class,
+        sum(work_start), sum(work_sum),sum(work_huo),sum(kaohe),sum(mei_kaohe),sum(meeting),count(years_holidays),sum(years_cost),count(year_day),sum(year_cost),sum(year_work),
+        sum(year_sum),count(year_plus),sum(year_duty),count(work_plus),sum(work_cost),count(law_day),sum(law_cost),count(bus_day),sum(bus_cost),sum(bus_plus),sum(woman),sum(run),
+        sum(ye), sum(kuangji),count(huli_day),sum(huli_cost),count(gs_day),sum(gs_cost),count(tq_day),sum(tq_cost),count(bing_day),sum(bing_cost),count(sang_day),sum(sang_cost),
+		count(sj_day),count(kg_day),count(dg_day),sum(other),sum(user_cost),create_time, create_by,yx.update_time,update_by, remark
+        
+       from yx
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+            <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
+            <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
+            <if test="workStart != null">   and work_start = #{workStart} </if>
+            <if test="createTime != null  and createTime != ''">and yx.create_time like  concat('%',#{createTime},'%')</if>
+        </where>
+    </select>
+    
+    
+    
+    
+    
     <select id="selectYxList" parameterType="Yx" resultMap="YxResult">
         <include refid="selectYxVo"/>
         <where>  
@@ -93,10 +118,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
             <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
             <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
-            <if test="workStart != null  and workStart != ''"> and work_start = #{workStart}</if>
-            <if test="createTime != null  and createTime != ''">and create_time = #{createTime},</if>
+            <if test="workStart != null">   and work_start = #{workStart} </if>
+            <if test="createTime != null  and createTime != ''">and yx.create_time like  concat('%',#{createTime},'%')</if>
         </where>
     </select>
+    
+    
+    
+    
+    
+    
     
     <select id="selectYxById" parameterType="Long" resultMap="YxResult">
         <include refid="selectYxVo"/>

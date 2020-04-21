@@ -55,6 +55,17 @@ public class YxServiceImpl implements IYxService
     {
         return yxMapper.selectYxList(yx);
     }
+    /**
+     * 查询牙星公司列表
+     * 
+     * @param yx 牙星公司
+     * @return 牙星公司
+     */
+    @Override
+    public List<Yx> selectYxKHList(Yx yx)
+    {
+        return yxMapper.selectYxKHList(yx);
+    }
 
     /**
      * 新增牙星公司

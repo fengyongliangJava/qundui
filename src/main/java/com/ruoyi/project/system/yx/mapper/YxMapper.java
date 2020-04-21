@@ -34,7 +34,13 @@ public interface YxMapper
      * @return 牙星公司集合
      */
     public List<Yx> selectYxList(Yx yx);
-
+    /**
+     * 查询牙星公司列表
+     * 
+     * @param yx 牙星公司
+     * @return 牙星公司集合
+     */
+    public List<Yx> selectYxKHList(Yx yx);
     /**
      * 新增牙星公司
      * 
