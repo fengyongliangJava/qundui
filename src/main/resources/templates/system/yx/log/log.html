@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                
+                  			<li>
+                                <label>创建日期：</label>
+                                <input readonly="true" type="text" class="time-input" data-format="yyyy-MM" id="createTime" name="createTime" />
+                            </li>
+                            
+    					    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId" name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
+                            </li>
+                        
+                           <li>
+                            	<label>员工性别：</label>
+								<select id="sex" name="sex" th:with="type=${@dict.getType('sys_user_sex')}">
+									<option value="">-请选择-</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+                            </li>
+                       
+                            <li>
+                                <label>工作类型：</label>
+                     				<select id="workType" name="workType" th:with="type=${@dict.getType('workType')}">
+									<option value="">-请选择-</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+                            </li>
+                        
+                        
+                            <li>
+                                <label>工资种类：</label>
+                                <select id="workClass" name="workClass" th:with="type=${@dict.getType('workClass')}">
+                                    <option value="">-请选择-</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            
+
+                            <li>
+                                <label>员工工号：</label>
+                                <input type="text" id="userId" name="userId"  maxlength="7" />
+                            </li>
+
+
+                      		 <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-refresh"></i>&nbsp;导出</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:log:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:log:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:log:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:log:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                 <table id="bootstrap-table" data-mobile-responsive="true"  style="table-layout:fixed;width:3000px;">
+					
+				 </table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('system:log:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:log:remove')}]];
+        var prefix = ctx + "system/log";
+        
+        function selectDeptTree() {
+            var options = {
+                title: '部门选择',
+                width: "380",
+                url: "/system/yx/selectDD/selectDeptTree",
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+
+    }
+
+    function doSubmit(index, layero){
+        
+        var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if ($.tree.notAllowLastLevel(tree)) {
+            var body = layer.getChildFrame('body', index);
+            $("#treeId").val(body.find('#treeId').val());
+            $("#treeName").val(body.find('#treeName').val());
+            layer.close(index);
+        }
+    }
+    
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "牙星公司",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'id', 
+                    title: 'id',
+					align : "center",
+					valign : "middle",
+					width:50,
+                    visible: false
+                },
+                {
+                    field: 'createTime', 
+                    title: '创建时间',
+					align : "center",
+					valign : "middle",
+					width:120
+                },
+                {
+                    field: 'userId', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '员工工号'
+                },
+                {
+                    field: 'userName', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '员工姓名'
+                },
+                {
+                    field: 'sex', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '性别',
+					formatter : function(value, row, index) {
+						if (value == '女') {
+							return '<span class="label label-danger">女</span>';
+						} else if (value == '男') {
+							return '<span class="label label-primary">男</span>';
+						}
+					}
+                },
+                {
+                    field: 'tell', 
+					align : "center",
+					valign : "middle",
+					width:120,
+                    title: '联系方式'
+                },
+                {
+                    field: 'card', 
+					align : "center",
+					valign : "middle",
+					width:150,
+                    title: '身份证'
+                },
+                {
+                    field: 'address',
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '户籍所在地'
+                },
+                {
+                    field: 'userOrg',
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '单位'
+                },
+                {
+                    field: 'userArea', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '部门'
+                },
+                {
+                    field: 'userGroup', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '区队'
+                },
+                {
+                    field: 'userClass', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '班组'
+                },
+                {
+                    field: 'station', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '岗位'
+                },
+                {
+                    field: 'workType', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '工资种类'
+                },
+                {
+                    field: 'workClass', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '工资类型'
+                },
+                
+                {
+                    field: 'countDay', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '出勤天数',
+                
+                },
+                {
+                    field: 'workSum', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '计件工资'
+                },
+                {
+                    field: 'workHuo', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '零活工资'
+                },
+                {
+                    field: 'kaohe', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '考核'
+                },
+                {
+                    field: 'meiKaohe', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '煤质考核'
+                },
+                {
+                    field: 'meeting', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '早会'
+                },
+                {
+                    field: 'yearsHolidays',
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '年休假天数'
+                },
+                {
+                    field: 'yearsCost', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '年休假工资'
+                },
+                {
+                    field: 'yearDay', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '春节休假天数'
+                },
+                {
+                    field: 'yearCost',
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '春节休假工资'
+                },
+                {
+                	
+                    field: 'yearWork', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '春节上班'
+                },
+                {
+                    field: 'yearSum', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '春节上班工资'
+                },
+                {
+                    field: 'yearPlus', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '春节值班天数'
+                },
+                {
+                    field: 'yearDuty', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '春节值班工资'
+                },
+                {
+                    field: 'workPlus', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '加班天数'
+                },
+                {
+                    field: 'workCost', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '加班工资'
+                },
+                {
+                    field: 'lawDay', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '法定天数'
+                },
+                {
+                    field: 'lawCost',
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '法定工资'
+                },
+                {
+                    field: 'busDay',
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '公休天数'
+                },
+                {
+                    field: 'busCost', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '公休工资'
+                },
+                {
+                    field: 'busPlus', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '延时加班工资'
+                },
+                {
+                    field: 'woman', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '女工费'
+                },
+                {
+                    field: 'run', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '入井费'
+                },
+                {
+                    field: 'ye', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '夜班补助'
+                },
+                {
+                    field: 'kuangji',
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '矿井处罚'
+                },
+                {
+                    field: 'huliDay', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '护理假天数'
+                },
+                {
+                    field: 'huliCost', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '护理假工资'
+                },
+                {
+                    field: 'gsDay', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '工伤假天数'
+                },
+                {
+                    field: 'gsCost', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '工伤假工资'
+                },
+                {
+                    field: 'tqDay', 
+					align : "center",
+					valign : "middle",
+					width:100,
+                    title: '探亲假天数'
+                },
+                {
+                    field: 'tqCost', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '探亲工资'
+                },
+                {
+                    field: 'bingDay', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '病假天数'
+                },
+                {
+                    field: 'bingCost', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '病假工资'
+                },
+                {
+                    field: 'sangDay', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '丧假天数'
+                },
+                {
+                    field: 'sangCost', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '丧假工资'
+                },
+                {
+                    field: 'sjDay', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '事假天数'
+                },
+                {
+                    field: 'kgDay', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '旷工天数'
+                },
+                {
+                    field: 'dgDay', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '待岗天数'
+                },
+                {
+                    field: 'other', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '其它补助'
+                },
+                {
+                    field: 'userCost', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '计算工资'
+                },
+                {
+                    field: 'fu', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '浮动比例'
+                },
+                {
+                    field: 'user_money', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '实发工资'
+                },
+
+                {
+                    field: 'remark', 
+           			valign : "middle",
+           		    align: 'center',
+   					width:80,
+                    title: '备注'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+					valign : "middle",
+					width:150,
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

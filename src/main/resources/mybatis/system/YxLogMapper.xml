@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.YxLogMapper">
+    
+    <resultMap type="YxLog" id="YxLogResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="sex"    column="sex"    />
+        <result property="tell"    column="tell"    />
+        <result property="card"    column="card"    />
+        <result property="address"    column="address"    />
+        <result property="userOrg"    column="user_org"    />
+        <result property="userArea"    column="user_area"    />
+        <result property="userGroup"    column="user_group"    />
+        <result property="userClass"    column="user_class"    />
+        <result property="station"    column="station"    />
+        <result property="workType"    column="work_type"    />
+        <result property="workClass"    column="work_class"    />
+        <result property="countDay"    column="count_day"    />
+        <result property="workSum"    column="work_sum"    />
+        <result property="workHuo"    column="work_huo"    />
+        <result property="kaohe"    column="kaohe"    />
+        <result property="meiKaohe"    column="mei_kaohe"    />
+        <result property="meeting"    column="meeting"    />
+        <result property="yearsHolidays"    column="years_holidays"    />
+        <result property="yearsCost"    column="years_cost"    />
+        <result property="yearDay"    column="year_day"    />
+        <result property="yearCost"    column="year_cost"    />
+        <result property="yearWork"    column="year_work"    />
+        <result property="yearSum"    column="year_sum"    />
+        <result property="yearPlus"    column="year_plus"    />
+        <result property="yearDuty"    column="year_duty"    />
+        <result property="workPlus"    column="work_plus"    />
+        <result property="workCost"    column="work_cost"    />
+        <result property="lawDay"    column="law_day"    />
+        <result property="lawCost"    column="law_cost"    />
+        <result property="busDay"    column="bus_day"    />
+        <result property="busCost"    column="bus_cost"    />
+        <result property="busPlus"    column="bus_plus"    />
+        <result property="woman"    column="woman"    />
+        <result property="run"    column="run"    />
+        <result property="ye"    column="ye"    />
+        <result property="kuangji"    column="kuangji"    />
+        <result property="huliDay"    column="huli_day"    />
+        <result property="huliCost"    column="huli_cost"    />
+        <result property="gsDay"    column="gs_day"    />
+        <result property="gsCost"    column="gs_cost"    />
+        <result property="tqDay"    column="tq_day"    />
+        <result property="tqCost"    column="tq_cost"    />
+        <result property="bingDay"    column="bing_day"    />
+        <result property="bingCost"    column="bing_cost"    />
+        <result property="sangDay"    column="sang_day"    />
+        <result property="sangCost"    column="sang_cost"    />
+        <result property="sjDay"    column="sj_day"    />
+        <result property="kgDay"    column="kg_day"    />
+        <result property="dgDay"    column="dg_day"    />
+        <result property="other"    column="other"    />
+        <result property="userCost"    column="user_cost"    />
+        <result property="fu"    column="fu"    />
+        <result property="userMoney"    column="user_money"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectYxLogVo">
+        select id, user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, count_day, work_sum, work_huo, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work, year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day, other, user_cost, fu, user_money, create_time, create_by, update_time, update_by, remark from yx_log
+    </sql>
+
+    <select id="selectYxLogList" parameterType="YxLog" resultMap="YxLogResult">
+        <include refid="selectYxLogVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="tell != null  and tell != ''"> and tell = #{tell}</if>
+            <if test="card != null  and card != ''"> and card = #{card}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="userOrg != null  and userOrg != ''"> and user_org = #{userOrg}</if>
+            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+            <if test="station != null  and station != ''"> and station = #{station}</if>
+            <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
+            <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
+            <if test="countDay != null "> and count_day = #{countDay}</if>
+            <if test="workSum != null "> and work_sum = #{workSum}</if>
+            <if test="workHuo != null "> and work_huo = #{workHuo}</if>
+            <if test="kaohe != null "> and kaohe = #{kaohe}</if>
+            <if test="meiKaohe != null "> and mei_kaohe = #{meiKaohe}</if>
+            <if test="meeting != null "> and meeting = #{meeting}</if>
+            <if test="yearsHolidays != null "> and years_holidays = #{yearsHolidays}</if>
+            <if test="yearsCost != null "> and years_cost = #{yearsCost}</if>
+            <if test="yearDay != null "> and year_day = #{yearDay}</if>
+            <if test="yearCost != null "> and year_cost = #{yearCost}</if>
+            <if test="yearWork != null "> and year_work = #{yearWork}</if>
+            <if test="yearSum != null "> and year_sum = #{yearSum}</if>
+            <if test="yearPlus != null "> and year_plus = #{yearPlus}</if>
+            <if test="yearDuty != null "> and year_duty = #{yearDuty}</if>
+            <if test="workPlus != null "> and work_plus = #{workPlus}</if>
+            <if test="workCost != null "> and work_cost = #{workCost}</if>
+            <if test="lawDay != null "> and law_day = #{lawDay}</if>
+            <if test="lawCost != null "> and law_cost = #{lawCost}</if>
+            <if test="busDay != null "> and bus_day = #{busDay}</if>
+            <if test="busCost != null "> and bus_cost = #{busCost}</if>
+            <if test="busPlus != null "> and bus_plus = #{busPlus}</if>
+            <if test="woman != null "> and woman = #{woman}</if>
+            <if test="run != null "> and run = #{run}</if>
+            <if test="ye != null "> and ye = #{ye}</if>
+            <if test="kuangji != null "> and kuangji = #{kuangji}</if>
+            <if test="huliDay != null "> and huli_day = #{huliDay}</if>
+            <if test="huliCost != null "> and huli_cost = #{huliCost}</if>
+            <if test="gsDay != null "> and gs_day = #{gsDay}</if>
+            <if test="gsCost != null "> and gs_cost = #{gsCost}</if>
+            <if test="tqDay != null "> and tq_day = #{tqDay}</if>
+            <if test="tqCost != null "> and tq_cost = #{tqCost}</if>
+            <if test="bingDay != null "> and bing_day = #{bingDay}</if>
+            <if test="bingCost != null "> and bing_cost = #{bingCost}</if>
+            <if test="sangDay != null "> and sang_day = #{sangDay}</if>
+            <if test="sangCost != null "> and sang_cost = #{sangCost}</if>
+            <if test="sjDay != null "> and sj_day = #{sjDay}</if>
+            <if test="kgDay != null "> and kg_day = #{kgDay}</if>
+            <if test="dgDay != null "> and dg_day = #{dgDay}</if>
+            <if test="other != null "> and other = #{other}</if>
+            <if test="userCost != null "> and user_cost = #{userCost}</if>
+            <if test="fu != null "> and fu = #{fu}</if>
+            <if test="userMoney != null "> and user_money = #{userMoney}</if>
+        </where>
+    </select>
+    
+    <select id="selectYxLogById" parameterType="Long" resultMap="YxLogResult">
+        <include refid="selectYxLogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYxLog" parameterType="YxLog" useGeneratedKeys="true" keyProperty="id">
+        insert into yx_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="tell != null  and tell != ''">tell,</if>
+            <if test="card != null  and card != ''">card,</if>
+            <if test="address != null  and address != ''">address,</if>
+            <if test="userOrg != null  and userOrg != ''">user_org,</if>
+            <if test="userArea != null  and userArea != ''">user_area,</if>
+            <if test="userGroup != null  and userGroup != ''">user_group,</if>
+            <if test="userClass != null  and userClass != ''">user_class,</if>
+            <if test="station != null  and station != ''">station,</if>
+            <if test="workType != null  and workType != ''">work_type,</if>
+            <if test="workClass != null  and workClass != ''">work_class,</if>
+            <if test="countDay != null ">count_day,</if>
+            <if test="workSum != null ">work_sum,</if>
+            <if test="workHuo != null ">work_huo,</if>
+            <if test="kaohe != null ">kaohe,</if>
+            <if test="meiKaohe != null ">mei_kaohe,</if>
+            <if test="meeting != null ">meeting,</if>
+            <if test="yearsHolidays != null ">years_holidays,</if>
+            <if test="yearsCost != null ">years_cost,</if>
+            <if test="yearDay != null ">year_day,</if>
+            <if test="yearCost != null ">year_cost,</if>
+            <if test="yearWork != null ">year_work,</if>
+            <if test="yearSum != null ">year_sum,</if>
+            <if test="yearPlus != null ">year_plus,</if>
+            <if test="yearDuty != null ">year_duty,</if>
+            <if test="workPlus != null ">work_plus,</if>
+            <if test="workCost != null ">work_cost,</if>
+            <if test="lawDay != null ">law_day,</if>
+            <if test="lawCost != null ">law_cost,</if>
+            <if test="busDay != null ">bus_day,</if>
+            <if test="busCost != null ">bus_cost,</if>
+            <if test="busPlus != null ">bus_plus,</if>
+            <if test="woman != null ">woman,</if>
+            <if test="run != null ">run,</if>
+            <if test="ye != null ">ye,</if>
+            <if test="kuangji != null ">kuangji,</if>
+            <if test="huliDay != null ">huli_day,</if>
+            <if test="huliCost != null ">huli_cost,</if>
+            <if test="gsDay != null ">gs_day,</if>
+            <if test="gsCost != null ">gs_cost,</if>
+            <if test="tqDay != null ">tq_day,</if>
+            <if test="tqCost != null ">tq_cost,</if>
+            <if test="bingDay != null ">bing_day,</if>
+            <if test="bingCost != null ">bing_cost,</if>
+            <if test="sangDay != null ">sang_day,</if>
+            <if test="sangCost != null ">sang_cost,</if>
+            <if test="sjDay != null ">sj_day,</if>
+            <if test="kgDay != null ">kg_day,</if>
+            <if test="dgDay != null ">dg_day,</if>
+            <if test="other != null ">other,</if>
+            <if test="userCost != null ">user_cost,</if>
+            <if test="fu != null ">fu,</if>
+            <if test="userMoney != null ">user_money,</if>
+            <if test="createTime != null  and createTime != ''">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="tell != null  and tell != ''">#{tell},</if>
+            <if test="card != null  and card != ''">#{card},</if>
+            <if test="address != null  and address != ''">#{address},</if>
+            <if test="userOrg != null  and userOrg != ''">#{userOrg},</if>
+            <if test="userArea != null  and userArea != ''">#{userArea},</if>
+            <if test="userGroup != null  and userGroup != ''">#{userGroup},</if>
+            <if test="userClass != null  and userClass != ''">#{userClass},</if>
+            <if test="station != null  and station != ''">#{station},</if>
+            <if test="workType != null  and workType != ''">#{workType},</if>
+            <if test="workClass != null  and workClass != ''">#{workClass},</if>
+            <if test="countDay != null ">#{countDay},</if>
+            <if test="workSum != null ">#{workSum},</if>
+            <if test="workHuo != null ">#{workHuo},</if>
+            <if test="kaohe != null ">#{kaohe},</if>
+            <if test="meiKaohe != null ">#{meiKaohe},</if>
+            <if test="meeting != null ">#{meeting},</if>
+            <if test="yearsHolidays != null ">#{yearsHolidays},</if>
+            <if test="yearsCost != null ">#{yearsCost},</if>
+            <if test="yearDay != null ">#{yearDay},</if>
+            <if test="yearCost != null ">#{yearCost},</if>
+            <if test="yearWork != null ">#{yearWork},</if>
+            <if test="yearSum != null ">#{yearSum},</if>
+            <if test="yearPlus != null ">#{yearPlus},</if>
+            <if test="yearDuty != null ">#{yearDuty},</if>
+            <if test="workPlus != null ">#{workPlus},</if>
+            <if test="workCost != null ">#{workCost},</if>
+            <if test="lawDay != null ">#{lawDay},</if>
+            <if test="lawCost != null ">#{lawCost},</if>
+            <if test="busDay != null ">#{busDay},</if>
+            <if test="busCost != null ">#{busCost},</if>
+            <if test="busPlus != null ">#{busPlus},</if>
+            <if test="woman != null ">#{woman},</if>
+            <if test="run != null ">#{run},</if>
+            <if test="ye != null ">#{ye},</if>
+            <if test="kuangji != null ">#{kuangji},</if>
+            <if test="huliDay != null ">#{huliDay},</if>
+            <if test="huliCost != null ">#{huliCost},</if>
+            <if test="gsDay != null ">#{gsDay},</if>
+            <if test="gsCost != null ">#{gsCost},</if>
+            <if test="tqDay != null ">#{tqDay},</if>
+            <if test="tqCost != null ">#{tqCost},</if>
+            <if test="bingDay != null ">#{bingDay},</if>
+            <if test="bingCost != null ">#{bingCost},</if>
+            <if test="sangDay != null ">#{sangDay},</if>
+            <if test="sangCost != null ">#{sangCost},</if>
+            <if test="sjDay != null ">#{sjDay},</if>
+            <if test="kgDay != null ">#{kgDay},</if>
+            <if test="dgDay != null ">#{dgDay},</if>
+            <if test="other != null ">#{other},</if>
+            <if test="userCost != null ">#{userCost},</if>
+            <if test="fu != null ">#{fu},</if>
+            <if test="userMoney != null ">#{userMoney},</if>
+            <if test="createTime != null  and createTime != ''">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYxLog" parameterType="YxLog">
+        update yx_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null  and userId != ''">user_id = #{userId},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="sex != null  and sex != ''">sex = #{sex},</if>
+            <if test="tell != null  and tell != ''">tell = #{tell},</if>
+            <if test="card != null  and card != ''">card = #{card},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="userOrg != null  and userOrg != ''">user_org = #{userOrg},</if>
+            <if test="userArea != null  and userArea != ''">user_area = #{userArea},</if>
+            <if test="userGroup != null  and userGroup != ''">user_group = #{userGroup},</if>
+            <if test="userClass != null  and userClass != ''">user_class = #{userClass},</if>
+            <if test="station != null  and station != ''">station = #{station},</if>
+            <if test="workType != null  and workType != ''">work_type = #{workType},</if>
+            <if test="workClass != null  and workClass != ''">work_class = #{workClass},</if>
+            <if test="countDay != null ">count_day = #{countDay},</if>
+            <if test="workSum != null ">work_sum = #{workSum},</if>
+            <if test="workHuo != null ">work_huo = #{workHuo},</if>
+            <if test="kaohe != null ">kaohe = #{kaohe},</if>
+            <if test="meiKaohe != null ">mei_kaohe = #{meiKaohe},</if>
+            <if test="meeting != null ">meeting = #{meeting},</if>
+            <if test="yearsHolidays != null ">years_holidays = #{yearsHolidays},</if>
+            <if test="yearsCost != null ">years_cost = #{yearsCost},</if>
+            <if test="yearDay != null ">year_day = #{yearDay},</if>
+            <if test="yearCost != null ">year_cost = #{yearCost},</if>
+            <if test="yearWork != null ">year_work = #{yearWork},</if>
+            <if test="yearSum != null ">year_sum = #{yearSum},</if>
+            <if test="yearPlus != null ">year_plus = #{yearPlus},</if>
+            <if test="yearDuty != null ">year_duty = #{yearDuty},</if>
+            <if test="workPlus != null ">work_plus = #{workPlus},</if>
+            <if test="workCost != null ">work_cost = #{workCost},</if>
+            <if test="lawDay != null ">law_day = #{lawDay},</if>
+            <if test="lawCost != null ">law_cost = #{lawCost},</if>
+            <if test="busDay != null ">bus_day = #{busDay},</if>
+            <if test="busCost != null ">bus_cost = #{busCost},</if>
+            <if test="busPlus != null ">bus_plus = #{busPlus},</if>
+            <if test="woman != null ">woman = #{woman},</if>
+            <if test="run != null ">run = #{run},</if>
+            <if test="ye != null ">ye = #{ye},</if>
+            <if test="kuangji != null ">kuangji = #{kuangji},</if>
+            <if test="huliDay != null ">huli_day = #{huliDay},</if>
+            <if test="huliCost != null ">huli_cost = #{huliCost},</if>
+            <if test="gsDay != null ">gs_day = #{gsDay},</if>
+            <if test="gsCost != null ">gs_cost = #{gsCost},</if>
+            <if test="tqDay != null ">tq_day = #{tqDay},</if>
+            <if test="tqCost != null ">tq_cost = #{tqCost},</if>
+            <if test="bingDay != null ">bing_day = #{bingDay},</if>
+            <if test="bingCost != null ">bing_cost = #{bingCost},</if>
+            <if test="sangDay != null ">sang_day = #{sangDay},</if>
+            <if test="sangCost != null ">sang_cost = #{sangCost},</if>
+            <if test="sjDay != null ">sj_day = #{sjDay},</if>
+            <if test="kgDay != null ">kg_day = #{kgDay},</if>
+            <if test="dgDay != null ">dg_day = #{dgDay},</if>
+            <if test="other != null ">other = #{other},</if>
+            <if test="userCost != null ">user_cost = #{userCost},</if>
+            <if test="fu != null ">fu = #{fu},</if>
+            <if test="userMoney != null ">user_money = #{userMoney},</if>
+            <if test="createTime != null  and createTime != ''">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteYxLogById" parameterType="Long">
+        delete from yx_log where id = #{id}
+    </delete>
+
+    <delete id="deleteYxLogByIds" parameterType="String">
+        delete from yx_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

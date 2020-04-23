@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改牙星公司')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-log-edit" th:object="${yxLog}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">员工工号：</label>
+                <div class="col-sm-4">
+                    <input  id="userId" name="userId" th:field="*{userId}" class="form-control" type="text" required maxlength="7">
+                </div>
+                
+                <label class="col-sm-2 control-label is-required">员工姓名：</label>
+                <div class="col-sm-4">
+                    <input id="userName" name="userName" th:field="*{userName}" class="form-control" type="text" required maxlength="30">
+                </div>
+            </div>
+            
+            
+            
+            <div class="form-group">	
+				<label class="col-sm-2 control-label is-required">手机号码：</label>
+				<div class="col-sm-4">
+					<input id="tell" name="tell" th:field="*{tell}" class="form-control" type="text"  required maxlength="11" >
+				</div>
+				
+				<label class="col-sm-2 control-label is-required">身份证号：</label>
+				<div class="col-sm-4">
+					<input id="card" name="card" th:field="*{card}" class="form-control" type="text"  required maxlength="18">
+				</div>
+			</div>
+            
+
+            
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">员工性别：</label>
+                <div class="col-sm-4">
+                   <select  id="sex"  name="sex" th:field="${yxLog.sex}" th:value="${yxLog.sex}"  required data-placeholder="选择员工性别" 
+							class="form-control chosen-select" >
+							<option th:selected="${yxLog.sex == '1' ? 'selected' : ''}" value="1">男</option>
+							<option th:selected="${yxLog.sex == '2' ? 'selected' : ''}" value="2">女</option>
+				   </select>
+                </div>
+                
+                
+                <label class="col-sm-2 control-label is-required">户籍城市：</label>
+                <div class="col-sm-4">
+                    <input name="address" th:field="*{address}" class="form-control" type="text" required>
+                </div>
+            </div>
+               
+
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">单位：</label>
+                <div class="col-sm-4">
+                    <input name="userOrg" th:field="*{userOrg}" class="form-control" type="text" required>
+                </div>
+                
+                <label class="col-sm-2 control-label is-required">部门：</label>
+                <div class="col-sm-4">
+                    <input name="userArea" th:field="*{userArea}" class="form-control" type="text" required>
+                </div>
+            </div>
+            
+         
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">区队：</label>
+                <div class="col-sm-4">
+                    <input name="userGroup" th:field="*{userGroup}" class="form-control" type="text" required>
+                </div>
+                
+                 <label class="col-sm-2 control-label is-required">班组：</label>
+                <div class="col-sm-4">
+                    <input name="userClass" th:field="*{userClass}" class="form-control" type="text" required>
+                </div>
+            </div>
+
+  
+         
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">工作类型：</label>
+                <div class="col-sm-4">
+		            <select  id="workType"  name="workType" th:field="${yxLog.workType}" th:value="${yxLog.workType}" required  data-placeholder="选择工作类型" 
+							class="form-control chosen-select" >
+							<option th:selected="${yxLog.workType == '1' ? 'selected' : ''}" value="1">计件工资</option>
+							<option th:selected="${yxLog.workType == '2' ? 'selected' : ''}" value="2">月薪工资</option>
+							<option th:selected="${yxLog.workType == '3' ? 'selected' : ''}" value="3">单项工程</option>
+				   </select>
+                </div>
+                  
+                <label class="col-sm-2 control-label is-required">工资种类：</label>
+                <div class="col-sm-4">
+                    <select  id="workClass"  name="workClass" th:field="${yxLog.workClass}" th:value="${yxLog.workClass}"  required data-placeholder="选择工作类型" 
+							class="form-control chosen-select" >
+							<option th:selected="${yxLog.workClass == '1' ? 'selected' : ''}" value="1">一线工资</option>
+							<option th:selected="${yxLog.workClass == '2' ? 'selected' : ''}" value="2">二线工资</option>
+							<option th:selected="${yxLog.workClass == '3' ? 'selected' : ''}" value="3">三线工程</option>
+				   </select>
+                </div>
+            </div>
+                
+
+            
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">岗位：</label>
+                <div class="col-sm-4">
+                    <input name="station" th:field="*{station}" class="form-control" type="text" required>
+                </div>
+                
+				<label class="col-sm-2 control-label">计件工资：</label>
+				<div class="col-sm-4">
+					<input id="countDay" name="countDay"  th:field="*{countDay}"  class="form-control" type="text"   maxlength="2">
+				</div>
+            </div>
+            
+            
+            
+            <div class="form-group">    
+				<label class="col-sm-2 control-label">计件工资：</label>
+				<div class="col-sm-4">
+					<input id="workSum" name="workSum"  th:field="*{workSum}"  class="form-control" type="text"   maxlength="6">
+				</div>
+				
+				
+			     <label class="col-sm-2 control-label">零活工资：</label>
+				<div class="col-sm-4">
+					<input id="workHuo" name="workHuo"  th:field="*{workHuo}"  class="form-control" type="text"   maxlength="6">
+				</div>
+            </div>
+
+		
+	       <div class="form-group">	
+				<label class="col-sm-2 control-label">考核：</label>
+				<div class="col-sm-4">
+					<input id="kaohe" name="kaohe" th:field="*{kaohe}"  class="form-control" type="text"   maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">煤质考核：</label>
+				<div class="col-sm-4">
+					<input id="meiKaohe" name="meiKaohe"  th:field="*{meiKaohe}" class="form-control" type="text"   maxlength="4">
+				</div>
+			</div>
+			
+			
+		   <div class="form-group">	
+				<label class="col-sm-2 control-label">早会：</label>
+				<div class="col-sm-4">
+					<input id="meeting" name="meeting"  th:field="*{meeting}"  class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">年休假天数：</label>
+				<div class="col-sm-4">
+					<input id="yearsHolidays" name="yearsHolidays" th:field="*{yearsHolidays}"   class="form-control" type="text"  maxlength="2">
+				</div>
+			</div>
+			
+			
+										                                         
+	       <div class="form-group">	
+				<label class="col-sm-2 control-label">年休假工资：</label>
+				<div class="col-sm-4">
+					<input id="yearsCost" name="yearsCost"  th:field="*{yearsCost}"  class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">春节休假天数：</label>
+				<div class="col-sm-4">
+					<input id="yearDay" name="yearDay"  th:field="*{yearDay}" class="form-control" type="text"  maxlength="2">
+				</div>
+			</div>
+						
+										                                 		 
+										                                         
+           <div class="form-group">	
+				<label class="col-sm-2 control-label">春节休假工资：</label>
+				<div class="col-sm-4">
+					<input id="yearCost" name="yearCost" th:field="*{yearCost}" class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">春节上班天数：</label>
+				<div class="col-sm-4">
+					<input id="yearWork" name="yearWork" th:field="*{yearWork}" class="form-control" type="text"  maxlength="2">
+				</div>
+			</div>
+			
+
+			
+	        <div class="form-group">	
+				<label class="col-sm-2 control-label">春节上班工资：</label>
+				<div class="col-sm-4">
+					<input id="yearSum" name="yearSum" th:field="*{yearSum}" class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">春节值班天数：</label>
+				<div class="col-sm-4">
+					<input id="yearPlus" name="yearPlus" th:field="*{yearPlus}" class="form-control" type="text"  maxlength="2">
+				</div>
+			</div>
+		
+			
+								                                                          
+            <div class="form-group">	
+				<label class="col-sm-2 control-label">加班工资：</label>
+				<div class="col-sm-4">
+					<input id="workCost" name="workCost" th:field="*{workCost}" class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">法定天数：</label>
+				<div class="col-sm-4">
+					<input id="lawDay" name="lawDay" th:field="*{lawDay}"  class="form-control" type="text"  maxlength="2">
+				</div>
+			</div>
+			
+			
+
+										    
+										    
+		   <div class="form-group">	
+				<label class="col-sm-2 control-label">法定工资：</label>
+				<div class="col-sm-4">
+					<input id="lawCost" name="lawCost" th:field="*{lawCost}" class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">公休天数：</label>
+				<div class="col-sm-4">
+					<input id="busDay" name="busDay" th:field="*{busDay}" class="form-control" type="text"  maxlength="2">
+				</div>
+			</div>
+			
+
+			
+	      <div class="form-group">	
+				<label class="col-sm-2 control-label">公休工资：</label>
+				<div class="col-sm-4">
+					<input id="busCost" name="busCost" th:field="*{busCost}" class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">延时加班工资：</label>
+				<div class="col-sm-4">
+					<input id="busPlus" name="busPlus"  th:field="*{busPlus}" class="form-control" type="text"  maxlength="5">
+				</div>
+			</div>
+										                                        
+			
+			
+            <div class="form-group">	
+				<label class="col-sm-2 control-label">女工费：</label>
+				<div class="col-sm-4">
+					<input id="woman" name="woman" th:field="*{woman}" class="form-control" type="text"  maxlength="4">
+				</div>
+				
+				<label class="col-sm-2 control-label">入井费：</label>
+				<div class="col-sm-4">
+					<input id="run" name="run"  th:field="*{run}" class="form-control" type="text"  maxlength="4">
+				</div>
+			</div>
+										     
+   
+										                                                        
+	       <div class="form-group">	
+				<label class="col-sm-2 control-label">夜班补助：</label>
+				<div class="col-sm-4">
+					<input id="ye" name="ye" th:field="*{ye}" class="form-control" type="text"  maxlength="5">
+				</div>
+				
+				<label class="col-sm-2 control-label">矿井处罚：</label>
+				<div class="col-sm-4">
+					<input id="kuangji" name="kuangji" th:field="*{kuangji}" class="form-control" type="text"  maxlength="5">
+				</div>
+			</div>
+									
+			
+			
+           <div class="form-group">	
+				<label class="col-sm-2 control-label">护理假天数：</label>
+				<div class="col-sm-4">
+					<input id="huliDay" name="huliDay" th:field="*{huliDay}" class="form-control" type="text"  maxlength="2">
+				</div>
+				
+				
+				<label class="col-sm-2 control-label">护理假工资：</label>
+				<div class="col-sm-4">
+					<input id="huliCost" name="huliCost" th:field="*{huliCost}" class="form-control" type="text"  maxlength="4">
+				</div>
+			</div>
+						
+		
+										                                                        
+										      
+           <div class="form-group">	
+           		<label class="col-sm-2 control-label">工伤假天数：</label>
+				<div class="col-sm-4">
+					<input id="gsDay" name="gsDay"  th:field="*{gsDay}" class="form-control" type="text"  maxlength="2">
+				</div>	
+           
+           
+				<label class="col-sm-2 control-label">工伤假工资：</label>
+				<div class="col-sm-4">
+					<input id="gsCost" name="gsCost" th:field="*{gsCost}" class="form-control" type="text"  maxlength="4">
+				</div>
+			</div>
+			
+			
+								
+	       <div class="form-group">	
+				<label class="col-sm-2 control-label">探亲假天数：</label>
+				<div class="col-sm-4">
+					<input id="tqDay" name="tqDay" th:field="*{tqDay}" class="form-control" type="text"  maxlength="2">
+				</div>
+				
+				<label class="col-sm-2 control-label">探亲工资：</label>
+				<div class="col-sm-4">
+					<input id="tqCost" name="tqCost" th:field="*{tqCost}"  class="form-control" type="text"  maxlength="4">
+				</div>
+			</div>
+								
+										     
+
+		   <div class="form-group">	
+				<label class="col-sm-2 control-label">病假天数：</label>
+				<div class="col-sm-4">
+					<input id="bingDay" name="bingDay" th:field="*{bingDay}"  class="form-control" type="text"  maxlength="2">
+				</div>
+		   
+		   
+				<label class="col-sm-2 control-label">病假工资：</label>
+				<div class="col-sm-4">
+					<input id="bingCost" name="bingCost" th:field="*{bingCost}"  class="form-control" type="text"  maxlength="4">
+				</div>
+			</div>
+										                                            
+								
+										                                                 
+            <div class="form-group">	
+				<label class="col-sm-2 control-label">丧假天数：</label>
+				<div class="col-sm-4">
+					<input id="sangDay" name="sangDay" th:field="*{sangDay}"  class="form-control" type="text"  maxlength="2">
+				</div>
+            
+            
+		 		<label class="col-sm-2 control-label">丧假工资：</label>
+				<div class="col-sm-4">
+					<input id="sangCost" name="sangCost"  th:field="*{sangCost}"  class="form-control" type="text"  maxlength="4">
+				</div>
+			</div>
+			
+										                             
+              <div class="form-group">	
+                   <label class="col-sm-2 control-label">事假天数：</label>
+				<div class="col-sm-4">
+					<input id="sjDay" name="sjDay" th:field="*{sjDay}"  class="form-control" type="text"  maxlength="2">
+				</div>
+				
+				
+				<label class="col-sm-2 control-label">旷工天数：</label>
+				<div class="col-sm-4">
+					<input id="kgDay" name="kgDay" th:field="*{kgDay}" class="form-control" type="text"  maxlength="2">
+				</div>
+			</div>
+			
+
+	       <div class="form-group">	
+            		<label class="col-sm-2 control-label">待岗天数：</label>
+				<div class="col-sm-4">
+					<input id="dgDay" name="dgDay" th:field="*{dgDay}" class="form-control" type="text"  maxlength="2">
+				</div>
+				
+				<label class="col-sm-2 control-label">其它补助：</label>
+				<div class="col-sm-4">
+					<input id="other" name="other" th:field="*{other}" class="form-control" type="text"  maxlength="6">
+				</div>
+			</div>
+			
+							
+											                                                           
+	       <div class="form-group">	
+				<label class="col-sm-2 control-label">创建时间：</label>
+				<div class="col-sm-4">
+				
+					 <input id="createTime" name="createTime" th:value="${#dates.format(yxLog.createTime,'yyyy-MM-dd')}"    class="form-control" type="text"  maxlength="20">
+				</div>
+				
+
+				<label class="col-sm-2 control-label">计算工资：</label>
+				<div class="col-sm-4">
+					<input id="userCost" name="userCost" th:field="*{userCost}" class="form-control" type="text"  maxlength="6">
+				</div>
+				
+			</div>
+							
+            <div class="form-group">    
+                <label class="col-sm-2 control-label">浮动比例：</label>
+                <div class="col-sm-4">
+                    <input id="fu"  name="fu" th:field="*{fu}" class="form-control" type="text" maxlength="3">
+                </div>
+       
+                <label class="col-sm-2 control-label">实发工资：</label>
+                <div class="col-sm-4">
+                    <input id="userMoney" name="userMoney" th:field="*{userMoney}" class="form-control" type="text" maxlength="6">
+                </div>
+            </div>
+            
+            
+             <div class="form-group">	
+				<label class="col-sm-2 control-label">备注：</label>
+				<div class="col-sm-10">
+					<textarea id="remark" name="remark" th:field="*{remark}" maxlength="100" class="input-xlarge" rows="3" style="width:100%;border-radius:5px;"></textarea>
+				</div>
+			</div>	
+            
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "system/log";
+        $("#form-log-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-log-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>
