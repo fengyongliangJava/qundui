@@ -118,32 +118,10 @@ from  yx
            
         </where>
         
-        
          group by  user_id, user_name, sex, tell, card,address,user_org, user_area, user_group, user_class, station, work_type, work_class, work_start,LEFT(create_time,7) having work_start = 1
 
-    <select id="selectYxKHList" parameterType="Yx" resultMap="YxResult">
-        select  user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class,
-        sum(work_start), sum(work_sum),sum(work_huo),sum(kaohe),sum(mei_kaohe),sum(meeting),count(years_holidays),sum(years_cost),count(year_day),sum(year_cost),sum(year_work),
-        sum(year_sum),count(year_plus),sum(year_duty),count(work_plus),sum(work_cost),count(law_day),sum(law_cost),count(bus_day),sum(bus_cost),sum(bus_plus),sum(woman),sum(run),
-        sum(ye), sum(kuangji),count(huli_day),sum(huli_cost),count(gs_day),sum(gs_cost),count(tq_day),sum(tq_cost),count(bing_day),sum(bing_cost),count(sang_day),sum(sang_cost),
-		count(sj_day),count(kg_day),count(dg_day),sum(other),sum(user_cost),create_time, create_by,yx.update_time,update_by, remark
-        
-       from yx
-        <where>  
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
-            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
-            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
-            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
-            <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
-            <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
-            <if test="workStart != null">   and work_start = #{workStart} </if>
-            <if test="createTime != null  and createTime != ''">and yx.create_time like  concat('%',#{createTime},'%')</if>
-        </where>
->>>>>>> branch 'master' of https://github.com/fengyongliangJava/qundui
-    </select>
-    
-    
+
+</select>       
     
     
     
