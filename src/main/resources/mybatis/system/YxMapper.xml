@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join sys_dept sd on (sd.dept_name = yx.user_org or sd.dept_name = yx.user_area or sd.dept_name = yx.user_group or sd.dept_name = yx.user_class)
     </sql>
 
-<<<<<<< HEAD
+
 
 
     <select id="selectYxKHList" parameterType="Yx" resultMap="YxResult">
@@ -120,7 +120,7 @@ from  yx
         
         
          group by  user_id, user_name, sex, tell, card,address,user_org, user_area, user_group, user_class, station, work_type, work_class, work_start,LEFT(create_time,7) having work_start = 1
-=======
+
     <select id="selectYxKHList" parameterType="Yx" resultMap="YxResult">
         select  user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class,
         sum(work_start), sum(work_sum),sum(work_huo),sum(kaohe),sum(mei_kaohe),sum(meeting),count(years_holidays),sum(years_cost),count(year_day),sum(year_cost),sum(year_work),
