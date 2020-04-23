@@ -3,7 +3,6 @@ package com.ruoyi.project.system.yx.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,6 +71,7 @@ public class YxmoneyYueController extends BaseController {
 
 		ExcelUtil<YxYue> util = new ExcelUtil<YxYue>(YxYue.class);
 		List<YxYue> userList = util.importExcel(file.getInputStream());
+		
 		
 		int i = 0;
 		for (YxYue yxuser : userList) {
