@@ -73,10 +73,25 @@ public class Yx
     @Excel(name = "工资类型")
     private String workClass;
     
-    /** 出勤状态 */
+    
+    //@Transient
+    private Integer countDay;
+    
+    public Integer getCountDay() {
+		return countDay;
+	}
+
+	public void setCountDay(Integer countDay) {
+		this.countDay = countDay;
+	}
+
+	
+	/** 出勤状态 */
     @Excel(name = "出勤状态")
     private Integer workStart;
 
+    
+    
     /** 产量 */
     @Excel(name = "产量")
     private Integer workNumber;

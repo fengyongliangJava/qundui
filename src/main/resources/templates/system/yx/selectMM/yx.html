@@ -47,14 +47,7 @@
                                 </select>
                             </li>
                             
-                            <li>
-                                <label>出勤状态：</label>
-                                <select id="workStart" name="workStart" th:with="type=${@dict.getType('workStart')}">
-                                    <option value="">-请选择-</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            
+
                             <li>
                                 <label>员工工号：</label>
                                 <input type="text" id="userId" name="userId"  maxlength="7" />
@@ -112,7 +105,7 @@
         }
 
         function doSubmit(index, layero){
-            debugger;
+            
             var tree = layero.find("iframe")[0].contentWindow.$._tree;
             if ($.tree.notAllowLastLevel(tree)) {
                 var body = layer.getChildFrame('body', index);

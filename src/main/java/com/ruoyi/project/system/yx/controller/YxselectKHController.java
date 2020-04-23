@@ -1,5 +1,7 @@
 package com.ruoyi.project.system.yx.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -29,7 +32,7 @@ import com.ruoyi.project.system.yx.service.IYxService;
  * @author ruoyi
  * @date 2020-04-07
  */
-@Controller
+@Controller("YxLog")
 @RequestMapping("/system/yx/selectKH")
 public class YxselectKHController extends BaseController
 {
@@ -77,6 +80,44 @@ public class YxselectKHController extends BaseController
         return getDataTable(list);
     }
 
+    
+    
+    
+    public void ryMultipleParams(String s, Boolean b, Long l, Double d, Integer i)
+    {
+        System.out.println(StringUtils.format("执行多参方法： 字符串类型{}，布尔类型{}，长整型{}，浮点型{}，整形{}", s, b, l, d, i));
+    }
+
+    public void ryParams(String params)
+    {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+		
+       new Yx().setCreateTime(LocalDate.now().format(formatter));
+    	
+     //  List<Yx> KHList = yxService.selectYxKHList(yx);
+    }
+
+    public void ryNoParams()
+    {
+        System.out.println("执行无参方法");
+    }
+    
+
+    
+/*    @PostMapping("/countMoney")
+    @ResponseBody
+    public TableDataInfo countMoney(Yx yx)
+    {
+        List<Yx> KHList = yxService.selectYxKHList(yx);
+        return getDataTable(list);
+    }*/
+
+    
+
+    
+    
+    
+    
     /**
      * 导出牙星公司列表
      */

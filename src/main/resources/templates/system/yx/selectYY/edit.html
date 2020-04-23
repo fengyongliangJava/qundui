@@ -130,17 +130,34 @@
 					<input id="workAll" name="workAll"  th:field="*{workAll}"   class="form-control" type="text"   maxlength="3">
 				</div>
 			</div>
-
-			
-            <div class="form-group">	
+、
+		    <div class="form-group">	
 				<label class="col-sm-2 control-label">个人工分：</label>
 				<div class="col-sm-4">
 					<input id="workFen" name="workFen"  th:field="*{workFen}" class="form-control" type="text"    maxlength="2">
 				</div>
 				
+			    <label class="col-sm-2 control-label is-required">出勤状态：</label>
+                <div class="col-sm-4">
+                    <select  id="workStart"  name="workStart" th:field="${yx.workStart}" th:value="${yx.workStart}"  required data-placeholder="选择工作类型" 
+							class="form-control chosen-select" >
+							<option th:selected="${yx.workStart == '1' ? 'selected' : ''}" value="1">出勤</option>
+							<option th:selected="${yx.workStart == '0' ? 'selected' : ''}" value="2">未出勤</option>
+				   </select>
+                </div>
+			</div>
+			
+			
+            <div class="form-group">	
 				<label class="col-sm-2 control-label">计件工资：</label>
 				<div class="col-sm-4">
 					<input id="workSum" name="workSum"  th:field="*{workSum}"  class="form-control" type="text"   maxlength="6">
+				</div>
+				
+				
+			    <label class="col-sm-2 control-label">零活工资：</label>
+				<div class="col-sm-4">
+					<input id="workHuo" name="workHuo"  th:field="*{workHuo}"  class="form-control" type="text"   maxlength="6">
 				</div>
 			</div>
 
@@ -392,16 +409,14 @@
 	       <div class="form-group">	
 				<label class="col-sm-2 control-label">创建时间：</label>
 				<div class="col-sm-4">
-				
-					 <input id="createTime" name="createTime" th:value="${#dates.format(yx.createTime,'yyyy-MM-dd')}"    class="form-control" type="text"  maxlength="20">
+					 <input id="createTime" name="createTime" th:value="*{createTime}" class="form-control" type="text"  maxlength="20">
 				</div>
 				
 
-				<label class="col-sm-2 control-label">实发工资：</label>
+				<label class="col-sm-2 control-label">计算工资：</label>
 				<div class="col-sm-4">
 					<input id="userCost" name="userCost" th:field="*{userCost}" class="form-control" type="text"  maxlength="6">
 				</div>
-				
 			</div>
 		
 		
@@ -411,19 +426,12 @@
 					<textarea id="remark" name="remark" th:field="*{remark}" maxlength="100" class="input-xlarge" rows="3" style="width:100%;border-radius:5px;"></textarea>
 				</div>
 			</div>				
-				
-							
-							
-							
-							
-							
-							
-							
+
         </form>
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/yx";
+        var prefix = ctx + "system/yx/selectYY";
         $("#form-yx-edit").validate({
             focusCleanup: true
         });

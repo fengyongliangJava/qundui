@@ -1,9 +1,12 @@
 package com.ruoyi.project.system.yx.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +110,34 @@ public class YxmoneyCountController extends BaseController
     }
        
 
+    
+    
+	/**
+	 * 导出模板
+	 */
+	@GetMapping("/exprotModel")
+	@ResponseBody
+	public byte[] exprotModel(MultipartFile file, boolean updateSupport, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		//加载模板流
+		InputStream is = this.getClass().getClassLoader().getResourceAsStream("model/计件上传模板.xlsx");
+		int i = 0;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		while((i = is.read()) != -1) {
+			baos.write(i);
+		}
+		String fileName = "计件上传模板";
+		fileName = new String(fileName.getBytes("GB2312"), "ISO8859-1");
+		response.setContentType("application/ms-excel;charset=UTF-8");
+		response.addHeader("Content-Disposition", "attachment;filename=" + fileName+".xlsx");
+		//response.setHeader("Content-disposition","attachment;filename=月薪上传模板" + UUID.randomUUID().toString() + ".xlsx");
+		return baos.toByteArray();
+
+	}
+
+
+    
+    
     
 }
     

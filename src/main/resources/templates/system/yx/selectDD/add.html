@@ -35,11 +35,10 @@
          	<div class="form-group">	
 				<label class="col-sm-2 control-label is-required">员工性别：</label>
 				<div class="col-sm-4">
-					<select id="sex" name="sex" class="form-control m-b" required>
-					    <option value=" ">-请选择-</option>
-	                    <option value="1">男</option>
-	                    <option value="2">女</option>
-	                </select>
+					<select id="sex" name="sex" class="form-control m-b" required th:with="type=${@dict.getType('sys_user_sex')}">
+						<option value="">-请选择-</option>
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
 				</div>
 				
 				<label class="col-sm-2 control-label is-required" >户籍城市：</label>
@@ -54,12 +53,13 @@
             <div class="form-group">	
 				<label class="col-sm-2 control-label">单位：</label>
 				<div class="col-sm-4">
-					<input  class="form-control" id="userOrg" name="userOrg"  type="text">
+					<input  class="form-control" id="userOrg" name="userOrg"  value="牙星公司"  readonly="true" type="text">
 				</div>
 				
 				<label class="col-sm-2 control-label">部门：</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="userArea" name="userArea" type="text">
+			        <input   type="hidden" id="treeId" name="userArea" readonly="true"/>
+                    <input  class="form-control" type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
 				</div>
 			</div>
 					
@@ -68,12 +68,14 @@
            <div class="form-group">	
 				<label class="col-sm-2 control-label">区队：</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="userGroup" name="userGroup"  type="text">
+				    <input type="hidden" id="treeId" name="userGroup" readonly="true"/>
+                    <input  class="form-control"  type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
 				</div>
 				
 				<label class="col-sm-2 control-label">班组：</label>
 				<div class="col-sm-4">
-					<input class="form-control" id="userClass" name="userClass"  type="text">
+				    <input type="hidden" id="treeId" name="userClass" readonly="true"/>
+                    <input  class="form-control"  type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
 				</div>
 			</div>
             
@@ -81,22 +83,18 @@
             <div class="form-group">	
 				<label class="col-sm-2 control-label is-required">工作类型：</label>
 				<div class="col-sm-4">
-					<select id="workType" name="workType" class="form-control m-b" required>
-					    <option value=" ">-请选择-</option>
-	                    <option value="1">计件工资</option>
-	                    <option value="2">月薪工资</option>
-	                    <option value="3">单项工程</option>
-	                </select>
+					<select id="workType" name="workType" class="form-control m-b" required th:with="type=${@dict.getType('workType')}">
+						<option value="">-请选择-</option>
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
 				</div>
-					
+				
 				<label class="col-sm-2 control-label is-required">工资种类：</label>
 				<div class="col-sm-4">
-					<select id="workClass" name="workClass" class="form-control m-b" required>
-					    <option value=" ">-请选择-</option>
-	                    <option value="1">一线工资</option>
-	                    <option value="2">二线工资</option>
-	                    <option value="3">三线工资</option>
-	                </select>
+					<select id="workClass" name="workClass" class="form-control m-b" required th:with="type=${@dict.getType('workClass')}">
+						<option value="">-请选择-</option>
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
 				</div>
 			</div>
     
@@ -127,15 +125,33 @@
 				</div>
 			</div>
 
-			
-            <div class="form-group">	
+
+		     <div class="form-group">	
 				<label class="col-sm-2 control-label">个人工分：</label>
 				<div class="col-sm-4">
 					<input id="workFen" name="workFen" class="form-control" type="text"    maxlength="2">
 				</div>
+				
+				
+				<label class="col-sm-2 control-label">出勤状态：</label>
+				<div class="col-sm-4">
+					<select id="workStart" name="workStart" class="form-control m-b" required th:with="type=${@dict.getType('workStart')}">
+						<option value="">-请选择-</option>
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
+				</div>
+		
+			</div>
+			
+            <div class="form-group">	
 				<label class="col-sm-2 control-label">计件工资：</label>
 				<div class="col-sm-4">
 					<input id="workSum" name="workSum" class="form-control" type="text"   maxlength="6">
+				</div>
+				
+				<label class="col-sm-2 control-label">零活工资：</label>
+				<div class="col-sm-4">
+					<input id="workHuo" name="workHuo" class="form-control" type="text"   maxlength="6">
 				</div>
 			</div>
     
@@ -410,7 +426,29 @@
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/yx/selectDD"
+       var prefix = ctx + "system/yx/selectDD"
+        
+      function selectDeptTree() {
+            var options = {
+                title: '部门选择',
+                width: "380",
+                url: prefix + "/selectDeptTree",
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+
+    }
+
+    function doSubmit(index, layero){
+        var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if ($.tree.notAllowLastLevel(tree)) {
+            var body = layer.getChildFrame('body', index);
+            $("#treeId").val(body.find('#treeId').val());
+            $("#treeName").val(body.find('#treeName').val());
+            layer.close(index);
+        }
+    }
+        
         
         $().ready(function() {
         	validateRule();

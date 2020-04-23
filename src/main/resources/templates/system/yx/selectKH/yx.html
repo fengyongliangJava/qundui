@@ -47,13 +47,6 @@
                                 </select>
                             </li>
                             
-                            <li>
-                                <label>出勤状态：</label>
-                                <select id="workStart" name="workStart" th:with="type=${@dict.getType('workStart')}">
-                                    <option value="">-请选择-</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
                             
                             <li>
                                 <label>员工工号：</label>
@@ -98,7 +91,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('system:yx:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:yx:remove')}]];
-        var prefix = ctx + "system/yx/selectMM";
+        var prefix = ctx + "system/yx/selectKH";
 
         /*部门管理-修改-选择部门树*/
         function selectDeptTree() {
@@ -131,13 +124,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                
-		        showSearch: false,
-		        showRefresh: false,
-		        showToggle: false,
-		        showColumns: false,
-		        showPageGo: true,
-                modalName: "牙星公司",
+
                 columns: [{
                     checkbox: true
                 },
@@ -259,54 +246,15 @@
                 
                 
                 {
-                    field: 'workStart', 
+                    field: 'countDay', 
 					align : "center",
 					valign : "middle",
 					width:80,
-                    title: '出勤状态',
-	    			formatter : function(value, row, index) {
-						if (value == 0) {
-							return '<span class="label label-danger">未出勤</span>';
-						} else if (value == 1) {
-							return '<span class="label label-primary">出勤</span>';
-						}
-					}
-                
+                    title: '出勤天数'
+
                 
                 },
                 
-                {
-                    field: 'workNumber', 
-					align : "center",
-					valign : "middle",
-					width:80,         
-					editable: true,
-                    title: '产量'
-                },
-                {
-                    field: 'workPrice', 
-					align : "center",
-					valign : "middle",
-					width:80,
-		            editable: true,
-                    title: '单价'
-                },
-                {
-                    field: 'workAll', 
-					align : "center",
-					valign : "middle",
-					width:80,
-		            editable: true,
-                    title: '总工分'
-                },
-                {
-                    field: 'workFen', 
-					align : "center",
-					valign : "middle",
-					width:80,
-		            editable: true,
-                    title: '工分'
-                },
                 {
                     field: 'workSum', 
 					align : "center",
