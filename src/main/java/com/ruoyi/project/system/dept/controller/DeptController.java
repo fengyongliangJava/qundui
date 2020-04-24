@@ -158,9 +158,9 @@ public class DeptController extends BaseController
      */
     @GetMapping("/treeData")
     @ResponseBody
-    public List<Ztree> treeData()
+    public List<Ztree> treeData(Dept dept)
     {
-        List<Ztree> ztrees = deptService.selectDeptTree(new Dept());
+        List<Ztree> ztrees = deptService.selectDeptTree(dept);
         return ztrees;
     }
 
