@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +27,8 @@ import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxLog;
+import com.ruoyi.project.system.yx.service.IYxLogService;
 import com.ruoyi.project.system.yx.service.IYxService;
 
 /**
@@ -36,10 +41,16 @@ import com.ruoyi.project.system.yx.service.IYxService;
 @RequestMapping("/system/yx/selectKH")
 public class YxselectKHController extends BaseController
 {
+	Logger log = LoggerFactory.getLogger(YxselectKHController.class);
+	
     private String prefix = "system/yx/selectKH";
 
     @Autowired
     private IYxService yxService;
+
+
+    @Autowired
+    private IYxLogService yxLogService;
 
     @RequiresPermissions("system:yx:selectKH:view")
     @GetMapping()
@@ -91,10 +102,19 @@ public class YxselectKHController extends BaseController
     public void ryParams(String params)
     {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-		
-       new Yx().setCreateTime(LocalDate.now().format(formatter));
+		Yx yx = new Yx();
+		yx.setCreateTime(LocalDate.now().format(formatter));
     	
-     //  List<Yx> KHList = yxService.selectYxKHList(yx);
+       List<Yx> KHList = yxService.selectYxKHList(yx);
+       
+       
+       KHList.parallelStream().forEach(e->{
+    	   YxLog yxlog = new YxLog();
+    	   BeanUtils.copyProperties(e, yxlog);
+    	   log.info(yxlog.toString());
+    	   yxLogService.insertYxLog(yxlog);
+       });
+       
     }
 
     public void ryNoParams()
@@ -103,19 +123,6 @@ public class YxselectKHController extends BaseController
     }
     
 
-    
-/*    @PostMapping("/countMoney")
-    @ResponseBody
-    public TableDataInfo countMoney(Yx yx)
-    {
-        List<Yx> KHList = yxService.selectYxKHList(yx);
-        return getDataTable(list);
-    }*/
-
-    
-
-    
-    
     
     
     /**

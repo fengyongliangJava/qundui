@@ -55,7 +55,6 @@ public class YxLogServiceImpl implements IYxLogService
     @Override
     public int insertYxLog(YxLog yxLog)
     {
-        yxLog.setCreateTime(DateUtils.getNowDate());
         return yxLogMapper.insertYxLog(yxLog);
     }
 

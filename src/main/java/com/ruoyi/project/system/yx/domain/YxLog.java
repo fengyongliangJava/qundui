@@ -1,9 +1,12 @@
 package com.ruoyi.project.system.yx.domain;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
-import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 牙星公司对象 yx_log
@@ -11,7 +14,7 @@ import com.ruoyi.framework.web.domain.BaseEntity;
  * @author ruoyi
  * @date 2020-04-23
  */
-public class YxLog extends BaseEntity
+public class YxLog
 {
     private static final long serialVersionUID = 1L;
 
@@ -76,11 +79,11 @@ public class YxLog extends BaseEntity
 
     /** 计件工资 */
     @Excel(name = "计件工资")
-    private Double workSum;
+    private BigDecimal workSum;
 
     /** 零活工资 */
     @Excel(name = "零活工资")
-    private Double workHuo;
+    private BigDecimal workHuo;
 
     /** 考核 */
     @Excel(name = "考核")
@@ -228,17 +231,78 @@ public class YxLog extends BaseEntity
 
     /** 计算工资 */
     @Excel(name = "计算工资")
-    private Double userCost;
+    private BigDecimal userCost;
 
     /** 浮动比例 */
     @Excel(name = "浮动比例")
-    private Double fu;
+    private BigDecimal fu;
 
     /** 实发工资 */
     @Excel(name = "实发工资")
-    private Double userMoney;
+    private BigDecimal userMoney;
 
-    public void setId(Long id) 
+    
+    /** 创建时间 */
+    @Excel(name = "创建时间")
+    private String createTime;
+    
+    /** 创建者 */
+    @Excel(name = "创建者")
+    private String createBy;
+    
+    /** 更新时间 */
+    @Excel(name = "更新时间")
+    private Date updateTime;
+    
+    /** 更新者 */
+    @Excel(name = "更新者")
+    private String updateBy;
+
+    /** 备注 */
+    @Excel(name = "备注")
+    private String remark;
+    
+    public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public void setId(Long id) 
     {
         this.id = id;
     }
@@ -373,25 +437,24 @@ public class YxLog extends BaseEntity
     {
         return countDay;
     }
-    public void setWorkSum(Double workSum) 
-    {
-        this.workSum = workSum;
-    }
+    
+    public BigDecimal getWorkSum() {
+		return workSum;
+	}
 
-    public Double getWorkSum() 
-    {
-        return workSum;
-    }
-    public void setWorkHuo(Double workHuo) 
-    {
-        this.workHuo = workHuo;
-    }
+	public void setWorkSum(BigDecimal workSum) {
+		this.workSum = workSum;
+	}
 
-    public Double getWorkHuo() 
-    {
-        return workHuo;
-    }
-    public void setKaohe(Integer kaohe) 
+	public BigDecimal getWorkHuo() {
+		return workHuo;
+	}
+
+	public void setWorkHuo(BigDecimal workHuo) {
+		this.workHuo = workHuo;
+	}
+
+	public void setKaohe(Integer kaohe) 
     {
         this.kaohe = kaohe;
     }
@@ -715,35 +778,32 @@ public class YxLog extends BaseEntity
     {
         return other;
     }
-    public void setUserCost(Double userCost) 
-    {
-        this.userCost = userCost;
-    }
+    
+    public BigDecimal getUserCost() {
+		return userCost;
+	}
 
-    public Double getUserCost() 
-    {
-        return userCost;
-    }
-    public void setFu(Double fu) 
-    {
-        this.fu = fu;
-    }
+	public void setUserCost(BigDecimal userCost) {
+		this.userCost = userCost;
+	}
 
-    public Double getFu() 
-    {
-        return fu;
-    }
-    public void setUserMoney(Double userMoney) 
-    {
-        this.userMoney = userMoney;
-    }
+	public BigDecimal getFu() {
+		return fu;
+	}
 
-    public Double getUserMoney() 
-    {
-        return userMoney;
-    }
+	public void setFu(BigDecimal fu) {
+		this.fu = fu;
+	}
 
-    @Override
+	public BigDecimal getUserMoney() {
+		return userMoney;
+	}
+
+	public void setUserMoney(BigDecimal userMoney) {
+		this.userMoney = userMoney;
+	}
+
+	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
