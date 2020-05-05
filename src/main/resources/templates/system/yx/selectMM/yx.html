@@ -31,15 +31,6 @@
                             </li>
                        
                             <li>
-                                <label>工作类型：</label>
-                     				<select id="workType" name="workType" th:with="type=${@dict.getType('workType')}">
-									<option value="">-请选择-</option>
-									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-								</select>
-                            </li>
-                        
-                        
-                            <li>
                                 <label>工资种类：</label>
                                 <select id="workClass" name="workClass" th:with="type=${@dict.getType('workClass')}">
                                     <option value="">-请选择-</option>
@@ -47,16 +38,26 @@
                                 </select>
                             </li>
                             
+                            <li>
+                                <label>出勤状态：</label>
+                                <select id="workStart" name="workStart" th:with="type=${@dict.getType('workStart')}">
+                                    <option value="">-请选择-</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
 
                             <li>
                                 <label>员工工号：</label>
                                 <input type="text" id="userId" name="userId"  maxlength="7" />
                             </li>
 
-
+      						<li>
+                                <label>员工姓名：</label>
+                                <input type="text" id="userName" name="userName"  maxlength="10" />
+                            </li>
                       		 <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-refresh"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
                             </li>
                         </ul>
                     </div>

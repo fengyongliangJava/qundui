@@ -32,8 +32,8 @@
 
 
                             <li>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="exprotExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="exprotExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="exprotModel()"><i class="fa fa-download"></i>&nbsp;模板</a>
                             </li>
                             
@@ -63,7 +63,6 @@
     }
 
     function doSubmit(index, layero){
-        debugger;
         var tree = layero.find("iframe")[0].contentWindow.$._tree;
         if ($.tree.notAllowLastLevel(tree)) {
             var body = layer.getChildFrame('body', index);
@@ -85,20 +84,19 @@
     		    var file = $('#excelFile').val();
     		    
     		    
-    			if(isEmpty(createTime)){
+    			if($.common.isEmpty(createTime)){
     				alert("请选择上传时间！");
     				LoadingClose();
     				return;
     			} 
     			
-    			if(isEmpty(userOrg)){
+    			if($.common.isEmpty(userOrg)){
     				alert("请选择组织机构！");
     				LoadingClose();
     				return;
     			} 
     			
-    		    var file = $('#excelFile').val();
-    			if(isEmpty(file)){
+    			if($.common.isEmpty(file)){
     				alert("请选择上传Excel文件！");
     				LoadingClose();
     				return;
@@ -119,13 +117,7 @@
     			    error : function(xhr,type) {
     			    },
     			    success:function(data){
-                        if('success' == data){
-                      	  $.modal.alertSuccess('上传计件工资成功!');
-                        }else if("fail" == data) {
-                      	  $.modal.alertError('上传计件工资失败!');
-                        }else{
-                      	  $.modal.alertWarning('第    行数据不匹配!');
-                        }
+    			          $.modal.alertSuccess(data.msg);
                         LoadingClose();
     			    }
     			});

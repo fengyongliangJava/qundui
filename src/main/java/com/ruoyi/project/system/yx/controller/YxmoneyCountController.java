@@ -23,9 +23,9 @@ import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxDay;
 import com.ruoyi.project.system.yx.domain.YxUpload;
-import com.ruoyi.project.system.yx.service.IYxService;
+import com.ruoyi.project.system.yx.service.IYxDayService;
 
 /**
  * 牙星公司Controller
@@ -40,7 +40,7 @@ public class YxmoneyCountController extends BaseController
     private String prefix = "system/yx/moneyCount";
 
     @Autowired
-    private IYxService yxService;
+    private IYxDayService yxDayService;
 
     @RequiresPermissions("system:yx:moneyCount:view")
     @GetMapping()
@@ -57,10 +57,10 @@ public class YxmoneyCountController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yx yx)
+    public AjaxResult export(YxDay yxDay)
     {
-        List<Yx> list = yxService.selectYxList(yx);
-        ExcelUtil<Yx> util = new ExcelUtil<Yx>(Yx.class);
+        List<YxDay> list = yxDayService.selectYxList(yxDay);
+        ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
         return util.exportExcel(list, "yx");
     }
 
@@ -68,7 +68,7 @@ public class YxmoneyCountController extends BaseController
     
     
     /**
-     * 导入当日工资
+     * 导入计件日工资
      */
     @PostMapping("/importExcel")
     @ResponseBody
@@ -93,7 +93,7 @@ public class YxmoneyCountController extends BaseController
                 || yxuser.getWorkFen() == null) {
                    return AjaxResult.success("导入第"+i+"条有空数据");
                 }
-    		if(yxService.findUserOrgExize(userOrg,yxuser.getUserId()) == null) {
+    		if(yxDayService.findUserOrgExize(userOrg,yxuser.getUserId()) == null) {
     			    return AjaxResult.success("导入第"+i+"条员工编号不匹配");
     		}
         }
@@ -102,8 +102,8 @@ public class YxmoneyCountController extends BaseController
     		yxuser.setUserOrg(userOrg);
     		yxuser.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     		yxuser.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
-    		yxuser.setWorkSum(new BigDecimal(yxuser.getWorkNumber()).multiply(yxuser.getWorkPrice()).divide(new BigDecimal(yxuser.getWorkAll()),3, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(yxuser.getWorkFen())));
-    		yxService.insertYxUpload(yxuser);
+    		yxuser.setUserCost(new BigDecimal(yxuser.getWorkNumber()).multiply(yxuser.getWorkPrice()).divide(new BigDecimal(yxuser.getWorkAll()),2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(yxuser.getWorkFen())));
+    		yxDayService.insertYxUpload(yxuser);
         }
        return AjaxResult.success("上传 "+createTime+"工资信息成功！！！");
 

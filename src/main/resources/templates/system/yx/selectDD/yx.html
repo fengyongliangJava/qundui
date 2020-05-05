@@ -2,7 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('牙星公司列表')" />
-
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -13,6 +12,7 @@
                         <ul>                    
              				<li>
                                 <label>创建日期：</label>
+                                
                                 <input readonly="true" type="text" class="time-input"  id="createTime" name="createTime" />
                             </li>
                             
@@ -29,16 +29,6 @@
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
                             </li>
-
-
-                            <li>
-                                <label>工作类型：</label>
-                     				<select id="workType" name="workType" th:with="type=${@dict.getType('workType')}">
-									<option value="">-请选择-</option>
-									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-								</select>
-                            </li>
-
 
                             <li>
                                 <label>工资种类：</label>
@@ -61,10 +51,14 @@
                                 <input type="text" id="userId" name="userId"  maxlength="7" />
                             </li>
 
+      						 <li>
+                                <label>员工姓名：</label>
+                                <input type="text" id="userName" name="userName"  maxlength="10" />
+                            </li>
 
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-refresh"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
                             </li>
                         </ul>
                     </div>
@@ -96,6 +90,7 @@
     <th:block th:include="include :: footer" />
 
     <script th:inline="javascript">
+
         var editFlag = [[${@permission.hasPermi('system:yx:selectDD:edit')}]];
         var removeFlag = [[${@permission.hasPermi('system:yx:selectDD:remove')}]];
         var prefix = ctx + "system/yx/selectDD";

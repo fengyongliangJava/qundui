@@ -1,6 +1,12 @@
 package com.ruoyi.project.system.yx.controller;
 
+import java.io.ByteArrayOutputStream;
+
+import java.io.InputStream;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +21,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.system.yx.domain.YxUser;
-import com.ruoyi.project.system.yx.service.IYxService;
+import com.ruoyi.project.system.yx.service.IYxUserService;
 
 /**
  * 牙星公司Controller
@@ -30,7 +36,7 @@ public class YxuserUpload extends BaseController
     private String prefix = "system/yx/userUpload";
 
     @Autowired
-    private IYxService yxService;
+    private IYxUserService yxUserService;
 
     @RequiresPermissions("system:yx:userUpload:view")
     @GetMapping()
@@ -55,8 +61,29 @@ public class YxuserUpload extends BaseController
         boolean success = true;
         for(YxUser yxuser : userList) {
         	i++;
+        	if(yxuser.getUserId().isEmpty() 
+                    || yxuser.getUserName().isEmpty()
+                    || yxuser.getSex() == null
+                    || yxuser.getTell() == null
+                    || yxuser.getCard() == null
+                    || yxuser.getAddress() == null
+                    || yxuser.getUserOrg() == null
+                    || yxuser.getUserArea() == null
+                    || yxuser.getUserGroup() == null
+                    || yxuser.getUserClass() == null
+                    || yxuser.getStation() == null
+                    || yxuser.getWorkType() == null
+                    || yxuser.getWorkClass() == null 			
+        			
+        			) {
+                       return AjaxResult.success("导入第"+i+"条有空数据");
+                    }
+
+
+        	
+        	
         	try {
-        		yxService.insertYxUser(yxuser);
+        		yxUserService.insertYxUser(yxuser);
         	}catch (Exception e) {
         		message ="导入"+i+"条失败";
         		success = false;
@@ -68,5 +95,33 @@ public class YxuserUpload extends BaseController
         }
         return AjaxResult.success(message);
     }
+    
+    
+    
+	/**
+	 * 导出模板
+	 */
+	@GetMapping("/exprotModel")
+	@ResponseBody
+	public byte[] exprotModel(MultipartFile file, boolean updateSupport, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		//加载模板流
+		InputStream is = this.getClass().getClassLoader().getResourceAsStream("model/员工信息模板.xlsx");
+		int i = 0;
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		while((i = is.read()) != -1) {
+			baos.write(i);
+		}
+		String fileName = "员工信息";
+		fileName = new String(fileName.getBytes("GB2312"), "ISO8859-1");
+		response.setContentType("application/ms-excel;charset=UTF-8");
+		response.addHeader("Content-Disposition", "attachment;filename=" + fileName+".xlsx");
+		//response.setHeader("Content-disposition","attachment;filename=月薪上传模板" + UUID.randomUUID().toString() + ".xlsx");
+		return baos.toByteArray();
+
+	}
+    
+    
+    
 }
     

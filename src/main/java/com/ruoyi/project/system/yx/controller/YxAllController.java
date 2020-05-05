@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.system.yx.domain.YxLog;
-import com.ruoyi.project.system.yx.service.IYxLogService;
+import com.ruoyi.project.system.yx.domain.YxAll;
+import com.ruoyi.project.system.yx.service.IYxAllService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -24,49 +24,49 @@ import com.ruoyi.framework.web.page.TableDataInfo;
  * 牙星公司Controller
  * 
  * @author ruoyi
- * @date 2020-04-23
+ * @date 2020-05-02
  */
 @Controller
-@RequestMapping("/system/log")
-public class YxLogController extends BaseController
+@RequestMapping("/system/all")
+public class YxAllController extends BaseController
 {
-    private String prefix = "system/yx/log";
+    private String prefix = "/system/yx/all";
 
     @Autowired
-    private IYxLogService yxLogService;
+    private IYxAllService yxAllService;
 
-    @RequiresPermissions("system:log:view")
+    @RequiresPermissions("system:all:view")
     @GetMapping()
-    public String log()
+    public String all()
     {
-        return prefix + "/log";
+        return prefix + "/all";
     }
 
     /**
      * 查询牙星公司列表
      */
-    @RequiresPermissions("system:log:list")
+    @RequiresPermissions("system:all:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(YxLog yxLog)
+    public TableDataInfo list(YxAll yxAll)
     {
         startPage();
-        List<YxLog> list = yxLogService.selectYxLogList(yxLog);
+        List<YxAll> list = yxAllService.selectYxAllList(yxAll);
         return getDataTable(list);
     }
 
     /**
      * 导出牙星公司列表
      */
-    @RequiresPermissions("system:log:export")
+    @RequiresPermissions("system:all:export")
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(YxLog yxLog)
+    public AjaxResult export(YxAll yxAll)
     {
-        List<YxLog> list = yxLogService.selectYxLogList(yxLog);
-        ExcelUtil<YxLog> util = new ExcelUtil<YxLog>(YxLog.class);
-        return util.exportExcel(list, "log");
+        List<YxAll> list = yxAllService.selectYxAllList(yxAll);
+        ExcelUtil<YxAll> util = new ExcelUtil<YxAll>(YxAll.class);
+        return util.exportExcel(list, "all");
     }
 
     /**
@@ -81,13 +81,13 @@ public class YxLogController extends BaseController
     /**
      * 新增保存牙星公司
      */
-    @RequiresPermissions("system:log:add")
+    @RequiresPermissions("system:all:add")
     @Log(title = "牙星公司", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(YxLog yxLog)
+    public AjaxResult addSave(YxAll yxAll)
     {
-        return toAjax(yxLogService.insertYxLog(yxLog));
+        return toAjax(yxAllService.insertYxAll(yxAll));
     }
 
     /**
@@ -96,32 +96,32 @@ public class YxLogController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        YxLog yxLog = yxLogService.selectYxLogById(id);
-        mmap.put("yxLog", yxLog);
+        YxAll yxAll = yxAllService.selectYxAllById(id);
+        mmap.put("yxAll", yxAll);
         return prefix + "/edit";
     }
 
     /**
      * 修改保存牙星公司
      */
-    @RequiresPermissions("system:log:edit")
+    @RequiresPermissions("system:all:edit")
     @Log(title = "牙星公司", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(YxLog yxLog)
+    public AjaxResult editSave(YxAll yxAll)
     {
-        return toAjax(yxLogService.updateYxLog(yxLog));
+        return toAjax(yxAllService.updateYxAll(yxAll));
     }
 
     /**
      * 删除牙星公司
      */
-    @RequiresPermissions("system:log:remove")
+    @RequiresPermissions("system:all:remove")
     @Log(title = "牙星公司", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(yxLogService.deleteYxLogByIds(ids));
+        return toAjax(yxAllService.deleteYxAllByIds(ids));
     }
 }

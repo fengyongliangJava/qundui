@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改牙星公司人员')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-user-edit" th:object="${yxUser}">
+            <input name="id" th:field="*{id}" type="hidden">
+           <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">员工工号：</label>
+                <div class="col-sm-4">
+                    <input  id="userId" name="userId" th:field="*{userId}" class="form-control" type="text" required maxlength="7">
+                </div>
+                
+                <label class="col-sm-2 control-label is-required">员工姓名：</label>
+                <div class="col-sm-4">
+                    <input id="userName" name="userName" th:field="*{userName}" class="form-control" type="text" required maxlength="30">
+                </div>
+            </div>
+            
+            
+            
+            <div class="form-group">	
+				<label class="col-sm-2 control-label is-required">手机号码：</label>
+				<div class="col-sm-4">
+					<input id="tell" name="tell" th:field="*{tell}" class="form-control" type="text"  required maxlength="11" >
+				</div>
+				
+				<label class="col-sm-2 control-label is-required">身份证号：</label>
+				<div class="col-sm-4">
+					<input id="card" name="card" th:field="*{card}" class="form-control" type="text"  required maxlength="18">
+				</div>
+			</div>
+            
+
+            
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">员工性别：</label>
+                <div class="col-sm-4">
+                   <select  id="sex"  name="sex" th:field="${yxUser.sex}" th:value="${yxUser.sex}"  required data-placeholder="选择员工性别" 
+							class="form-control chosen-select" >
+							<option th:selected="${yxUser.sex == '男' ? 'selected' : ''}" value="男">男</option>
+							<option th:selected="${yxUser.sex == '女' ? 'selected' : ''}" value="女">女</option>
+				   </select>
+                </div>
+                
+                
+                <label class="col-sm-2 control-label is-required">户籍城市：</label>
+                <div class="col-sm-4">
+                    <input name="address" th:field="*{address}" class="form-control" type="text" required>
+                </div>
+            </div>
+               
+
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">单位：</label>
+                <div class="col-sm-4">
+                    <input type="hidden"   id="dep_1"   readonly="true"/>
+                    <input  class="form-control" th:field="*{userOrg}" name="userOrg" type="text" id="depName_1" onclick="selectDeptTree(1)" readonly="true">
+                </div>
+                
+                <label class="col-sm-2 control-label is-required">部门：</label>
+                <div class="col-sm-4">
+                    <input type="hidden"   id="dep_2"  readonly="true"/>
+                    <input  class="form-control" th:field="*{userArea}" name="userArea" type="text" id="depName_2" onclick="selectDeptTree(2,dep_1)" readonly="true">
+                    
+                </div>
+            </div>
+            
+         
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">区队：</label>
+                <div class="col-sm-4">
+                    <input type="hidden"   id="dep_3"  readonly="true"/>
+                    <input  class="form-control" th:field="*{userGroup}" name="userArea" type="text" id="depName_3" onclick="selectDeptTree(3,dep_2)" readonly="true">
+                </div>
+                
+                 <label class="col-sm-2 control-label is-required">班组：</label>
+                <div class="col-sm-4">
+                    <input type="hidden"   id="dep_4"  readonly="true"/>
+                    <input  class="form-control" th:field="*{userClass}" name="userArea" type="text" id="depName_4" onclick="selectDeptTree(4,dep_3)" readonly="true">
+                </div>
+            </div>
+
+  
+         
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">工作类型：</label>
+                <div class="col-sm-4">
+		            <select  id="workType"  name="workType" th:field="${yxUser.workType}" th:value="${yxUser.workType}" required  data-placeholder="选择工作类型" 
+							class="form-control chosen-select" >
+							<option th:selected="${yxUser.workType == '计件工资' ? 'selected' : ''}" value="计件工资">计件工资</option>
+							<option th:selected="${yxUser.workType == '月薪工资' ? 'selected' : ''}" value="月薪工资">月薪工资</option>
+	
+				   </select>
+                </div>
+                  
+                <label class="col-sm-2 control-label is-required">工资种类：</label>
+                <div class="col-sm-4">
+                    <select  id="workClass"  name="workClass" th:field="${yxUser.workClass}" th:value="${yxUser.workClass}"  required data-placeholder="选择工作类型" 
+							class="form-control chosen-select" >
+							<option th:selected="${yxUser.workClass == '一线工资' ? 'selected' : ''}" value="一线工资">一线工资</option>
+							<option th:selected="${yxUser.workClass == '二线工资' ? 'selected' : ''}" value="一线工资">二线工资</option>
+							<option th:selected="${yxUser.workClass == '三线工资' ? 'selected' : ''}" value="一线工资">三线工程</option>
+				   </select>
+                </div>
+            </div>
+                
+
+            
+            <div class="form-group">    
+                <label class="col-sm-2 control-label is-required">岗位：</label>
+                <div class="col-sm-4">
+                    <input name="station" th:field="*{station}" class="form-control" type="text" required>
+                </div>
+                
+               	<label class="col-sm-2 control-label">备注：</label>
+				<div class="col-sm-4">
+					<textarea id="remark" name="remark" maxlength="100" class="input-xlarge" rows="3" style="width:100%;border-radius:5px;"></textarea>
+				</div>
+            </div>
+            
+            
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "system/yx/user";
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-user-edit').serialize());
+            }
+        }
+        
+        
+        
+        function selectDeptTree(val,_pid) {
+        	console.log(val);
+        	var pid = 0;
+        	if(_pid){
+        		pid=$(_pid).val();
+        	}
+        	top._pid=pid;
+            var options = {
+                title: '部门选择',
+                width: "380",
+                url:"/system/yx/selectDD/selectDeptTree?parentId="+pid,
+                callBack: function(index, layero){
+                	//val   dep_1   dep_2/dep_3/depName_2/depName_3  clear
+                	//val   dep_2   /dep_3/depName_3  clear
+                	var tree = layero.find("iframe")[0].contentWindow.$._tree;
+                    if ($.tree.notAllowLastLevel(tree)) {
+                        var body = layer.getChildFrame('body', index);
+                        $("#dep_"+val).val(body.find('#treeId').val());
+                        $("#depName_"+val).val(body.find('#treeName').val());
+                        layer.close(index);
+                    }
+                }
+            };
+            $.modal.openOptions(options);
+
+    }
+
+    function doSubmit(index, layero){
+        var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if ($.tree.notAllowLastLevel(tree)) {
+            var body = layer.getChildFrame('body', index);
+            $("#treeId").val(body.find('#treeId').val());
+            $("#treeName").val(body.find('#treeName').val());
+            layer.close(index);
+        }
+    }
+        
+
+        $.validator.addMethod("_checkHan",function(value,element,params){
+			var checkQQ = /[\u4e00-\u9fa5]/;
+			return this.optional(element)||(checkQQ.test(value));
+		},"*请输入正确的汉字！");
+        
+        $(function(){
+            var icon = "<i class='fa fa-times-circle'></i> ";
+            $("#form-user-edit").validate({
+                rules: {
+                    
+                    userId : {
+  	      				required : true,
+  	      				digits : true
+  	      			},
+  	      			userName : {
+  	      				required : true,
+  	      				_checkHan:true
+  	      			},
+  	      			sex : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			tell : {
+  	      				isPhone:true
+  	      			},
+  	      	
+  	      			card : {
+  	      				isIdentity:true
+  	      			},
+  	      			
+  	      			address : {
+	  	      			required : true,
+		      			_checkHan:true
+  	      			},
+
+
+  	      			userOrg : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			userArea : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			userGroup : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			userClass : {
+  	      				required : true
+  	      			},
+  	      			
+  	      			station : {
+  	      				required : true,
+	      				_checkHan:true
+  	      			},
+ 	      			workType : {
+  	      				required : true
+  	      			},
+  	      			
+  	      		    workClass : {
+  	      				required : true
+  	      			}
+                    
+                    
+                },
+                messages: {
+                	
+      	      		userId : {
+      	      			required : icon + "请输入编号！",
+      	      			digits : icon + "只能输入数字！"
+      	      		},
+      	      		userName : {
+      	      			required : icon + "请输入姓名！",
+      	      			_checkHan: icon + "只能输入汉字！"
+      	      		},
+      	      		
+      	      		sex : {
+      	      			required : icon + "请输选择性别！"
+      	      		},
+      	      		
+      	      		tell : {
+      	      			required : icon + "请输正确的手机号码！"
+      	      		},
+      	      		card : {
+      	      			required : icon + "请输正确的身份证号码！"
+      	      		},
+      	      		
+      	      		address : {
+      	      			required : icon + "请输户籍所在地！",
+      	      			_checkHan: icon + "只能输入汉字！"
+      	      		},
+
+      	      		userOrg : {
+      	      			required : icon + "请选择单位！"
+      	      		},
+      	      		
+      	      		userArea : {
+      	      			required : icon + "请选择部门！"
+      	      		},
+      	      		
+      	      		userGroup : {
+      	      			required : icon + "请选择区队！"
+      	      		},
+      	      		
+      	      		station : {
+      	      			required : icon + "请填写岗位！",
+      	      			_checkHan: icon + "只能输入汉字！"
+      	      		},
+      	      		workType : {
+      	      			required : icon + "请填写工作类型！"
+      	      		},
+      	      		workClass : {
+      	      			required : icon + "请填写工资种类！"
+      	      		}
+      	      		
+                }
+            }); 
+        })
+        
+    </script>
+</body>
+</html>

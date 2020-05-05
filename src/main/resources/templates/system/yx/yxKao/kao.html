@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('部门列表')" />
+</head>
+<body class="gray-bg">
+	<div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="dept-form">
+					<div class="select-list">
+						<ul>
+							<li>
+                                <label>创建日期：</label>
+                                <input readonly="true" type="text" class="time-input" data-format="yyyy-MM" id="createTime" name="createTime" />
+							</li>
+
+				       		 <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                            </li>
+						</ul>
+					</div>
+				</form>
+			</div>
+                
+            <div class="btn-group-sm" id="toolbar" role="group">
+		        <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:kao:add">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
+                <a class="btn btn-primary" onclick="$.operate.edit()" shiro:hasPermission="system:kao:edit">
+		            <i class="fa fa-edit"></i> 修改
+		        </a>
+                <a class="btn btn-info" id="expandAllBtn">
+                    <i class="fa fa-exchange"></i> 展开/折叠
+                </a>
+	        </div>
+       		 <div class="col-sm-12 select-table table-striped">
+	            <table id="bootstrap-tree-table"></table>
+	        </div>
+	    </div>
+	</div>
+	<th:block th:include="include :: footer" />
+	<script th:inline="javascript">
+		var addFlag = [[${@permission.hasPermi('system:kao:add')}]];
+		var editFlag = [[${@permission.hasPermi('system:kao:edit')}]];
+		var removeFlag = [[${@permission.hasPermi('system:kao:remove')}]];
+		var datas = [[${@dict.getType('sys_normal_disable')}]];
+		var prefix = ctx + "system/kao"
+		$(function() {
+		    var options = {
+		        code: "deptId",
+		        parentCode: "parentId",
+		        uniqueId: "deptId",
+		        url: prefix + "/list",
+		        createUrl: prefix + "/add/{id}",
+		        updateUrl: prefix + "/edit/{id}",
+		        removeUrl: prefix + "/remove/{id}",
+		        modalName: "部门",
+		        ajaxParams:{'parentId':top._tmpDeptID},
+		        columns: [{
+                    field: 'selectItem', 
+                    radio: true
+                 },
+                 {
+		            field: 'deptName',
+		            title: '部门名称',
+		            align: "left"
+		        },
+
+		        {
+		            field: 'deptNum',
+		            title: '部门人数',
+		            align: "left"
+		        },
+		        {
+		            field: 'userCost',
+		            title: '计算工资',
+		            align: "left"
+		 
+		        },
+		        {
+		            field: 'userMoney',
+		            title: '计划工资',
+		            align: "left"
+		        },
+		        {
+		            field: 'createTime',
+		            title: '创建时间',
+		            align: "left"
+		        },
+		        {
+		            title: '操作',
+		            align: 'left',
+		            formatter: function(value, row, index) {
+		                if (row.parentId != 0) {
+		                    var actions = [];
+		                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.deptId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+		                    actions.push('<a class="btn btn-info  btn-xs ' + addFlag + '" href="javascript:void(0)" onclick="$.operate.add()"><i class="fa fa-plus"></i>新增</a> ');
+		                    actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.deptId + '\')"><i class="fa fa-trash"></i>删除</a>');
+		                    return actions.join('');
+		                } else {
+		                    return "";
+		                }
+		            }
+		        }]
+		    };
+		    $.treeTable.init(options);
+		});
+	</script>
+</body>
+</html>

@@ -22,11 +22,12 @@
 								<input type="text" class="time-input" id="createTime" name="createTime"  readonly="true"/>
 							</li>
                         
-                            <li>
-                                <label>组织机构：</label>              
-                                <input type="text" id="userOrg" name="userOrg" readonly="true"/>
+                    	    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId"  name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName"  name="treeName"onclick="selectDeptTree()" readonly="true">
                             </li>
-
+                            
 
                             <li>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
@@ -136,8 +137,29 @@
 
     <script th:inline="javascript">
 
-        var prefix = ctx + "system/yx/tableMM";
+        var prefix = ctx + "system/yx/tableDD";
 
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url:"/system/yx/selectDD/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
+
+        }
+
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
 
         
     </script>

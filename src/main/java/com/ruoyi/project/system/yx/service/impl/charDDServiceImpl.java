@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxDay;
 import com.ruoyi.project.system.yx.mapper.charDDMapper;
 import com.ruoyi.project.system.yx.service.IcharDDService;
 
@@ -25,32 +25,32 @@ public class charDDServiceImpl implements IcharDDService {
 //workType
     
 	@Override
-	public int YxCountWorkType1(Yx yx) {
-		return charDDMapper.YxCountWorkType1(yx);
+	public int YxCountWorkType1(YxDay yxDay) {
+		return charDDMapper.YxCountWorkType1(yxDay);
 	}
 	@Override
-	public BigDecimal YxSumWorkType1(Yx yx) {
-		return charDDMapper.YxSumWorkType1(yx);
+	public BigDecimal YxSumWorkType1(YxDay yxDay) {
+		return charDDMapper.YxSumWorkType1(yxDay);
 	}
 	
 	
 	@Override
-	public int YxCountWorkType2(Yx yx) {
-		return charDDMapper.YxCountWorkType2(yx);
+	public int YxCountWorkType2(YxDay yxDay) {
+		return charDDMapper.YxCountWorkType2(yxDay);
 	}
 	@Override
-	public BigDecimal YxSumWorkType2(Yx yx) {
-		return charDDMapper.YxSumWorkType2(yx);
+	public BigDecimal YxSumWorkType2(YxDay yxDay) {
+		return charDDMapper.YxSumWorkType2(yxDay);
 	}
 
 	
 	@Override
-	public int YxCountWorkType3(Yx yx) {
-		return charDDMapper.YxCountWorkType3(yx);
+	public int YxCountWorkType3(YxDay yxDay) {
+		return charDDMapper.YxCountWorkType3(yxDay);
 	}
 	@Override
-	public BigDecimal YxSumWorkType3(Yx yx) {
-		return charDDMapper.YxSumWorkType3(yx);
+	public BigDecimal YxSumWorkType3(YxDay yxDay) {
+		return charDDMapper.YxSumWorkType3(yxDay);
 	}
 	
 //workType
@@ -61,32 +61,32 @@ public class charDDServiceImpl implements IcharDDService {
 //workClass
     
 	@Override
-	public int YxCountWorkClass1(Yx yx) {
-		return charDDMapper.YxCountWorkClass1(yx);
+	public int YxCountWorkClass1(YxDay yxDay) {
+		return charDDMapper.YxCountWorkClass1(yxDay);
 	}
 	@Override
-	public BigDecimal YxSumWorkClass1(Yx yx) {
-		return charDDMapper.YxSumWorkClass1(yx);
+	public BigDecimal YxSumWorkClass1(YxDay yxDay) {
+		return charDDMapper.YxSumWorkClass1(yxDay);
 	}
 	
 	
 	@Override
-	public int YxCountWorkClass2(Yx yx) {
-		return charDDMapper.YxCountWorkClass2(yx);
+	public int YxCountWorkClass2(YxDay yxDay) {
+		return charDDMapper.YxCountWorkClass2(yxDay);
 	}
 	@Override
-	public BigDecimal YxSumWorkClass2(Yx yx) {
-		return charDDMapper.YxSumWorkClass2(yx);
+	public BigDecimal YxSumWorkClass2(YxDay yxDay) {
+		return charDDMapper.YxSumWorkClass2(yxDay);
 	}
 
 	
 	@Override
-	public int YxCountWorkClass3(Yx yx) {
-		return charDDMapper.YxCountWorkClass3(yx);
+	public int YxCountWorkClass3(YxDay yxDay) {
+		return charDDMapper.YxCountWorkClass3(yxDay);
 	}
 	@Override
-	public BigDecimal YxSumWorkClass3(Yx yx) {
-		return charDDMapper.YxSumWorkClass3(yx);
+	public BigDecimal YxSumWorkClass3(YxDay yxDay) {
+		return charDDMapper.YxSumWorkClass3(yxDay);
 	}
 //workClass	
 	

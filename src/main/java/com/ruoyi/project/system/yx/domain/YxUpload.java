@@ -67,10 +67,22 @@ public class YxUpload
     private String workType;
     private String workClass;
     
+    private BigDecimal userCost;
     
     
-    
-    private String createTime;
+    public BigDecimal getUserCost() {
+		return userCost;
+	}
+
+	public void setUserCost(BigDecimal userCost) {
+		this.userCost = userCost;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	private String createTime;
     private String createBy;
     private Date updateTime;
     private String updateBy;

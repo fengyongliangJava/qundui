@@ -5,22 +5,22 @@ import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.system.yx.mapper.YxLogMapper;
-import com.ruoyi.project.system.yx.domain.YxLog;
-import com.ruoyi.project.system.yx.service.IYxLogService;
+import com.ruoyi.project.system.yx.mapper.YxAllMapper;
+import com.ruoyi.project.system.yx.domain.YxAll;
+import com.ruoyi.project.system.yx.service.IYxAllService;
 import com.ruoyi.common.utils.text.Convert;
 
 /**
  * 牙星公司Service业务层处理
  * 
  * @author ruoyi
- * @date 2020-04-23
+ * @date 2020-05-02
  */
 @Service
-public class YxLogServiceImpl implements IYxLogService 
+public class YxAllServiceImpl implements IYxAllService 
 {
     @Autowired
-    private YxLogMapper yxLogMapper;
+    private YxAllMapper yxAllMapper;
 
     /**
      * 查询牙星公司
@@ -29,46 +29,47 @@ public class YxLogServiceImpl implements IYxLogService
      * @return 牙星公司
      */
     @Override
-    public YxLog selectYxLogById(Long id)
+    public YxAll selectYxAllById(Long id)
     {
-        return yxLogMapper.selectYxLogById(id);
+        return yxAllMapper.selectYxAllById(id);
     }
 
     /**
      * 查询牙星公司列表
      * 
-     * @param yxLog 牙星公司
+     * @param yxAll 牙星公司
      * @return 牙星公司
      */
     @Override
-    public List<YxLog> selectYxLogList(YxLog yxLog)
+    public List<YxAll> selectYxAllList(YxAll yxAll)
     {
-        return yxLogMapper.selectYxLogList(yxLog);
+        return yxAllMapper.selectYxAllList(yxAll);
     }
 
     /**
      * 新增牙星公司
      * 
-     * @param yxLog 牙星公司
+     * @param yxAll 牙星公司
      * @return 结果
      */
     @Override
-    public int insertYxLog(YxLog yxLog)
+    public int insertYxAll(YxAll yxAll)
     {
-        return yxLogMapper.insertYxLog(yxLog);
+       // yxAll.setCreateTime(DateUtils.getNowDate());
+        return yxAllMapper.insertYxAll(yxAll);
     }
 
     /**
      * 修改牙星公司
      * 
-     * @param yxLog 牙星公司
+     * @param yxAll 牙星公司
      * @return 结果
      */
     @Override
-    public int updateYxLog(YxLog yxLog)
+    public int updateYxAll(YxAll yxAll)
     {
-        yxLog.setUpdateTime(DateUtils.getNowDate());
-        return yxLogMapper.updateYxLog(yxLog);
+        yxAll.setUpdateTime(DateUtils.getNowDate());
+        return yxAllMapper.updateYxAll(yxAll);
     }
 
     /**
@@ -78,9 +79,9 @@ public class YxLogServiceImpl implements IYxLogService
      * @return 结果
      */
     @Override
-    public int deleteYxLogByIds(String ids)
+    public int deleteYxAllByIds(String ids)
     {
-        return yxLogMapper.deleteYxLogByIds(Convert.toStrArray(ids));
+        return yxAllMapper.deleteYxAllByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -90,8 +91,8 @@ public class YxLogServiceImpl implements IYxLogService
      * @return 结果
      */
     @Override
-    public int deleteYxLogById(Long id)
+    public int deleteYxAllById(Long id)
     {
-        return yxLogMapper.deleteYxLogById(id);
+        return yxAllMapper.deleteYxAllById(id);
     }
 }

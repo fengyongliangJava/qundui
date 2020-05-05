@@ -9,8 +9,8 @@
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
                     <div class="select-list">
-                        <ul>  
-                                          
+                        <ul>
+                
                   			<li>
                                 <label>创建日期：</label>
                                 <input readonly="true" type="text" class="time-input" data-format="yyyy-MM" id="createTime" name="createTime" />
@@ -47,113 +47,163 @@
                                 </select>
                             </li>
                             
-                            <li>
-                                <label>出勤状态：</label>
-                                <select id="workStart" name="workStart" th:with="type=${@dict.getType('workStart')}">
-                                    <option value="">-请选择-</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
-                            
+
                             <li>
                                 <label>员工工号：</label>
                                 <input type="text" id="userId" name="userId"  maxlength="7" />
                             </li>
 
-
-        				   <li>
+                          	 <li>
+                                <label>员工姓名：</label>
+                                <input type="text" id="userName" name="userName"  maxlength="10" />
+                          	  </li>
+                          	  
+                      		 <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-refresh"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
                             </li>
                         </ul>
                     </div>
-                    
-                    
-                    <div class="select-list">
-                        <ul>  
-                            <li>
-                                <label>计划工资：</label>
-                                <input type="text" id="userId" name="userId"  maxlength="7" />
-                            </li>
-
-     					    <li>
-                                <label>浮动比：</label>
-                                <input type="text" id="userId" name="userId"  maxlength="3" />
-                            </li>
-
-        				    <li>
-                                <a class="btn btn btn-primary single disabled btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;结算</a>
-                            </li>
-                         </ul>     
-                    </div>   
-                    
-                          
                 </form>
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:yx:add">
-                    <i class="fa fa-plus"></i> 添加
-                </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:yx:edit">
-                    <i class="fa fa-edit"></i> 修改
-                </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:yx:remove">
-                    <i class="fa fa-remove"></i> 删除
-                </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:yx:export">
-                    <i class="fa fa-download"></i> 导出
-                </a>
+  				<form id="sp">
+  				    <div class="select-list">
+		       			 <li>
+		                     <label>浮动比：</label>
+		                     <input type="text" id="fu" name="fu"  maxlength="3" />
+		                 </li>
+		                  <li>
+		                     <a class="btn btn-danger btn-rounded btn-sm" onclick="money()"><i class="fa fa-calculator"></i>&nbsp;结算</a>
+		                 </li>
+	                 </div>
+				</form>
             </div>
             <div class="col-sm-12 select-table table-striped">
-                  <table id="bootstrap-table" data-mobile-responsive="true"  style="table-layout:fixed;width:3000px;">
+                 <table id="bootstrap-table" data-mobile-responsive="true"  style="table-layout:fixed;width:3000px;">
 					
 				 </table>
-                
             </div>
         </div>
     </div>
+    
     <th:block th:include="include :: footer" />
-    <th:block th:include="include :: bootstrap-table-editable-js" />
-
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('system:yx:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('system:yx:remove')}]];
-        var prefix = ctx + "system/yx/selectMM";
+    
+    $.validator.addMethod("checkMoney",function(value,element,params){
+		var checkQQ = /(?!^0*(\.0{1,1})?$)^\d{1,13}(\.\d{1,1})?$/;
+		return this.optional(element)||(checkQQ.test(value));
+	},"*请输入正确数字（最多保留一位小数）！");
+    
+     $(function(){
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        $("#sp").validate({
+            rules: {
+   	      		fu : {
+   	      		checkMoney:true
+   	      		}
 
-        /*部门管理-修改-选择部门树*/
-        function selectDeptTree() {
-                var options = {
-                    title: '部门选择',
-                    width: "380",
-                    url: "/system/yx/selectDD/selectDeptTree",
-                    callBack: doSubmit
-                };
-                $.modal.openOptions(options);
-
-        }
-
-        function doSubmit(index, layero){
-            debugger;
-            var tree = layero.find("iframe")[0].contentWindow.$._tree;
-            if ($.tree.notAllowLastLevel(tree)) {
-                var body = layer.getChildFrame('body', index);
-                $("#treeId").val(body.find('#treeId').val());
-                $("#treeName").val(body.find('#treeName').val());
-                layer.close(index);
+            },
+            messages: {
+   	      		fu : {
+   	      		checkMoney :  icon + "请填正确的数据（最多保留一位小数）！"
+   	      		}
             }
-        }
+        }); 
+    }) 
+    
+    
+    
+        var editFlag = [[${@permission.hasPermi('system:log:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:log:remove')}]];
+        var prefix = ctx + "system/yxYue";
         
-        $(function() {
+        function selectDeptTree() {
+            var options = {
+                title: '部门选择',
+                width: "380",
+                url: "/system/yx/selectDD/selectDeptTree?parentId="+window.parent._deptID,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
 
+    }
+
+    function doSubmit(index, layero){
+        
+        var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if ($.tree.notAllowLastLevel(tree)) {
+            var body = layer.getChildFrame('body', index);
+            $("#treeId").val(body.find('#treeId').val());
+            $("#treeName").val(body.find('#treeName').val());
+            layer.close(index);
+        }
+    }
+    
+    
+    function money(){
+  	
+		    var fu = $('#fu').val();
+		    
+			if($.common.isEmpty(fu)){
+				alert("请输入浮动比！");
+				LoadingClose();
+				return;
+			}
+			
+			
+			 var  yxtable  = $('#bootstrap-table').bootstrapTable('getSelections');
+			 
+				if($.common.isEmpty(yxtable)){
+					alert("请选择数据！");
+					LoadingClose();
+					return;
+				}
+			
+			var formData =[];
+			
+			$.each(yxtable, function(i, row) {
+				var rowData = {};
+				rowData.userMoney=row.userCost*fu;
+				rowData.fu=fu;
+				rowData.id=row.id;
+				console.log(rowData);
+				formData.push(rowData);
+			});
+			console.log(formData);
+			
+			$.tzLoading({content:'正在结算，请稍等...'})
+			$.ajax({
+				cache : false,
+				type : "POST",
+				url :prefix +'/money',
+				data : JSON.stringify(formData),
+				async : true,
+				processData: false,
+				contentType: false,
+			    error : function(xhr,type) {
+			    	 LoadingClose();
+			    },
+			    success:function(data){
+                  if(data.code == 0){
+                	  $.modal.alertSuccess('结算成功!');
+                  }else{
+                	  $.modal.alertError('结算失败!');
+                  }
+                  LoadingClose();
+			    }
+			});
+			
+}
+
+        $(function() {
             var options = {
                 url: prefix + "/list",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                
-
                 modalName: "牙星公司",
                 columns: [{
                     checkbox: true
@@ -166,23 +216,19 @@
 					width:50,
                     visible: false
                 },
-                
                 {
                     field: 'createTime', 
+                    title: '创建时间',
 					align : "center",
 					valign : "middle",
-					width:120,
-                    title: '创建时间'
-      
+					width:120
                 },
-                
                 {
                     field: 'userId', 
 					align : "center",
 					valign : "middle",
 					width:80,
                     title: '员工工号'
-      
                 },
                 {
                     field: 'userName', 
@@ -276,62 +322,22 @@
                     title: '工资类型'
                 },
                 
-                
                 {
-                    field: 'workStart', 
+                    field: 'countDay', 
 					align : "center",
 					valign : "middle",
 					width:80,
-                    title: '出勤状态',
-	    			formatter : function(value, row, index) {
-						if (value == 0) {
-							return '<span class="label label-danger">未出勤</span>';
-						} else if (value == 1) {
-							return '<span class="label label-primary">出勤</span>';
-						}
-					}
+			        editable: true,
+                    title: '出勤天数'
+         
                 
-                
-                },
-                
-                {
-                    field: 'workNumber', 
-					align : "center",
-					valign : "middle",
-					width:80,         
-					editable: true,
-                    title: '产量'
-                },
-                {
-                    field: 'workPrice', 
-					align : "center",
-					valign : "middle",
-					width:80,
-		            editable: true,
-                    title: '单价'
-                },
-                {
-                    field: 'workAll', 
-					align : "center",
-					valign : "middle",
-					width:80,
-		            editable: true,
-                    title: '总工分'
-                },
-                {
-                    field: 'workFen', 
-					align : "center",
-					valign : "middle",
-					width:80,
-		            editable: true,
-                    title: '工分'
                 },
                 {
                     field: 'workSum', 
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '计件工资'
                 },
                 {
@@ -339,7 +345,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '零活工资'
                 },
                 {
@@ -347,7 +353,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '考核'
                 },
                 {
@@ -355,7 +361,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '煤质考核'
                 },
                 {
@@ -363,7 +369,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '早会'
                 },
                 {
@@ -371,7 +377,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '年休假天数'
                 },
                 {
@@ -379,7 +385,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '年休假工资'
                 },
                 {
@@ -387,7 +393,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '春节休假天数'
                 },
                 {
@@ -395,7 +401,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '春节休假工资'
                 },
                 {
@@ -404,7 +410,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '春节上班'
                 },
                 {
@@ -412,7 +418,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '春节上班工资'
                 },
                 {
@@ -420,7 +426,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '春节值班天数'
                 },
                 {
@@ -428,7 +434,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '春节值班工资'
                 },
                 {
@@ -436,7 +442,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '加班天数'
                 },
                 {
@@ -444,7 +450,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '加班工资'
                 },
                 {
@@ -452,7 +458,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '法定天数'
                 },
                 {
@@ -460,7 +466,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '法定工资'
                 },
                 {
@@ -468,7 +474,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '公休天数'
                 },
                 {
@@ -476,7 +482,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '公休工资'
                 },
                 {
@@ -484,7 +490,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '延时加班工资'
                 },
                 {
@@ -492,7 +498,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '女工费'
                 },
                 {
@@ -500,7 +506,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '入井费'
                 },
                 {
@@ -508,7 +514,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '夜班补助'
                 },
                 {
@@ -516,7 +522,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '矿井处罚'
                 },
                 {
@@ -524,7 +530,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '护理假天数'
                 },
                 {
@@ -532,7 +538,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '护理假工资'
                 },
                 {
@@ -540,7 +546,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '工伤假天数'
                 },
                 {
@@ -548,7 +554,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '工伤假工资'
                 },
                 {
@@ -556,7 +562,7 @@
 					align : "center",
 					valign : "middle",
 					width:100,
-				    editable: true,
+					editable: true,
                     title: '探亲假天数'
                 },
                 {
@@ -564,7 +570,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '探亲工资'
                 },
                 {
@@ -572,7 +578,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '病假天数'
                 },
                 {
@@ -580,6 +586,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+					editable: true,
                     title: '病假工资'
                 },
                 {
@@ -587,6 +594,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+					editable: true,
                     title: '丧假天数'
                 },
                 {
@@ -594,6 +602,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
+					editable: true,
                     title: '丧假工资'
                 },
                 {
@@ -601,7 +610,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '事假天数'
                 },
                 {
@@ -609,7 +618,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '旷工天数'
                 },
                 {
@@ -617,7 +626,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '待岗天数'
                 },
                 {
@@ -625,7 +634,7 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '其它补助'
                 },
                 {
@@ -633,45 +642,35 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
+					editable: true,
                     title: '计算工资'
-                },
-                {
-                    field: 'userSum', 
-					align : "center",
-					valign : "middle",
-					width:80,
-				    editable: true,
-                    title: '计划工资'
                 },
                 {
                     field: 'fu', 
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
-                    title: '浮动比'
+                    title: '浮动比例'
                 },
-          
                 {
                     field: 'userMoney', 
 					align : "center",
 					valign : "middle",
 					width:80,
-				    editable: true,
                     title: '实发工资'
                 },
+
                 {
                     field: 'remark', 
-					align : "center",
-					valign : "middle",
-					width:80,
-				    editable: true,
+           			valign : "middle",
+           		    align: 'center',
+   					width:80,
+   					editable: true,
                     title: '备注'
                 },
                 {
                     title: '操作',
-					align : "center",
+                    align: 'center',
 					valign : "middle",
 					width:150,
                     formatter: function(value, row, index) {
@@ -684,7 +683,6 @@
             };
             $.table.init(options);
         });
-        
     </script>
 </body>
 </html>

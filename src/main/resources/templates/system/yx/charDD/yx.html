@@ -18,17 +18,8 @@
                             
     					    <li>
                                 <label>组织机构：</label>
-      							<input type="hidden" id="treeId"  readonly="true"/>
+      							<input type="hidden" id="treeId"  name="userOrg" readonly="true"/>
                                 <input  type="text" id="treeName"  name="treeName"onclick="selectDeptTree()" readonly="true">
-                            </li>
-                            
-                            
-                            <li>
-                                <label>统计类型：</label>              
-                               	<select id="countType" name="countType" th:with="type=${@dict.getType('countType')}">
-									<option value="">-请选择-</option>
-									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-								</select>
                             </li>
                             
                             
@@ -68,7 +59,7 @@
 
     <script th:inline="javascript">
 
-    var prefix = ctx + "system/yx/charDD";
+    var prefix = ctx + "/system/yx/charDD";
     /*部门管理-修改-选择部门树*/
     function selectDeptTree() {
             var options = {
@@ -239,16 +230,13 @@
     });
     
     
-    
 
 
     function charDD() {
 
         $.tzLoading({content: '正在统计，请稍等...'}); 
-
         var createTime = $('#createTime').val();
         var userOrg  = $('#treeName').val();
-        var workType = $('#countType').val();
 	     
 		if ($.common.isEmpty(createTime)) {
             alert("请选择创建时间！");
@@ -262,183 +250,10 @@
             return;
         } 
         
-        if ($.common.isEmpty(workType)) {
-            alert("请选择统计类型！");
-            LoadingClose();
-            return;
-        } 
-        
-
-        
- 
 
         var formData = new FormData($('#formId')[0]);
 
         
-        if(workType == 1){
-        	 $.ajax({
-                 cache: false,
-                 type: "POST",
-                 url: prefix + '/charWorkType',
-                 data : formData,
-                 async: false,
-                 processData: false,
-                 contentType: false,
-                 error: function () {
-                 },
-                 success: function (data) {
-                      LoadingClose(); 
-                     var myChart = echarts.init(document.getElementById('box'));
-
-                     var weatherIcons = {
-                         'Sunny':  '../../img/ji.png',
-                         'Cloudy': '../../img/time.png',
-                         'Showers':'../../img/dan.png'
-
-                     };
-
-                     
-                    	alert(data);
-                     
-                     
-                     if(data==null){
-                     	alert("当日没有工资记录!");
-                     	return;
-                     }
-                     
-
-                     option = {
-                         title: {
-                             text: createTime + '当日工资报表',
-                             subtext:userOrg + '工资总数 ' + data.totalCount + '户 ' + data.totalSum + '元',
-                             left: 'center'
-                         },
-                         tooltip: {
-                             trigger: 'item',
-                             formatter: "{a} <br/>{b} : {c} ({d}%)"
-                         },
-                         legend: {
-                             bottom: 10,
-                             left: 'center',
-                             data: ['计件工资', '月薪工资', '单项工程']
-                         },
-                         series: [
-                             {
-                                 type: 'pie',
-                                 radius: '65%',
-                                 center: ['50%', '50%'],
-                                 selectedMode: 'single',
-                                 data:[
-                                     {
-                                         value:data.YxSumWorkType1,
-                                         name: '计件工资',
-                                         label: {
-                                             normal: {
-                                                 formatter: [
-                                                     '{title|{b}}{abg|}',
-                                                     '  {weatherHead|类型}{valueHead|人数}{rateHead|元}',
-                                                     '{hr|}',
-                                                     '  {Cloudy|}{value|'+data.YxCountWorkType1+'}{rate|'+data.YxSumWorkType1+'}',
-                                                     '  {Sunny|}{value|'+data.YxCountWorkType2+'}{rate|'+data.YxSumWorkType2+'}',
-                                                     '  {Showers|}{value|'+data.YxCountWorkType3+'}{rate|'+data.YxSumWorkType3+'}'
-                                                 ].join('\n'),
-                                                 backgroundColor: '#eee',
-                                                 borderColor: '#777',
-                                                 borderWidth: 1,
-                                                 borderRadius: 4,
-                                                 rich: {
-                                                     title: {
-                                                         color: '#eee',
-                                                         align: 'center'
-                                                     },
-                                                     abg: {
-                                                         backgroundColor: '#333',
-                                                         width: '100%',
-                                                         align: 'right',
-                                                         height: 25,
-                                                         borderRadius: [4, 4, 0, 0]
-                                                     },
-                                                     Sunny: {
-                                                         height: 30,
-                                                         align: 'left',
-                                                         backgroundColor: {
-                                                             image: weatherIcons.Sunny
-                                                         }
-                                                     },
-                                                     Cloudy: {
-                                                         height: 30,
-                                                         align: 'left',
-                                                         backgroundColor: {
-                                                             image: weatherIcons.Cloudy
-                                                         }
-                                                     },
-                                                     Showers: {
-                                                         height: 30,
-                                                         align: 'left',
-                                                         backgroundColor: {
-                                                             image: weatherIcons.Showers
-                                                         }
-                                                     },
-                                                     weatherHead: {
-                                                         color: '#333',
-                                                         height: 24,
-                                                         align: 'left'
-                                                     },
-                                                     hr: {
-                                                         borderColor: '#777',
-                                                         width: '100%',
-                                                         borderWidth: 0.5,
-                                                         height: 0
-                                                     },
-                                                     value: {
-                                                         width: 20,
-                                                         padding: [0, 20, 0, 30],
-                                                         align: 'left'
-                                                     },
-                                                     valueHead: {
-                                                         color: '#333',
-                                                         width: 20,
-                                                         padding: [0, 20, 0, 30],
-                                                         align: 'center'
-                                                     },
-                                                     rate: {
-                                                         width: 40,
-                                                         align: 'right',
-                                                         padding: [0, 10, 0, 0]
-                                                     },
-                                                     rateHead: {
-                                                         color: '#333',
-                                                         width: 40,
-                                                         align: 'center',
-                                                         padding: [0, 10, 0, 0]
-                                                     }
-                                                 }
-                                             }
-                                         }
-                                     },
-                                     {value:data.YxSumWorkType2, name:'月薪工资'},
-                                     {value:data.YxSumWorkType3, name:'单项工程'}
-                                 ],
-                                 itemStyle: {
-                                     emphasis: {
-                                         shadowBlur: 10,
-                                         shadowOffsetX: 0,
-                                         shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                     }
-                                 }
-                             }
-                         ]
-                     };
-                     myChart.setOption(option);
-
-                 }
-             });
-        	
-        }
-        
-        
-        
-        if(workType == 2){
        	 $.ajax({
                 cache: false,
                 type: "POST",
@@ -598,14 +413,9 @@
             });
        	
        }
-
-    }
-
-
     </script>
 
 
-    
     
 </body>
 </html>

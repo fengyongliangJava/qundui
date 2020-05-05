@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.project.system.dept.domain.Dept;
-import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxDay;
 import com.ruoyi.project.system.yx.domain.YxUpload;
 import com.ruoyi.project.system.yx.domain.YxUser;
 
@@ -14,7 +14,7 @@ import com.ruoyi.project.system.yx.domain.YxUser;
  * @author ruoyi
  * @date 2020-04-07
  */
-public interface IYxService 
+public interface IYxDayService 
 {
     /**
      * 查询牙星公司
@@ -22,33 +22,33 @@ public interface IYxService
      * @param id 牙星公司ID
      * @return 牙星公司
      */
-    public Yx selectYxById(Long id);
+    public YxDay selectYxById(Long id);
 
     /**
      * 查询牙星公司列表
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 牙星公司集合
      */
-    public List<Yx> selectYxList(Yx yx);
+    public List<YxDay> selectYxList(YxDay yxDay);
     
     
     /**
      * 查询牙星公司列表
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 牙星公司集合
      */
-    public List<Yx> selectYxKHList(Yx yx);
+    public List<YxDay> selectYxKHList(YxDay yxDay);
 
 
     /**
      * 新增牙星公司
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 结果
      */
-    public int insertYx(Yx yx);
+    public int insertYx(YxDay yxDay);
     
     /**
      * 新增牙星公司用户
@@ -68,10 +68,10 @@ public interface IYxService
     /**
      * 修改牙星公司
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 结果
      */
-    public int updateYx(Yx yx);
+    public int updateYx(YxDay yxDay);
 
     /**
      * 批量删除牙星公司

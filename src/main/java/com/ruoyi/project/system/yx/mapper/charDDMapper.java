@@ -2,7 +2,7 @@ package com.ruoyi.project.system.yx.mapper;
 
 import java.math.BigDecimal;
 
-import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxDay;
 
 /**
  * 牙星公司Mapper接口
@@ -16,23 +16,23 @@ public interface charDDMapper {
 
 //workType
 	
-	int YxCountWorkType1 (Yx yx);
-	BigDecimal YxSumWorkType1 (Yx yx);
-	int YxCountWorkType2 (Yx yx);
-	BigDecimal YxSumWorkType2 (Yx yx);
-	int YxCountWorkType3 (Yx yx);
-	BigDecimal YxSumWorkType3 (Yx yx);
+	int YxCountWorkType1 (YxDay yxDay);
+	BigDecimal YxSumWorkType1 (YxDay yxDay);
+	int YxCountWorkType2 (YxDay yxDay);
+	BigDecimal YxSumWorkType2 (YxDay yxDay);
+	int YxCountWorkType3 (YxDay yxDay);
+	BigDecimal YxSumWorkType3 (YxDay yxDay);
 	
 //workType	
 	
 //workClass
 	
-	int YxCountWorkClass1 (Yx yx);
-	BigDecimal YxSumWorkClass1 (Yx yx);
-	int YxCountWorkClass2 (Yx yx);
-	BigDecimal YxSumWorkClass2 (Yx yx);
-	int YxCountWorkClass3 (Yx yx);
-	BigDecimal YxSumWorkClass3 (Yx yx);
+	int YxCountWorkClass1 (YxDay yxDay);
+	BigDecimal YxSumWorkClass1 (YxDay yxDay);
+	int YxCountWorkClass2 (YxDay yxDay);
+	BigDecimal YxSumWorkClass2 (YxDay yxDay);
+	int YxCountWorkClass3 (YxDay yxDay);
+	BigDecimal YxSumWorkClass3 (YxDay yxDay);
 		
 //workClass	
 	

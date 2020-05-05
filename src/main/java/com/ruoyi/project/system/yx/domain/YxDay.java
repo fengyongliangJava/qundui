@@ -9,12 +9,12 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 
 /**
- * 牙星公司对象 yx_log
+ * 牙星公司对象 yx
  * 
  * @author ruoyi
- * @date 2020-04-23
+ * @date 2020-04-07
  */
-public class YxLog
+public class YxDay 
 {
     private static final long serialVersionUID = 1L;
 
@@ -33,12 +33,12 @@ public class YxLog
     @Excel(name = "性别")
     private String sex;
 
-    /** 手机号码 */
-    @Excel(name = "手机号码")
+    /** 联系方式 */
+    @Excel(name = "联系方式")
     private String tell;
 
-    /** 身份证号 */
-    @Excel(name = "身份证号")
+    /** 身份证 */
+    @Excel(name = "身份证")
     private String card;
 
     /** 户籍所在地 */
@@ -49,8 +49,8 @@ public class YxLog
     @Excel(name = "单位")
     private String userOrg;
 
-    /** 科室 */
-    @Excel(name = "科室")
+    /** 部门 */
+    @Excel(name = "部门")
     private String userArea;
 
     /** 区队 */
@@ -72,175 +72,211 @@ public class YxLog
     /** 工资类型 */
     @Excel(name = "工资类型")
     private String workClass;
-
-    /** 出勤天数 */
-    @Excel(name = "出勤天数")
+    
+    
+    //@Transient
     private Integer countDay;
+    
+    public Integer getCountDay() {
+		return countDay;
+	}
 
-    /** 计件工资 */
+	public void setCountDay(Integer countDay) {
+		this.countDay = countDay;
+	}
+
+	
+	/** 出勤状态 */
+    @Excel(name = "出勤状态")
+    private Integer workStart;
+
+    
+    
+    /** 产量 */
+    @Excel(name = "产量")
+    private Integer workNumber;
+
+    /** 单价 */
+    @Excel(name = "单价")
+    private BigDecimal workPrice;
+
+    /** 总工分 */
+    @Excel(name = "总工分")
+    private Integer workAll;
+
+    /** 工分 */
+    @Excel(name = "工分")
+    private Integer workFen;
+
+   /** 计件工资*/
     @Excel(name = "计件工资")
     private BigDecimal workSum;
-
-    /** 零活工资 */
-    @Excel(name = "零活工资")
+    
+    /** 零活工资*/
+    @Excel(name = "计件工资")
     private BigDecimal workHuo;
 
-    /** 考核 */
+   /** 考核*/
     @Excel(name = "考核")
     private Integer kaohe;
 
-    /** 煤质考核 */
+   /** 煤质考核*/
     @Excel(name = "煤质考核")
     private Integer meiKaohe;
 
-    /** 早会 */
+   /** 早会*/
     @Excel(name = "早会")
     private Integer meeting;
 
-    /** 年休假天数 */
+   /** 年休假天数*/
     @Excel(name = "年休假天数")
     private Integer yearsHolidays;
 
-    /** 年休假工资 */
+   /** 年休假工资*/
     @Excel(name = "年休假工资")
     private Integer yearsCost;
 
-    /** 春节休假天数 */
+   /** 春节休假天数*/
     @Excel(name = "春节休假天数")
     private Integer yearDay;
 
-    /** 春节休假工资 */
+   /** 春节休假工资*/
     @Excel(name = "春节休假工资")
     private Integer yearCost;
 
-    /** 春节上班 */
+   /** 春节上班*/
     @Excel(name = "春节上班")
     private Integer yearWork;
 
-    /** 春节上班工资 */
+   /** 春节上班工资*/
     @Excel(name = "春节上班工资")
     private Integer yearSum;
 
-    /** 春节值班天数 */
+   /** 春节值班天数*/
     @Excel(name = "春节值班天数")
     private Integer yearPlus;
 
-    /** 春节值班工资 */
+   /** 春节值班工资*/
     @Excel(name = "春节值班工资")
     private Integer yearDuty;
 
-    /** 加班天数 */
+   /** 加班天数*/
     @Excel(name = "加班天数")
     private Integer workPlus;
 
-    /** 加班工资 */
+   /** 加班工资*/
     @Excel(name = "加班工资")
     private Integer workCost;
 
-    /** 法定天数 */
+   /** 法定天数*/
     @Excel(name = "法定天数")
     private Integer lawDay;
 
-    /** 法定工资 */
+   /** 法定工资*/
     @Excel(name = "法定工资")
     private Integer lawCost;
 
-    /** 公休天数 */
+   /** 公休天数*/
     @Excel(name = "公休天数")
     private Integer busDay;
 
-    /** 公休工资 */
+   /** 公休工资*/
     @Excel(name = "公休工资")
     private Integer busCost;
 
-    /** 延时加班工资 */
+   /** 延时加班工资*/
     @Excel(name = "延时加班工资")
     private Integer busPlus;
 
-    /** 女工费 */
+   /** 女工费*/
     @Excel(name = "女工费")
     private Integer woman;
 
-    /** 入井费 */
+   /** 入井费*/
     @Excel(name = "入井费")
     private Integer run;
 
-    /** 夜班补助 */
+   /** 夜班补助*/
     @Excel(name = "夜班补助")
     private Integer ye;
 
-    /** 矿井处罚 */
+   /** 矿井处罚*/
     @Excel(name = "矿井处罚")
     private Integer kuangji;
 
-    /** 护理假天数 */
+   /** 护理假天数*/
     @Excel(name = "护理假天数")
     private Integer huliDay;
 
-    /** 护理假工资 */
+   /** 护理假工资*/
     @Excel(name = "护理假工资")
     private Integer huliCost;
 
-    /** 工伤假天数 */
+   /** 工伤假天数*/
     @Excel(name = "工伤假天数")
     private Integer gsDay;
 
-    /** 工伤假工资 */
+   /** 工伤假工资*/
     @Excel(name = "工伤假工资")
     private Integer gsCost;
 
-    /** 探亲假天数 */
+   /** 探亲假天数*/
     @Excel(name = "探亲假天数")
     private Integer tqDay;
 
-    /** 探亲工资 */
+   /** 探亲工资*/
     @Excel(name = "探亲工资")
     private Integer tqCost;
 
-    /** 病假天数 */
+   /** 病假天数*/
     @Excel(name = "病假天数")
     private Integer bingDay;
 
-    /** 病假工资 */
+   /** 病假工资*/
     @Excel(name = "病假工资")
     private Integer bingCost;
 
-    /** 丧假天数 */
+   /** 丧假天数*/
     @Excel(name = "丧假天数")
     private Integer sangDay;
 
-    /** 丧假工资 */
+   /** 丧假工资*/
     @Excel(name = "丧假工资")
     private Integer sangCost;
 
-    /** 事假天数 */
+   /** 事假天数*/
     @Excel(name = "事假天数")
     private Integer sjDay;
 
-    /** 旷工天数 */
+   /** 旷工天数*/
     @Excel(name = "旷工天数")
     private Integer kgDay;
 
-    /** 待岗天数 */
+   /** 待岗天数*/
     @Excel(name = "待岗天数")
     private Integer dgDay;
 
-    /** 其它补助 */
+   /** 其它补助*/
     @Excel(name = "其它补助")
     private Integer other;
 
-    /** 计算工资 */
+   /** 计算工资*/
     @Excel(name = "计算工资")
     private BigDecimal userCost;
-
-    /** 浮动比例 */
-    @Excel(name = "浮动比例")
+    
+   /** 计划工资*/
+    @Excel(name = "计划工资")
+    private BigDecimal userSum;
+    
+    /** 浮动比*/
+    @Excel(name = "浮动比")
     private BigDecimal fu;
-
-    /** 实发工资 */
+    
+    /** 实发工资*/
     @Excel(name = "实发工资")
     private BigDecimal userMoney;
 
+    
     
     /** 创建时间 */
     @Excel(name = "创建时间")
@@ -262,45 +298,8 @@ public class YxLog
     @Excel(name = "备注")
     private String remark;
     
-    public String getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
-
-	public String getCreateBy() {
-		return createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-
-	public String getUpdateBy() {
-		return updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    
+    
 
 	public void setId(Long id) 
     {
@@ -311,6 +310,8 @@ public class YxLog
     {
         return id;
     }
+    
+    
     public void setUserId(String userId) 
     {
         this.userId = userId;
@@ -338,7 +339,7 @@ public class YxLog
     {
         return sex;
     }
-    public void setTell(String tell) 
+   public void setTell(String tell) 
     {
         this.tell = tell;
     }
@@ -428,33 +429,74 @@ public class YxLog
     {
         return workClass;
     }
-    public void setCountDay(Integer countDay) 
+    
+    public void setWorkStart(Integer workStart) 
     {
-        this.countDay = countDay;
+        this.workStart = workStart;
     }
 
-    public Integer getCountDay() 
+    public Integer getWorkStart() 
     {
-        return countDay;
+        return workStart;
     }
     
-    public BigDecimal getWorkSum() {
-		return workSum;
-	}
+    
+    public void setWorkNumber(Integer workNumber) 
+    {
+        this.workNumber = workNumber;
+    }
 
-	public void setWorkSum(BigDecimal workSum) {
-		this.workSum = workSum;
-	}
+    public Integer getWorkNumber() 
+    {
+        return workNumber;
+    }
+    public void setWorkPrice(BigDecimal workPrice) 
+    {
+        this.workPrice = workPrice;
+    }
 
-	public BigDecimal getWorkHuo() {
-		return workHuo;
-	}
+    public BigDecimal getWorkPrice() 
+    {
+        return workPrice;
+    }
+    public void setWorkAll(Integer workAll) 
+    {
+        this.workAll = workAll;
+    }
 
-	public void setWorkHuo(BigDecimal workHuo) {
-		this.workHuo = workHuo;
-	}
+    public Integer getWorkAll() 
+    {
+        return workAll;
+    }
+    public void setWorkFen(Integer workFen) 
+    {
+        this.workFen = workFen;
+    }
 
-	public void setKaohe(Integer kaohe) 
+    public Integer getWorkFen() 
+    {
+        return workFen;
+    }
+    public void setWorkSum(BigDecimal workSum) 
+    {
+        this.workSum = workSum;
+    }
+
+    public BigDecimal getWorkSum() 
+    {
+        return workSum;
+    }
+    public void setWorkHuo(BigDecimal workHuo) 
+    {
+        this.workHuo = workHuo;
+    }
+
+    public BigDecimal getWorkHuo() 
+    {
+        return workHuo;
+    }
+    
+    public void setKaohe(Integer kaohe) 
     {
         this.kaohe = kaohe;
     }
@@ -778,29 +820,96 @@ public class YxLog
     {
         return other;
     }
+    public void setUserCost(BigDecimal userCost) 
+    {
+        this.userCost = userCost;
+    }
+
+    public BigDecimal getUserCost() 
+    {
+        return userCost;
+    }
     
-    public BigDecimal getUserCost() {
-		return userCost;
+    
+    public void setUserSum(BigDecimal userSum) 
+    {
+        this.userSum = userSum;
+    }
+
+    public BigDecimal getUserSum() 
+    {
+        return userSum;
+    }
+    
+    
+    public void setFu(BigDecimal fu) 
+    {
+        this.fu = fu;
+    }
+
+    public BigDecimal getFu() 
+    {
+        return fu;
+    }
+    
+    public void setUserMoney(BigDecimal userMoney) 
+    {
+        this.userMoney = userMoney;
+    }
+
+    public BigDecimal getUserMoney() 
+    {
+        return userMoney;
+    }
+    
+
+    
+    
+    
+    
+    
+    public String getCreateTime() {
+		return createTime;
 	}
 
-	public void setUserCost(BigDecimal userCost) {
-		this.userCost = userCost;
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 
-	public BigDecimal getFu() {
-		return fu;
+	public String getCreateBy() {
+		return createBy;
 	}
 
-	public void setFu(BigDecimal fu) {
-		this.fu = fu;
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
 	}
 
-	public BigDecimal getUserMoney() {
-		return userMoney;
+	public String getUpdateBy() {
+		return updateBy;
 	}
 
-	public void setUserMoney(BigDecimal userMoney) {
-		this.userMoney = userMoney;
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -820,7 +929,11 @@ public class YxLog
             .append("station", getStation())
             .append("workType", getWorkType())
             .append("workClass", getWorkClass())
-            .append("countDay", getCountDay())
+            .append("workStart", getWorkStart())
+            .append("workNumber", getWorkNumber())
+            .append("workPrice", getWorkPrice())
+            .append("workAll", getWorkAll())
+            .append("workFen", getWorkFen())
             .append("workSum", getWorkSum())
             .append("workHuo", getWorkHuo())
             .append("kaohe", getKaohe())
@@ -860,6 +973,7 @@ public class YxLog
             .append("dgDay", getDgDay())
             .append("other", getOther())
             .append("userCost", getUserCost())
+            .append("userSum", getUserSum())
             .append("fu", getFu())
             .append("userMoney", getUserMoney())
             .append("createTime", getCreateTime())
@@ -869,4 +983,8 @@ public class YxLog
             .append("remark", getRemark())
             .toString();
     }
+    
+    
+    
+    
 }

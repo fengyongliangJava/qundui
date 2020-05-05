@@ -18,8 +18,8 @@ import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.project.system.yx.domain.Yx;
-import com.ruoyi.project.system.yx.service.IYxService;
+import com.ruoyi.project.system.yx.domain.YxDay;
+import com.ruoyi.project.system.yx.service.IYxDayService;
 import com.ruoyi.project.system.yx.service.IcharMMService;
 
 /**
@@ -34,7 +34,7 @@ public class YxcharMMController extends BaseController
     private String prefix = "system/yx/charMM";
 
     @Autowired
-    private IYxService yxService;
+    private IYxDayService yxDayService;
     
     
     @Autowired
@@ -53,19 +53,19 @@ public class YxcharMMController extends BaseController
     
     @ResponseBody
     @PostMapping("/charWorkType")
-    public Map<String,Object> charWorkType(Yx yx) {
+    public Map<String,Object> charWorkType(YxDay yxDay) {
   	  
   	  
   	    Map<String,Object> map = new HashMap<>();
   	  
   
   		
-  		int YxCountWorkType1 = charMMService.YxCountWorkType1(yx);
-  		BigDecimal YxSumWorkType1 = charMMService.YxSumWorkType1(yx);
-  		int YxCountWorkType2 = charMMService.YxCountWorkType2(yx);
-  		BigDecimal YxSumWorkType2 = charMMService.YxSumWorkType2(yx);
-  		int YxCountWorkType3 = charMMService.YxCountWorkType3(yx);
-  		BigDecimal YxSumWorkType3 = charMMService.YxSumWorkType3(yx);
+  		int YxCountWorkType1 = charMMService.YxCountWorkType1(yxDay);
+  		BigDecimal YxSumWorkType1 = charMMService.YxSumWorkType1(yxDay);
+  		int YxCountWorkType2 = charMMService.YxCountWorkType2(yxDay);
+  		BigDecimal YxSumWorkType2 = charMMService.YxSumWorkType2(yxDay);
+  		int YxCountWorkType3 = charMMService.YxCountWorkType3(yxDay);
+  		BigDecimal YxSumWorkType3 = charMMService.YxSumWorkType3(yxDay);
   		
   		int totalCount = YxCountWorkType1 + YxCountWorkType2 + YxCountWorkType3;
   		BigDecimal totalSum = (YxSumWorkType1.add(YxSumWorkType2)).add(YxSumWorkType3);
@@ -88,18 +88,18 @@ public class YxcharMMController extends BaseController
 
     @ResponseBody
     @PostMapping("/charWorkClass")
-    public Map<String,Object> charWorkClass(Yx yx) {
+    public Map<String,Object> charWorkClass(YxDay yxDay) {
   	  
   	  
   	    Map<String,Object> map = new HashMap<>();
   	  
   		
-  		int YxCountWorkClass1 = charMMService.YxCountWorkClass1(yx);
-  		BigDecimal YxSumWorkClass1 = charMMService.YxSumWorkClass1(yx);
-  		int YxCountWorkClass2 = charMMService.YxCountWorkClass2(yx);
-  		BigDecimal YxSumWorkClass2 = charMMService.YxSumWorkClass2(yx);
-  		int YxCountWorkClass3 = charMMService.YxCountWorkClass3(yx);
-  		BigDecimal YxSumWorkClass3 = charMMService.YxSumWorkClass3(yx);
+  		int YxCountWorkClass1 = charMMService.YxCountWorkClass1(yxDay);
+  		BigDecimal YxSumWorkClass1 = charMMService.YxSumWorkClass1(yxDay);
+  		int YxCountWorkClass2 = charMMService.YxCountWorkClass2(yxDay);
+  		BigDecimal YxSumWorkClass2 = charMMService.YxSumWorkClass2(yxDay);
+  		int YxCountWorkClass3 = charMMService.YxCountWorkClass3(yxDay);
+  		BigDecimal YxSumWorkClass3 = charMMService.YxSumWorkClass3(yxDay);
 
   		map.put("YxCountWorkClass1",YxCountWorkClass1);
   		map.put("YxSumWorkClass1",YxSumWorkClass1);
@@ -125,10 +125,10 @@ public class YxcharMMController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yx yx)
+    public AjaxResult export(YxDay yxDay)
     {
-        List<Yx> list = yxService.selectYxList(yx);
-        ExcelUtil<Yx> util = new ExcelUtil<Yx>(Yx.class);
+        List<YxDay> list = yxDayService.selectYxList(yxDay);
+        ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
         return util.exportExcel(list, "yx");
     }
 

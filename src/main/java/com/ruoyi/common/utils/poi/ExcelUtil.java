@@ -205,11 +205,14 @@ public class ExcelUtil<T>
                 // 从第2行开始取数据,默认第一行是表头.
                 Row row = sheet.getRow(i);
                 T entity = null;
-
+                boolean flag = false;
                 for (Map.Entry<Integer, Field> entry : fieldsMap.entrySet())
                 {
+                	flag = false;
                     Object val = this.getCellValue(row, entry.getKey());
-                       
+                    if(null==val || String.valueOf(val).length()>0) {
+                    	flag = true;
+                    }
                     // 如果不存在实例则新建.
                     entity = (entity == null ? clazz.newInstance() : entity);
                     // 从map中得到对应列的field.
@@ -282,7 +285,11 @@ public class ExcelUtil<T>
                         ReflectUtils.invokeSetter(entity, propertyName, val);
                     }
                 }
-                list.add(entity);
+                if(flag) {
+                	list.add(entity);
+                }else {
+                	break;
+                }
             }
         }
         return list;

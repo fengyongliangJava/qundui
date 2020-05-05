@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxDay;
 import com.ruoyi.project.system.yx.service.IcharYYService;
 
 /**
@@ -43,91 +43,91 @@ public class YxcharYYController extends BaseController
 
     @ResponseBody
     @PostMapping("/charWorkType")
-    public Map<String,Object> charWorkType(Yx yx) {
+    public Map<String,Object> charWorkType(YxDay yxDay) {
   	  
   	  
   	    Map<String,Object> map = new HashMap<>();
   	  
   		
-  		int YxCountWorkType1yue1 = charYYService.YxCountWorkType1yue1(yx);
-  		BigDecimal YxSumWorkType1yue1 = charYYService.YxSumWorkType1yue1(yx);
-  		int YxCountWorkType1yue2 = charYYService.YxCountWorkType1yue2(yx);
-  		BigDecimal YxSumWorkType1yue2 = charYYService.YxSumWorkType1yue2(yx);
-  		int YxCountWorkType1yue3 = charYYService.YxCountWorkType1yue3(yx);
-  		BigDecimal YxSumWorkType1yue3 = charYYService.YxSumWorkType1yue3(yx);
-  		int YxCountWorkType1yue4 = charYYService.YxCountWorkType1yue4(yx);
-  		BigDecimal YxSumWorkType1yue4 = charYYService.YxSumWorkType1yue4(yx);	
-  		int YxCountWorkType1yue5 = charYYService.YxCountWorkType1yue5(yx);
-  		BigDecimal YxSumWorkType1yue5 = charYYService.YxSumWorkType1yue5(yx);
-  		int YxCountWorkType1yue6 = charYYService.YxCountWorkType1yue6(yx);
-  		BigDecimal YxSumWorkType1yue6 = charYYService.YxSumWorkType1yue6(yx);
-  		int YxCountWorkType1yue7 = charYYService.YxCountWorkType1yue7(yx);
-  		BigDecimal YxSumWorkType1yue7 = charYYService.YxSumWorkType1yue7(yx);
-  		int YxCountWorkType1yue8 = charYYService.YxCountWorkType1yue8(yx);
-  		BigDecimal YxSumWorkType1yue8 = charYYService.YxSumWorkType1yue8(yx);	
-  		int YxCountWorkType1yue9 = charYYService.YxCountWorkType1yue9(yx);
-  		BigDecimal YxSumWorkType1yue9 = charYYService.YxSumWorkType1yue9(yx);
-  		int YxCountWorkType1yue10 = charYYService.YxCountWorkType1yue10(yx);
-  		BigDecimal YxSumWorkType1yue10 = charYYService.YxSumWorkType1yue10(yx);	
-  		int YxCountWorkType1yue11 = charYYService.YxCountWorkType1yue11(yx);
-  		BigDecimal YxSumWorkType1yue11 = charYYService.YxSumWorkType1yue11(yx);	
-  		int YxCountWorkType1yue12 = charYYService.YxCountWorkType1yue12(yx);
-  		BigDecimal YxSumWorkType1yue12 = charYYService.YxSumWorkType1yue12(yx);	
+  		int YxCountWorkType1yue1 = charYYService.YxCountWorkType1yue1(yxDay);
+  		BigDecimal YxSumWorkType1yue1 = charYYService.YxSumWorkType1yue1(yxDay);
+  		int YxCountWorkType1yue2 = charYYService.YxCountWorkType1yue2(yxDay);
+  		BigDecimal YxSumWorkType1yue2 = charYYService.YxSumWorkType1yue2(yxDay);
+  		int YxCountWorkType1yue3 = charYYService.YxCountWorkType1yue3(yxDay);
+  		BigDecimal YxSumWorkType1yue3 = charYYService.YxSumWorkType1yue3(yxDay);
+  		int YxCountWorkType1yue4 = charYYService.YxCountWorkType1yue4(yxDay);
+  		BigDecimal YxSumWorkType1yue4 = charYYService.YxSumWorkType1yue4(yxDay);	
+  		int YxCountWorkType1yue5 = charYYService.YxCountWorkType1yue5(yxDay);
+  		BigDecimal YxSumWorkType1yue5 = charYYService.YxSumWorkType1yue5(yxDay);
+  		int YxCountWorkType1yue6 = charYYService.YxCountWorkType1yue6(yxDay);
+  		BigDecimal YxSumWorkType1yue6 = charYYService.YxSumWorkType1yue6(yxDay);
+  		int YxCountWorkType1yue7 = charYYService.YxCountWorkType1yue7(yxDay);
+  		BigDecimal YxSumWorkType1yue7 = charYYService.YxSumWorkType1yue7(yxDay);
+  		int YxCountWorkType1yue8 = charYYService.YxCountWorkType1yue8(yxDay);
+  		BigDecimal YxSumWorkType1yue8 = charYYService.YxSumWorkType1yue8(yxDay);	
+  		int YxCountWorkType1yue9 = charYYService.YxCountWorkType1yue9(yxDay);
+  		BigDecimal YxSumWorkType1yue9 = charYYService.YxSumWorkType1yue9(yxDay);
+  		int YxCountWorkType1yue10 = charYYService.YxCountWorkType1yue10(yxDay);
+  		BigDecimal YxSumWorkType1yue10 = charYYService.YxSumWorkType1yue10(yxDay);	
+  		int YxCountWorkType1yue11 = charYYService.YxCountWorkType1yue11(yxDay);
+  		BigDecimal YxSumWorkType1yue11 = charYYService.YxSumWorkType1yue11(yxDay);	
+  		int YxCountWorkType1yue12 = charYYService.YxCountWorkType1yue12(yxDay);
+  		BigDecimal YxSumWorkType1yue12 = charYYService.YxSumWorkType1yue12(yxDay);	
   		
   		
   		
-  		int YxCountWorkType2yue1 = charYYService.YxCountWorkType2yue1(yx);
-  		BigDecimal YxSumWorkType2yue1 = charYYService.YxSumWorkType2yue1(yx);
-  		int YxCountWorkType2yue2 = charYYService.YxCountWorkType2yue2(yx);
-  		BigDecimal YxSumWorkType2yue2 = charYYService.YxSumWorkType2yue2(yx);
-  		int YxCountWorkType2yue3 = charYYService.YxCountWorkType2yue3(yx);
-  		BigDecimal YxSumWorkType2yue3 = charYYService.YxSumWorkType2yue3(yx);
-  		int YxCountWorkType2yue4 = charYYService.YxCountWorkType2yue4(yx);
-  		BigDecimal YxSumWorkType2yue4 = charYYService.YxSumWorkType2yue4(yx);	
-  		int YxCountWorkType2yue5 = charYYService.YxCountWorkType2yue5(yx);
-  		BigDecimal YxSumWorkType2yue5 = charYYService.YxSumWorkType2yue5(yx);
-  		int YxCountWorkType2yue6 = charYYService.YxCountWorkType2yue6(yx);
-  		BigDecimal YxSumWorkType2yue6 = charYYService.YxSumWorkType2yue6(yx);
-  		int YxCountWorkType2yue7 = charYYService.YxCountWorkType2yue7(yx);
-  		BigDecimal YxSumWorkType2yue7 = charYYService.YxSumWorkType2yue7(yx);
-  		int YxCountWorkType2yue8 = charYYService.YxCountWorkType2yue8(yx);
-  		BigDecimal YxSumWorkType2yue8 = charYYService.YxSumWorkType2yue8(yx);	
-  		int YxCountWorkType2yue9 = charYYService.YxCountWorkType2yue9(yx);
-  		BigDecimal YxSumWorkType2yue9 = charYYService.YxSumWorkType2yue9(yx);
-  		int YxCountWorkType2yue10 = charYYService.YxCountWorkType2yue10(yx);
-  		BigDecimal YxSumWorkType2yue10 = charYYService.YxSumWorkType2yue10(yx);	
-  		int YxCountWorkType2yue11 = charYYService.YxCountWorkType2yue11(yx);
-  		BigDecimal YxSumWorkType2yue11 = charYYService.YxSumWorkType2yue11(yx);	
-  		int YxCountWorkType2yue12 = charYYService.YxCountWorkType2yue12(yx);
-  		BigDecimal YxSumWorkType2yue12 = charYYService.YxSumWorkType2yue12(yx);	
+  		int YxCountWorkType2yue1 = charYYService.YxCountWorkType2yue1(yxDay);
+  		BigDecimal YxSumWorkType2yue1 = charYYService.YxSumWorkType2yue1(yxDay);
+  		int YxCountWorkType2yue2 = charYYService.YxCountWorkType2yue2(yxDay);
+  		BigDecimal YxSumWorkType2yue2 = charYYService.YxSumWorkType2yue2(yxDay);
+  		int YxCountWorkType2yue3 = charYYService.YxCountWorkType2yue3(yxDay);
+  		BigDecimal YxSumWorkType2yue3 = charYYService.YxSumWorkType2yue3(yxDay);
+  		int YxCountWorkType2yue4 = charYYService.YxCountWorkType2yue4(yxDay);
+  		BigDecimal YxSumWorkType2yue4 = charYYService.YxSumWorkType2yue4(yxDay);	
+  		int YxCountWorkType2yue5 = charYYService.YxCountWorkType2yue5(yxDay);
+  		BigDecimal YxSumWorkType2yue5 = charYYService.YxSumWorkType2yue5(yxDay);
+  		int YxCountWorkType2yue6 = charYYService.YxCountWorkType2yue6(yxDay);
+  		BigDecimal YxSumWorkType2yue6 = charYYService.YxSumWorkType2yue6(yxDay);
+  		int YxCountWorkType2yue7 = charYYService.YxCountWorkType2yue7(yxDay);
+  		BigDecimal YxSumWorkType2yue7 = charYYService.YxSumWorkType2yue7(yxDay);
+  		int YxCountWorkType2yue8 = charYYService.YxCountWorkType2yue8(yxDay);
+  		BigDecimal YxSumWorkType2yue8 = charYYService.YxSumWorkType2yue8(yxDay);	
+  		int YxCountWorkType2yue9 = charYYService.YxCountWorkType2yue9(yxDay);
+  		BigDecimal YxSumWorkType2yue9 = charYYService.YxSumWorkType2yue9(yxDay);
+  		int YxCountWorkType2yue10 = charYYService.YxCountWorkType2yue10(yxDay);
+  		BigDecimal YxSumWorkType2yue10 = charYYService.YxSumWorkType2yue10(yxDay);	
+  		int YxCountWorkType2yue11 = charYYService.YxCountWorkType2yue11(yxDay);
+  		BigDecimal YxSumWorkType2yue11 = charYYService.YxSumWorkType2yue11(yxDay);	
+  		int YxCountWorkType2yue12 = charYYService.YxCountWorkType2yue12(yxDay);
+  		BigDecimal YxSumWorkType2yue12 = charYYService.YxSumWorkType2yue12(yxDay);	
   		
   		
   		
   		
-  		int YxCountWorkType3yue1 = charYYService.YxCountWorkType3yue1(yx);
-  		BigDecimal YxSumWorkType3yue1 = charYYService.YxSumWorkType3yue1(yx);
-  		int YxCountWorkType3yue2 = charYYService.YxCountWorkType3yue2(yx);
-  		BigDecimal YxSumWorkType3yue2 = charYYService.YxSumWorkType3yue2(yx);
-  		int YxCountWorkType3yue3 = charYYService.YxCountWorkType3yue3(yx);
-  		BigDecimal YxSumWorkType3yue3 = charYYService.YxSumWorkType3yue3(yx);
-  		int YxCountWorkType3yue4 = charYYService.YxCountWorkType3yue4(yx);
-  		BigDecimal YxSumWorkType3yue4 = charYYService.YxSumWorkType3yue4(yx);	
-  		int YxCountWorkType3yue5 = charYYService.YxCountWorkType3yue5(yx);
-  		BigDecimal YxSumWorkType3yue5 = charYYService.YxSumWorkType3yue5(yx);
-  		int YxCountWorkType3yue6 = charYYService.YxCountWorkType3yue6(yx);
-  		BigDecimal YxSumWorkType3yue6 = charYYService.YxSumWorkType3yue6(yx);
-  		int YxCountWorkType3yue7 = charYYService.YxCountWorkType3yue7(yx);
-  		BigDecimal YxSumWorkType3yue7 = charYYService.YxSumWorkType3yue7(yx);
-  		int YxCountWorkType3yue8 = charYYService.YxCountWorkType3yue8(yx);
-  		BigDecimal YxSumWorkType3yue8 = charYYService.YxSumWorkType3yue8(yx);	
-  		int YxCountWorkType3yue9 = charYYService.YxCountWorkType3yue9(yx);
-  		BigDecimal YxSumWorkType3yue9 = charYYService.YxSumWorkType3yue9(yx);
-  		int YxCountWorkType3yue10 = charYYService.YxCountWorkType3yue10(yx);
-  		BigDecimal YxSumWorkType3yue10 = charYYService.YxSumWorkType3yue10(yx);	
-  		int YxCountWorkType3yue11 = charYYService.YxCountWorkType3yue11(yx);
-  		BigDecimal YxSumWorkType3yue11 = charYYService.YxSumWorkType3yue11(yx);	
-  		int YxCountWorkType3yue12 = charYYService.YxCountWorkType3yue12(yx);
-  		BigDecimal YxSumWorkType3yue12 = charYYService.YxSumWorkType3yue12(yx);	
+  		int YxCountWorkType3yue1 = charYYService.YxCountWorkType3yue1(yxDay);
+  		BigDecimal YxSumWorkType3yue1 = charYYService.YxSumWorkType3yue1(yxDay);
+  		int YxCountWorkType3yue2 = charYYService.YxCountWorkType3yue2(yxDay);
+  		BigDecimal YxSumWorkType3yue2 = charYYService.YxSumWorkType3yue2(yxDay);
+  		int YxCountWorkType3yue3 = charYYService.YxCountWorkType3yue3(yxDay);
+  		BigDecimal YxSumWorkType3yue3 = charYYService.YxSumWorkType3yue3(yxDay);
+  		int YxCountWorkType3yue4 = charYYService.YxCountWorkType3yue4(yxDay);
+  		BigDecimal YxSumWorkType3yue4 = charYYService.YxSumWorkType3yue4(yxDay);	
+  		int YxCountWorkType3yue5 = charYYService.YxCountWorkType3yue5(yxDay);
+  		BigDecimal YxSumWorkType3yue5 = charYYService.YxSumWorkType3yue5(yxDay);
+  		int YxCountWorkType3yue6 = charYYService.YxCountWorkType3yue6(yxDay);
+  		BigDecimal YxSumWorkType3yue6 = charYYService.YxSumWorkType3yue6(yxDay);
+  		int YxCountWorkType3yue7 = charYYService.YxCountWorkType3yue7(yxDay);
+  		BigDecimal YxSumWorkType3yue7 = charYYService.YxSumWorkType3yue7(yxDay);
+  		int YxCountWorkType3yue8 = charYYService.YxCountWorkType3yue8(yxDay);
+  		BigDecimal YxSumWorkType3yue8 = charYYService.YxSumWorkType3yue8(yxDay);	
+  		int YxCountWorkType3yue9 = charYYService.YxCountWorkType3yue9(yxDay);
+  		BigDecimal YxSumWorkType3yue9 = charYYService.YxSumWorkType3yue9(yxDay);
+  		int YxCountWorkType3yue10 = charYYService.YxCountWorkType3yue10(yxDay);
+  		BigDecimal YxSumWorkType3yue10 = charYYService.YxSumWorkType3yue10(yxDay);	
+  		int YxCountWorkType3yue11 = charYYService.YxCountWorkType3yue11(yxDay);
+  		BigDecimal YxSumWorkType3yue11 = charYYService.YxSumWorkType3yue11(yxDay);	
+  		int YxCountWorkType3yue12 = charYYService.YxCountWorkType3yue12(yxDay);
+  		BigDecimal YxSumWorkType3yue12 = charYYService.YxSumWorkType3yue12(yxDay);	
   		
   		
   		
@@ -230,91 +230,91 @@ public class YxcharYYController extends BaseController
     
     @ResponseBody
     @PostMapping("/charWorkClass")
-    public Map<String,Object> charWorkClass(Yx yx) {
+    public Map<String,Object> charWorkClass(YxDay yxDay) {
   	  
   	  
   	    Map<String,Object> map = new HashMap<>();
   	  
   		
-  		int YxCountWorkClass1yue1 = charYYService.YxCountWorkClass1yue1(yx);
-  		BigDecimal YxSumWorkClass1yue1 = charYYService.YxSumWorkClass1yue1(yx);
-  		int YxCountWorkClass1yue2 = charYYService.YxCountWorkClass1yue2(yx);
-  		BigDecimal YxSumWorkClass1yue2 = charYYService.YxSumWorkClass1yue2(yx);
-  		int YxCountWorkClass1yue3 = charYYService.YxCountWorkClass1yue3(yx);
-  		BigDecimal YxSumWorkClass1yue3 = charYYService.YxSumWorkClass1yue3(yx);
-  		int YxCountWorkClass1yue4 = charYYService.YxCountWorkClass1yue4(yx);
-  		BigDecimal YxSumWorkClass1yue4 = charYYService.YxSumWorkClass1yue4(yx);	
-  		int YxCountWorkClass1yue5 = charYYService.YxCountWorkClass1yue5(yx);
-  		BigDecimal YxSumWorkClass1yue5 = charYYService.YxSumWorkClass1yue5(yx);
-  		int YxCountWorkClass1yue6 = charYYService.YxCountWorkClass1yue6(yx);
-  		BigDecimal YxSumWorkClass1yue6 = charYYService.YxSumWorkClass1yue6(yx);
-  		int YxCountWorkClass1yue7 = charYYService.YxCountWorkClass1yue7(yx);
-  		BigDecimal YxSumWorkClass1yue7 = charYYService.YxSumWorkClass1yue7(yx);
-  		int YxCountWorkClass1yue8 = charYYService.YxCountWorkClass1yue8(yx);
-  		BigDecimal YxSumWorkClass1yue8 = charYYService.YxSumWorkClass1yue8(yx);	
-  		int YxCountWorkClass1yue9 = charYYService.YxCountWorkClass1yue9(yx);
-  		BigDecimal YxSumWorkClass1yue9 = charYYService.YxSumWorkClass1yue9(yx);
-  		int YxCountWorkClass1yue10 = charYYService.YxCountWorkClass1yue10(yx);
-  		BigDecimal YxSumWorkClass1yue10 = charYYService.YxSumWorkClass1yue10(yx);	
-  		int YxCountWorkClass1yue11 = charYYService.YxCountWorkClass1yue11(yx);
-  		BigDecimal YxSumWorkClass1yue11 = charYYService.YxSumWorkClass1yue11(yx);	
-  		int YxCountWorkClass1yue12 = charYYService.YxCountWorkClass1yue12(yx);
-  		BigDecimal YxSumWorkClass1yue12 = charYYService.YxSumWorkClass1yue12(yx);	
+  		int YxCountWorkClass1yue1 = charYYService.YxCountWorkClass1yue1(yxDay);
+  		BigDecimal YxSumWorkClass1yue1 = charYYService.YxSumWorkClass1yue1(yxDay);
+  		int YxCountWorkClass1yue2 = charYYService.YxCountWorkClass1yue2(yxDay);
+  		BigDecimal YxSumWorkClass1yue2 = charYYService.YxSumWorkClass1yue2(yxDay);
+  		int YxCountWorkClass1yue3 = charYYService.YxCountWorkClass1yue3(yxDay);
+  		BigDecimal YxSumWorkClass1yue3 = charYYService.YxSumWorkClass1yue3(yxDay);
+  		int YxCountWorkClass1yue4 = charYYService.YxCountWorkClass1yue4(yxDay);
+  		BigDecimal YxSumWorkClass1yue4 = charYYService.YxSumWorkClass1yue4(yxDay);	
+  		int YxCountWorkClass1yue5 = charYYService.YxCountWorkClass1yue5(yxDay);
+  		BigDecimal YxSumWorkClass1yue5 = charYYService.YxSumWorkClass1yue5(yxDay);
+  		int YxCountWorkClass1yue6 = charYYService.YxCountWorkClass1yue6(yxDay);
+  		BigDecimal YxSumWorkClass1yue6 = charYYService.YxSumWorkClass1yue6(yxDay);
+  		int YxCountWorkClass1yue7 = charYYService.YxCountWorkClass1yue7(yxDay);
+  		BigDecimal YxSumWorkClass1yue7 = charYYService.YxSumWorkClass1yue7(yxDay);
+  		int YxCountWorkClass1yue8 = charYYService.YxCountWorkClass1yue8(yxDay);
+  		BigDecimal YxSumWorkClass1yue8 = charYYService.YxSumWorkClass1yue8(yxDay);	
+  		int YxCountWorkClass1yue9 = charYYService.YxCountWorkClass1yue9(yxDay);
+  		BigDecimal YxSumWorkClass1yue9 = charYYService.YxSumWorkClass1yue9(yxDay);
+  		int YxCountWorkClass1yue10 = charYYService.YxCountWorkClass1yue10(yxDay);
+  		BigDecimal YxSumWorkClass1yue10 = charYYService.YxSumWorkClass1yue10(yxDay);	
+  		int YxCountWorkClass1yue11 = charYYService.YxCountWorkClass1yue11(yxDay);
+  		BigDecimal YxSumWorkClass1yue11 = charYYService.YxSumWorkClass1yue11(yxDay);	
+  		int YxCountWorkClass1yue12 = charYYService.YxCountWorkClass1yue12(yxDay);
+  		BigDecimal YxSumWorkClass1yue12 = charYYService.YxSumWorkClass1yue12(yxDay);	
   		
   		
   		
-  		int YxCountWorkClass2yue1 = charYYService.YxCountWorkClass2yue1(yx);
-  		BigDecimal YxSumWorkClass2yue1 = charYYService.YxSumWorkClass2yue1(yx);
-  		int YxCountWorkClass2yue2 = charYYService.YxCountWorkClass2yue2(yx);
-  		BigDecimal YxSumWorkClass2yue2 = charYYService.YxSumWorkClass2yue2(yx);
-  		int YxCountWorkClass2yue3 = charYYService.YxCountWorkClass2yue3(yx);
-  		BigDecimal YxSumWorkClass2yue3 = charYYService.YxSumWorkClass2yue3(yx);
-  		int YxCountWorkClass2yue4 = charYYService.YxCountWorkClass2yue4(yx);
-  		BigDecimal YxSumWorkClass2yue4 = charYYService.YxSumWorkClass2yue4(yx);	
-  		int YxCountWorkClass2yue5 = charYYService.YxCountWorkClass2yue5(yx);
-  		BigDecimal YxSumWorkClass2yue5 = charYYService.YxSumWorkClass2yue5(yx);
-  		int YxCountWorkClass2yue6 = charYYService.YxCountWorkClass2yue6(yx);
-  		BigDecimal YxSumWorkClass2yue6 = charYYService.YxSumWorkClass2yue6(yx);
-  		int YxCountWorkClass2yue7 = charYYService.YxCountWorkClass2yue7(yx);
-  		BigDecimal YxSumWorkClass2yue7 = charYYService.YxSumWorkClass2yue7(yx);
-  		int YxCountWorkClass2yue8 = charYYService.YxCountWorkClass2yue8(yx);
-  		BigDecimal YxSumWorkClass2yue8 = charYYService.YxSumWorkClass2yue8(yx);	
-  		int YxCountWorkClass2yue9 = charYYService.YxCountWorkClass2yue9(yx);
-  		BigDecimal YxSumWorkClass2yue9 = charYYService.YxSumWorkClass2yue9(yx);
-  		int YxCountWorkClass2yue10 = charYYService.YxCountWorkClass2yue10(yx);
-  		BigDecimal YxSumWorkClass2yue10 = charYYService.YxSumWorkClass2yue10(yx);	
-  		int YxCountWorkClass2yue11 = charYYService.YxCountWorkClass2yue11(yx);
-  		BigDecimal YxSumWorkClass2yue11 = charYYService.YxSumWorkClass2yue11(yx);	
-  		int YxCountWorkClass2yue12 = charYYService.YxCountWorkClass2yue12(yx);
-  		BigDecimal YxSumWorkClass2yue12 = charYYService.YxSumWorkClass2yue12(yx);	
+  		int YxCountWorkClass2yue1 = charYYService.YxCountWorkClass2yue1(yxDay);
+  		BigDecimal YxSumWorkClass2yue1 = charYYService.YxSumWorkClass2yue1(yxDay);
+  		int YxCountWorkClass2yue2 = charYYService.YxCountWorkClass2yue2(yxDay);
+  		BigDecimal YxSumWorkClass2yue2 = charYYService.YxSumWorkClass2yue2(yxDay);
+  		int YxCountWorkClass2yue3 = charYYService.YxCountWorkClass2yue3(yxDay);
+  		BigDecimal YxSumWorkClass2yue3 = charYYService.YxSumWorkClass2yue3(yxDay);
+  		int YxCountWorkClass2yue4 = charYYService.YxCountWorkClass2yue4(yxDay);
+  		BigDecimal YxSumWorkClass2yue4 = charYYService.YxSumWorkClass2yue4(yxDay);	
+  		int YxCountWorkClass2yue5 = charYYService.YxCountWorkClass2yue5(yxDay);
+  		BigDecimal YxSumWorkClass2yue5 = charYYService.YxSumWorkClass2yue5(yxDay);
+  		int YxCountWorkClass2yue6 = charYYService.YxCountWorkClass2yue6(yxDay);
+  		BigDecimal YxSumWorkClass2yue6 = charYYService.YxSumWorkClass2yue6(yxDay);
+  		int YxCountWorkClass2yue7 = charYYService.YxCountWorkClass2yue7(yxDay);
+  		BigDecimal YxSumWorkClass2yue7 = charYYService.YxSumWorkClass2yue7(yxDay);
+  		int YxCountWorkClass2yue8 = charYYService.YxCountWorkClass2yue8(yxDay);
+  		BigDecimal YxSumWorkClass2yue8 = charYYService.YxSumWorkClass2yue8(yxDay);	
+  		int YxCountWorkClass2yue9 = charYYService.YxCountWorkClass2yue9(yxDay);
+  		BigDecimal YxSumWorkClass2yue9 = charYYService.YxSumWorkClass2yue9(yxDay);
+  		int YxCountWorkClass2yue10 = charYYService.YxCountWorkClass2yue10(yxDay);
+  		BigDecimal YxSumWorkClass2yue10 = charYYService.YxSumWorkClass2yue10(yxDay);	
+  		int YxCountWorkClass2yue11 = charYYService.YxCountWorkClass2yue11(yxDay);
+  		BigDecimal YxSumWorkClass2yue11 = charYYService.YxSumWorkClass2yue11(yxDay);	
+  		int YxCountWorkClass2yue12 = charYYService.YxCountWorkClass2yue12(yxDay);
+  		BigDecimal YxSumWorkClass2yue12 = charYYService.YxSumWorkClass2yue12(yxDay);	
   		
   		
   		
   		
-  		int YxCountWorkClass3yue1 = charYYService.YxCountWorkClass3yue1(yx);
-  		BigDecimal YxSumWorkClass3yue1 = charYYService.YxSumWorkClass3yue1(yx);
-  		int YxCountWorkClass3yue2 = charYYService.YxCountWorkClass3yue2(yx);
-  		BigDecimal YxSumWorkClass3yue2 = charYYService.YxSumWorkClass3yue2(yx);
-  		int YxCountWorkClass3yue3 = charYYService.YxCountWorkClass3yue3(yx);
-  		BigDecimal YxSumWorkClass3yue3 = charYYService.YxSumWorkClass3yue3(yx);
-  		int YxCountWorkClass3yue4 = charYYService.YxCountWorkClass3yue4(yx);
-  		BigDecimal YxSumWorkClass3yue4 = charYYService.YxSumWorkClass3yue4(yx);	
-  		int YxCountWorkClass3yue5 = charYYService.YxCountWorkClass3yue5(yx);
-  		BigDecimal YxSumWorkClass3yue5 = charYYService.YxSumWorkClass3yue5(yx);
-  		int YxCountWorkClass3yue6 = charYYService.YxCountWorkClass3yue6(yx);
-  		BigDecimal YxSumWorkClass3yue6 = charYYService.YxSumWorkClass3yue6(yx);
-  		int YxCountWorkClass3yue7 = charYYService.YxCountWorkClass3yue7(yx);
-  		BigDecimal YxSumWorkClass3yue7 = charYYService.YxSumWorkClass3yue7(yx);
-  		int YxCountWorkClass3yue8 = charYYService.YxCountWorkClass3yue8(yx);
-  		BigDecimal YxSumWorkClass3yue8 = charYYService.YxSumWorkClass3yue8(yx);	
-  		int YxCountWorkClass3yue9 = charYYService.YxCountWorkClass3yue9(yx);
-  		BigDecimal YxSumWorkClass3yue9 = charYYService.YxSumWorkClass3yue9(yx);
-  		int YxCountWorkClass3yue10 = charYYService.YxCountWorkClass3yue10(yx);
-  		BigDecimal YxSumWorkClass3yue10 = charYYService.YxSumWorkClass3yue10(yx);	
-  		int YxCountWorkClass3yue11 = charYYService.YxCountWorkClass3yue11(yx);
-  		BigDecimal YxSumWorkClass3yue11 = charYYService.YxSumWorkClass3yue11(yx);	
-  		int YxCountWorkClass3yue12 = charYYService.YxCountWorkClass3yue12(yx);
-  		BigDecimal YxSumWorkClass3yue12 = charYYService.YxSumWorkClass3yue12(yx);	
+  		int YxCountWorkClass3yue1 = charYYService.YxCountWorkClass3yue1(yxDay);
+  		BigDecimal YxSumWorkClass3yue1 = charYYService.YxSumWorkClass3yue1(yxDay);
+  		int YxCountWorkClass3yue2 = charYYService.YxCountWorkClass3yue2(yxDay);
+  		BigDecimal YxSumWorkClass3yue2 = charYYService.YxSumWorkClass3yue2(yxDay);
+  		int YxCountWorkClass3yue3 = charYYService.YxCountWorkClass3yue3(yxDay);
+  		BigDecimal YxSumWorkClass3yue3 = charYYService.YxSumWorkClass3yue3(yxDay);
+  		int YxCountWorkClass3yue4 = charYYService.YxCountWorkClass3yue4(yxDay);
+  		BigDecimal YxSumWorkClass3yue4 = charYYService.YxSumWorkClass3yue4(yxDay);	
+  		int YxCountWorkClass3yue5 = charYYService.YxCountWorkClass3yue5(yxDay);
+  		BigDecimal YxSumWorkClass3yue5 = charYYService.YxSumWorkClass3yue5(yxDay);
+  		int YxCountWorkClass3yue6 = charYYService.YxCountWorkClass3yue6(yxDay);
+  		BigDecimal YxSumWorkClass3yue6 = charYYService.YxSumWorkClass3yue6(yxDay);
+  		int YxCountWorkClass3yue7 = charYYService.YxCountWorkClass3yue7(yxDay);
+  		BigDecimal YxSumWorkClass3yue7 = charYYService.YxSumWorkClass3yue7(yxDay);
+  		int YxCountWorkClass3yue8 = charYYService.YxCountWorkClass3yue8(yxDay);
+  		BigDecimal YxSumWorkClass3yue8 = charYYService.YxSumWorkClass3yue8(yxDay);	
+  		int YxCountWorkClass3yue9 = charYYService.YxCountWorkClass3yue9(yxDay);
+  		BigDecimal YxSumWorkClass3yue9 = charYYService.YxSumWorkClass3yue9(yxDay);
+  		int YxCountWorkClass3yue10 = charYYService.YxCountWorkClass3yue10(yxDay);
+  		BigDecimal YxSumWorkClass3yue10 = charYYService.YxSumWorkClass3yue10(yxDay);	
+  		int YxCountWorkClass3yue11 = charYYService.YxCountWorkClass3yue11(yxDay);
+  		BigDecimal YxSumWorkClass3yue11 = charYYService.YxSumWorkClass3yue11(yxDay);	
+  		int YxCountWorkClass3yue12 = charYYService.YxCountWorkClass3yue12(yxDay);
+  		BigDecimal YxSumWorkClass3yue12 = charYYService.YxSumWorkClass3yue12(yxDay);	
   		
   		
   		
@@ -424,10 +424,10 @@ public class YxcharYYController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yx yx)
+    public AjaxResult export(YxDay yx)
     {
-        List<Yx> list = yxService.selectYxList(yx);
-        ExcelUtil<Yx> util = new ExcelUtil<Yx>(Yx.class);
+        List<YxDay> list = yxService.selectYxList(yx);
+        ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
         return util.exportExcel(list, "yx");
     }*/
 

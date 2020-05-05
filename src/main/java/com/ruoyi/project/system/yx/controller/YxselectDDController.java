@@ -20,8 +20,8 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.dept.domain.Dept;
-import com.ruoyi.project.system.yx.domain.Yx;
-import com.ruoyi.project.system.yx.service.IYxService;
+import com.ruoyi.project.system.yx.domain.YxDay;
+import com.ruoyi.project.system.yx.service.IYxDayService;
 
 /**
  * 牙星公司Controller
@@ -36,7 +36,7 @@ public class YxselectDDController extends BaseController
     private String prefix = "system/yx/selectDD";
 
     @Autowired
-    private IYxService yxService;
+    private IYxDayService yxDayService;
 
     @RequiresPermissions("system:yx:selectDD:view")
     @GetMapping()
@@ -52,7 +52,7 @@ public class YxselectDDController extends BaseController
     @ResponseBody
     public List<Ztree> treeData()
     {
-        List<Ztree> ztrees = yxService.selectDeptTree(new Dept());
+        List<Ztree> ztrees = yxDayService.selectDeptTree(new Dept());
         return ztrees;
     }
 
@@ -70,10 +70,10 @@ public class YxselectDDController extends BaseController
     @RequiresPermissions("system:yx:selectDD:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Yx yx)
+    public TableDataInfo list(YxDay yxDay)
     {
         startPage();
-        List<Yx> list = yxService.selectYxList(yx);
+        List<YxDay> list = yxDayService.selectYxList(yxDay);
         return getDataTable(list);
     }
 
@@ -84,10 +84,10 @@ public class YxselectDDController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yx yx)
+    public AjaxResult export(YxDay yxDay)
     {
-        List<Yx> list = yxService.selectYxList(yx);
-        ExcelUtil<Yx> util = new ExcelUtil<Yx>(Yx.class);
+        List<YxDay> list = yxDayService.selectYxList(yxDay);
+        ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
         return util.exportExcel(list, "yx");
     }
 
@@ -107,9 +107,9 @@ public class YxselectDDController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Yx yx)
+    public AjaxResult addSave(YxDay yxDay)
     {
-        return toAjax(yxService.insertYx(yx));
+        return toAjax(yxDayService.insertYx(yxDay));
     }
 
     /**
@@ -118,8 +118,8 @@ public class YxselectDDController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        Yx yx = yxService.selectYxById(id);
-        mmap.put("yx", yx);
+        YxDay yxDay = yxDayService.selectYxById(id);
+        mmap.put("yx", yxDay);
         return prefix + "/edit";
     }
 
@@ -130,9 +130,9 @@ public class YxselectDDController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Yx yx)
+    public AjaxResult editSave(YxDay yxDay)
     {
-        return toAjax(yxService.updateYx(yx));
+        return toAjax(yxDayService.updateYx(yxDay));
     }
 
     /**
@@ -144,6 +144,6 @@ public class YxselectDDController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(yxService.deleteYxByIds(ids));
+        return toAjax(yxDayService.deleteYxByIds(ids));
     }
 }

@@ -1,8 +1,13 @@
 package com.ruoyi.project.system.yx.controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
@@ -26,10 +31,12 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.dept.domain.Dept;
-import com.ruoyi.project.system.yx.domain.Yx;
-import com.ruoyi.project.system.yx.domain.YxLog;
-import com.ruoyi.project.system.yx.service.IYxLogService;
-import com.ruoyi.project.system.yx.service.IYxService;
+import com.ruoyi.project.system.yx.domain.YxDay;
+import com.ruoyi.project.system.yx.domain.YxKao;
+import com.ruoyi.project.system.yx.domain.YxYue;
+import com.ruoyi.project.system.yx.service.IYxDayService;
+import com.ruoyi.project.system.yx.service.IYxKaoService;
+import com.ruoyi.project.system.yx.service.IYxYueService;
 
 /**
  * 牙星公司Controller
@@ -46,11 +53,14 @@ public class YxselectKHController extends BaseController
     private String prefix = "system/yx/selectKH";
 
     @Autowired
-    private IYxService yxService;
+    private IYxDayService yxDayService;
+    
+    @Autowired
+    private IYxKaoService yxKaoService;
 
 
     @Autowired
-    private IYxLogService yxLogService;
+    private IYxYueService yxYueService;
 
     @RequiresPermissions("system:yx:selectKH:view")
     @GetMapping()
@@ -66,7 +76,7 @@ public class YxselectKHController extends BaseController
     @ResponseBody
     public List<Ztree> treeData()
     {
-        List<Ztree> ztrees = yxService.selectDeptTree(new Dept());
+        List<Ztree> ztrees = yxDayService.selectDeptTree(new Dept());
         return ztrees;
     }
 
@@ -84,10 +94,10 @@ public class YxselectKHController extends BaseController
     @RequiresPermissions("system:yx:selectKH:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Yx yx)
+    public TableDataInfo list(YxDay yxDay)
     {
         startPage();
-        List<Yx> list = yxService.selectYxKHList(yx);
+        List<YxDay> list = yxDayService.selectYxKHList(yxDay);
         return getDataTable(list);
     }
 
@@ -102,19 +112,74 @@ public class YxselectKHController extends BaseController
     public void ryParams(String params)
     {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
-		Yx yx = new Yx();
-		yx.setCreateTime(LocalDate.now().format(formatter));
+		YxDay yxDay = new YxDay();
+		yxDay.setCreateTime(LocalDate.now().format(formatter));
     	
-       List<Yx> KHList = yxService.selectYxKHList(yx);
+       List<YxDay> KHList = yxDayService.selectYxKHList(yxDay);
        
-       
+       StringBuilder  ids = new StringBuilder();
+       AtomicInteger idx=new AtomicInteger(0);
        KHList.parallelStream().forEach(e->{
-    	   YxLog yxlog = new YxLog();
-    	   BeanUtils.copyProperties(e, yxlog);
-    	   log.info(yxlog.toString());
-    	   yxLogService.insertYxLog(yxlog);
+    	   YxYue yxYue = new YxYue();
+    	   BeanUtils.copyProperties(e, yxYue);
+    	   ids.append(yxYue.getUserId()).append(",");
+    	   yxYueService.insertYxYue(yxYue);
+       });
+       //invoke 
+       /******************************************************/
+       //select yxYue list
+       YxYue yx = new YxYue();
+       yx.setCreateTime(yxDay.getCreateTime());
+       List<YxYue> list = yxYueService.selectYxYueList(yx);
+       
+       Map<String,AtomicInteger> map= new HashMap(16);
+       Map<String,AtomicReference<BigDecimal>> sum= new HashMap(16);
+       list.parallelStream().forEach(yxYue->{
+    	   counter(yxYue.getUserClass(),map);
+    	   counter(yxYue.getUserGroup(),map);
+    	   counter(yxYue.getUserArea(),map);
+    	   counter(yxYue.getUserOrg(),map);
+    	   sum(yxYue.getUserClass(),sum,yxYue.getUserCost());
+    	   sum(yxYue.getUserGroup(),sum,yxYue.getUserCost());
+    	   sum(yxYue.getUserArea(),sum,yxYue.getUserCost());
+    	   sum(yxYue.getUserOrg(),sum,yxYue.getUserCost());
        });
        
+       YxKao kao = new YxKao();
+       kao.setCreateBy(ids.substring(0,ids.length()-1));
+       yxKaoService.insertYxKH(kao);
+       //根据 depName  count  sum
+       map.forEach((k,v)->{
+    	   YxKao yxKao = new YxKao();
+    	   yxKao.setDeptName(k);
+    	   yxKao.setDeptNum(v.intValue());
+    	   yxKao.setUserCost(sum.get(k).toString());
+    	   yxKao.setCreateTime(yxDay.getCreateTime());
+    	   
+    	   yxKaoService.updateYxName(yxKao);
+       });
+       /*******************************************************/
+    }
+    
+    public void sum(String key,Map<String,AtomicReference<BigDecimal>> map,BigDecimal salary) {
+    	AtomicReference<BigDecimal> sum= map.get(key);
+    	if(null==salary) {
+    		salary=BigDecimal.ZERO;
+    	}
+   	   if(sum==null) {
+   		   map.put(key, new AtomicReference<BigDecimal>(salary));
+   	   }else {
+   		   log.info("current {} sum:{}",key,map.get(key).accumulateAndGet(salary, (x,y)->x.add(y)));
+   	   }
+     }
+    
+    public void counter(String key,Map<String,AtomicInteger> map) {
+       AtomicInteger counter = map.get(key);
+  	   if(counter==null) {
+  		   map.put(key, new AtomicInteger(1));
+  	   }else {
+  		   log.info("current {} counter:{}",key,map.get(key).incrementAndGet());
+  	   }
     }
 
     public void ryNoParams()
@@ -132,10 +197,10 @@ public class YxselectKHController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yx yx)
+    public AjaxResult export(YxDay yxDay)
     {
-        List<Yx> list = yxService.selectYxList(yx);
-        ExcelUtil<Yx> util = new ExcelUtil<Yx>(Yx.class);
+        List<YxDay> list = yxDayService.selectYxList(yxDay);
+        ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
         return util.exportExcel(list, "yx");
     }
 
@@ -155,9 +220,9 @@ public class YxselectKHController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Yx yx)
+    public AjaxResult addSave(YxDay yxDay)
     {
-        return toAjax(yxService.insertYx(yx));
+        return toAjax(yxDayService.insertYx(yxDay));
     }
 
     /**
@@ -166,8 +231,8 @@ public class YxselectKHController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        Yx yx = yxService.selectYxById(id);
-        mmap.put("yx", yx);
+        YxDay yxDay = yxDayService.selectYxById(id);
+        mmap.put("yx", yxDay);
         return prefix + "/edit";
     }
 
@@ -178,9 +243,9 @@ public class YxselectKHController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Yx yx)
+    public AjaxResult editSave(YxDay yxDay)
     {
-        return toAjax(yxService.updateYx(yx));
+        return toAjax(yxDayService.updateYx(yxDay));
     }
 
     /**
@@ -192,6 +257,6 @@ public class YxselectKHController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(yxService.deleteYxByIds(ids));
+        return toAjax(yxDayService.deleteYxByIds(ids));
     }
 }

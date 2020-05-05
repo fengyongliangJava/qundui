@@ -179,7 +179,7 @@
 		
 		function queryDeptTree()
 		{
-			var url = ctx + "system/dept/treeData";
+			var url = ctx + "system/dept/treeData?parentId="+top._tmpDeptID;
 			var options = {
 		        url: url,
 		        expandLevel: 2,

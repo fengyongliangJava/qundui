@@ -10,15 +10,16 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.framework.aspectj.lang.annotation.DataScope;
 import com.ruoyi.framework.web.domain.Ztree;
 import com.ruoyi.project.system.dept.domain.Dept;
-import com.ruoyi.project.system.yx.domain.Yx;
+import com.ruoyi.project.system.yx.domain.YxDay;
 import com.ruoyi.project.system.yx.domain.YxUpload;
 import com.ruoyi.project.system.yx.domain.YxUser;
-import com.ruoyi.project.system.yx.mapper.YxMapper;
-import com.ruoyi.project.system.yx.service.IYxService;
+import com.ruoyi.project.system.yx.mapper.YxDayMapper;
+import com.ruoyi.project.system.yx.service.IYxDayService;
 
 /**
  * 牙星公司Service业务层处理
@@ -27,10 +28,10 @@ import com.ruoyi.project.system.yx.service.IYxService;
  * @date 2020-04-07
  */
 @Service
-public class YxServiceImpl implements IYxService 
+public class YxDayServiceImpl implements IYxDayService 
 {
 	@Autowired
-    private YxMapper yxMapper;
+    private YxDayMapper yxDayMapper;
 
     /**
      * 查询牙星公司
@@ -39,45 +40,47 @@ public class YxServiceImpl implements IYxService
      * @return 牙星公司
      */
     @Override
-    public Yx selectYxById(Long id)
+    public YxDay selectYxById(Long id)
     {
-        return yxMapper.selectYxById(id);
+        return yxDayMapper.selectYxById(id);
     }
 
     /**
      * 查询牙星公司列表
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 牙星公司
      */
     @Override
-    public List<Yx> selectYxList(Yx yx)
+    public List<YxDay> selectYxList(YxDay yxDay)
     {
-        return yxMapper.selectYxList(yx);
+        return yxDayMapper.selectYxList(yxDay);
     }
     /**
      * 查询牙星公司列表
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 牙星公司
      */
     @Override
-    public List<Yx> selectYxKHList(Yx yx)
+    public List<YxDay> selectYxKHList(YxDay yxDay)
     {
-        return yxMapper.selectYxKHList(yx);
+        return yxDayMapper.selectYxKHList(yxDay);
     }
 
     /**
      * 新增牙星公司
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 结果
      */
     @Override
-    public int insertYx(Yx yx)
+    public int insertYx(YxDay yxDay)
     {
-        yx.setUpdateTime(DateUtils.getNowDate());
-        return yxMapper.insertYx(yx);
+      	 yxDay.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+    	 yxDay.setUpdateTime(DateUtils.getNowDate());
+    	 yxDay.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+        return yxDayMapper.insertYx(yxDay);
     }
     
     /**
@@ -92,7 +95,9 @@ public class YxServiceImpl implements IYxService
     	
     	yxupload.setUpdateTime(DateUtils.getNowDate());
     	
-    	Map<String, String> selectYx = yxMapper.selectYx(yxupload.getUserId());
+    	Map<String, String> selectYx = yxDayMapper.selectYx(yxupload.getUserId());
+    	
+    	if(!(selectYx == null || selectYx.isEmpty())) {
          yxupload.setSex(selectYx.get("sex"));
 	   	 yxupload.setTell(selectYx.get("tell"));
 	   	 yxupload.setCard(selectYx.get("card"));
@@ -104,8 +109,12 @@ public class YxServiceImpl implements IYxService
 	   	 yxupload.setStation(selectYx.get("userClass"));
 	   	 yxupload.setWorkType(selectYx.get("workType"));
 	   	 yxupload.setWorkClass(selectYx.get("workClass"));
-	       return yxMapper.insertYxUpload(yxupload);
-    	
+	   	 yxupload.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+    	 yxupload.setUpdateTime(DateUtils.getNowDate());
+    	 yxupload.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+	       return yxDayMapper.insertYxUpload(yxupload);
+    	}
+    	return  0;
     }
     
     
@@ -121,21 +130,27 @@ public class YxServiceImpl implements IYxService
     @Override
     public int insertYxUser(YxUser yxuser)
     {
-        return yxMapper.insertYxUser(yxuser);
+    	yxuser.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+    	yxuser.setUpdateTime(DateUtils.getNowDate());
+    	yxuser.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+        return yxDayMapper.insertYxUser(yxuser);
     }
 
 
     /**
      * 修改牙星公司
      * 
-     * @param yx 牙星公司
+     * @param yxDay 牙星公司
      * @return 结果
      */
     @Override
-    public int updateYx(Yx yx)
+    public int updateYx(YxDay yxDay)
     {
-        yx.setUpdateTime(DateUtils.getNowDate());
-        return yxMapper.updateYx(yx);
+    	yxDay.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+    	yxDay.setUpdateTime(DateUtils.getNowDate());
+    	yxDay.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+        yxDay.setUpdateTime(DateUtils.getNowDate());
+        return yxDayMapper.updateYx(yxDay);
     }
 
     /**
@@ -147,7 +162,7 @@ public class YxServiceImpl implements IYxService
     @Override
     public int deleteYxByIds(String ids)
     {
-        return yxMapper.deleteYxByIds(Convert.toStrArray(ids));
+        return yxDayMapper.deleteYxByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -159,7 +174,7 @@ public class YxServiceImpl implements IYxService
     @Override
     public int deleteYxById(Long id)
     {
-        return yxMapper.deleteYxById(id);
+        return yxDayMapper.deleteYxById(id);
     }
 
     /**
@@ -172,7 +187,7 @@ public class YxServiceImpl implements IYxService
     @DataScope(deptAlias = "d")
     public List<Ztree> selectDeptTree(Dept dept)
     {
-        List<Dept> deptList = yxMapper.selectDeptList(dept);
+        List<Dept> deptList = yxDayMapper.selectDeptList(dept);
         List<Ztree> ztrees = initZtree(deptList);
         return ztrees;
     }
@@ -221,7 +236,7 @@ public class YxServiceImpl implements IYxService
     
 	@Override
 	public String findUserOrgExize(String userOrg, String userId) {
-		return yxMapper.findUserOrgExize(userOrg,userId);
+		return yxDayMapper.findUserOrgExize(userOrg,userId);
 	}
 }
     

@@ -1,15 +1,16 @@
 package com.ruoyi.project.system.yx.service;
 
 import java.util.List;
-import com.ruoyi.project.system.yx.domain.YxLog;
+
+import com.ruoyi.project.system.yx.domain.YxAll;
 
 /**
  * 牙星公司Service接口
  * 
  * @author ruoyi
- * @date 2020-04-23
+ * @date 2020-05-02
  */
-public interface IYxLogService 
+public interface IYxAllService 
 {
     /**
      * 查询牙星公司
@@ -17,31 +18,31 @@ public interface IYxLogService
      * @param id 牙星公司ID
      * @return 牙星公司
      */
-    public YxLog selectYxLogById(Long id);
+    public YxAll selectYxAllById(Long id);
 
     /**
      * 查询牙星公司列表
      * 
-     * @param yxLog 牙星公司
+     * @param yxAll 牙星公司
      * @return 牙星公司集合
      */
-    public List<YxLog> selectYxLogList(YxLog yxLog);
+    public List<YxAll> selectYxAllList(YxAll yxAll);
 
     /**
      * 新增牙星公司
      * 
-     * @param yxLog 牙星公司
+     * @param yxAll 牙星公司
      * @return 结果
      */
-    public int insertYxLog(YxLog yxLog);
+    public int insertYxAll(YxAll yxAll);
 
     /**
      * 修改牙星公司
      * 
-     * @param yxLog 牙星公司
+     * @param yxAll 牙星公司
      * @return 结果
      */
-    public int updateYxLog(YxLog yxLog);
+    public int updateYxAll(YxAll yxAll);
 
     /**
      * 批量删除牙星公司
@@ -49,7 +50,7 @@ public interface IYxLogService
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteYxLogByIds(String ids);
+    public int deleteYxAllByIds(String ids);
 
     /**
      * 删除牙星公司信息
@@ -57,5 +58,5 @@ public interface IYxLogService
      * @param id 牙星公司ID
      * @return 结果
      */
-    public int deleteYxLogById(Long id);
+    public int deleteYxAllById(Long id);
 }

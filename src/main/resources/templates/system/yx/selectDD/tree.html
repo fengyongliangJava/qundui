@@ -10,7 +10,7 @@
 </style>
 <body class="hold-transition box box-main">
 	<input id="treeId"   name="treeId"    type="hidden" />
-	<input id="treeName" name="treeName"  type="hidden"/>
+	<input id="treeName" name="treeName"  type="hidden" value="[[${user.deptId}]]"/>
 	<div class="wrapper"><div class="treeShowHideButton" onclick="$.tree.toggleSearch();">
 		<label id="btnShow" title="显示搜索" style="display:none;">︾</label>
 		<label id="btnHide" title="隐藏搜索">︽</label>
@@ -27,9 +27,15 @@
 	</div>
 	<th:block th:include="include :: footer" />
 	<th:block th:include="include :: ztree-js" />
+	
 	<script th:inline="javascript">
+	
 		$(function() {
-			var url = ctx + "system/dept/treeData";
+			var param=top._tmpDeptID;
+			if(top._pid){
+				param = top._pid;
+			}
+			var url = ctx + "system/dept/treeData?parentId="+param;//${dep.deptId}
 			var options = {
 		        url: url,
 		        expandLevel: 2,
@@ -39,11 +45,13 @@
 		});
 		
 		function zOnClick(event, treeId, treeNode) {
+			top._pid="";
 		    var treeId = treeNode.id;
 		    var treeName = treeNode.name;
 		    $("#treeId").val(treeId);
 		    $("#treeName").val(treeName);
 		}
+		
 	</script>
 </body>
 </html>

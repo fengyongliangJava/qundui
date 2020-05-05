@@ -15,8 +15,8 @@ import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.project.system.yx.domain.Yx;
-import com.ruoyi.project.system.yx.service.IYxService;
+import com.ruoyi.project.system.yx.domain.YxDay;
+import com.ruoyi.project.system.yx.service.IYxDayService;
 
 /**
  * 牙星公司Controller
@@ -31,7 +31,7 @@ public class YxtableMMController extends BaseController
     private String prefix = "system/yx/tableMM";
 
     @Autowired
-    private IYxService yxService;
+    private IYxDayService yxDayService;
 
     @RequiresPermissions("system:yx:tableMM:view")
     @GetMapping()
@@ -48,10 +48,10 @@ public class YxtableMMController extends BaseController
     @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Yx yx)
+    public AjaxResult export(YxDay yxDay)
     {
-        List<Yx> list = yxService.selectYxList(yx);
-        ExcelUtil<Yx> util = new ExcelUtil<Yx>(Yx.class);
+        List<YxDay> list = yxDayService.selectYxList(yxDay);
+        ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
         return util.exportExcel(list, "yx");
     }
 

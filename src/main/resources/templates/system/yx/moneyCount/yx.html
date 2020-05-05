@@ -29,17 +29,11 @@
                                 <input  type="text" id="treeName" name="treeName" onclick="selectDeptTree()" readonly="true">
                             </li>
 
-
                             <li>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="exprotExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
-<<<<<<< HEAD
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="exprotExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="exprotModel()"><i class="fa fa-download"></i>&nbsp;模板</a>
-=======
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.importTemplate();"><i class="fa fa-download"></i>&nbsp;模板</a>
->>>>>>> branch 'master' of https://github.com/fengyongliangJava/qundui
                             </li>
-                            
                             
                         </ul>
                     </div>
@@ -77,12 +71,7 @@
         }
         
         
-        
-        
-        
-        
-        
-        
+
 
       function importExcel(){
       		
@@ -92,7 +81,7 @@
       			var userOrg  = $('#treeName').val();
       		    var file = $('#excelFile').val();
       		    
-      		    
+
       			if($.common.isEmpty(createTime)){
       				alert("请选择上传时间！");
       				LoadingClose();
@@ -105,7 +94,6 @@
       				return;
       			} 
       			
-      		    var file = $('#excelFile').val();
       			if($.common.isEmpty(file)){
       				alert("请选择上传Excel文件！");
       				LoadingClose();
@@ -147,7 +135,7 @@
       			return;
       		}  */
       		
-      		if(isEmpty(userOrg)){
+      		if($.common.isEmpty(userOrg)){
       			alert("请选择组织机构！");
       			LoadingClose();
       			return;
@@ -158,12 +146,10 @@
       }
       		
         
+      
       function exprotModel(){
-<<<<<<< HEAD
+
      	$.tzLoading({content:'正在导出模板，请稍等...'});
-=======
-     		$.tzLoading({content:'正在导出模板，请稍等...'});
->>>>>>> branch 'master' of https://github.com/fengyongliangJava/qundui
   	    window.location.href = prefix + '/exprotModel';
   	    LoadingClose();
   	  }

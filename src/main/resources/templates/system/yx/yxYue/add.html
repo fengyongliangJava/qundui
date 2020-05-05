@@ -5,7 +5,7 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-yx-add">
+        <form class="form-horizontal m" id="form-yxYue-add">
             <div class="form-group">    
                 <label class="col-sm-2 control-label is-required">员工工号：</label>
                 <div class="col-sm-4">
@@ -107,35 +107,21 @@
 					<input id="station" name="station" class="form-control" type="text" required maxlength="20">
 				</div>
 				
-				<label class="col-sm-2 control-label">产量：</label>
+				<label class="col-sm-2 control-label">出勤天数：</label>
 				<div class="col-sm-4">
-					<input id="workNumber" name="workNumber" class="form-control" type="text"  maxlength="6">
+					<input id="countDay" name="countDay" class="form-control" type="text"  maxlength="2">
 				</div>
 			</div>
-			
-										                                                               
-										                                                               
-			<div class="form-group">	
-				<label class="col-sm-2 control-label">单价：</label>
-				<div class="col-sm-4">
-					<input id="workPrice" name="workPrice" class="form-control" type="text"  maxlength="3">
-				</div>
-				
-				<label class="col-sm-2 control-label">总工分：</label>
-				<div class="col-sm-4">
-					<input id="workAll" name="workAll" class="form-control" type="text"      maxlength="3">
-				</div>
-			</div>
-
-			
+	
             <div class="form-group">	
-				<label class="col-sm-2 control-label">个人工分：</label>
-				<div class="col-sm-4">
-					<input id="workFen" name="workFen" class="form-control" type="text"    maxlength="2">
-				</div>
 				<label class="col-sm-2 control-label">计件工资：</label>
 				<div class="col-sm-4">
 					<input id="workSum" name="workSum" class="form-control" type="text"   maxlength="6">
+				</div>
+				
+				<label class="col-sm-2 control-label">零活工资：</label>
+				<div class="col-sm-4">
+					<input id="workHuo" name="workHuo" class="form-control" type="text"   maxlength="6">
 				</div>
 			</div>
     
@@ -384,14 +370,30 @@
 	     <div class="form-group">	
 			<label class="col-sm-2 control-label">创建时间：</label>
 			<div class="col-sm-4">
-				<input type="text" class="form-control time-input" id="createTime" name="createTime" /> 
+				<input type="text" class="form-control time-input" data-format="yyyy-MM" id="createTime" name="createTime" /> 
 			</div>
 						
-			<label class="col-sm-2 control-label">实发工资：</label>
+			<label class="col-sm-2 control-label">计算工资：</label>
 			<div class="col-sm-4">
 				<input id="userCost" name="userCost" class="form-control" type="text"  maxlength="6">
 			</div>
 		</div>
+	
+	
+	     <div class="form-group">    
+	     
+             <label class="col-sm-2 control-label">浮动比例：</label>
+             <div class="col-sm-4">
+                 <input id="fu" name="fu" class="form-control" type="text" maxlength="2">
+             </div>
+           
+             <label class="col-sm-2 control-label">实发工资：</label>
+             <div class="col-sm-4">
+                 <input id="userMoney" name="userMoney" class="form-control" type="text" maxlength="6">
+             </div>
+             
+         </div>
+	
 	
 	
 	   <div class="form-group">	
@@ -402,24 +404,401 @@
 		</div>
 		
 
-
-
-
-
+     
         </form>
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/yx"
-        $("#form-yx-add").validate({
-            focusCleanup: true
-        });
+        var prefix = ctx + "system/yxYue"
 
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/add", $('#form-yx-add').serialize());
+                $.operate.save(prefix + "/add", $('#form-yxYue-add').serialize());
             }
         }
+        
+        $.validator.addMethod("checkMoney",function(value,element,params){
+			var checkQQ = /(?!^0*(\.0{1,2})?$)^\d{1,13}(\.\d{1,2})?$/;
+			return this.optional(element)||(checkQQ.test(value));
+		},"*请输入正确金额（最多保留两位小数）！");
+        
+        $.validator.addMethod("_checkMoney",function(value,element,params){
+        	if(!value.startsWith('-')){
+        		return false;
+        	}
+        	_val = value.substring(1,value.length);
+			var checkQQ = /(?!^0*(\.0{1,2})?$)^\d{1,13}(\.\d{1,2})?$/;
+			return this.optional(element)||(checkQQ.test(_val));
+		},"*请输入负金额（最多保留两位小数）！");
+        
+        
+        $.validator.addMethod("_checkHan",function(value,element,params){
+			var checkQQ = /[\u4e00-\u9fa5]/;
+			return this.optional(element)||(checkQQ.test(value));
+		},"*请输入汉字（最多保留两位小数）！");
+        
+        
+         $(function(){
+            var icon = "<i class='fa fa-times-circle'></i> ";
+            $("#form-yxYue-add").validate({
+                rules: {
+                    
+                    userId : {
+  	      				required : true,
+  	      				digits : true
+  	      			},
+  	      			userName : {
+  	      				required : true,
+  	      				_checkHan: true
+  	      			},
+  	      			sex : {
+  	      				required : true
+  	      			},
+  	      			tell : {
+  	      				required : true,
+  	      				isPhone:true
+  	      			},
+  	      			card : {
+  	      				required : true,
+  	      				isIdentity:true
+  	      			},
+  	      			address : {
+  	      				required : true,
+  	      				_checkHan: true
+  	      			},
+  	      			userOrg : {
+  	      				required : true
+  	      			},
+  	      			userArea : {
+  	      				required : true
+  	      			},
+  	      			userGroup : {
+  	      				required : true
+  	      			},
+  	      			userClass : {
+  	      				required : true
+  	      			},
+  	      			station : {
+  	      				required : true,
+  	      				_checkHan: true
+  	      			},
+  	      			workType : {
+  	      				required : true
+  	      			},
+  	      		    workClass : {
+  	      				required : true
+  	      			},
+  	      			countDay : {
+  	      				required : true,
+  	      				digits : true
+  	      			},
+  	      			workSum : {
+  	      				required : true,
+  	      				checkMoney: true
+  	      			},
+  	      			workHuo : {
+  	      				required : true,
+  	      				checkMoney: true
+  	      			},
+  	      		     kaohe : {
+  	      				checkMoney: true
+  	      			},
+  	      		     meiKaohe : {
+   	      				checkMoney: true
+   	      			},
+   	      		     meeting : {
+	   	      			checkMoney: true
+	   	      		},
+	   	        	yearsHolidays : {
+	   	      			digits : true
+	   	      		},
+	   	      		yearsCost : {
+	   	      			checkMoney: true
+	   	      		},
+	   	      		yearDay : {
+	   	      			digits : true
+	   	      		},
+	  	      		yearCost : {
+	  	      			checkMoney: true
+	   	      		},
+	   	      		yearWork : {
+	   	      			digits : true
+	   	      		},
+	  	      		yearSum : {
+	  	      			checkMoney: true
+	   	      		},
+	   	      		yearPlus : {
+	   	      			digits : true
+	   	      		},
+	   	      		yearDuty : {
+	   	      			checkMoney: true
+	   	      		},
+	   	      		workPlus : {
+	   	      			digits : true
+	   	      		},
+	   	      		workCost : {
+	   	        		checkMoney: true
+	   	      		},
+	   	      		lawDay : {
+	   	      			digits : true
+	   	      		},
+	   	      		lawCost : {
+	   	      		   checkMoney: true
+	   	      		},
+	   	      		busDay : {
+	   	      			digits : true
+	   	      		},
+	   		      	busCost : {
+	   		      		checkMoney: true
+	   	      		},
+	   	      		busPlus : {
+	   	      		    checkMoney: true
+	   	      		},
+	   	      		woman : {
+	   	      	    	checkMoney: true
+	   	      		},
+	   	      		run : {
+	   	      		    checkMoney: true
+	   	      		},
+	   	      		ye : {
+	   	      		    checkMoney: true
+	   	      		},
+	   	      		kuangji : {
+	   	      		   _checkMoney: true
+	   	      		},
+	   	      		huliDay : {
+	   	    			digits:true
+	   	      		},
+	   	      		huliCost : {
+	   	      		    checkMoney: true
+	   	      		},
+	   	      		gsDay : {
+	   	    			digits:true
+	   	      		},
+	   	      		gsCost : {
+	   	      		   checkMoney: true
+	   	      		},
+	   	      		tqDay : {
+	   	    			digits:true
+	   	      		},
+	   	      		tqCost : {
+	   	      		   checkMoney: true
+	   	      		},
+	   	      		bingDay : {
+	   	    			digits:true
+	   	      		},
+	   	      		bingCost : {
+	   	      	    	checkMoney: true
+	   	      		},
+	   	      		sangDay : {
+	   	    			digits:true
+	   	      		},
+	   	      		sangCost : {
+	   	      	    	checkMoney: true
+	   	      		},
+	   	      		sjDay : {
+	   	    			digits:true
+	   	      		},
+	  	      		kgDay : {
+	   	    			digits:true
+	   	      		},
+		      		dgDay : {
+	   	    			digits:true
+	   	      		},
+	   	      		other : {
+	   	      		   checkMoney: true
+	   	      		},
+	   	      		userCost : {
+	   	      		   required : true,
+	   	      		  checkMoney: true
+	   	      		},
+	   	      		fu : {
+	   	    			digits:true
+	   	      		},
+	   	      		userMoney : {
+	   	      		   checkMoney: true
+	   	      		}
+
+  	      			
+                    
+                },
+                messages: {
+                	
+      	      		userId : {
+      	      			required : icon + "请输入编号！",
+      	      			digits : icon + "只能输入整数！"
+      	      		},
+      	      		userName : {
+      	      			required : icon + "请输入姓名！",
+      	      			_checkHan : icon + "只能输入汉字！"
+      	      		},
+      	      		sex : {
+      	      			required : icon + "请输选择！"
+      	      		},
+      	      		tell : {
+      	      			required : icon + "请输正确的手机号码！"
+      	      		},
+      	      		card : {
+      	      			required : icon + "请输正确的身份证号码！"
+      	      		},
+      	      		address : {
+      	      			required : icon + "请输户籍所在地！",
+      	      		   _checkHan : icon + "只能输入汉字！"
+      	      		},
+      	      		userOrg : {
+      	      			required : icon + "请选择单位！"
+      	      		},
+      	      		userArea : {
+      	      			required : icon + "请选择部门！"
+      	      		},
+      	      		userGroup : {
+      	      			required : icon + "请选择区队！"
+      	      		},
+      	      		station : {
+      	      			required : icon + "请填写岗位！",
+      	      		   _checkHan : icon + "只能输入汉字！"
+      	      		},
+      	      		workType : {
+      	      			required : icon + "请填写工作类型！"
+      	      		},
+      	      		workClass : {
+      	      			required : icon + "请填写工资种类！"
+      	      		},
+  	      			countDay : {
+  	      				required : icon + "请填写出勤天数！",
+  	      				digits : icon + "请填写整数！"
+  	      			},
+  	      			workSum : {
+  	      				required : icon + "请填写计件工资！",
+  	      				checkMoney: icon + "请填写数字！"
+  	      			},
+  	      			workHuo : {
+  	      				required : icon + "请填写零活工资！",
+	      				checkMoney: icon + "请填写数字！"
+  	      			},
+  	      		     kaohe : {
+  	      		    	checkMoney: icon + "请填写数字！"
+  	      			},
+  	      		     meiKaohe : {
+  	      		    	checkMoney: icon + "请填写数字！"
+   	      			},
+   	      		     meeting : {
+   	      		   		 checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	        	yearsHolidays : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		yearsCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		yearDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	  	      		yearCost : {
+	  	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		yearWork : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	  	      		yearSum : {
+	  	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		yearPlus : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		yearDuty : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		workPlus : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		workCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		lawDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		lawCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		busDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   		      	busCost : {
+	   		      		checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		busPlus : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		woman : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		run : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		ye : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		kuangji : {
+	   	      			_checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		huliDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		huliCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		gsDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		gsCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		tqDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		tqCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		bingDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		bingCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		sangDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		sangCost : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		sjDay : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	  	      		kgDay : {
+	  	      			digits :  icon + "请填写整数！"
+	   	      		},
+		      		dgDay : {
+		      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		other : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		userCost : {
+	   	      		   required : icon + "请填写计算工资！",
+	   	      		   checkMoney: icon + "请填写数字！"
+	   	      		},
+	   	      		fu : {
+	   	      			digits :  icon + "请填写整数！"
+	   	      		},
+	   	      		userMoney : {
+	   	      			checkMoney: icon + "请填写数字！"
+	   	      		}
+      	      		
+
+                }
+            }); 
+        }) 
     </script>
 </body>
 </html>

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.system.yx.mapper.YxMapper">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.YxDayMapper">
     
-    <resultMap type="Yx" id="YxResult">
+    <resultMap type="YxDay" id="YxResult">
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
         <result property="userName"    column="user_name"    />
@@ -76,45 +76,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         work_number, work_price, work_all, work_fen, work_sum, work_huo, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work,
          year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, 
          gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day,other, user_cost,
-        yx.create_time, yx.create_by,yx.update_time,yx.update_by, remark from yx
+         
+         YxDay.create_time, YxDay.create_by,YxDay.update_time,YxDay.update_by, remark from yx_day as YxDay
         
-<!--          yx.create_time, yx.create_by,yx.update_time,yx.update_by, -->
         
-        
-        left join sys_dept sd on (sd.dept_name = yx.user_org or sd.dept_name = yx.user_area or sd.dept_name = yx.user_group or sd.dept_name = yx.user_class)
+        left join sys_dept sd on (sd.dept_name = YxDay.user_org or sd.dept_name = YxDay.user_area or sd.dept_name = YxDay.user_group or sd.dept_name = YxDay.user_class)
     </sql>
 
 
 
 
-    <select id="selectYxKHList" parameterType="Yx" resultMap="YxResult">
+    <select id="selectYxKHList" parameterType="YxDay" resultMap="YxResult">
     
- select user_id, user_name, sex, tell, card,address,user_org, user_area, user_group, user_class, station, work_type, work_class,LEFT(create_time,7) AS create_time,COUNT(*) as count_day,work_start,sum(work_sum) as work_sum ,sum(work_huo) as work_huo,
-
-sum(kaohe) as kaohe,sum(mei_kaohe) as mei_kaohe,sum(meeting) as meeting,count(years_holidays) as years_holidays,sum(years_cost) as years_cost,count(year_day) as year_day,sum(year_cost) as year_cost,sum(year_work) as year_work,
-
-
-sum(year_sum) as year_sum,count(year_plus) as year_plus,sum(year_duty) as year_duty,count(work_plus) as work_plus,sum(work_cost) as work_cost,count(law_day) as law_day,sum(law_cost) as law_cost,count(bus_day) as bus_day,sum(bus_cost) as bus_cost,sum(bus_plus) as bus_plus,sum(woman) as woman,sum(run) as run,
-
-
-sum(ye) as ye, sum(kuangji) as kuangji,count(huli_day) as huli_day,sum(huli_cost) as huli_cost,count(gs_day) as gs_day,sum(gs_cost) as gs_cost,count(tq_day) as q_day,sum(tq_cost) as tq_cost,count(bing_day) as bing_day,sum(bing_cost) as bing_cost,count(sang_day) as sang_day,sum(sang_cost) as sang_cost,
-
-
-count(sj_day) as sj_day,count(kg_day) as kg_day,count(dg_day) as dg_day,sum(other) as other,sum(work_sum) + sum(work_huo) + sum(kaohe) as user_cost  
-    
-from  yx   
+    select user_id, user_name, sex, tell, card,address,user_org, user_area, user_group, user_class, station, work_type, work_class,LEFT(create_time,7) AS create_time,COUNT(*) as count_day,work_start,sum(work_sum) as work_sum ,sum(work_huo) as work_huo,
+		
+		sum(kaohe) as kaohe,sum(mei_kaohe) as mei_kaohe,sum(meeting) as meeting,count(years_holidays) as years_holidays,sum(years_cost) as years_cost,count(year_day) as year_day,sum(year_cost) as year_cost,sum(year_work) as year_work,
+		
+		sum(year_sum) as year_sum,count(year_plus) as year_plus,sum(year_duty) as year_duty,count(work_plus) as work_plus,sum(work_cost) as work_cost,count(law_day) as law_day,sum(law_cost) as law_cost,count(bus_day) as bus_day,sum(bus_cost) as bus_cost,sum(bus_plus) as bus_plus,sum(woman) as woman,sum(run) as run,
+		
+		sum(ye) as ye, sum(kuangji) as kuangji,count(huli_day) as huli_day,sum(huli_cost) as huli_cost,count(gs_day) as gs_day,sum(gs_cost) as gs_cost,count(tq_day) as q_day,sum(tq_cost) as tq_cost,count(bing_day) as bing_day,sum(bing_cost) as bing_cost,count(sang_day) as sang_day,sum(sang_cost) as sang_cost,
+		
+		count(sj_day) as sj_day,count(kg_day) as kg_day,count(dg_day) as dg_day,sum(other) as other,
+		
+		sum(work_sum) + sum(work_huo) + sum(kaohe) + sum(mei_kaohe) + sum(meeting) + sum(years_cost) + sum(year_cost) + sum(year_sum) + sum(year_duty) + sum(work_cost) + sum(law_cost) + sum(bus_cost) + sum(bus_plus) + sum(woman) + sum(run) + sum(ye) + sum(kuangji) + sum(huli_cost) + sum(gs_cost) + sum(tq_cost) + sum(bing_cost) + sum(sang_cost) + sum(other) AS user_cost
+		from  yx_day   
 
     
         <where>  
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
             <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
             <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
             <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
             <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
             <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
-            <if test="createTime != null  and createTime != ''">and yx.create_time like  concat('%',#{createTime},'%')</if>
-         <!--   <if test="createTime != null  and createTime != ''">and yx.create_time like '2020-04' </if> -->
+            <if test="createTime != null  and createTime != ''">and create_time like  concat('%',#{createTime},'%')</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%',#{userName},'%')</if>
+            <if test="workStart != null  and workStart != ''"> and work_start = #{workStart}</if>
+         <!--   <if test="createTime != null  and createTime != ''">and YxDay.create_time like '2020-04' </if> -->
            
         </where>
         
@@ -125,7 +125,7 @@ from  yx
     
     
     
-    <select id="selectYxList" parameterType="Yx" resultMap="YxResult">
+    <select id="selectYxList" parameterType="YxDay" resultMap="YxResult">
         <include refid="selectYxVo"/>
         <where>  
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
@@ -136,7 +136,8 @@ from  yx
             <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
             <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
             <if test="workStart != null">   and work_start = #{workStart} </if>
-            <if test="createTime != null  and createTime != ''">and yx.create_time like  concat('%',#{createTime},'%')</if>
+            <if test="createTime != null  and createTime != ''">and YxDay.create_time like  concat('%',#{createTime},'%')</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%',#{userName},'%')</if>
         </where>
     </select>
     
@@ -154,13 +155,13 @@ from  yx
     
     <select id="findUserOrgExize" resultType="String">
        select
-          yx.id
+          YxUser.user_id
        from 
-          yx 
-          left join sys_dept sd on (sd.dept_name = yx.user_org or sd.dept_name = yx.user_area or sd.dept_name = yx.user_group or sd.dept_name = yx.user_class)   
+          yx_user AS YxUser
+          left join sys_dept sd on (sd.dept_name = YxUser.user_org or sd.dept_name = YxUser.user_area or sd.dept_name = YxUser.user_group or sd.dept_name = YxUser.user_class)   
        where
           sd.dept_id = #{userOrg}
-          and yx.user_id = #{userId}
+          and YxUser.user_id = #{userId}
           limit 1        
     </select>
     
@@ -178,56 +179,20 @@ from  yx
            work_type AS "workType",
            work_class AS "workClass"
        from 
-           yx
+           yx_user
        where
-           user_id = #{userId}
+           user_id = #{userId} 
            limit 1        
     </select>
     
 
 
 
- <insert id="insertYxUser" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
-        insert into yx
-        
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userId != null  and userId != ''">user_id,</if>
-            <if test="userName != null  and userName != ''">user_name,</if>
-            <if test="sex != null  and sex != ''">sex,</if>
-            <if test="tell != null  and tell != ''">tell,</if>
-            <if test="card != null  and card != ''">card,</if>
-            <if test="address != null  and address != ''">address,</if>
-            <if test="userOrg != null  and userOrg != ''">user_org,</if>
-            <if test="userArea != null  and userArea != ''">user_area,</if>
-            <if test="userGroup != null  and userGroup != ''">user_group,</if>
-            <if test="userClass != null  and userClass != ''">user_class,</if>
-            <if test="station != null  and station != ''">station,</if>
-            <if test="workType != null  and workType != ''">work_type,</if>
-            <if test="workClass != null  and workClass != ''">work_class,</if>
-         </trim>
-         
-         
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-             <if test="userId != null  and userId != ''">#{userId},</if>
-            <if test="userName != null  and userName != ''">#{userName},</if>
-            <if test="sex != null  and sex != ''">#{sex},</if>
-            <if test="tell != null  and tell != ''">#{tell},</if>
-            <if test="card != null  and card != ''"> #{card},</if>
-            <if test="address != null  and address != ''">#{address},</if>
-            <if test="userOrg != null  and userOrg != ''"> #{userOrg},</if>
-            <if test="userArea != null  and userArea != ''">#{userArea},</if>
-            <if test="userGroup != null  and userGroup != ''">#{userGroup},</if>
-            <if test="userClass != null  and userClass != ''">#{userClass},</if>
-            <if test="station != null  and station != ''">#{station},</if>
-            <if test="workType != null  and workType != ''">#{workType},</if>
-            <if test="workClass != null  and workClass != ''">#{workClass},</if>
-         </trim>
-    </insert>
 
 
 
- <insert id="insertYx" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
-        insert into yx
+  <insert id="insertYx" parameterType="YxUpload" useGeneratedKeys="true" keyProperty="id">
+        insert into Yx_day
         
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id,</if>
@@ -269,9 +234,8 @@ from  yx
     </insert>
 
 
-
     <insert id="insertYxUpload" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
-        insert into yx
+        insert into Yx_day
        
         <trim prefix="(" suffix=")" suffixOverrides=",">
 		<if test="userId != null  and userId != ''">user_id,</if>
@@ -298,6 +262,7 @@ from  yx
             <if test="station != null  and station != ''">station,</if>
             <if test="workType != null  and workType != ''">work_type,</if>
             <if test="workClass != null  and workClass != ''">work_class,</if>
+            <if test="userCost != null  and userCost != ''">user_cost,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 		<if test="userId != null  and userId != ''">#{userId},</if>
@@ -324,13 +289,14 @@ from  yx
             <if test="station != null  and station != ''">#{station},</if>
             <if test="workType != null  and workType != ''">#{workType},</if>
             <if test="workClass != null  and workClass != ''">#{workClass},</if>
+            <if test="userCost != null  and userCost != ''">#{userCost},</if>
         </trim>    
     </insert>
 
     
 
-    <update id="updateYx" parameterType="Yx">
-        update yx
+    <update id="updateYx" parameterType="YxDay">
+        update yx_day
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="userName != null  and userName != ''">user_name = #{userName},</if>
@@ -387,11 +353,11 @@ from  yx
     </update>
 
     <delete id="deleteYxById" parameterType="Long">
-        delete from yx where id = #{id}
+        delete from yx_day where id = #{id}
     </delete>
 
     <delete id="deleteYxByIds" parameterType="String">
-        delete from yx where id in 
+        delete from yx_day where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.YxKaoMapper">
+    
+    <resultMap type="YxKao" id="YxKaoResult">
+        <result property="deptId"    column="dept_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="ancestors"    column="ancestors"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="deptNum"    column="dept_num"    />
+        <result property="userCost"    column="user_cost"    />
+        <result property="userMoney"    column="user_money"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectYxKaoVo">
+        select dept_id, parent_id, ancestors, dept_name, dept_num, user_cost, user_money, create_time, create_by, update_time, update_by from yx_kao
+    </sql>
+
+    <select id="selectYxKaoList" parameterType="YxKao" resultMap="YxKaoResult">
+        <include refid="selectYxKaoVo"/>
+        where 1=1
+        <if test="parentId != null and parentId != 0">
+			AND FIND_IN_SET(dept_id, getDepLevel(#{parentId}))
+		</if>
+		<if test="deptName != null and deptName != ''">
+			AND dept_name like concat('%', #{deptName}, '%')
+		</if>
+		<if test="createTime != null and createTime != ''">
+			AND create_time = #{createTime}
+		</if>
+		<!-- 数据范围过滤 -->
+<!-- 		${params.dataScope} -->
+		order by dept_id 
+    </select>
+    
+    
+    <select id="selectYxKaoById" parameterType="Long" resultMap="YxKaoResult">
+        <include refid="selectYxKaoVo"/>
+        where dept_id = #{deptId}
+    </select>
+        
+        
+       <insert id="insertYxKH" parameterType="YxKao" useGeneratedKeys="true" keyProperty="deptId">
+        
+			INSERT INTO yx_kao select d.dept_id,d.parent_id,d.ancestors,d.dept_name,0,'','','','',now(),''
+			from sys_dept d where FIND_IN_SET(d.dept_id,
+			(select GROUP_CONCAT(CONCAT(d.ancestors,',',d.dept_id)) did from 
+			yx_user u 
+			LEFT JOIN sys_dept d on (u.user_class = d.dept_name or u.user_area = d.dept_name or u.user_group = d.dept_name or u.user_org = d.dept_name)
+			where u.user_id in 
+				   <foreach item="item" index="index" collection="createBy.split(',')" open="(" separator="," close=")">
+					'${item}'
+					</foreach>
+
+			)); 
+			       
+         </insert>
+        
+        
+        
+        
+    <insert id="insertYxKao" parameterType="YxKao" useGeneratedKeys="true" keyProperty="deptId">
+        insert into yx_kao
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null ">parent_id,</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors,</if>
+            <if test="deptName != null  and deptName != ''">dept_name,</if>
+            <if test="deptNum != null ">dept_num,</if>
+            <if test="userCost != null  and userCost != ''">user_cost,</if>
+            <if test="userMoney != null  and userMoney != ''">user_money,</if>
+            <if test="createTime != null  and createTime != ''">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">#{ancestors},</if>
+            <if test="deptName != null  and deptName != ''">#{deptName},</if>
+            <if test="deptNum != null ">#{deptNum},</if>
+            <if test="userCost != null  and userCost != ''">#{userCost},</if>
+            <if test="userMoney != null  and userMoney != ''">#{userMoney},</if>
+            <if test="createTime != null  and createTime != ''">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYxKao" parameterType="YxKao">
+        update yx_kao
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors = #{ancestors},</if>
+            <if test="deptName != null  and deptName != ''">dept_name = #{deptName},</if>
+            <if test="deptNum != null ">dept_num = #{deptNum},</if>
+            <if test="userCost != null  and userCost != ''">user_cost = #{userCost},</if>
+            <if test="userMoney != null  and userMoney != ''">user_money = #{userMoney},</if>
+            <if test="createTime != null  and createTime != ''">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where dept_id = #{deptId}
+    </update>
+    
+    
+    
+        <update id="updateYxName" parameterType="YxKao">
+        update yx_kao
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptNum != null ">dept_num = #{deptNum},</if>
+            <if test="userCost != null  and userCost != ''">user_cost = #{userCost},</if>
+            <if test="createTime != null  and createTime != ''">create_time = #{createTime},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+        </trim>
+        where dept_name = #{deptName}
+    </update>
+    
+    
+
+    <delete id="deleteYxKaoById" parameterType="Long">
+        delete from yx_kao where dept_id = #{deptId}
+    </delete>
+
+    <delete id="deleteYxKaoByIds" parameterType="String">
+        delete from yx_kao where dept_id in 
+        <foreach item="deptId" collection="array" open="(" separator="," close=")">
+            #{deptId}
+        </foreach>
+    </delete>
+    
+</mapper>
