@@ -80,19 +80,20 @@ public class YxmoneyYueController extends BaseController {
         List<YxAll> userList = util.importExcel(file.getInputStream());
         
         int i = 0;
-        for(YxAll YxAll : userList) {
+        for(YxAll yxExcel : userList) {
         	i++;
-        	if(YxAll.getUserId().isEmpty() 
-                || YxAll.getUserName().isEmpty()
-                || YxAll.getCountDay() == null
-                || YxAll.getCountMoney() == null
-                || YxAll.getSumDay() == null
-                || YxAll.getWorkPlus() == null
-                || YxAll.getWorkCost() == null) {
+        	if(yxExcel.getUserId().isEmpty() 
+                || yxExcel.getUserName().isEmpty()
+                || yxExcel.getCountDay() == null
+                || yxExcel.getCountMoney() == null
+                || yxExcel.getSumDay() == null
+                || yxExcel.getWorkPlus() == null
+                || yxExcel.getWorkCost() == null
+                || yxExcel.getOther() == null) {
                    return AjaxResult.success("导入第"+i+"条有空数据");
                 }
-    		if(yxUserService.findUserExize(userOrg,YxAll.getUserId()) == null) {
-    			    return AjaxResult.success("导入第"+i+"条员工编号不匹配");
+    		if(yxUserService.findUserExize(userOrg,yxExcel.getUserId(),yxExcel.getUserName()) == null) {
+			    return AjaxResult.success(String.format("导入第%s条数据不匹配(当前部门未找到编号为【%s】 姓名为【%s】的员工)",i,yxExcel.getUserId(),yxExcel.getUserName()));
     		}
         }
         for(YxAll YxAll : userList) {
@@ -100,15 +101,11 @@ public class YxmoneyYueController extends BaseController {
     		YxAll.setUserOrg(userOrg);
     		YxAll.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     		YxAll.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
-    		//返回的类型可能不是一个decimal   
-    		//树  
-    		// 1.查询的时候现在只查了 depName，关联下把dep_id也查上来，然后在前端界面赋值给hidden id。
-    		// 2.查询treedata 的数据 更改sql ，根据depname 查询depid，然后再根据depid查询数据    select * from dep where id in（select depid from dep where depname=‘’）
     		YxAll.setSumMoney(YxAll.getCountMoney().divide(new BigDecimal(YxAll.getCountDay()),2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(YxAll.getSumDay())));
     		
-    		if(YxAll.getOther() == null) {
+  /*  		if(YxAll.getOther() == null) {
     			YxAll.setOther(new BigDecimal(0));
-    		}
+    		}*/
     		YxAll.setUserCost(YxAll.getCountMoney().subtract(YxAll.getSumMoney()).add(YxAll.getWorkCost()).add(YxAll.getOther()));
     		YxYueService.insertYxAll(YxAll);
         }

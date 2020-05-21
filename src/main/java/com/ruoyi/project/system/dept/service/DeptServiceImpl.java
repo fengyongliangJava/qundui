@@ -49,6 +49,15 @@ public class DeptServiceImpl implements IDeptService
     @DataScope(deptAlias = "d")
     public List<Ztree> selectDeptTree(Dept dept)
     {
+    	if(dept.getParentName()!=null && dept.getParentName().length()>0) {
+    		dept.setDeptName(dept.getParentName());
+    		List<Dept> list = deptMapper.selectDeptList(dept);
+    		if(list!=null && list.size()==1) {
+    			dept.setParentId(list.get(0).getDeptId());
+    			dept.setParentName(null);
+    			dept.setDeptName(null);
+    		}
+    	}
         List<Dept> deptList = deptMapper.selectDeptList(dept);
         List<Ztree> ztrees = initZtree(deptList);
         return ztrees;

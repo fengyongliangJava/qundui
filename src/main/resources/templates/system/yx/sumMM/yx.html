@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+    
+    <style type="text/css">
+	    #tableBox1{margin:30px auto;table-layout:fixed;width:2000px;} 
+		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		.userList{width:100px;height:20px;ling-height:20px;text-align:center;}
+		#tableBox1 tr:hover{background:#fff;}
+		
+		#tableBox2{margin:30px auto;} 
+		#tableBox2 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox2 tr:hover{background:#fff;}
+	</style>
+</head>
+
+
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>                    
+                        	<li>
+								<label>创建日期： </label>
+								<input type="text" class="time-input" id="createTime" name="createTime" data-format="yyyy-MM" readonly="true"/>
+							</li>
+                        
+                    	    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId"  name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName"  name="treeName"onclick="selectDeptTree()" readonly="true">
+                            </li>
+                            
+                            <li>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="sumMM()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-12" >
+            
+				<div id="box1" class='box1' style="overflow:scroll;">
+					
+					<table  id="tableBox1"  class="table-hover" border = "1" >
+					
+						 <tr>
+						 	<td colspan="36">月考勤报表 </td>
+						 </tr>
+
+             		     <tr>
+             		       <td>员工编号</td>
+              		 	   <td>员工姓名</td>
+              		 	   <td>岗位名称</td>
+              		 	   <td>班次</td>
+              		 	   <td>26</td>
+		                   <td>27</td>
+		                   <td>28</td>
+		                   <td>29</td>
+		                   <td>30</td>
+		                   <td>31</td>
+		                   <td>1</td>
+		                   <td>2</td>
+		                   <td>3</td>
+		                   <td>4</td>
+		                   <td>5</td>
+		                   <td>6</td>
+		                   <td>7</td>
+		                   <td>8</td>
+		                   <td>9</td>
+		                   <td>10</td>
+		                   <td>11</td>
+		                   <td>12</td>
+		                   <td>13</td>
+		                   <td>14</td>
+		                   <td>15</td>
+		                   <td>16</td>
+		                   <td>17</td>
+		                   <td>18</td>
+		                   <td>19</td>
+		                   <td>20</td>
+		                   <td>21</td>
+		                   <td>22</td>
+		                   <td>23</td>
+		                   <td>24</td>
+		                   <td>25</td>
+		                   <td>出勤合计</td>
+				  		 </tr>	 
+				  		 
+			
+						 <tr >
+             		       <td rowspan = "3">0508097</td>
+              		 	   <td rowspan = "3">王晶</td>
+              		 	   <td rowspan = "3">班长</td>
+              		 	   <td class="userList">夜班</td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>	 
+				  		 
+				  		 
+				  		  <tr>
+       
+              		 	   <td class="userList">白班</td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>	 
+
+				  		 <tr>
+             
+              		 	   <td class="userList">中班</td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>	 
+
+					</table>
+					
+						<p><span>负责人：</span><span style="margin-left:200px;">分管负责人：</span><span style="margin-left:200px;">部门负责人：</span><span style="margin-left:200px;">记录人：</span></p>
+						
+					    说明：  1、夜班为0：00-8:00；白班为8:00-16:00；中班为16:00-0:00；	</br>																																	
+          				  2、不倒班的单位按上午、下午记录；		</br>																																
+          				  3、记录符号：出勤“√”、迟到、早退（5分以上）“→”、旷工“X”、放假“Т”、 加班“力”、出差“↑”、事假“△”、调休   </br>
+                          “Φ”、工伤假“+”、婚假“○”、产假“产”、计划生育假“J”、病休假“∕”、探亲假“⊙”、丧假“*”、缺勤“Q”；   																																
+                </div>
+                
+                
+                
+                
+                
+                <div id="box2" class='box2' style="display:none;">
+                
+					<table  id="tableBox2"  class="table-hover" border = "2" >
+					
+						 <tr>
+						 	<td colspan="36">月考勤报表 </td>
+						 </tr>
+
+             		     <tr>
+             		       <td>员工编号</td>
+              		 	   <td>员工姓名</td>
+              		 	   <td>岗位名称</td>
+              		 	   <td>班次</td>
+              		 	   <td>26</td>
+		                   <td>27</td>
+		                   <td>28</td>
+		                   <td>29</td>
+		                   <td>30</td>
+		                   <td>31</td>
+		                   <td>1</td>
+		                   <td>2</td>
+		                   <td>3</td>
+		                   <td>4</td>
+		                   <td>5</td>
+		                   <td>6</td>
+		                   <td>7</td>
+		                   <td>8</td>
+		                   <td>9</td>
+		                   <td>10</td>
+		                   <td>11</td>
+		                   <td>12</td>
+		                   <td>13</td>
+		                   <td>14</td>
+		                   <td>15</td>
+		                   <td>16</td>
+		                   <td>17</td>
+		                   <td>18</td>
+		                   <td>19</td>
+		                   <td>20</td>
+		                   <td>21</td>
+		                   <td>22</td>
+		                   <td>23</td>
+		                   <td>24</td>
+		                   <td>25</td>
+		                   <td>出勤合计</td>
+				  		 </tr>	 
+				  		 
+						  <tbody id="userList">
+				          
+				          </tbody>
+
+					</table>
+					
+						<p><span>负责人：</span><span style="margin-left:200px;">分管负责人：</span><span style="margin-left:200px;">部门负责人：</span><span style="margin-left:200px;">记录人：</span></p>
+						
+					    说明：  1、夜班为0：00-8:00；白班为8:00-16:00；中班为16:00-0:00；	</br>																																	
+          				  2、不倒班的单位按上午、下午记录；		</br>																																
+          				  3、记录符号：出勤“√”、迟到、早退（5分以上）“→”、旷工“X”、放假“Т”、 加班“力”、出差“↑”、事假“△”、调休   </br>
+                          “Φ”、工伤假“+”、婚假“○”、产假“产”、计划生育假“J”、病休假“∕”、探亲假“⊙”、丧假“*”、缺勤“Q”；   		
+																														
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+
+    <script th:inline="javascript">
+
+        var prefix = ctx + "system/yx/sumMM";
+
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url:"/system/yx/selectDD/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
+        }
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+        
+        
+        
+        function sumMM() {
+            $.tzLoading({content: '正在统计，请稍等...'});
+            
+            var title = document.getElementById("title");
+            var number = document.getElementById("number");
+            var foot = document.getElementById("foot");
+            var userList = document.getElementById("userList");
+            
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+            
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+            
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/sumMM',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (da) {
+                	var datalist = da;
+        
+                    var str1 = "";
+                    var str2 = "";
+                    var str3 = "";
+                    userList.innerHTML="";
+                    
+                    str1 += "<td colspan='36' align='center'>" + createTime+userOrg+"月考勤报表</td>";
+                    
+                    var initCnt = false;
+                    var total = 0;
+                    for(var  i=0;i<datalist.length;i++){
+                    	var data = datalist[i];
+                    	if(!initCnt){
+                    		str2 = _initCnt(data);
+                    		initCnt=true;
+                    	}
+                    	if(data.total){
+                    		total = data.total;
+                    		continue;
+                    	}
+                    	
+                    	 var str3 = "<tr>" +
+
+                         "<td>" + data.userId + "</td>" +
+                         "<td>" + data.userName + "</td>" +
+                         "<td>" + data.Station + "</td>" +
+                         
+                         
+                         "<td>" + data.a26 + "</td>" +
+                         "<td>" + data.a27 + "</td>" +
+                         "<td>" + data.a28 + "</td>" +
+                       	 "<td>" + data.a29 + "</td>" + 
+                     	 "<td>" + data.a30 + "</td>" +   
+                         "<td>" + data.a31 + "</td>" +
+                         "<td>" + data.a01 + "</td>" +
+                         "<td>" + data.a02 + "</td>" +
+                         "<td>" + data.a03 + "</td>" +
+                         "<td>" + data.a04 + "</td>" +
+                         "<td>" + data.a05 + "</td>" +
+                         "<td>" + data.a06 + "</td>" +
+                         "<td>" + data.a07 + "</td>" +
+                         "<td>" + data.a08 + "</td>" +
+                         "<td>" + data.a09 + "</td>" +
+                         "<td>" + data.a10 + "</td>" +
+                         "<td>" + data.a11 + "</td>" +
+                         "<td>" + data.a12 + "</td>" +
+                         "<td>" + data.a13 + "</td>" +
+                         "<td>" + data.a14 + "</td>" +
+                         "<td>" + data.a15 + "</td>" +
+                         "<td>" + data.a16 + "</td>" +
+                         "<td>" + data.a17 + "</td>" +
+                         "<td>" + data.a18 + "</td>" +
+                         "<td>" + data.a19 + "</td>" +
+                         "<td>" + data.a20 + "</td>" +
+                         "<td>" + data.a21 + "</td>" +
+                         "<td>" + data.a22 + "</td>" +
+                         "<td>" + data.a23 + "</td>" +
+                         "<td>" + data.a24 + "</td>" +
+                         "<td>" + data.a25 + "</td>" +
+                         "<td>" + data.sum + "</td></tr>";
+                         $("#userList").append(str3);
+                    }
+
+                    title.innerHTML = str1;
+                    number.innerHTML = str2;
+                     
+                	box2.style.display = 'block';
+                    box1.style.display = 'none';
+                    
+                	LoadingClose();
+                }
+            });
+
+        }
+        
+
+        
+        function exportExcel() {
+            $.tzLoading({content: '正在导出，请稍等...'});
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/exportExcel',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (data) {
+                	download(data);
+                	LoadingClose();
+                }
+            });
+        }
+        
+        function download(data){
+	        window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+        }
+        
+    </script>
+    
+    
+
+    
+    
+</body>
+</html>

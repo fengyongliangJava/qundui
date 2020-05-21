@@ -34,8 +34,8 @@
                             
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="charMM()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
                             </li>
                             
                             
@@ -68,7 +68,7 @@
 
     <script th:inline="javascript">
 
-    var prefix = ctx + "/system/yx/charDD";
+    var prefix = ctx + "system/yx/charMM";
     /*部门管理-修改-选择部门树*/
     function selectDeptTree() {
             var options = {
@@ -81,8 +81,15 @@
 
     }
 
+ 
+
     function doSubmit(index, layero){
         var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if(tree.getSelectedNodes().length==0){
+        	alert("请选择组织机构");
+        	return;
+        }
+        
         if ($.tree.notAllowLastLevel(tree)) {
             var body = layer.getChildFrame('body', index);
             $("#treeId").val(body.find('#treeId').val());
@@ -90,8 +97,11 @@
             layer.close(index);
         }
     }
-
-
+    
+    
+    
+    
+    
         	
 
 
@@ -294,17 +304,7 @@
                              'Showers':'../../img/dan.png'
 
                      };
-
                      
-                    	alert(data);
-                     
-                     
-                     if(data==null){
-                     	alert("当日没有工资记录!");
-                     	return;
-                     }
-                     
-
                      option = {
                          title: {
                              text: createTime + '当日工资报表',
@@ -318,7 +318,7 @@
                          legend: {
                              bottom: 10,
                              left: 'center',
-                             data: ['计件工资', '月薪工资', '单项工程']
+                             data: ['计件工资', '月薪工资']
                          },
                          series: [
                              {
@@ -328,7 +328,7 @@
                                  selectedMode: 'single',
                                  data:[
                                      {
-                                         value:data.YxSumWorkType1,
+                                         value:data.YxYueSumWorkType1,
                                          name: '计件工资',
                                          label: {
                                              normal: {
@@ -336,9 +336,8 @@
                                                      '{title|{b}}{abg|}',
                                                      '  {weatherHead|类型}{valueHead|人数}{rateHead|元}',
                                                      '{hr|}',
-                                                     '  {Cloudy|}{value|'+data.YxCountWorkType1+'}{rate|'+data.YxSumWorkType1+'}',
-                                                     '  {Sunny|}{value|'+data.YxCountWorkType2+'}{rate|'+data.YxSumWorkType2+'}',
-                                                     '  {Showers|}{value|'+data.YxCountWorkType3+'}{rate|'+data.YxSumWorkType3+'}'
+                                                     '  {Cloudy|}{value|'+data.YxYueCountWorkType1+'}{rate|'+data.YxYueSumWorkType1+'}',
+                                                     '  {Sunny|}{value|'+data.YxYueCountWorkType2+'}{rate|'+data.YxYueSumWorkType2+'}'
                                                  ].join('\n'),
                                                  backgroundColor: '#eee',
                                                  borderColor: '#777',
@@ -414,8 +413,7 @@
                                              }
                                          }
                                      },
-                                     {value:data.YxSumWorkType2, name:'月薪工资'},
-                                     {value:data.YxSumWorkType3, name:'单项工程'}
+                                     {value:data.YxYueSumWorkType2, name:'月薪工资'}
                                  ],
                                  itemStyle: {
                                      emphasis: {
@@ -459,15 +457,6 @@
                     };
 
                     
-                   	alert(data);
-                    
-                    
-                    if(data==null){
-                    	alert("当日没有工资记录!");
-                    	return;
-                    }
-                    
-
                     option = {
                         title: {
                             text: createTime + '当日工资报表',
@@ -491,7 +480,7 @@
                                 selectedMode: 'single',
                                 data:[
                                     {
-                                        value:data.YxSumWorkType1,
+                                        value:data.YxYueSumWorkClass1,
                                         name: '一线工资',
                                         label: {
                                             normal: {
@@ -499,9 +488,9 @@
                                                     '{title|{b}}{abg|}',
                                                     '  {weatherHead|类型}{valueHead|人数}{rateHead|元}',
                                                     '{hr|}',
-                                                    '  {Cloudy|}{value|'+data.YxCountWorkType1+'}{rate|'+data.YxSumWorkType1+'}',
-                                                    '  {Sunny|}{value|'+data.YxCountWorkType2+'}{rate|'+data.YxSumWorkType2+'}',
-                                                    '  {Showers|}{value|'+data.YxCountWorkType3+'}{rate|'+data.YxSumWorkType3+'}'
+                                                    '  {Cloudy|}{value|'+data.YxYueCountWorkClass1+'}{rate|'+data.YxYueSumWorkClass1+'}',
+                                                    '  {Sunny|}{value|'+data.YxYueCountWorkClass2+'}{rate|'+data.YxYueSumWorkClass2+'}',
+                                                    '  {Showers|}{value|'+data.YxYueCountWorkClass3+'}{rate|'+data.YxYueSumWorkClass3+'}'
                                                 ].join('\n'),
                                                 backgroundColor: '#eee',
                                                 borderColor: '#777',
@@ -577,8 +566,8 @@
                                             }
                                         }
                                     },
-                                    {value:data.YxSumWorkType2, name:'二线工资'},
-                                    {value:data.YxSumWorkType3, name:'三线工资'}
+                                    {value:data.YxYueSumWorkClass2, name:'二线工资'},
+                                    {value:data.YxYueSumWorkClass3, name:'三线工资'}
                                 ],
                                 itemStyle: {
                                     emphasis: {
@@ -599,7 +588,49 @@
 
     }
 
+    function exportExcel() {
+        $.tzLoading({content: '正在导出，请稍等...'});
+        
+        var createTime = $('#createTime').val();
+        var userOrg  = $('#treeName').val();
 
+        if ($.common.isEmpty(createTime)) {
+            alert("请选择统计时间！");
+            LoadingClose();
+            return;
+        }
+
+        if ($.common.isEmpty(userOrg)) {
+            alert("请选择组织机构！！");
+            LoadingClose();
+            return;
+        }
+
+        var formData = new FormData($('#formId')[0]);
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: prefix + '/exportExcel',
+            data : formData,
+            async: false,
+            processData: false,
+            contentType: false,
+            error: function () {
+            },
+            
+            success: function (data) {
+            	download(data);
+            	LoadingClose();
+            }
+        });
+
+    }
+  
+    function download(data){
+        window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+    }
+    
     </script>
 
 

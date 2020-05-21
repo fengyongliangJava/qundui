@@ -209,6 +209,7 @@ public class ExcelUtil<T>
                 for (Map.Entry<Integer, Field> entry : fieldsMap.entrySet())
                 {
                 	flag = false;
+       
                     Object val = this.getCellValue(row, entry.getKey());
                     if(null==val || String.valueOf(val).length()>0) {
                     	flag = true;

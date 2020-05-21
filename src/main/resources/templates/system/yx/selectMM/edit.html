@@ -5,7 +5,7 @@
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-yx-edit" th:object="${yx}">
+        <form class="form-horizontal m" id="form-YxDay-edit" th:object="${YxDay}">
             <input name="id" th:field="*{id}" type="hidden">
             
             <div class="form-group">    
@@ -39,10 +39,10 @@
             <div class="form-group">    
                 <label class="col-sm-2 control-label is-required">员工性别：</label>
                 <div class="col-sm-4">
-                   <select  id="sex"  name="sex" th:field="${yx.sex}" th:value="${yx.sex}"  required data-placeholder="选择员工性别" 
+                   <select  id="sex"  name="sex" th:field="${YxDay.sex}" th:value="${YxDay.sex}"  required data-placeholder="选择员工性别" 
 							class="form-control chosen-select" >
-							<option th:selected="${yx.sex == '1' ? 'selected' : ''}" value="1">男</option>
-							<option th:selected="${yx.sex == '2' ? 'selected' : ''}" value="2">女</option>
+							<option th:selected="${YxDay.sex == '男' ? 'selected' : ''}" value="男">男</option>
+							<option th:selected="${YxDay.sex == '女' ? 'selected' : ''}" value="女">女</option>
 				   </select>
                 </div>
                 
@@ -54,15 +54,19 @@
             </div>
                
 
+           
             <div class="form-group">    
                 <label class="col-sm-2 control-label is-required">单位：</label>
                 <div class="col-sm-4">
-                    <input name="userOrg" th:field="*{userOrg}" class="form-control" type="text" required>
+                    <input type="hidden"   id="dep_1"  name="userOrg" readonly="true"/>
+                    <input  class="form-control" th:field="*{userOrg}" name="userOrg" type="text" id="depName_1" onclick="selectDeptTree(1)"  required readonly="true">
                 </div>
                 
                 <label class="col-sm-2 control-label is-required">部门：</label>
                 <div class="col-sm-4">
-                    <input name="userArea" th:field="*{userArea}" class="form-control" type="text" required>
+                    <input type="hidden"   id="dep_2" name="userArea"  readonly="true"/>
+                    <input  class="form-control" th:field="*{userArea}" name="userArea" type="text" id="depName_2" onclick="selectDeptTree(2,depName_1)"  required readonly="true">
+                    
                 </div>
             </div>
             
@@ -70,35 +74,37 @@
             <div class="form-group">    
                 <label class="col-sm-2 control-label is-required">区队：</label>
                 <div class="col-sm-4">
-                    <input name="userGroup" th:field="*{userGroup}" class="form-control" type="text" required>
+                    <input type="hidden"   id="dep_3" name="userGroup" readonly="true"/>
+                    <input  class="form-control" th:field="*{userGroup}" name="userGroup" type="text" id="depName_3" onclick="selectDeptTree(3,depName_2)"  required readonly="true">
                 </div>
                 
                  <label class="col-sm-2 control-label is-required">班组：</label>
                 <div class="col-sm-4">
-                    <input name="userClass" th:field="*{userClass}" class="form-control" type="text" required>
+                    <input type="hidden"   id="dep_4" name="userClass" readonly="true"/>
+                    <input  class="form-control" th:field="*{userClass}" name="userClass" type="text" id="depName_4" onclick="selectDeptTree(4,depName_3)"  required readonly="true">
                 </div>
             </div>
 
+  
   
          
             <div class="form-group">    
                 <label class="col-sm-2 control-label is-required">工作类型：</label>
                 <div class="col-sm-4">
-		            <select  id="workType"  name="workType" th:field="${yx.workType}" th:value="${yx.workType}" required  data-placeholder="选择工作类型" 
+		            <select  id="workType"  name="workType" th:field="${YxDay.workType}" th:value="${YxDay.workType}" required  data-placeholder="选择工作类型" 
 							class="form-control chosen-select" >
-							<option th:selected="${yx.workType == '1' ? 'selected' : ''}" value="1">计件工资</option>
-							<option th:selected="${yx.workType == '2' ? 'selected' : ''}" value="2">月薪工资</option>
-							<option th:selected="${yx.workType == '3' ? 'selected' : ''}" value="3">单项工程</option>
+							<option th:selected="${YxDay.workType == '计件工资' ? 'selected' : ''}" value="计件工资">计件工资</option>
+							<option th:selected="${YxDay.workType == '月薪工资' ? 'selected' : ''}" value="月薪工资">月薪工资</option>
 				   </select>
                 </div>
                   
-                <label class="col-sm-2 control-label is-required">工资种类：</label>
+                <label class="col-sm-2 control-label is-required">工资类型：</label>
                 <div class="col-sm-4">
-                    <select  id="workClass"  name="workClass" th:field="${yx.workClass}" th:value="${yx.workClass}"  required data-placeholder="选择工作类型" 
+                    <select  id="workClass"  name="workClass" th:field="${YxDay.workClass}" th:value="${YxDay.workClass}"  required data-placeholder="选择工作类型" 
 							class="form-control chosen-select" >
-							<option th:selected="${yx.workClass == '1' ? 'selected' : ''}" value="1">一线工资</option>
-							<option th:selected="${yx.workClass == '2' ? 'selected' : ''}" value="2">二线工资</option>
-							<option th:selected="${yx.workClass == '3' ? 'selected' : ''}" value="3">三线工程</option>
+							<option th:selected="${YxDay.workClass == '一线工资' ? 'selected' : ''}" value="一线工资">一线工资</option>
+							<option th:selected="${YxDay.workClass == '二线工资' ? 'selected' : ''}" value="二线工资">二线工资</option>
+							<option th:selected="${YxDay.workClass == '三线工资' ? 'selected' : ''}" value="三线工资">三线工程</option>
 				   </select>
                 </div>
             </div>
@@ -111,296 +117,72 @@
                     <input name="station" th:field="*{station}" class="form-control" type="text" required>
                 </div>
                 
-                <label class="col-sm-2 control-label">产量：</label>
+                
+        	    <label class="col-sm-2 control-label is-required">出勤状态：</label>
                 <div class="col-sm-4">
-                    <input name="workNumber" th:field="*{workNumber}" class="form-control" type="text"  maxlength="5">
+                    <select  id="workStart"  name="workStart" th:field="${YxDay.workStart}" th:value="${YxDay.workStart}"  required data-placeholder="选择工作类型" 
+							class="form-control chosen-select" >
+							<option th:selected="${YxDay.workStart == '1' ? 'selected' : ''}" value="1">出勤</option>
+							<option th:selected="${YxDay.workStart == '0' ? 'selected' : ''}" value="2">未出勤</option>
+				   </select>
                 </div>
             </div>
             
             
            							                                                               
 			<div class="form-group">	
+			
+			     <label class="col-sm-2 control-label">产量：</label>
+                <div class="col-sm-4">
+                    <input name="workNumber" th:field="*{workNumber}" class="form-control" type="text"  maxlength="5">
+                </div>
+			
 				<label class="col-sm-2 control-label">单价：</label>
 				<div class="col-sm-4">
 					<input id="workPrice" name="workPrice"  th:field="*{workPrice}" class="form-control" type="text"  maxlength="3">
 				</div>
-				
-				<label class="col-sm-2 control-label">总工分：</label>
-				<div class="col-sm-4">
-					<input id="workAll" name="workAll"  th:field="*{workAll}"   class="form-control" type="text"   maxlength="3">
-				</div>
 			</div>
 、
 		    <div class="form-group">	
+		    
+		    	<label class="col-sm-2 control-label">总工分：</label>
+				<div class="col-sm-4">
+					<input id="workAll" name="workAll"  th:field="*{workAll}"   class="form-control" type="text"   maxlength="3">
+				</div>
+		    
+		    
 				<label class="col-sm-2 control-label">个人工分：</label>
 				<div class="col-sm-4">
 					<input id="workFen" name="workFen"  th:field="*{workFen}" class="form-control" type="text"    maxlength="2">
 				</div>
-				
-			    <label class="col-sm-2 control-label is-required">出勤状态：</label>
-                <div class="col-sm-4">
-                    <select  id="workStart"  name="workStart" th:field="${yx.workStart}" th:value="${yx.workStart}"  required data-placeholder="选择工作类型" 
-							class="form-control chosen-select" >
-							<option th:selected="${yx.workStart == '1' ? 'selected' : ''}" value="1">出勤</option>
-							<option th:selected="${yx.workStart == '0' ? 'selected' : ''}" value="2">未出勤</option>
-				   </select>
-                </div>
+
 			</div>
 			
 			
             <div class="form-group">	
 				<label class="col-sm-2 control-label">计件工资：</label>
 				<div class="col-sm-4">
-					<input id="workSum" name="workSum"  th:field="*{workSum}"  class="form-control" type="text"   maxlength="6">
+					<input id="workSum" name="workSum"  th:field="*{workSum}"  class="form-control" type="text"   maxlength="8">
 				</div>
 				
 				
 			    <label class="col-sm-2 control-label">零活工资：</label>
 				<div class="col-sm-4">
-					<input id="workHuo" name="workHuo"  th:field="*{workHuo}"  class="form-control" type="text"   maxlength="6">
-				</div>
-			</div>
-
-
-			
-	       <div class="form-group">	
-				<label class="col-sm-2 control-label">考核：</label>
-				<div class="col-sm-4">
-					<input id="kaohe" name="kaohe" th:field="*{kaohe}"  class="form-control" type="text"   maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">煤质考核：</label>
-				<div class="col-sm-4">
-					<input id="meiKaohe" name="meiKaohe"  th:field="*{meiKaohe}" class="form-control" type="text"   maxlength="4">
-				</div>
-			</div>
-			
-			
-		   <div class="form-group">	
-				<label class="col-sm-2 control-label">早会：</label>
-				<div class="col-sm-4">
-					<input id="meeting" name="meeting"  th:field="*{meeting}"  class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">年休假天数：</label>
-				<div class="col-sm-4">
-					<input id="yearsHolidays" name="yearsHolidays" th:field="*{yearsHolidays}"   class="form-control" type="text"  maxlength="2">
-				</div>
-			</div>
-			
-			
-										                                         
-	       <div class="form-group">	
-				<label class="col-sm-2 control-label">年休假工资：</label>
-				<div class="col-sm-4">
-					<input id="yearsCost" name="yearsCost"  th:field="*{yearsCost}"  class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">春节休假天数：</label>
-				<div class="col-sm-4">
-					<input id="yearDay" name="yearDay"  th:field="*{yearDay}" class="form-control" type="text"  maxlength="2">
-				</div>
-			</div>
-						
-										                                 		 
-										                                         
-           <div class="form-group">	
-				<label class="col-sm-2 control-label">春节休假工资：</label>
-				<div class="col-sm-4">
-					<input id="yearCost" name="yearCost" th:field="*{yearCost}" class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">春节上班天数：</label>
-				<div class="col-sm-4">
-					<input id="yearWork" name="yearWork" th:field="*{yearWork}" class="form-control" type="text"  maxlength="2">
-				</div>
-			</div>
-			
-
-			
-	        <div class="form-group">	
-				<label class="col-sm-2 control-label">春节上班工资：</label>
-				<div class="col-sm-4">
-					<input id="yearSum" name="yearSum" th:field="*{yearSum}" class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">春节值班天数：</label>
-				<div class="col-sm-4">
-					<input id="yearPlus" name="yearPlus" th:field="*{yearPlus}" class="form-control" type="text"  maxlength="2">
+					<input id="workHuo" name="workHuo"  th:field="*{workHuo}"  class="form-control" type="text"   maxlength="8">
 				</div>
 			</div>
 		
-			
-								                                                          
-            <div class="form-group">	
-				<label class="col-sm-2 control-label">加班工资：</label>
-				<div class="col-sm-4">
-					<input id="workCost" name="workCost" th:field="*{workCost}" class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">法定天数：</label>
-				<div class="col-sm-4">
-					<input id="lawDay" name="lawDay" th:field="*{lawDay}"  class="form-control" type="text"  maxlength="2">
-				</div>
-			</div>
-			
-			
-
-										    
-										    
-		   <div class="form-group">	
-				<label class="col-sm-2 control-label">法定工资：</label>
-				<div class="col-sm-4">
-					<input id="lawCost" name="lawCost" th:field="*{lawCost}" class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">公休天数：</label>
-				<div class="col-sm-4">
-					<input id="busDay" name="busDay" th:field="*{busDay}" class="form-control" type="text"  maxlength="2">
-				</div>
-			</div>
-			
-
-			
-	      <div class="form-group">	
-				<label class="col-sm-2 control-label">公休工资：</label>
-				<div class="col-sm-4">
-					<input id="busCost" name="busCost" th:field="*{busCost}" class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">延时加班工资：</label>
-				<div class="col-sm-4">
-					<input id="busPlus" name="busPlus"  th:field="*{busPlus}" class="form-control" type="text"  maxlength="5">
-				</div>
-			</div>
-										                                        
-			
-			
-            <div class="form-group">	
-				<label class="col-sm-2 control-label">女工费：</label>
-				<div class="col-sm-4">
-					<input id="woman" name="woman" th:field="*{woman}" class="form-control" type="text"  maxlength="4">
-				</div>
-				
-				<label class="col-sm-2 control-label">入井费：</label>
-				<div class="col-sm-4">
-					<input id="run" name="run"  th:field="*{run}" class="form-control" type="text"  maxlength="4">
-				</div>
-			</div>
-										     
-   
-										                                                        
-	       <div class="form-group">	
-				<label class="col-sm-2 control-label">夜班补助：</label>
-				<div class="col-sm-4">
-					<input id="ye" name="ye" th:field="*{ye}" class="form-control" type="text"  maxlength="5">
-				</div>
-				
-				<label class="col-sm-2 control-label">矿井处罚：</label>
-				<div class="col-sm-4">
-					<input id="kuangji" name="kuangji" th:field="*{kuangji}" class="form-control" type="text"  maxlength="5">
-				</div>
-			</div>
-									
-			
-			
-           <div class="form-group">	
-				<label class="col-sm-2 control-label">护理假天数：</label>
-				<div class="col-sm-4">
-					<input id="huliDay" name="huliDay" th:field="*{huliDay}" class="form-control" type="text"  maxlength="2">
-				</div>
-				
-				
-				<label class="col-sm-2 control-label">护理假工资：</label>
-				<div class="col-sm-4">
-					<input id="huliCost" name="huliCost" th:field="*{huliCost}" class="form-control" type="text"  maxlength="4">
-				</div>
-			</div>
-						
-		
-										                                                        
-										      
-           <div class="form-group">	
-           		<label class="col-sm-2 control-label">工伤假天数：</label>
-				<div class="col-sm-4">
-					<input id="gsDay" name="gsDay"  th:field="*{gsDay}" class="form-control" type="text"  maxlength="2">
-				</div>	
-           
-           
-				<label class="col-sm-2 control-label">工伤假工资：</label>
-				<div class="col-sm-4">
-					<input id="gsCost" name="gsCost" th:field="*{gsCost}" class="form-control" type="text"  maxlength="4">
-				</div>
-			</div>
-			
-			
-								
-	       <div class="form-group">	
-				<label class="col-sm-2 control-label">探亲假天数：</label>
-				<div class="col-sm-4">
-					<input id="tqDay" name="tqDay" th:field="*{tqDay}" class="form-control" type="text"  maxlength="2">
-				</div>
-				
-				<label class="col-sm-2 control-label">探亲工资：</label>
-				<div class="col-sm-4">
-					<input id="tqCost" name="tqCost" th:field="*{tqCost}"  class="form-control" type="text"  maxlength="4">
-				</div>
-			</div>
-								
-										     
-
-		   <div class="form-group">	
-				<label class="col-sm-2 control-label">病假天数：</label>
-				<div class="col-sm-4">
-					<input id="bingDay" name="bingDay" th:field="*{bingDay}"  class="form-control" type="text"  maxlength="2">
-				</div>
-		   
-		   
-				<label class="col-sm-2 control-label">病假工资：</label>
-				<div class="col-sm-4">
-					<input id="bingCost" name="bingCost" th:field="*{bingCost}"  class="form-control" type="text"  maxlength="4">
-				</div>
-			</div>
-										                                            
-								
-										                                                 
-            <div class="form-group">	
-				<label class="col-sm-2 control-label">丧假天数：</label>
-				<div class="col-sm-4">
-					<input id="sangDay" name="sangDay" th:field="*{sangDay}"  class="form-control" type="text"  maxlength="2">
-				</div>
-            
-            
-		 		<label class="col-sm-2 control-label">丧假工资：</label>
-				<div class="col-sm-4">
-					<input id="sangCost" name="sangCost"  th:field="*{sangCost}"  class="form-control" type="text"  maxlength="4">
-				</div>
-			</div>
-			
-										                             
-              <div class="form-group">	
-                   <label class="col-sm-2 control-label">事假天数：</label>
-				<div class="col-sm-4">
-					<input id="sjDay" name="sjDay" th:field="*{sjDay}"  class="form-control" type="text"  maxlength="2">
-				</div>
-				
-				
-				<label class="col-sm-2 control-label">旷工天数：</label>
-				<div class="col-sm-4">
-					<input id="kgDay" name="kgDay" th:field="*{kgDay}" class="form-control" type="text"  maxlength="2">
-				</div>
-			</div>
-			
+	
 
 	       <div class="form-group">	
-            		<label class="col-sm-2 control-label">待岗天数：</label>
+			    <label class="col-sm-2 control-label">单项工程：</label>
 				<div class="col-sm-4">
-					<input id="dgDay" name="dgDay" th:field="*{dgDay}" class="form-control" type="text"  maxlength="2">
+					<input id="workDan" name="workDan"  th:field="*{workDan}"  class="form-control" type="text"   maxlength="8">
 				</div>
 				
-				<label class="col-sm-2 control-label">其它补助：</label>
+				<label class="col-sm-2 control-label">计算工资：</label>
 				<div class="col-sm-4">
-					<input id="other" name="other" th:field="*{other}" class="form-control" type="text"  maxlength="6">
+					<input id="userCost" name="userCost" th:field="*{userCost}" class="form-control" type="text"  maxlength="8">
 				</div>
 			</div>
 			
@@ -412,35 +194,250 @@
 					 <input id="createTime" name="createTime" th:value="*{createTime}" class="form-control" type="text"  maxlength="20">
 				</div>
 				
-
-				<label class="col-sm-2 control-label">计算工资：</label>
+				
+				<label class="col-sm-2 control-label">备注：</label>
 				<div class="col-sm-4">
-					<input id="userCost" name="userCost" th:field="*{userCost}" class="form-control" type="text"  maxlength="6">
+					<textarea id="remark" name="remark" th:field="*{remark}" maxlength="100" class="input-xlarge" rows="3" style="width:100%;border-radius:5px;"></textarea>
 				</div>
 			</div>
 		
-		
-        	<div class="form-group">	
-				<label class="col-sm-2 control-label">备注：</label>
-				<div class="col-sm-10">
-					<textarea id="remark" name="remark" th:field="*{remark}" maxlength="100" class="input-xlarge" rows="3" style="width:100%;border-radius:5px;"></textarea>
-				</div>
-			</div>				
-				
+							
         </form>
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        var prefix = ctx + "system/yx/selectMM";
-        $("#form-yx-edit").validate({
-            focusCleanup: true
-        });
-
+        var prefix = ctx + "system/yx/selectDD";
+        
         function submitHandler() {
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-yx-edit').serialize());
+                $.operate.save(prefix + "/edit", $('#form-YxDay-edit').serialize());
             }
         }
+        
+        function selectDeptTree(val,_pid) {
+        	var pid = 0;
+        	if(_pid){
+        		pid=$(_pid).val();
+        	}
+        	top._pid=pid;
+            var options = {
+                title: '部门选择',
+                width: "380",
+                url:"/system/yx/selectDD/selectDeptTree?name="+pid,
+                callBack: function(index, layero){
+                	//val   dep_1   dep_2/dep_3/depName_2/depName_3  clear
+                	//val   dep_2   /dep_3/depName_3  clear
+                	var tree = layero.find("iframe")[0].contentWindow.$._tree;
+                    if ($.tree.notAllowLastLevel(tree)) {
+                        var body = layer.getChildFrame('body', index);
+                        $("#dep_"+val).val(body.find('#treeId').val());
+                        $("#depName_"+val).val(body.find('#treeName').val());
+                        layer.close(index);
+                    }
+                }
+            };
+            $.modal.openOptions(options);
+
+   		 }
+        
+        
+        $.validator.addMethod("checkMoney",function(value,element,params){
+			var checkQQ = /(?!^0*(\.0{1,2})?$)^\d{1,13}(\.\d{1,2})?$/;
+			return this.optional(element)||(checkQQ.test(value));
+		},"*请输入正确金额（最多保留两位小数）！");
+
+        $.validator.addMethod("_checkHan",function(value,element,params){
+			var checkQQ = /[\u4e00-\u9fa5]/;
+			return this.optional(element)||(checkQQ.test(value));
+		},"*请输入正确的汉字！");
+        
+        $(function(){
+            var icon = "<i class='fa fa-times-circle'></i> ";
+            $("#form-YxDay-edit").validate({
+                rules: {
+                    
+                    userId : {
+  	      				required : true,
+  	      				digits : true
+  	      			},
+  	      			userName : {
+  	      				required : true,
+  	      				_checkHan:true
+  	      			},
+  	      			sex : {
+  	      				required : true
+  	      			},
+  	      			tell : {
+  	      				isPhone:true
+  	      			},
+  	      			card : {
+  	      				isIdentity:true
+  	      			},
+  	      			address : {
+	  	      			required : true,
+		      			_checkHan:true
+  	      			},
+  	      			userOrg : {
+  	      				required : true
+  	      			},
+  	      			userArea : {
+  	      				required : true
+  	      			},
+  	      			userGroup : {
+  	      				required : true
+  	      			},
+  	      			userClass : {
+  	      				required : true
+  	      			},
+  	      			station : {
+  	      				required : true,
+	      				_checkHan:true
+  	      			},
+ 	      			workType : {
+  	      				required : true
+  	      			},
+  	      			
+  	      		    workClass : {
+  	      				required : true
+  	      			},
+  	      		    workStart : {
+  	      				required : true
+  	      			},
+  	   		    	workNumber : {
+	      				required : true,
+	      				digits : true
+	      			},
+	     		    workPrice : {
+  	      				required : true,
+  	      				checkMoney:true
+  	      			},
+  	   		        workAll : {
+	      				required : true,
+	      				digits : true
+	      			},
+	    	        workFen : {
+	      				required : true,
+	      				digits : true
+	      			},
+	       	        workSum : {
+	      				required : true,
+	      				checkMoney:true
+	      			},
+	      	        workHuo : {
+	      				required : true,
+	      				checkMoney:true
+	      			},
+	      	        workDan : {
+	      				required : true,
+	      				checkMoney:true
+	      			},
+	      	        userCost : {
+	      				required : true,
+	      				checkMoney:true
+	      			},
+	      			createTime : {
+	      				required : true
+	      			}
+  	      	    
+  	      			
+                },
+                messages: {
+                	
+      	      		userId : {
+      	      			required : icon + "请输入编号！",
+      	      			digits : icon + "只能输入数字！"
+      	      		},
+      	      		userName : {
+      	      			required : icon + "请输入姓名！",
+      	      			_checkHan: icon + "只能输入汉字！"
+      	      		},
+      	      		
+      	      		sex : {
+      	      			required : icon + "请输选择性别！"
+      	      		},
+      	      		
+      	      		tell : {
+      	      			required : icon + "请输正确的手机号码！"
+      	      		},
+      	      		card : {
+      	      			required : icon + "请输正确的身份证号码！"
+      	      		},
+      	      		address : {
+      	      			required : icon + "请输户籍所在地！",
+      	      			_checkHan: icon + "只能输入汉字！"
+      	      		},
+
+      	      		userOrg : {
+      	      			required : icon + "请选择单位！"
+      	      		},
+      	      		
+      	      		userArea : {
+      	      			required : icon + "请选择部门！"
+      	      		},
+      	      		
+      	      		userGroup : {
+      	      			required : icon + "请选择区队！"
+      	      		},
+      	    		userClass : {
+      	      			required : icon + "请选择班组！"
+      	      		},
+      	      		station : {
+      	      			required : icon + "请填写岗位！",
+      	      			_checkHan: icon + "只能输入汉字！"
+      	      		},
+      	      		workType : {
+      	      			required : icon + "请填写工作类型！"
+      	      		},
+      	      		workClass : {
+      	      			required : icon + "请填写工资类型！"
+      	      		},
+  	      		    workStart : {
+  	      				required : icon + "请选择出勤状态！"
+  	      			},
+  	   		    	workNumber : {
+  	   		    		required : icon + "请填写产量/进米！",
+  	   		    		digits : icon + "请输入正确的数字！"
+	      			},
+	     		    workPrice : {
+	     				required : icon + "请填写单价！",
+	     				checkMoney : icon + "*请输入正确金额（最多保留两位小数）！"
+  	      			},
+  	   		        workAll : {
+  	   		   			required : icon + "请填写总工分！",
+	   		    		digits : icon + "请输入正确的数字！"
+	      			},
+	    	        workFen : {
+	    	  			required : icon + "请填写个人工分！",
+	   		    		digits : icon + "请输入正确的数字！"
+	      			},
+	       	        workSum : {
+	    	  			required : icon + "请填写计件工资！",
+	    	  			checkMoney : icon + "*请输入正确金额（最多保留两位小数）！"
+	      			},
+	      	        workHuo : {
+		      	  		required : icon + "请填写零活工资！",
+	    	  			checkMoney : icon + "*请输入正确金额（最多保留两位小数）！"
+	      			},
+	      	        workDan : {
+	      		  		required : icon + "请填写单项工程！",
+	    	  			checkMoney : icon + "*请输入正确金额（最多保留两位小数）！"
+	      			},
+	      	        userCost : {
+	      		  		required : icon + "请填写计算工资！",
+	    	  			checkMoney : icon + "*请输入正确金额（最多保留两位小数）！"
+	      			},
+	      			createTime : {
+	      				required : icon + "请填写创建时间！",
+	      			}
+      	      		
+                }
+            }); 
+        })
+
+        
+        
+        
+        
     </script>
 </body>
 </html>

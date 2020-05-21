@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.project.system.yx.mapper.YxDayMapper">
     
-    <resultMap type="YxDay" id="YxResult">
+    <resultMap type="YxDay" id="YxDayResult">
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
         <result property="userName"    column="user_name"    />
@@ -20,49 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="workType"    column="work_type"    />
         <result property="workClass"    column="work_class"    />
         <result property="workStart"    column="work_start"    />
-        <result property="countDay"    column="count_day"    />
         <result property="workNumber"    column="work_number"    />
         <result property="workPrice"    column="work_price"    />
         <result property="workAll"    column="work_all"    />
         <result property="workFen"    column="work_fen"    />
         <result property="workSum"    column="work_sum"    />
         <result property="workHuo"    column="work_huo"    />
-        <result property="kaohe"    column="kaohe"    />
-        <result property="meiKaohe"    column="mei_kaohe"    />
-        <result property="meeting"    column="meeting"    />
-        <result property="yearsHolidays"    column="years_holidays"    />
-        <result property="yearsCost"    column="years_cost"    />
-        <result property="yearDay"    column="year_day"    />
-        <result property="yearCost"    column="year_cost"    />
-        <result property="yearWork"    column="year_work"    />
-        <result property="yearSum"    column="year_sum"    />
-        <result property="yearPlus"    column="year_plus"    />
-        <result property="yearDuty"    column="year_duty"    />
-        <result property="workPlus"    column="work_plus"    />
-        <result property="workCost"    column="work_cost"    />
-        <result property="lawDay"    column="law_day"    />
-        <result property="lawCost"    column="law_cost"    />
-        <result property="busDay"    column="bus_day"    />
-        <result property="busCost"    column="bus_cost"    />
-        <result property="busPlus"    column="bus_plus"    />
-        <result property="woman"    column="woman"    />
-        <result property="run"    column="run"    />
-        <result property="ye"    column="ye"    />
-        <result property="kuangji"    column="kuangji"    />
-        <result property="huliDay"    column="huli_day"    />
-        <result property="huliCost"    column="huli_cost"    />
-        <result property="gsDay"    column="gs_day"    />
-        <result property="gsCost"    column="gs_cost"    />
-        <result property="tqDay"    column="tq_day"    />
-        <result property="tqCost"    column="tq_cost"    />
-        <result property="bingDay"    column="bing_day"    />
-        <result property="bingCost"    column="bing_cost"    />
-        <result property="sangDay"    column="sang_day"    />
-        <result property="sangCost"    column="sang_cost"    />
-        <result property="sjDay"    column="sj_day"    />
-        <result property="kgDay"    column="kg_day"    />
-        <result property="dgDay"    column="dg_day"    />
-        <result property="other"    column="other"    />
+        <result property="workDan"    column="work_dan"    />
         <result property="userCost"    column="user_cost"    />
         <result property="createTime"    column="create_time"    />
         <result property="createBy"    column="create_by"    />
@@ -71,37 +35,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
+
+
     <sql id="selectYxVo">
-        select distinct(id), user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, work_start,
-        work_number, work_price, work_all, work_fen, work_sum, work_huo, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work,
-         year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, 
-         gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day,other, user_cost,
-         
-         YxDay.create_time, YxDay.create_by,YxDay.update_time,YxDay.update_by, remark from yx_day as YxDay
-        
-        
+        select distinct(id), user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, 
+        work_type, work_class, work_start, work_number, work_price, work_all, work_fen, work_sum, work_huo, work_dan,user_cost,
+        YxDay.create_time, YxDay.create_by,YxDay.update_time,YxDay.update_by, remark from yx_day as YxDay
         left join sys_dept sd on (sd.dept_name = YxDay.user_org or sd.dept_name = YxDay.user_area or sd.dept_name = YxDay.user_group or sd.dept_name = YxDay.user_class)
     </sql>
 
 
 
-
-    <select id="selectYxKHList" parameterType="YxDay" resultMap="YxResult">
+    <select id="selectYxKHList" parameterType="YxDay" resultMap="YxDayResult">
     
-    select user_id, user_name, sex, tell, card,address,user_org, user_area, user_group, user_class, station, work_type, work_class,LEFT(create_time,7) AS create_time,COUNT(*) as count_day,work_start,sum(work_sum) as work_sum ,sum(work_huo) as work_huo,
-		
-		sum(kaohe) as kaohe,sum(mei_kaohe) as mei_kaohe,sum(meeting) as meeting,count(years_holidays) as years_holidays,sum(years_cost) as years_cost,count(year_day) as year_day,sum(year_cost) as year_cost,sum(year_work) as year_work,
-		
-		sum(year_sum) as year_sum,count(year_plus) as year_plus,sum(year_duty) as year_duty,count(work_plus) as work_plus,sum(work_cost) as work_cost,count(law_day) as law_day,sum(law_cost) as law_cost,count(bus_day) as bus_day,sum(bus_cost) as bus_cost,sum(bus_plus) as bus_plus,sum(woman) as woman,sum(run) as run,
-		
-		sum(ye) as ye, sum(kuangji) as kuangji,count(huli_day) as huli_day,sum(huli_cost) as huli_cost,count(gs_day) as gs_day,sum(gs_cost) as gs_cost,count(tq_day) as q_day,sum(tq_cost) as tq_cost,count(bing_day) as bing_day,sum(bing_cost) as bing_cost,count(sang_day) as sang_day,sum(sang_cost) as sang_cost,
-		
-		count(sj_day) as sj_day,count(kg_day) as kg_day,count(dg_day) as dg_day,sum(other) as other,
-		
-		sum(work_sum) + sum(work_huo) + sum(kaohe) + sum(mei_kaohe) + sum(meeting) + sum(years_cost) + sum(year_cost) + sum(year_sum) + sum(year_duty) + sum(work_cost) + sum(law_cost) + sum(bus_cost) + sum(bus_plus) + sum(woman) + sum(run) + sum(ye) + sum(kuangji) + sum(huli_cost) + sum(gs_cost) + sum(tq_cost) + sum(bing_cost) + sum(sang_cost) + sum(other) AS user_cost
+    select user_id, user_name, sex, tell, card,address,user_org, user_area, user_group, user_class, station, work_type, work_class,LEFT(create_time,7) AS create_time,COUNT(*) as count_day,work_start,sum(work_sum) as work_sum ,sum(work_huo) as work_huo,sum(work_dan) as work_dan,
+		sum(work_sum) + sum(work_huo) + sum(work_dan)  AS user_cost
 		from  yx_day   
 
-    
         <where>  
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
             <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
@@ -119,13 +69,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
         
          group by  user_id, user_name, sex, tell, card,address,user_org, user_area, user_group, user_class, station, work_type, work_class, work_start,LEFT(create_time,7) having work_start = 1
-
+         
 
 </select>       
     
     
     
-    <select id="selectYxList" parameterType="YxDay" resultMap="YxResult">
+    <select id="selectYxDayList" parameterType="YxDay" resultMap="YxDayResult">
         <include refid="selectYxVo"/>
         <where>  
             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
@@ -136,32 +86,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="workType != null  and workType != ''"> and work_type = #{workType}</if>
             <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
             <if test="workStart != null">   and work_start = #{workStart} </if>
-            <if test="createTime != null  and createTime != ''">and YxDay.create_time like  concat('%',#{createTime},'%')</if>
+            <if test="createTime != null  and createTime != ''">and YxDay.create_time like concat('%',#{createTime},'%')</if>
             <if test="userName != null  and userName != ''"> and user_name like concat('%',#{userName},'%')</if>
         </where>
     </select>
     
     
     
+    <select id="selectCountMMList" parameterType="YxDay" resultMap="YxDayResult">
+        <include refid="selectYxVo"/>
+        <where>  
+	            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+	            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+	            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+	            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+	            <if test="createTime != null  and createTime != ''">and YxDay.create_time  &lt;= #{createTime} and YxDay.create_time  &gt;= #{updateBy}	</if>
+        </where>
+    </select>
     
-    
-    
-    
-    <select id="selectYxById" parameterType="Long" resultMap="YxResult">
+    <select id="selectYxDayById" parameterType="Long" resultMap="YxDayResult">
         <include refid="selectYxVo"/>
         where id = #{id}
     </select>
     
     
     <select id="findUserOrgExize" resultType="String">
+    
        select
-          YxUser.user_id
+          YxUser.user_id,
+          YxUser.user_name,
+          YxUser.work_type
        from 
           yx_user AS YxUser
           left join sys_dept sd on (sd.dept_name = YxUser.user_org or sd.dept_name = YxUser.user_area or sd.dept_name = YxUser.user_group or sd.dept_name = YxUser.user_class)   
        where
           sd.dept_id = #{userOrg}
           and YxUser.user_id = #{userId}
+          and YxUser.user_name = #{userName}
+          and YxUser.work_type = "计件工资"
+          
           limit 1        
     </select>
     
@@ -190,10 +153,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 
-
-  <insert id="insertYx" parameterType="YxUpload" useGeneratedKeys="true" keyProperty="id">
-        insert into Yx_day
-        
+    <insert id="insertYxDay" parameterType="YxDay" useGeneratedKeys="true" keyProperty="id">
+        insert into yx_day
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id,</if>
             <if test="userName != null  and userName != ''">user_name,</if>
@@ -208,14 +169,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="station != null  and station != ''">station,</if>
             <if test="workType != null  and workType != ''">work_type,</if>
             <if test="workClass != null  and workClass != ''">work_class,</if>
-            <if test="workStart != null  and workStart != ''">work_start,</if>
+            <if test="workStart != null ">work_start,</if>
+            <if test="workNumber != null ">work_number,</if>
+            <if test="workPrice != null ">work_price,</if>
+            <if test="workAll != null ">work_all,</if>
+            <if test="workFen != null ">work_fen,</if>
+            <if test="workSum != null ">work_sum,</if>
+            <if test="workHuo != null ">work_huo,</if>
+            <if test="workDan != null ">work_dan,</if>
+            <if test="userCost != null ">user_cost,</if>
             <if test="createTime != null  and createTime != ''">create_time,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
          </trim>
-         
-         
-         
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-              <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="userId != null  and userId != ''">#{userId},</if>
             <if test="userName != null  and userName != ''">#{userName},</if>
             <if test="sex != null  and sex != ''">#{sex},</if>
             <if test="tell != null  and tell != ''">#{tell},</if>
@@ -228,10 +198,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="station != null  and station != ''">#{station},</if>
             <if test="workType != null  and workType != ''">#{workType},</if>
             <if test="workClass != null  and workClass != ''">#{workClass},</if>
-            <if test="workStart != null  and workStart != ''">#{workStart},</if>
+            <if test="workStart != null ">#{workStart},</if>
+            <if test="workNumber != null ">#{workNumber},</if>
+            <if test="workPrice != null ">#{workPrice},</if>
+            <if test="workAll != null ">#{workAll},</if>
+            <if test="workFen != null ">#{workFen},</if>
+            <if test="workSum != null ">#{workSum},</if>
+            <if test="workHuo != null ">#{workHuo},</if>
+            <if test="workDan != null ">#{workDan},</if>
+            <if test="userCost != null ">#{userCost},</if>
             <if test="createTime != null  and createTime != ''">#{createTime},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
          </trim>
     </insert>
+
 
 
     <insert id="insertYxUpload" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
@@ -294,54 +277,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     
-
-    <update id="updateYx" parameterType="YxDay">
+	<update id="updateYxDay" parameterType="YxDay">
         update yx_day
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null  and userId != ''">user_id = #{userId},</if>
             <if test="userName != null  and userName != ''">user_name = #{userName},</if>
-            <if test="workStart != null  and workStart != ''">work_start = #{workStart},</if>
+            <if test="sex != null  and sex != ''">sex = #{sex},</if>
+            <if test="tell != null  and tell != ''">tell = #{tell},</if>
+            <if test="card != null  and card != ''">card = #{card},</if>
+            <if test="address != null  and address != ''">address = #{address},</if>
+            <if test="userOrg != null  and userOrg != ''">user_org = #{userOrg},</if>
+            <if test="userArea != null  and userArea != ''">user_area = #{userArea},</if>
+            <if test="userGroup != null  and userGroup != ''">user_group = #{userGroup},</if>
+            <if test="userClass != null  and userClass != ''">user_class = #{userClass},</if>
+            <if test="station != null  and station != ''">station = #{station},</if>
+            <if test="workType != null  and workType != ''">work_type = #{workType},</if>
+            <if test="workClass != null  and workClass != ''">work_class = #{workClass},</if>
+            <if test="workStart != null ">work_start = #{workStart},</if>
             <if test="workNumber != null ">work_number = #{workNumber},</if>
             <if test="workPrice != null ">work_price = #{workPrice},</if>
             <if test="workAll != null ">work_all = #{workAll},</if>
             <if test="workFen != null ">work_fen = #{workFen},</if>
+            <if test="workSum != null ">work_sum = #{workSum},</if>
             <if test="workHuo != null ">work_huo = #{workHuo},</if>
-            <if test="kaohe != null ">kaohe = #{kaohe},</if>
-            <if test="meiKaohe != null ">mei_kaohe = #{meiKaohe},</if>
-            <if test="meeting != null ">meeting = #{meeting},</if>
-            <if test="yearsHolidays != null ">years_holidays = #{yearsHolidays},</if>
-            <if test="yearsCost != null ">years_cost = #{yearsCost},</if>
-            <if test="yearDay != null ">year_day = #{yearDay},</if>
-            <if test="yearCost != null ">year_cost = #{yearCost},</if>
-            <if test="yearWork != null ">year_work = #{yearWork},</if>
-            <if test="yearSum != null ">year_sum = #{yearSum},</if>
-            <if test="yearPlus != null ">year_plus = #{yearPlus},</if>
-            <if test="yearDuty != null ">year_duty = #{yearDuty},</if>
-            <if test="workPlus != null ">work_plus = #{workPlus},</if>
-            <if test="workCost != null ">work_cost = #{workCost},</if>
-            <if test="lawDay != null ">law_day = #{lawDay},</if>
-            <if test="lawCost != null ">law_cost = #{lawCost},</if>
-            <if test="busDay != null ">bus_day = #{busDay},</if>
-            <if test="busCost != null ">bus_cost = #{busCost},</if>
-            <if test="busPlus != null ">bus_plus = #{busPlus},</if>
-            <if test="woman != null ">woman = #{woman},</if>
-            <if test="run != null ">run = #{run},</if>
-            <if test="ye != null ">ye = #{ye},</if>
-            <if test="kuangji != null ">kuangji = #{kuangji},</if>
-            <if test="huliDay != null ">huli_day = #{huliDay},</if>
-            <if test="huliCost != null ">huli_cost = #{huliCost},</if>
-            <if test="gsDay != null ">gs_day = #{gsDay},</if>
-            <if test="gsCost != null ">gs_cost = #{gsCost},</if>
-            <if test="tqDay != null ">tq_day = #{tqDay},</if>
-            <if test="tqCost != null ">tq_cost = #{tqCost},</if>
-            <if test="bingDay != null ">bing_day = #{bingDay},</if>
-            <if test="bingCost != null ">bing_cost = #{bingCost},</if>
-            <if test="sangDay != null ">sang_day = #{sangDay},</if>
-            <if test="sangCost != null ">sang_cost = #{sangCost},</if>
-            <if test="sjDay != null ">sj_day = #{sjDay},</if>
-            <if test="kgDay != null ">kg_day = #{kgDay},</if>
-            <if test="dgDay != null ">dg_day = #{dgDay},</if>
-            <if test="other != null ">other = #{other},</if>
+            <if test="workDan != null ">work_dan = #{workDan},</if>
             <if test="userCost != null ">user_cost = #{userCost},</if>
             <if test="createTime != null  and createTime != ''">create_time = #{createTime},</if>
             <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
@@ -352,11 +311,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteYxById" parameterType="Long">
+
+    <delete id="deleteYxDayById" parameterType="Long">
         delete from yx_day where id = #{id}
     </delete>
 
-    <delete id="deleteYxByIds" parameterType="String">
+    <delete id="deleteYxDayByIds" parameterType="String">
         delete from yx_day where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}

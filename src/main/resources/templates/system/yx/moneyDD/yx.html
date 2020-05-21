@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                
+                  			<li>
+                                <label>创建日期：</label>
+                                <input readonly="true" type="text" class="time-input" data-format="yyyy-MM" id="createTime" name="createTime" />
+                            </li>
+                            
+    					    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId" name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName" onclick="selectDeptTree()" readonly="true">
+                            </li>
+                        
+                      		 <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;查询</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="importMoneyDD()"><i class="fa fa-upload"></i>&nbsp;上传</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:yxYue:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:yxYue:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:yxYue:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:yxYue:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                 <table id="bootstrap-table" data-mobile-responsive="true"  style="table-layout:fixed;">
+					
+				 </table>
+            </div>
+        </div>
+    </div>
+    
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: bootstrap-table-editable-js" />
+    <script th:inline="javascript">
+    
+        var editFlag = [[${@permission.hasPermi('system:yxYue:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:yxYue:remove')}]];
+        
+        var prefix = ctx + "system/yx/moneyDD";
+        
+        function selectDeptTree() {
+            var options = {
+                title: '部门选择',
+                width: "380",
+                url: "/system/yx/selectDD/selectDeptTree?parentId="+window.parent._deptID,
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+
+    }
+
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+
+        $(function() {
+            var options = {
+                url: "/system/yx/selectDD/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "牙星公司",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'id', 
+                    title: 'id',
+					align : "center",
+					valign : "middle",
+					width:50,
+                    visible: false
+                },
+
+                {
+                    field: 'userId', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '员工工号'
+                },
+                {
+                    field: 'userName', 
+					align : "center",
+					valign : "middle",
+					width:80,
+                    title: '员工姓名'
+                },
+            
+              
+                {
+                    field: 'workStart', 
+					align : "center",
+					valign : "middle",
+					width:80,
+			        editable: true,
+                    title: '出勤状态'
+         
+                
+                },
+                {
+                    field: 'workNumber', 
+					align : "center",
+					valign : "middle",
+					width:80,
+					editable: true,
+                    title: '产量/进米'
+                },
+                {
+                    field: 'workPrice', 
+					align : "center",
+					valign : "middle",
+					width:80,
+					editable: true,
+                    title: '单价'
+                },
+                {
+                    field: 'workAll', 
+					align : "center",
+					valign : "middle",
+					width:80,
+					editable: true,
+                    title: '总工分'
+                },
+                {
+                    field: 'workFen', 
+					align : "center",
+					valign : "middle",
+					width:80,
+					editable: true,
+                    title: '工分'
+                },
+                {
+                    field: 'workHuo', 
+					align : "center",
+					valign : "middle",
+					width:80,
+					editable: true,
+                    title: '零活工资'
+                },
+                {
+                    field: 'workDan',
+					align : "center",
+					valign : "middle",
+					width:100,
+					editable: true,
+                    title: '单项工程'
+                },
+      
+            
+                {
+                    title: '操作',
+                    align: 'center',
+					valign : "middle",
+					width:150,
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+        
+        
+        
+        
+        function importMoneyDD(){
+      		
+  			$.tzLoading({content:'正在上传，请稍等...'});
+  			var createTime = $('#createTime').val();
+  			var userOrg  = $('#treeName').val();
+  		    var file = $('#excelFile').val();
+  		    
+
+  			if($.common.isEmpty(createTime)){
+  				alert("请选择上传时间！");
+  				LoadingClose();
+  				return;
+  			} 
+  			
+  			if($.common.isEmpty(userOrg)){
+  				alert("请选择组织机构！");
+  				LoadingClose();
+  				return;
+  			} 
+  			
+  			if($.common.isEmpty(file)){
+  				alert("请选择上传Excel文件！");
+  				LoadingClose();
+  				return;
+  			}
+  			
+  		
+  			var formData = new FormData($('#formId')[0]);
+
+
+  			$.ajax({
+  				cache : false,
+  				type : "POST",
+  				url :prefix +'/importMoneyDD',
+  				data : formData,
+  				async : true,
+  				processData: false,
+  				contentType: false,
+  			    error : function(xhr,type) {
+  			    },
+  			    success:function(data){
+  	              $.modal.alertSuccess(data.msg);
+                  LoadingClose();
+  			    }
+  			});
+  			
+  }
+        
+        
+        
+        function exprotExcel(){
+          	
+      		$.tzLoading({content:'正在导出数据，请稍等...'});
+      	    var createTime = $('#createTime').val();
+      	    var userOrg  = $('#treeName').val();
+      	    
+       		if($.common.isEmpty(createTime)){
+      			alert("请选择导出时间！");
+      			LoadingClose();
+      			return;
+      		}  
+      		
+      		if($.common.isEmpty(userOrg)){
+      			alert("请选择组织机构！");
+      			LoadingClose();
+      			return;
+      		} 
+      	    
+      	    window.location.href = prefix + '/exprotExcel?createTime='+createTime+'&userOrg='+userOrg;
+      	    	LoadingClose();
+      }
+    </script>
+    
+    
+</body>
+</html>

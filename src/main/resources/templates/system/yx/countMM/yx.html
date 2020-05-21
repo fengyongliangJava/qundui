@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+    
+    <style type="text/css">
+	    #tableBox1{margin:30px auto;width:3000px;} 
+		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox1 tr:hover{background:#fff;}
+		
+		#tableBox2{margin:30px auto;width:3000px;} 
+		#tableBox2 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox2 tr:hover{background:#fff;}
+	</style>
+    
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>                    
+                        	<li>
+								<label>创建日期： </label>
+								<input type="text" class="time-input" id="createTime" name="createTime" data-format="yyyy-MM" readonly="true"/>
+							</li>
+                        
+                    	    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId"  name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName"  name="treeName"onclick="selectDeptTree()" readonly="true">
+                            </li>
+                            
+
+                            <li>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="countMM()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-sm-12">
+  
+					
+				<div id="box1" class='box1' style="overflow:scroll;">
+					
+					<table  id="tableBox1"  class="table-hover" border = "1" >
+					
+						 <tr>
+						 	<td colspan="35">月工资报表 </td>
+						 </tr>
+						 
+						 <tr>
+             		       <td colspan="3">产量/进米</td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>	 
+
+             		     <tr>
+             		       <td>员工编号</td>
+              		 	   <td>员工姓名</td>
+              		 	   <td>岗位名称</td>
+              		 	   <td>26</td>
+		                   <td>27</td>
+		                   <td>28</td>
+		                   <td>29</td>
+		                   <td>30</td>
+		                   <td>31</td>
+		                   <td>1</td>
+		                   <td>2</td>
+		                   <td>3</td>
+		                   <td>4</td>
+		                   <td>5</td>
+		                   <td>6</td>
+		                   <td>7</td>
+		                   <td>8</td>
+		                   <td>9</td>
+		                   <td>10</td>
+		                   <td>11</td>
+		                   <td>12</td>
+		                   <td>13</td>
+		                   <td>14</td>
+		                   <td>15</td>
+		                   <td>16</td>
+		                   <td>17</td>
+		                   <td>18</td>
+		                   <td>19</td>
+		                   <td>20</td>
+		                   <td>21</td>
+		                   <td>22</td>
+		                   <td>23</td>
+		                   <td>24</td>
+		                   <td>25</td>
+		                   <td>合计</td>
+				  		 </tr>	 
+				  		 
+				  	    
+				   <tr>
+				  		   <td></td>
+				  		   <td></td>
+             		       <td></td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>
+				  		 
+
+				  	    <tr>
+				  		   <td></td>
+				  		   <td></td>
+             		       <td></td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>
+				  		 
+				  		 
+				  		 
+				  	    <tr>
+				  		   <td></td>
+				  		   <td></td>
+             		       <td></td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>
+				  		 
+				  		 
+						 <tr>
+						 	<td colspan="35">总工资:     元</td>
+						 </tr>
+			
+					</table>
+				</div>
+		
+		
+			<div id="box2" class='box2'  style="display:none;overflow:scroll;">
+					<table  id="tableBox2"  class="table-hover" border = "1" >
+					
+						 <tr id="title">
+						 </tr>
+						 
+						 <tr id="number">
+						 </tr>
+						 
+             		     <tr>
+             		       <td>员工编号</td>
+              		 	   <td>员工姓名</td>
+              		 	   <td>岗位名称</td>
+              		 	   <td>26</td>
+		                   <td>27</td>
+		                   <td>28</td>
+		                   <td>29</td>
+		                   <td>30</td>
+		                   <td>31</td>
+		                   <td>1</td>
+		                   <td>2</td>
+		                   <td>3</td>
+		                   <td>4</td>
+		                   <td>5</td>
+		                   <td>6</td>
+		                   <td>7</td>
+		                   <td>8</td>
+		                   <td>9</td>
+		                   <td>10</td>
+		                   <td>11</td>
+		                   <td>12</td>
+		                   <td>13</td>
+		                   <td>14</td>
+		                   <td>15</td>
+		                   <td>16</td>
+		                   <td>17</td>
+		                   <td>18</td>
+		                   <td>19</td>
+		                   <td>20</td>
+		                   <td>21</td>
+		                   <td>22</td>
+		                   <td>23</td>
+		                   <td>24</td>
+		                   <td>25</td>
+		                   <td>合计</td>
+				  		 </tr>	 
+				  		 
+				  	      <tbody id="userList">
+				          
+				          </tbody>
+				  		 
+						 <tr id="foot">
+						 </tr>
+					</table>
+				</div>
+		
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+    
+        var prefix = ctx + "system/yx/countMM";
+
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url:"/system/yx/selectDD/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
+
+        }
+
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+
+        function converter(data){
+        	if(data){
+        		return data;
+        	}
+        	return "0";
+        }
+        
+        function _initCnt(datalist){
+        	return "<tr><td colspan='3' align='center'>" +"产量进米</td>"+
+            "<td>" + converter(datalist.a26_number) +"</td>"+
+            "<td>" + converter(datalist.a27_number) +"</td>"+
+            "<td>" + converter(datalist.a28_number) +"</td>"+
+            "<td>" + converter(datalist.a29_number) +"</td>"+
+            "<td>" + converter(datalist.a30_number) +"</td>"+
+            "<td>" + converter(datalist.a31_number) +"</td>"+
+            "<td>" + converter(datalist.a01_number) +"</td>"+
+            "<td>" + converter(datalist.a02_number) +"</td>"+
+            "<td>" + converter(datalist.a03_number) +"</td>"+
+            "<td>" + converter(datalist.a04_number) +"</td>"+
+            "<td>" + converter(datalist.a05_number) +"</td>"+
+            "<td>" + converter(datalist.a06_number) +"</td>"+
+            "<td>" + converter(datalist.a07_number) +"</td>"+
+            "<td>" + converter(datalist.a08_number) +"</td>"+
+            "<td>" + converter(datalist.a09_number) +"</td>"+
+            "<td>" + converter(datalist.a10_number) +"</td>"+
+            "<td>" + converter(datalist.a11_number) +"</td>"+
+            "<td>" + converter(datalist.a12_number) +"</td>"+
+            "<td>" + converter(datalist.a13_number) +"</td>"+
+            "<td>" + converter(datalist.a14_number) +"</td>"+
+            "<td>" + converter(datalist.a15_number) +"</td>"+
+            "<td>" + converter(datalist.a16_number) +"</td>"+
+            "<td>" + converter(datalist.a17_number) +"</td>"+
+            "<td>" + converter(datalist.a18_number) +"</td>"+
+            "<td>" + converter(datalist.a19_number) +"</td>"+
+            "<td>" + converter(datalist.a20_number) +"</td>"+
+            "<td>" + converter(datalist.a21_number) +"</td>"+
+            "<td>" + converter(datalist.a22_number) +"</td>"+
+            "<td>" + converter(datalist.a23_number) +"</td>"+
+            "<td>" + converter(datalist.a24_number) +"</td>"+
+            "<td>" + converter(datalist.a25_number) +"</td>"+
+            "<td>" + converter(datalist.a25_number) +"</td>"+
+		"</tr>";
+        }
+        
+
+        function countMM() {
+            $.tzLoading({content: '正在统计，请稍等...'});
+            
+            var title = document.getElementById("title");
+            var number = document.getElementById("number");
+            var foot = document.getElementById("foot");
+            var userList = document.getElementById("userList");
+            
+        
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+            
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/countMM',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (da) {
+                	var datalist = da;
+        
+                    var str1 = "";
+                    var str2 = "";
+                    var str3 = "";
+                    var str4 = "";
+                    
+                    userList.innerHTML="";
+                    number.innerHTML="";
+                    
+                    str1 += "<td colspan='35' align='center'>" + createTime+userOrg+"月统计报表</td>";
+                    
+                    var initCnt = false;
+                    var total = 0;
+                    for(var  i=0;i<datalist.length;i++){
+                    	var data = datalist[i];
+                    	if(!initCnt){
+                    		str2 = _initCnt(data);
+                    		initCnt=true;
+                    	}
+                    	if(data.total){
+                    		total = data.total;
+                    		continue;
+                    	}
+                    	
+                    	 var str3 = "<tr>" +
+
+                         "<td>" + data.userId + "</td>" +
+                         "<td>" + data.userName + "</td>" +
+                         "<td>" + data.Station + "</td>" +
+                         "<td>" + converter(data.a26) + "</td>" +
+                         "<td>" + converter(data.a27) + "</td>" +
+                         "<td>" + converter(data.a28) + "</td>" +
+                       	 "<td>" + converter(data.a29) + "</td>" + 
+                     	 "<td>" + converter(data.a30) + "</td>" +   
+                         "<td>" + converter(data.a31) + "</td>" +
+                         "<td>" + converter(data.a01) + "</td>" +
+                         "<td>" + converter(data.a02) + "</td>" +
+                         "<td>" + converter(data.a03) + "</td>" +
+                         "<td>" + converter(data.a04) + "</td>" +
+                         "<td>" + converter(data.a05) + "</td>" +
+                         "<td>" + converter(data.a06) + "</td>" +
+                         "<td>" + converter(data.a07) + "</td>" +
+                         "<td>" + converter(data.a08) + "</td>" +
+                         "<td>" + converter(data.a09) + "</td>" +
+                         "<td>" + converter(data.a10) + "</td>" +
+                         "<td>" + converter(data.a11) + "</td>" +
+                         "<td>" + converter(data.a12) + "</td>" +
+                         "<td>" + converter(data.a13) + "</td>" +
+                         "<td>" + converter(data.a14) + "</td>" +
+                         "<td>" + converter(data.a15) + "</td>" +
+                         "<td>" + converter(data.a16) + "</td>" +
+                         "<td>" + converter(data.a17) + "</td>" +
+                         "<td>" + converter(data.a18) + "</td>" +
+                         "<td>" + converter(data.a19) + "</td>" +
+                         "<td>" + converter(data.a20) + "</td>" +
+                         "<td>" + converter(data.a21) + "</td>" +
+                         "<td>" + converter(data.a22) + "</td>" +
+                         "<td>" + converter(data.a23) + "</td>" +
+                         "<td>" + converter(data.a24) + "</td>" +
+                         "<td>" + converter(data.a25) + "</td>" +
+                         "<td>" + converter(data.sum) + "</td></tr>";
+                         $("#userList").append(str3);
+                    }
+                    
+                    str4 += "<td colspan='35' align='center'><div align='center'>   当日工资总额:"+converter(total)+" </div></td>";
+
+                        title.innerHTML = str1;
+                        number.innerHTML = str2;
+                        foot.innerHTML = str4;
+                     
+                	box2.style.display = 'block';
+                    box1.style.display = 'none';
+                    
+                	LoadingClose();
+                }
+            });
+
+        }
+        
+
+        
+        function exportExcel() {
+        	
+            $.tzLoading({content: '正在导出，请稍等...'});
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/exportExcel',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                
+                success: function (data) {
+                	download(data);
+                	LoadingClose();
+                }
+            });
+
+        }
+      
+        
+        function download(data){
+	        window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+        }
+        
+        
+        
+        
+    </script>
+    
+</body>
+</html>

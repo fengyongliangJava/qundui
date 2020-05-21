@@ -92,6 +92,10 @@ public class YxYue
     private Integer allDay;
     
     /** 计件工资 */
+    @Excel(name = "产量进米")
+    private BigDecimal workNumber;
+    
+    /** 计件工资 */
     @Excel(name = "计件工资")
     private BigDecimal workSum;
 
@@ -449,7 +453,14 @@ public class YxYue
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public BigDecimal getWorkNumber() {
+		return workSum;
+	}
 
+	public void setWorkNumber(BigDecimal workNumber) {
+		this.workNumber = workNumber;
+	}
+	
 	public BigDecimal getWorkSum() {
 		return workSum;
 	}
@@ -881,6 +892,7 @@ public class YxYue
             .append("countDay", getSumDay())
             .append("countMoney", getSumMoney())
             .append("allDay", getAllDay())
+            .append("workSum", getWorkNumber())
             .append("workSum", getWorkSum())
             .append("workHuo", getWorkHuo())
             .append("kaohe", getKaohe())

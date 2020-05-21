@@ -21,6 +21,14 @@ public interface YxUserMapper
      * @return 牙星公司人员
      */
     public YxUser selectYxUserById(Long id);
+    
+    /**
+               * 查询牙星公司人员
+     * 
+     * @param id 牙星公司人员ID
+     * @return 牙星公司人员
+     */
+    public List<YxUser> selectUserModel(YxUser yxUser);
 
     /**
      * 查询牙星公司人员列表
@@ -62,6 +70,6 @@ public interface YxUserMapper
      */
     public int deleteYxUserByIds(String[] ids);
     
-	public String findUserExize(@Param("userOrg")String userOrg, @Param("userId")String userId);
+	public String findUserExize(@Param("userOrg")String userOrg, @Param("userId")String userId, @Param("userName")String userName);
 
 }

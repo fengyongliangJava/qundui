@@ -63,7 +63,7 @@
                 <label class="col-sm-2 control-label is-required">部门：</label>
                 <div class="col-sm-4">
                     <input type="hidden"   id="dep_2"  readonly="true"/>
-                    <input  class="form-control" th:field="*{userArea}" name="userArea" type="text" id="depName_2" onclick="selectDeptTree(2,dep_1)" readonly="true">
+                    <input  class="form-control" th:field="*{userArea}" name="userArea" type="text" id="depName_2" onclick="selectDeptTree(2,depName_1)" readonly="true">
                     
                 </div>
             </div>
@@ -73,13 +73,13 @@
                 <label class="col-sm-2 control-label is-required">区队：</label>
                 <div class="col-sm-4">
                     <input type="hidden"   id="dep_3"  readonly="true"/>
-                    <input  class="form-control" th:field="*{userGroup}" name="userArea" type="text" id="depName_3" onclick="selectDeptTree(3,dep_2)" readonly="true">
+                    <input  class="form-control" th:field="*{userGroup}" name="userGroup" type="text" id="depName_3" onclick="selectDeptTree(3,depName_2)" readonly="true">
                 </div>
                 
                  <label class="col-sm-2 control-label is-required">班组：</label>
                 <div class="col-sm-4">
                     <input type="hidden"   id="dep_4"  readonly="true"/>
-                    <input  class="form-control" th:field="*{userClass}" name="userArea" type="text" id="depName_4" onclick="selectDeptTree(4,dep_3)" readonly="true">
+                    <input  class="form-control" th:field="*{userClass}" name="userClass" type="text" id="depName_4" onclick="selectDeptTree(4,depName_3)" readonly="true">
                 </div>
             </div>
 
@@ -146,7 +146,7 @@
             var options = {
                 title: '部门选择',
                 width: "380",
-                url:"/system/yx/selectDD/selectDeptTree?parentId="+pid,
+                url:"/system/yx/selectDD/selectDeptTree?name="+pid,
                 callBack: function(index, layero){
                 	//val   dep_1   dep_2/dep_3/depName_2/depName_3  clear
                 	//val   dep_2   /dep_3/depName_3  clear

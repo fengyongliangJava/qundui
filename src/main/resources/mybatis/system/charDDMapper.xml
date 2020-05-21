@@ -5,12 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.project.system.yx.mapper.charDDMapper">
 
 	    <sql id="selectYxDayCount">
-	        select  user_org, user_area, user_group, user_class,count(id) from yx_day as YxDay
+	        select	ifnull(count(DISTINCT(id)),0)  from yx_day as YxDay
 	        left join sys_dept sd on (sd.dept_name = YxDay.user_org or sd.dept_name = YxDay.user_area or sd.dept_name = YxDay.user_group or sd.dept_name = YxDay.user_class)
 	    </sql>
 
 	    <sql id="selectYxDaySum">
-	        select  user_org, user_area, user_group, user_class,sum(user_cost) from yx_day as YxDay
+	        select ifnull(sum(DISTINCT(user_cost)),0) from yx_day as YxDay
 	        left join sys_dept sd on (sd.dept_name = YxDay.user_org or sd.dept_name = YxDay.user_area or sd.dept_name = YxDay.user_group or sd.dept_name = YxDay.user_class)
 	    </sql>
 	    
@@ -19,15 +19,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
 	            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
 	            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
-	            <if test="createTime != null  and createTime != ''">and create_time like  concat('%',#{createTime},'%')</if>
+	            <if test="createTime != null  and createTime != ''">and YxDay.create_time = #{createTime}</if>
 		</sql>
 	
     
-
-
-
-
-
 
 <!-- workClass -->
 

@@ -1,5 +1,6 @@
 package com.ruoyi.project.system.yx.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +41,9 @@ public class YxDayServiceImpl implements IYxDayService
      * @return 牙星公司
      */
     @Override
-    public YxDay selectYxById(Long id)
+    public YxDay selectYxDayById(Long id)
     {
-        return yxDayMapper.selectYxById(id);
+        return yxDayMapper.selectYxDayById(id);
     }
 
     /**
@@ -52,9 +53,20 @@ public class YxDayServiceImpl implements IYxDayService
      * @return 牙星公司
      */
     @Override
-    public List<YxDay> selectYxList(YxDay yxDay)
+    public List<YxDay> selectYxDayList(YxDay yxDay)
     {
-        return yxDayMapper.selectYxList(yxDay);
+    	//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	//formatter.format.();
+	   	 yxDay.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+	   	 yxDay.setUpdateTime(DateUtils.getNowDate());
+	   	 yxDay.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+        return yxDayMapper.selectYxDayList(yxDay);
+    }
+    
+    
+    public List<YxDay> selectCountMMList(YxDay yxDay)
+    {
+        return yxDayMapper.selectCountMMList(yxDay);
     }
     /**
      * 查询牙星公司列表
@@ -75,12 +87,12 @@ public class YxDayServiceImpl implements IYxDayService
      * @return 结果
      */
     @Override
-    public int insertYx(YxDay yxDay)
+    public int insertYxDay(YxDay yxDay)
     {
-      	 yxDay.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*      	 yxDay.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	 yxDay.setUpdateTime(DateUtils.getNowDate());
-    	 yxDay.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
-        return yxDayMapper.insertYx(yxDay);
+    	 yxDay.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
+        return yxDayMapper.insertYxDay(yxDay);
     }
     
     /**
@@ -130,9 +142,9 @@ public class YxDayServiceImpl implements IYxDayService
     @Override
     public int insertYxUser(YxUser yxuser)
     {
-    	yxuser.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*    	yxuser.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	yxuser.setUpdateTime(DateUtils.getNowDate());
-    	yxuser.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+    	yxuser.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
         return yxDayMapper.insertYxUser(yxuser);
     }
 
@@ -144,13 +156,12 @@ public class YxDayServiceImpl implements IYxDayService
      * @return 结果
      */
     @Override
-    public int updateYx(YxDay yxDay)
+    public int updateYxDay(YxDay yxDay)
     {
-    	yxDay.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*    	yxDay.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	yxDay.setUpdateTime(DateUtils.getNowDate());
-    	yxDay.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
-        yxDay.setUpdateTime(DateUtils.getNowDate());
-        return yxDayMapper.updateYx(yxDay);
+    	yxDay.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
+        return yxDayMapper.updateYxDay(yxDay);
     }
 
     /**
@@ -160,9 +171,9 @@ public class YxDayServiceImpl implements IYxDayService
      * @return 结果
      */
     @Override
-    public int deleteYxByIds(String ids)
+    public int deleteYxDayByIds(String ids)
     {
-        return yxDayMapper.deleteYxByIds(Convert.toStrArray(ids));
+        return yxDayMapper.deleteYxDayByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -172,9 +183,9 @@ public class YxDayServiceImpl implements IYxDayService
      * @return 结果
      */
     @Override
-    public int deleteYxById(Long id)
+    public int deleteYxDayById(Long id)
     {
-        return yxDayMapper.deleteYxById(id);
+        return yxDayMapper.deleteYxDayById(id);
     }
 
     /**
@@ -235,8 +246,8 @@ public class YxDayServiceImpl implements IYxDayService
     
     
 	@Override
-	public String findUserOrgExize(String userOrg, String userId) {
-		return yxDayMapper.findUserOrgExize(userOrg,userId);
+	public String findUserOrgExize(String userOrg, String userId,String userName ) {
+		return yxDayMapper.findUserOrgExize(userOrg,userId,userName);
 	}
 }
     

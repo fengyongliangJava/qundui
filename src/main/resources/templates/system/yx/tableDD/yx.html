@@ -7,6 +7,10 @@
 	    #tableBox1{margin:30px auto;} 
 		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
 		#tableBox1 tr:hover{background:#fff;}
+
+	    #tableBox2{margin:30px auto;} 
+		#tableBox2 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox2 tr:hover{background:#fff;}
 	</style>
     
 </head>
@@ -30,9 +34,9 @@
                             
 
                             <li>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="YxtableDD()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
                             </li>
                             
                             
@@ -44,93 +48,118 @@
 
 
             <div class="col-sm-12">
-  
-					
-					<table  id="tableBox1"  class="table-hover" border = "1" >
+	
+				<div id="box1" class='box1'>
+						<table  id="tableBox1"  class="table-hover" border = "1" >
 					
 						 <tr>
-						 	<td colspan="14">牙星公司平均工资明细表 </td>
+						 	<td colspan="8">日明细表 </td>
 						 </tr>
 						 
-			
-						 
-						
-              		 	 <tr>
-              		 	 	<td rowspan="2">类型</td>
-              		 	 	<td rowspan="2">部门</td>
-                    		<td colspan="4">上月工资(元)</td>
-                    		<td rowspan="2">平均工资差</td>
-        				    <td rowspan="2">产量/进米差</td>
-        				    <td colspan="4">本月工资(元)</td>
-        		
-     
-               			 </tr>
+
                			 
              		     <tr>
+             		       <td>类型</td>
+              		 	   <td>计件工资</td>
+              		 	   <td>零活工资</td>
+              		 	   <td>单项工程</td>
 		                   <td>总工资</td>
 		                   <td>总人数</td>
-		                   <td>平均工资</td>
 		                   <td>产量/进米</td>
-		      		       <td>总工资</td>
-		                   <td>总人数</td>
-		                   <td>平均工资</td>
-		                   <td>产量/进米</td>
+		                   <td>缺勤人数</td>
 				  		 </tr>	 
 				  		 
 				  	     <tr>
-				  	       <td rowspan="3">一线</td>
-				  	       <td></td>
+				           <td>一线</td>
+              		 	   <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
-		                   <td></td>
-		                   <td></td>
-		                   <td></td>
-		                   <td></td>
-				  	       <td></td>
-				  	       <td></td>
 				  		 </tr>	
 				  		 
 				  	     <tr>
-				  	       <td></td>
-				  	       <td></td>
+					       <td>二线</td>
+              		 	   <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
-		                   <td></td>
-		                   <td></td>
-		                   <td></td>
-		                   <td></td>
-				  	       <td></td>
 				  		 </tr>	
 		  		 			 
 		  		 			 
-		  		 	     <tr>
-				  	       <td></td>
-				  	       <td></td>
+				  	     <tr>
+					       <td>三线</td>
+              		 	   <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
+				  		 </tr>
+				  		 
+				  		 
+				  		 <tr>
+					       <td>合计</td>
+              		 	   <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
-				  	       <td></td>
-				  		 </tr>	
+				  		 </tr>
+				  		 
+				  		 
 						 <tr>
-						 	<td colspan="13">总工资:     元</td>
+						 	<td colspan="8">总工资:     元</td>
 						 </tr>
 			
 					</table>
+				</div>
 		
-		
+				<div id="box2" class='box2' style="display:none;">
+				
+						<table  id="tableBox2"  class="table-hover" border = "1">
+						
+						 <tr id="title">
+						 </tr>
+
+             		     <tr>
+             		       <td>类型</td>
+              		 	   <td>计件工资</td>
+              		 	   <td>零活工资</td>
+              		 	   <td>单项工程</td>
+		                   <td>总工资</td>
+		                   <td>总人数</td>
+		                   <td>产量/进米</td>
+		                   <td>缺勤人数</td>
+				  		 </tr>	 
+				  		 
+				  	     <tr id="one">
+				  		 </tr>	
+				  		 
+				  	     <tr id="two">
+				  		 </tr>	
+		  		 			 
+	  	    			 <tr id="three">
+				  		 </tr>	
+				  		 
+	  	     			  <tr id="all">
+				  		 </tr>	
+				  		 
+						 <tr id="foot">
+						 </tr>
+					</table>
+					
+				</div>
                 
             </div>
-
-
         </div>
     </div>
     <th:block th:include="include :: footer" />
@@ -153,6 +182,11 @@
 
         function doSubmit(index, layero){
             var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
             if ($.tree.notAllowLastLevel(tree)) {
                 var body = layer.getChildFrame('body', index);
                 $("#treeId").val(body.find('#treeId').val());
@@ -161,11 +195,160 @@
             }
         }
 
+
+        
+
+        function YxtableDD() {
+
+            $.tzLoading({content: '正在统计，请稍等...'});
+            
+            var title = document.getElementById("title");
+            var one = document.getElementById("one");
+            var two = document.getElementById("two");
+            var three = document.getElementById("three");
+            var all = document.getElementById("all");
+            var foot = document.getElementById("foot");
+
+            
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+
+
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/YxtableDD',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (data) {
+        			
+                    var str1 = "";
+                    var str2 = "";
+                    var str3 = "";
+                    var str4 = "";
+                    var str5 = "";
+                    var str6 = "";
+                    
+                    str1 += "<td colspan='8' align='center'>" + createTime+userOrg+"日统计报表</td>";
+                    
+                    str2 += "<td>一线工资</td>" +
+                    	"<td>" + data.workSum1 + "</td>" +
+                        "<td>" + data.workHuo1 + "</td>" +
+                        "<td>" + data.workDan1 + "</td>" +
+                        "<td>" + data.userCost1 + "</td>" +
+                        "<td>" + data.userId1 + "</td>" +
+                        "<td>" + data.workNumber1 + "</td>" +
+                        "<td>" + data.workStart1+ "</td>";
+        	        
+        		    str3 += "<td>二线工资</td>" +
+	                	"<td>" + data.workSum2 + "</td>" +
+	                    "<td>" + data.workHuo2 + "</td>" +
+	                    "<td>" + data.workDan2 + "</td>" +
+	                    "<td>" + data.userCost2 + "</td>" +
+	                    "<td>" + data.userId2 + "</td>" +
+	                    "<td>" + data.workNumber2 + "</td>" +
+	                    "<td>" + data.workStart2+ "</td>";   
+        			    
+        		    str4 += "<td>三线工资</td>" +
+	                	"<td>" + data.workSum3 + "</td>" +
+	                    "<td>" + data.workHuo3 + "</td>" +
+	                    "<td>" + data.workDan3 + "</td>" +
+	                    "<td>" + data.userCost3 + "</td>" +
+	                    "<td>" + data.userId3 + "</td>" +
+	                    "<td>" + data.workNumber3 + "</td>" +
+	                    "<td>" + data.workStart3+ "</td>";
+
+                    str5 += "<td>合计</td>" +
+	                	"<td>" + data.workSum + "</td>" +
+	                    "<td>" + data.workHuo + "</td>" +
+	                    "<td>" + data.workDan + "</td>" +
+	                    "<td>" + data.userCost + "</td>" +
+	                    "<td>" + data.userId + "</td>" +
+	                    "<td>" + data.workNumber + "</td>" +
+	                    "<td>" + data.workStart+ "</td>";
+
+                    str6 += "<td colspan='8' align='center'><div align='center'>当日工资总额:" + data.userCost+ "</div></td>";
+
+                        title.innerHTML = str1;
+                        one.innerHTML = str2;
+                        two.innerHTML = str3;
+                        three.innerHTML = str4;
+                        all.innerHTML = str5;
+                        foot.innerHTML = str6;
+                	box2.style.display = 'block';
+                    box1.style.display = 'none';
+                	LoadingClose();
+
+                }
+            });
+
+        }
+        
+        function exportExcel() {
+            $.tzLoading({content: '正在导出，请稍等...'});
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/exportExcel',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (data) {
+                	download(data);
+                	LoadingClose();
+                }
+            });
+        }
+        
+        function download(data){
+	        window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+        }
+        
         
     </script>
     
-    
-
     
     
 </body>

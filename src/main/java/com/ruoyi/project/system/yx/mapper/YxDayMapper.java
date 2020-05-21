@@ -25,7 +25,7 @@ public interface YxDayMapper
      * @param id 牙星公司ID
      * @return 牙星公司
      */
-    public YxDay selectYxById(Long id);
+    public YxDay selectYxDayById(Long id);
 
     /**
      * 查询牙星公司列表
@@ -33,7 +33,14 @@ public interface YxDayMapper
      * @param yxDay 牙星公司
      * @return 牙星公司集合
      */
-    public List<YxDay> selectYxList(YxDay yxDay);
+    public List<YxDay> selectYxDayList(YxDay yxDay);
+    /**
+     * 查询牙星公司列表
+     * 
+     * @param yxDay 牙星公司
+     * @return 牙星公司集合
+     */
+    public List<YxDay> selectCountMMList(YxDay yxDay);
     /**
      * 查询牙星公司列表
      * 
@@ -47,7 +54,7 @@ public interface YxDayMapper
      * @param yxDay 牙星公司
      * @return 结果
      */
-    public int insertYx(YxDay yxDay);
+    public int insertYxDay(YxDay yxDay);
     /**
      * 新增牙星公司
      * 
@@ -71,7 +78,7 @@ public interface YxDayMapper
      * @param yxDay 牙星公司
      * @return 结果
      */
-    public int updateYx(YxDay yxDay);
+    public int updateYxDay(YxDay yxDay);
 
     /**
      * 删除牙星公司
@@ -79,7 +86,7 @@ public interface YxDayMapper
      * @param id 牙星公司ID
      * @return 结果
      */
-    public int deleteYxById(Long id);
+    public int deleteYxDayById(Long id);
 
     /**
      * 批量删除牙星公司
@@ -87,7 +94,7 @@ public interface YxDayMapper
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteYxByIds(String[] ids);
+    public int deleteYxDayByIds(String[] ids);
 
 
     Dept selectDeptById();
@@ -97,7 +104,7 @@ public interface YxDayMapper
     List<Dept> selectDeptList(Dept dept);
     
     
-	public String findUserOrgExize(@Param("userOrg")String userOrg, @Param("userId")String userId);
+	public String findUserOrgExize(@Param("userOrg")String userOrg, @Param("userId")String userId, @Param("userName")String userName);
 
 	public Map<String,String> selectYx(@Param("userId")String userId);
 

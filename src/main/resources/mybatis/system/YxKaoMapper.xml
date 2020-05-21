@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
        <insert id="insertYxKH" parameterType="YxKao" useGeneratedKeys="true" keyProperty="deptId">
         
-			INSERT INTO yx_kao select d.dept_id,d.parent_id,d.ancestors,d.dept_name,0,'','','','',now(),''
+			INSERT INTO yx_kao select null, d.dept_id,d.parent_id,d.ancestors,d.dept_name,0,'','','','',now(),''
 			from sys_dept d where FIND_IN_SET(d.dept_id,
 			(select GROUP_CONCAT(CONCAT(d.ancestors,',',d.dept_id)) did from 
 			yx_user u 

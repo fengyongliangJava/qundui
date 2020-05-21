@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.tableMMMapper">
+
+	   <sql id="YxtableMMsql">
+	        select 	
+	        	ifnull(count(DISTINCT(user_id)), 0) AS userId,
+				ifnull(sum(DISTINCT(work_number)), 0) AS workNumber,
+				ifnull(sum(DISTINCT(user_cost)), 0) AS userCost
+	        
+	          from yx_yue as YxYue
+	        left join sys_dept sd on (sd.dept_name = YxYue.user_org or sd.dept_name = YxYue.user_area or sd.dept_name = YxYue.user_group or sd.dept_name = YxYue.user_class)
+	    </sql>
+
+	    
+		<sql id="query_Count_sql_where">
+	            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+	            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+	            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+	            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+	            <if test="createTime != null  and createTime != ''">and YxYue.create_time = #{createTime}</if>
+	            <if test="workType != null  and workType != ''">and work_type = #{workType}</if>
+	            <if test="workClass != null  and workClass != ''">and work_class = #{workClass}</if>
+		</sql>
+	
+			
+		<sql id="Prequery_Count_sql_where">
+	            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+	            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+	            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+	            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+				<if test="createTime != null and createTime != ''"> and PERIOD_DIFF(date_format(CONCAT(#{createTime},-01) ,'%Y%m' ) ,date_format( CONCAT(YxYue.create_time,"-01"), '%Y%m' ) ) =1</if>
+				<if test="workType != null  and workType != ''">and work_type = #{workType}</if>
+	            <if test="workClass != null  and workClass != ''">and work_class = #{workClass}</if>
+		</sql>
+
+	    <select id="YxtableMMPre"  parameterType="YxYue" resultType="java.util.Map" >
+		 <include refid="YxtableMMsql"></include>
+			<where>
+				<include refid="Prequery_Count_sql_where"></include>
+			</where>
+		</select>
+
+
+		<select id="YxtableMM"  parameterType="YxYue" resultType="java.util.Map">
+		 <include refid="YxtableMMsql"></include>
+			<where>
+				<include refid="query_Count_sql_where"></include>
+			</where>
+		</select> 
+		
+
+</mapper>

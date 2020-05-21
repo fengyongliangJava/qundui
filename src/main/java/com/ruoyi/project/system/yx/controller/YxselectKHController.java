@@ -199,7 +199,7 @@ public class YxselectKHController extends BaseController
     @ResponseBody
     public AjaxResult export(YxDay yxDay)
     {
-        List<YxDay> list = yxDayService.selectYxList(yxDay);
+        List<YxDay> list = yxDayService.selectYxDayList(yxDay);
         ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
         return util.exportExcel(list, "yx");
     }
@@ -222,7 +222,7 @@ public class YxselectKHController extends BaseController
     @ResponseBody
     public AjaxResult addSave(YxDay yxDay)
     {
-        return toAjax(yxDayService.insertYx(yxDay));
+        return toAjax(yxDayService.insertYxDay(yxDay));
     }
 
     /**
@@ -231,7 +231,7 @@ public class YxselectKHController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
-        YxDay yxDay = yxDayService.selectYxById(id);
+        YxDay yxDay = yxDayService.selectYxDayById(id);
         mmap.put("yx", yxDay);
         return prefix + "/edit";
     }
@@ -245,7 +245,7 @@ public class YxselectKHController extends BaseController
     @ResponseBody
     public AjaxResult editSave(YxDay yxDay)
     {
-        return toAjax(yxDayService.updateYx(yxDay));
+        return toAjax(yxDayService.updateYxDay(yxDay));
     }
 
     /**
@@ -257,6 +257,6 @@ public class YxselectKHController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(yxDayService.deleteYxByIds(ids));
+        return toAjax(yxDayService.deleteYxDayByIds(ids));
     }
 }

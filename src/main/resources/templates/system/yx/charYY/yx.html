@@ -43,8 +43,8 @@
 
                             <li>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="charWorkType()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
                             </li>
                             
                             
@@ -54,15 +54,11 @@
             </div>
 
 
-
             <div class="col-sm-12">
-  
 					
 			 	  <div id="container" style="min-width:400px;height:400px;margin-top:20px;"></div>
-		
                 
             </div>
-
 
         </div>
     </div>
@@ -85,11 +81,15 @@
                 callBack: doSubmit
             };
             $.modal.openOptions(options);
-
     }
 
     function doSubmit(index, layero){
         var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if(tree.getSelectedNodes().length==0){
+        	alert("请选择组织机构");
+        	return;
+        }
+        
         if ($.tree.notAllowLastLevel(tree)) {
             var body = layer.getChildFrame('body', index);
             $("#treeId").val(body.find('#treeId').val());
@@ -97,8 +97,8 @@
             layer.close(index);
         }
     }
+    
 
-        
 
         $(function () {
 
@@ -153,20 +153,11 @@
 
         });
         
-    </script>
-    
-    
-
-    
-    
-    
-  <script type="text/javascript">
-    
-    
+ 
+ 
 function charWorkType() {
 	
     $.tzLoading({content: '正在统计，请稍等...'});
-
 
     var createTime = $('#createTime').val();
     var userOrg  = $('#treeName').val();
@@ -190,10 +181,7 @@ function charWorkType() {
         return;
     } 
     
-
     var formData = new FormData($('#formId')[0]);
-
-    
     
     if(workType == '1'){
         
@@ -259,11 +247,16 @@ function charWorkType() {
 		                LoadingClose();
 		            }
 		        });
-		
-        
-    	
-    	
+		        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     if(workType == '2'){
@@ -336,119 +329,54 @@ function charWorkType() {
   
     
     
- </script>
-    
-    
-    
-    
-  <script type="text/javascript">
-    
-    
-function charWorkClass() {
-	
-    $.tzLoading({content: '正在统计，请稍等...'});
 
-
+    
+function exportExcel() {
+    $.tzLoading({content: '正在导出，请稍等...'});
+    
     var createTime = $('#createTime').val();
-    var userOrg  = $('#userOrg').val();
-    var workType = $('#workType option:selected').val();
+    var userOrg  = $('#treeName').val();
 
-	if ($.common.isEmpty(createTime)) {
-        alert("请选择创建时间！");
+    if ($.common.isEmpty(createTime)) {
+        alert("请选择统计时间！");
         LoadingClose();
         return;
     }
 
     if ($.common.isEmpty(userOrg)) {
-        alert("请选择组织机构！");
+        alert("请选择组织机构！！");
         LoadingClose();
         return;
-    } 
-    
-    if ($.common.isEmpty(workType)) {
-        alert("请选择统计类型！");
-        LoadingClose();
-        return;
-    } 
-    
+    }
 
     var formData = new FormData($('#formId')[0]);
 
     $.ajax({
         cache: false,
         type: "POST",
-        url: prefix + '/charWorkClass',
+        url: prefix + '/exportExcel',
         data : formData,
         async: false,
         processData: false,
         contentType: false,
         error: function () {
         },
+        
         success: function (data) {
-            var chart = Highcharts.chart('container', {
-
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: createTime + '全年工资报表',
-                },
-                subtitle: {
-                    text:  + data.totalCount + '人 ' + data.totalSum + '元'
-                },
-                xAxis: {
-                    categories: [
-                        '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
-                    ],
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: '金额(元)'
-                    }
-                },
-                tooltip: {
-                    // head + 每个 point + footer 拼接成完整的 table
-                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f}元</b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-                },
-                plotOptions: {
-                    column: {
-                        borderWidth: 0
-                    }
-                },
-                series: [{
-                    name: '一线工资',
-                    data: [data.YxSumWorkClass1yue1,data.YxSumWorkClass1yue2,data.YxSumWorkClass1yue3,data.YxSumWorkClass1yue4,data.YxSumWorkClass1yue5,data.YxSumWorkClass1yue6,data.YxSumWorkClass1yue7,data.YxSumWorkClass1yue8,data.YxSumWorkClass1yue9,data.YxSumWorkClass1yue10,data.YxSumWorkClass1yue11,data.YxSumWorkClass1yue12]
-                }, {
-                    name: '二线工资',
-                    data: [data.YxSumWorkClass2yue1,data.YxSumWorkClass2yue2,data.YxSumWorkClass2yue3,data.YxSumWorkClass2yue4,data.YxSumWorkClass2yue5,data.YxSumWorkClass2yue6,data.YxSumWorkClass2yue7,data.YxSumWorkClass2yue8,data.YxSumWorkClass2yue9,data.YxSumWorkClass2yue10,data.YxSumWorkClass2yue11,data.YxSumWorkClass2yue12]
-                }, {
-                    name: '三线工程',
-                    data: [data.YxSumWorkClass3yue1,data.YxSumWorkClass3yue2,data.YxSumWorkClass3yue3,data.YxSumWorkClass3yue4,data.YxSumWorkClass3yue5,data.YxSumWorkClass3yue6,data.YxSumWorkClass3yue7,data.YxSumWorkClass3yue8,data.YxSumWorkClass3yue9,data.YxSumWorkClass3yue10,data.YxSumWorkClass3yue11,data.YxSumWorkClass3yue12]
-                }]
-            });
-            LoadingClose();
+        	download(data);
+        	LoadingClose();
         }
     });
 
 }
-    
-    
-    
+
+function download(data){
+    window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+}
+
  </script>
     
-    
-    
-    
-    
-    
-    
+
     
     
 </body>

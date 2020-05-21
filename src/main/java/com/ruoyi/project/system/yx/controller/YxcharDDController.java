@@ -48,17 +48,11 @@ public class YxcharDDController extends BaseController{
         return prefix + "/yx";
     }
 
-    
-    
     @ResponseBody
     @PostMapping("/charWorkType")
     public Map<String,Object> charWorkType(YxDay yxDay) {
   	  
-  	  
   	    Map<String,Object> map = new HashMap<>();
-  	  
-  
-  
   		
   		int YxCountWorkType1 = charDDService.YxCountWorkType1(yxDay);
   		BigDecimal YxSumWorkType1 = charDDService.YxSumWorkType1(yxDay);
@@ -114,18 +108,29 @@ public class YxcharDDController extends BaseController{
   		
     }
     
-     /**
-                  * 导出牙星公司列表
-      */
-    @RequiresPermissions("system:yx:charDD:export")
-    @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
+    @PostMapping("/exportExcel")
     @ResponseBody
-    public AjaxResult export(YxDay yxDay){
-        List<YxDay> list = yxDayService.selectYxList(yxDay);
+    public AjaxResult exportExcel(YxDay yxDay)
+    {
+        List<YxDay> list = yxDayService.selectYxDayList(yxDay);
+        
+        /*		int dataSize = list.size();
+		for(int i = 0;i < dataSize ; i++ ) {
+	
+			if(list.get(i).getUpdateTime() != null) {
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			    String UpdateTime = formatter.format(list.get(i).getUpdateTime());
+			    
+			    list.get(i).setUpdateTime(UpdateTime);
+			    
+			}
+			    
+		}*/
+        
         ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
-        return util.exportExcel(list, "yx");
+        return util.exportExcel(list, "yxDay");
     }
+
 
   
 }

@@ -18,6 +18,14 @@ public interface IYxUserService
      * @return 牙星公司人员
      */
     public YxUser selectYxUserById(Long id);
+    
+    /**
+               * 查询牙星公司人员
+     * 
+     * @param id 牙星公司人员ID
+     * @return 牙星公司人员
+     */ 
+    public List<YxUser> selectUserModel(YxUser yxUser);
 
     /**
      * 查询牙星公司人员列表
@@ -61,6 +69,6 @@ public interface IYxUserService
     
     
     
-	public String findUserExize(String userOrg, String userId);
+	public String findUserExize(String userOrg, String userId, String userName);
     
 }

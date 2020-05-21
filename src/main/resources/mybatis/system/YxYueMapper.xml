@@ -73,46 +73,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectYxYueVo">
-        select id, user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, count_day,count_money,sum_day,sum_money,all_day, work_sum, work_huo, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work, year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day, other, user_cost, fu, user_money, create_time, create_by, update_time, update_by, remark from yx_yue
+        select DISTINCT(id), user_id, user_name, sex, tell, card, address, user_org, user_area, user_group, user_class, station, work_type, work_class, count_day,count_money,sum_day,sum_money,all_day, work_sum, work_huo, kaohe, mei_kaohe, meeting, years_holidays, years_cost, year_day, year_cost, year_work, year_sum, year_plus, year_duty, work_plus, work_cost, law_day, law_cost, bus_day, bus_cost, bus_plus, woman, run, ye, kuangji, huli_day, huli_cost, gs_day, gs_cost, tq_day, tq_cost, bing_day, bing_cost, sang_day, sang_cost, sj_day, kg_day, dg_day, other, user_cost, fu, user_money, YxYue.create_time, YxYue.create_by, YxYue.update_time, YxYue.update_by, YxYue.remark from yx_yue as YxYue
+        left join sys_dept sd on (sd.dept_name = YxYue.user_org or sd.dept_name = YxYue.user_area or sd.dept_name = YxYue.user_group or sd.dept_name = YxYue.user_class)
     </sql>
+    
+    
+    <sql id="queryYxYueVo">
+             <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+            <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
+            <if test="createTime != null  and createTime != ''">and YxYue.create_time like  concat('%',#{createTime},'%')</if>
+            <if test="userName != null  and userName != ''"> and user_name like concat('%',#{userName},'%')</if>
+    </sql>
+    
 
     <select id="selectYxYueList" parameterType="YxYue" resultMap="YxYueResult">
         <include refid="selectYxYueVo"/>
         <where>  
              work_type = "计件工资"
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
-            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
-            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
-            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
-            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
-            <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
-            <if test="createTime != null  and createTime != ''">and create_time like  concat('%',#{createTime},'%')</if>
-            <if test="userName != null  and userName != ''"> and user_name like concat('%',#{userName},'%')</if>
+             <include refid="queryYxYueVo"/>
         </where>
     </select>
-    
-    
-    
-    
     
      <select id="selectYxAllList" parameterType="YxYue" resultMap="YxYueResult">
         <include refid="selectYxYueVo"/>
         <where>  
             work_type = "月薪工资"
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
-            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
-            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
-            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
-            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
-            <if test="workClass != null  and workClass != ''"> and work_class = #{workClass}</if>
-            <if test="createTime != null  and createTime != ''">and create_time like  concat('%',#{createTime},'%')</if>
-            <if test="userName != null  and userName != ''"> and user_name like concat('%',#{userName},'%')</if>
+        	<include refid="queryYxYueVo"/>
         </where>
     </select>
     
-    
+     <select id="selectYxList" parameterType="YxYue" resultMap="YxYueResult">
+        <include refid="selectYxYueVo"/>
+        <where>  
+        	 <include refid="queryYxYueVo"/>
+        </where>
+    </select>
     
     
     
@@ -138,7 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="workType != null  and workType != ''">work_type,</if>
             <if test="workClass != null  and workClass != ''">work_class,</if>
             <if test="countDay != null ">count_day,</if>
-            <if test="countSum != null ">count_money,</if>
+            <if test="countMoney != null ">count_money,</if>
             <if test="sumDay != null ">sum_day,</if>
             <if test="sumMoney != null ">sum_money,</if>
             <if test="allDay != null ">all_day,</if>
@@ -207,7 +207,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="countMoney != null ">#{countMoney},</if>
             <if test="sumDay != null ">#{sumDay},</if>
             <if test="sumMoney!= null ">#{sumMoney},</if>
-            <if test="adllDay != null ">#{allDay},</if>
+            <if test="allDay != null ">#{allDay},</if>
             <if test="workSum != null ">#{workSum},</if>
             <if test="workHuo != null ">#{workHuo},</if>
             <if test="kaohe != null ">#{kaohe},</if>
@@ -278,7 +278,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="workType != null  and workType != ''">work_type,</if>
             <if test="workClass != null  and workClass != ''">work_class,</if>
             <if test="countDay != null ">count_day,</if>
-            <if test="countSum != null ">count_money,</if>
+            <if test="countMoney != null ">count_money,</if>
             <if test="sumDay != null ">sum_day,</if>
             <if test="sumMoney != null ">sum_money,</if>
             <if test="allDay != null ">all_day,</if>
@@ -315,7 +315,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="countMoney != null ">#{countMoney},</if>
             <if test="sumDay != null ">#{sumDay},</if>
             <if test="sumMoney!= null ">#{sumMoney},</if>
-            <if test="adllDay != null ">#{allDay},</if>
+            <if test="allDay != null ">#{allDay},</if>
             <if test="workPlus != null ">#{workPlus},</if>
             <if test="workCost != null ">#{workCost},</if>
             <if test="other != null ">#{other},</if>
@@ -329,8 +329,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null  and remark != ''">#{remark},</if>
          </trim>
     </insert>
-    
-    
     
     
     

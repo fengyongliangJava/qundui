@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('牙星公司列表')" />
+    
+    <style type="text/css">
+	    #tableBox1 {margin:30px auto;} 
+		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox1 tr:hover{background:#fff;}
+		
+		#tableBox2 {margin:30px auto;} 
+		#tableBox2 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox2 tr:hover{background:#fff;}
+	</style>
+    
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>                    
+                        	<li>
+								<label>创建日期： </label>
+								<input type="text" class="time-input" id="createTime" name="createTime" data-format="yyyy-MM-dd" readonly="true"/>
+							</li>
+                        
+                    	    <li>
+                                <label>组织机构：</label>
+      							<input type="hidden" id="treeId"  name="userOrg" readonly="true"/>
+                                <input  type="text" id="treeName"  name="treeName"onclick="selectDeptTree()" readonly="true">
+                            </li>
+
+                            <li>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="countDD()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-sm-12">
+  
+				<div id="box1" class='box1'>
+					<table  id="tableBox1"  class="table-hover" border = "1" >
+					
+						 <tr>
+						 	<td colspan="11">日工资报表 </td>
+						 </tr>					 
+
+             		     <tr>
+             		       <td>员工编号</td>
+              		 	   <td>员工姓名</td>
+              		 	   <td>岗位名称</td>
+              		 	   <td>个人工分</td>
+              		 	   <td>出勤状态</td>
+		                   <td>计件工资</td>
+		                   <td>零活工资</td>
+		                   <td>单项工程</td>
+		                   <td>合计</td>
+				  		 </tr>	 
+		 
+		 
+		                <tr>
+             		       <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>	
+				  		 
+				        <tr>
+             		       <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>
+
+		 		          <tr>
+             		       <td></td>
+              		 	   <td></td>
+              		 	   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  		 </tr>
+		 
+						 <tr>
+						 	<td colspan="11">总工资:     元            产量/进米</td>
+						 </tr>
+					</table>
+				</div>
+		
+                
+                
+				<div id="box2" class='box2' style="display:none;">
+					<table  id="tableBox2"  class="table-hover" border = "1" >
+					
+						 <tr id="title">
+						 </tr>					 
+
+             		     <tr>
+             		       <td>员工编号</td>
+              		 	   <td>员工姓名</td>
+              		 	   <td>岗位名称</td>
+              		 	   <td>个人工分</td>
+              		 	   <td>出勤状态</td>
+		                   <td>计件工资</td>
+		                   <td>零活工资</td>
+		                   <td>单项工程</td>
+		                   <td>合计</td>
+				  		 </tr>	 
+				  		 
+				  		 
+				          <tbody id="one">
+				          
+				          </tbody>
+		 			
+		 
+						 <tr id="foot">
+						 </tr>
+					</table>
+				</div>
+		
+                
+                
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+
+    <script th:inline="javascript">
+
+        var prefix = ctx + "system/yx/countDD";
+
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url:"/system/yx/selectDD/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
+
+        }
+
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+
+        
+        
+
+        function countDD() {
+
+            $.tzLoading({content: '正在统计，请稍等...'});
+            
+            var title = document.getElementById("title");
+            var foot = document.getElementById("foot");
+            var one = document.getElementById("one");
+
+            
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+
+
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/countDD',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (da) {
+        			
+                	var datalist = da['data'];
+        
+                    var str1 = "";
+                    var str2 = "";
+                    var str3 = "";
+                    one.innerHTML="";
+                    
+                    str1 += "<td colspan='9' align='center'>" + createTime+userOrg+"日统计报表</td>";
+                    
+                    for(var  i=0;i<datalist.length;i++){
+                    	var data = datalist[i];
+                    	 var str2 = "<tr>" +
+                         "<td>" + data.userId + "</td>" +
+                         "<td>" + data.userName + "</td>" +
+                         "<td>" + data.station + "</td>" +
+                       	 "<td>" + data.workFen + "</td>" + 
+                       	 "<td>" + data.workStart + "</td>" + 
+                     	 "<td>" + data.workSum + "</td>" +   
+                         "<td>" + data.workHuo + "</td>" +
+                         "<td>" + data.workDan + "</td>" +
+                         "<td>" + data.userCost+ "</td></tr>";
+                         $("#one").append(str2);
+                    }
+                    
+
+                    str3 += "<td colspan='9' align='center'><div align='center'>当日工资总额:" + da.sum+ "</div></td>";
+
+                        title.innerHTML = str1;
+                        
+                        foot.innerHTML = str3;
+                    
+                	box2.style.display = 'block';
+                    box1.style.display = 'none';
+                    
+                	LoadingClose();
+
+                }
+            });
+
+        }
+        
+        
+        
+        
+        
+        
+        function exportExcel() {
+        	
+            $.tzLoading({content: '正在导出，请稍等...'});
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/exportExcel',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                
+                success: function (data) {
+                	download(data);
+                	LoadingClose();
+                }
+            });
+
+        }
+      
+        
+        function download(data){
+	        window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+        }
+        
+    </script>
+    
+    
+
+    
+    
+</body>
+</html>

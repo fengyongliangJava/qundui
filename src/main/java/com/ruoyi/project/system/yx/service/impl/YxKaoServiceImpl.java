@@ -54,9 +54,9 @@ public class YxKaoServiceImpl implements IYxKaoService
 	@Override
 	public void insertYxKH(YxKao yxKao) {
 		
-	    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*	    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
 	    	yxKao.setUpdateTime(DateUtils.getNowDate());
-	    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+	    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
 		   yxKaoMapper.insertYxKH(yxKao);
 	}
     
@@ -70,9 +70,9 @@ public class YxKaoServiceImpl implements IYxKaoService
     @Override
     public int insertYxKao(YxKao yxKao)
     {
-    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	yxKao.setUpdateTime(DateUtils.getNowDate());
-    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
         return yxKaoMapper.insertYxKao(yxKao);
     }
 
@@ -85,9 +85,9 @@ public class YxKaoServiceImpl implements IYxKaoService
     @Override
     public int updateYxKao(YxKao yxKao)
     {
-    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	yxKao.setUpdateTime(DateUtils.getNowDate());
-    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
         return yxKaoMapper.updateYxKao(yxKao);
     }
 
@@ -96,9 +96,9 @@ public class YxKaoServiceImpl implements IYxKaoService
     @Override
     public int updateYxName(YxKao yxKao)
     {
-    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*    	yxKao.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	yxKao.setUpdateTime(DateUtils.getNowDate());
-    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+    	yxKao.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
         return yxKaoMapper.updateYxName(yxKao);
     }
     /**

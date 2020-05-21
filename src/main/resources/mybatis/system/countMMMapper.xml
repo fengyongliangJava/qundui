@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.countMMMapper">
+
+
+	   <sql id="countMMsql">
+	        select 	
+	        DISTINCT(id),
+	        user_id userId,
+	        user_name userName,
+	        station,
+	        ifnull(work_number,0) workNumber,
+	        	YxDay.create_time createTime,
+	        ifnull(user_cost,0) userCost
+	      
+	        from yx_day as YxDay
+	        left join sys_dept sd on (sd.dept_name = YxDay.user_org or sd.dept_name = YxDay.user_area or sd.dept_name = YxDay.user_group or sd.dept_name = YxDay.user_class)
+	    </sql>
+
+		<sql id="query_Count_sql_where">
+	            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+	            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+	            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+	            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+	            <if test="createTime != null  and createTime != ''">and YxDay.create_time  &lt;= #{createTime} and YxDay.create_time  &gt;= #{updateBy}	</if>
+		</sql>
+
+		<select id="countMM"  parameterType="YxDay" resultType="com.ruoyi.project.system.yx.domain.YxDay" >
+		 <include refid="countMMsql"></include>
+			<where>
+				<include refid="query_Count_sql_where"></include>
+			</where>
+			order by user_id asc
+		</select>
+		
+
+
+
+		
+</mapper>

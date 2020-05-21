@@ -45,6 +45,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectYxUserVo"/>
         where id = #{id}
     </select>
+    
+    
+    <select id="selectUserModel" parameterType="YxUser" resultMap="YxUserResult">
+     select user_id, user_name   from  yx_user as YxUser   
+     left join sys_dept sd on (sd.dept_name = YxUser.user_org or sd.dept_name = YxUser.user_area or sd.dept_name = YxUser.user_group or sd.dept_name = YxUser.user_class)
+        <where>  
+            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+        </where>
+	</select>       
+    
+    
         
     <insert id="insertYxUser" parameterType="YxUser" useGeneratedKeys="true" keyProperty="id">
         insert into yx_user
@@ -113,19 +127,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
      <select id="findUserExize" resultType="String">
        select
-          YxUser.user_id
+          YxUser.user_id,
+          YxUser.user_name,
+          YxUser.work_type
        from 
           yx_user AS YxUser
           left join sys_dept sd on (sd.dept_name = YxUser.user_org or sd.dept_name = YxUser.user_area or sd.dept_name = YxUser.user_group or sd.dept_name = YxUser.user_class)   
        where
           sd.dept_id = #{userOrg}
           and YxUser.user_id = #{userId}
-          and YxUser.work_type = '月薪工资'
+          and YxUser.user_Name = #{userName}
+          and YxUser.work_type = "月薪工资"
           limit 1        
     </select>
     
     
-    
+     <select id="selectYx" resultType="java.util.Map">
+       select 
+           sex AS "sex",
+           tell AS "tell",
+           card AS "card",
+           address AS "address",
+           user_org AS "userOrg",
+           user_area AS "userArea",
+           user_group AS "userGroup",
+           user_class AS "userClass",
+           station AS "station",
+           work_type AS "workType",
+           work_class AS "workClass"
+       from 
+           yx_user
+       where
+           user_id = #{userId} 
+           limit 1        
+    </select>
     
     
 </mapper>

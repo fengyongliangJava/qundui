@@ -72,25 +72,14 @@ public class YxDay
     /** 工资类型 */
     @Excel(name = "工资类型")
     private String workClass;
-    
-    
-    //@Transient
-    private Integer countDay;
-    
-    public Integer getCountDay() {
-		return countDay;
-	}
 
-	public void setCountDay(Integer countDay) {
-		this.countDay = countDay;
-	}
-
-	
 	/** 出勤状态 */
     @Excel(name = "出勤状态")
-    private Integer workStart;
-
+    private String workStart;
     
+	/** 出勤状态 */
+    @Excel(name = "班次")
+    private String sanClass;
     
     /** 产量 */
     @Excel(name = "产量")
@@ -113,170 +102,17 @@ public class YxDay
     private BigDecimal workSum;
     
     /** 零活工资*/
-    @Excel(name = "计件工资")
+    @Excel(name = "零活工资")
     private BigDecimal workHuo;
-
-   /** 考核*/
-    @Excel(name = "考核")
-    private Integer kaohe;
-
-   /** 煤质考核*/
-    @Excel(name = "煤质考核")
-    private Integer meiKaohe;
-
-   /** 早会*/
-    @Excel(name = "早会")
-    private Integer meeting;
-
-   /** 年休假天数*/
-    @Excel(name = "年休假天数")
-    private Integer yearsHolidays;
-
-   /** 年休假工资*/
-    @Excel(name = "年休假工资")
-    private Integer yearsCost;
-
-   /** 春节休假天数*/
-    @Excel(name = "春节休假天数")
-    private Integer yearDay;
-
-   /** 春节休假工资*/
-    @Excel(name = "春节休假工资")
-    private Integer yearCost;
-
-   /** 春节上班*/
-    @Excel(name = "春节上班")
-    private Integer yearWork;
-
-   /** 春节上班工资*/
-    @Excel(name = "春节上班工资")
-    private Integer yearSum;
-
-   /** 春节值班天数*/
-    @Excel(name = "春节值班天数")
-    private Integer yearPlus;
-
-   /** 春节值班工资*/
-    @Excel(name = "春节值班工资")
-    private Integer yearDuty;
-
-   /** 加班天数*/
-    @Excel(name = "加班天数")
-    private Integer workPlus;
-
-   /** 加班工资*/
-    @Excel(name = "加班工资")
-    private Integer workCost;
-
-   /** 法定天数*/
-    @Excel(name = "法定天数")
-    private Integer lawDay;
-
-   /** 法定工资*/
-    @Excel(name = "法定工资")
-    private Integer lawCost;
-
-   /** 公休天数*/
-    @Excel(name = "公休天数")
-    private Integer busDay;
-
-   /** 公休工资*/
-    @Excel(name = "公休工资")
-    private Integer busCost;
-
-   /** 延时加班工资*/
-    @Excel(name = "延时加班工资")
-    private Integer busPlus;
-
-   /** 女工费*/
-    @Excel(name = "女工费")
-    private Integer woman;
-
-   /** 入井费*/
-    @Excel(name = "入井费")
-    private Integer run;
-
-   /** 夜班补助*/
-    @Excel(name = "夜班补助")
-    private Integer ye;
-
-   /** 矿井处罚*/
-    @Excel(name = "矿井处罚")
-    private Integer kuangji;
-
-   /** 护理假天数*/
-    @Excel(name = "护理假天数")
-    private Integer huliDay;
-
-   /** 护理假工资*/
-    @Excel(name = "护理假工资")
-    private Integer huliCost;
-
-   /** 工伤假天数*/
-    @Excel(name = "工伤假天数")
-    private Integer gsDay;
-
-   /** 工伤假工资*/
-    @Excel(name = "工伤假工资")
-    private Integer gsCost;
-
-   /** 探亲假天数*/
-    @Excel(name = "探亲假天数")
-    private Integer tqDay;
-
-   /** 探亲工资*/
-    @Excel(name = "探亲工资")
-    private Integer tqCost;
-
-   /** 病假天数*/
-    @Excel(name = "病假天数")
-    private Integer bingDay;
-
-   /** 病假工资*/
-    @Excel(name = "病假工资")
-    private Integer bingCost;
-
-   /** 丧假天数*/
-    @Excel(name = "丧假天数")
-    private Integer sangDay;
-
-   /** 丧假工资*/
-    @Excel(name = "丧假工资")
-    private Integer sangCost;
-
-   /** 事假天数*/
-    @Excel(name = "事假天数")
-    private Integer sjDay;
-
-   /** 旷工天数*/
-    @Excel(name = "旷工天数")
-    private Integer kgDay;
-
-   /** 待岗天数*/
-    @Excel(name = "待岗天数")
-    private Integer dgDay;
-
-   /** 其它补助*/
-    @Excel(name = "其它补助")
-    private Integer other;
-
+    
+    /** 单项工程*/
+    @Excel(name = "单项工程")
+    private BigDecimal workDan; 
+    
    /** 计算工资*/
-    @Excel(name = "计算工资")
-    private BigDecimal userCost;
-    
-   /** 计划工资*/
     @Excel(name = "计划工资")
-    private BigDecimal userSum;
-    
-    /** 浮动比*/
-    @Excel(name = "浮动比")
-    private BigDecimal fu;
-    
-    /** 实发工资*/
-    @Excel(name = "实发工资")
-    private BigDecimal userMoney;
+    private BigDecimal userCost;
 
-    
     
     /** 创建时间 */
     @Excel(name = "创建时间")
@@ -298,8 +134,6 @@ public class YxDay
     @Excel(name = "备注")
     private String remark;
     
-    
-    
 
 	public void setId(Long id) 
     {
@@ -310,7 +144,6 @@ public class YxDay
     {
         return id;
     }
-    
     
     public void setUserId(String userId) 
     {
@@ -430,16 +263,25 @@ public class YxDay
         return workClass;
     }
     
-    public void setWorkStart(Integer workStart) 
+    public void setWorkStart(String workStart) 
     {
         this.workStart = workStart;
     }
 
-    public Integer getWorkStart() 
+    public String getWorkStart() 
     {
         return workStart;
     }
     
+    public void setSanClass(String sanClass) 
+    {
+        this.sanClass = sanClass;
+    }
+
+    public String getSanClass() 
+    {
+        return sanClass;
+    }
     
     public void setWorkNumber(Integer workNumber) 
     {
@@ -496,330 +338,17 @@ public class YxDay
         return workHuo;
     }
     
-    public void setKaohe(Integer kaohe) 
+    public void setWorkDan(BigDecimal workDan) 
     {
-        this.kaohe = kaohe;
+        this.workDan = workDan;
     }
 
-    public Integer getKaohe() 
+    public BigDecimal getWorkDan() 
     {
-        return kaohe;
-    }
-    public void setMeiKaohe(Integer meiKaohe) 
-    {
-        this.meiKaohe = meiKaohe;
+        return workDan;
     }
 
-    public Integer getMeiKaohe() 
-    {
-        return meiKaohe;
-    }
-    public void setMeeting(Integer meeting) 
-    {
-        this.meeting = meeting;
-    }
 
-    public Integer getMeeting() 
-    {
-        return meeting;
-    }
-    public void setYearsHolidays(Integer yearsHolidays) 
-    {
-        this.yearsHolidays = yearsHolidays;
-    }
-
-    public Integer getYearsHolidays() 
-    {
-        return yearsHolidays;
-    }
-    public void setYearsCost(Integer yearsCost) 
-    {
-        this.yearsCost = yearsCost;
-    }
-
-    public Integer getYearsCost() 
-    {
-        return yearsCost;
-    }
-    public void setYearDay(Integer yearDay) 
-    {
-        this.yearDay = yearDay;
-    }
-
-    public Integer getYearDay() 
-    {
-        return yearDay;
-    }
-    public void setYearCost(Integer yearCost) 
-    {
-        this.yearCost = yearCost;
-    }
-
-    public Integer getYearCost() 
-    {
-        return yearCost;
-    }
-    public void setYearWork(Integer yearWork) 
-    {
-        this.yearWork = yearWork;
-    }
-
-    public Integer getYearWork() 
-    {
-        return yearWork;
-    }
-    public void setYearSum(Integer yearSum) 
-    {
-        this.yearSum = yearSum;
-    }
-
-    public Integer getYearSum() 
-    {
-        return yearSum;
-    }
-    public void setYearPlus(Integer yearPlus) 
-    {
-        this.yearPlus = yearPlus;
-    }
-
-    public Integer getYearPlus() 
-    {
-        return yearPlus;
-    }
-    public void setYearDuty(Integer yearDuty) 
-    {
-        this.yearDuty = yearDuty;
-    }
-
-    public Integer getYearDuty() 
-    {
-        return yearDuty;
-    }
-    public void setWorkPlus(Integer workPlus) 
-    {
-        this.workPlus = workPlus;
-    }
-
-    public Integer getWorkPlus() 
-    {
-        return workPlus;
-    }
-    public void setWorkCost(Integer workCost) 
-    {
-        this.workCost = workCost;
-    }
-
-    public Integer getWorkCost() 
-    {
-        return workCost;
-    }
-    public void setLawDay(Integer lawDay) 
-    {
-        this.lawDay = lawDay;
-    }
-
-    public Integer getLawDay() 
-    {
-        return lawDay;
-    }
-    public void setLawCost(Integer lawCost) 
-    {
-        this.lawCost = lawCost;
-    }
-
-    public Integer getLawCost() 
-    {
-        return lawCost;
-    }
-    public void setBusDay(Integer busDay) 
-    {
-        this.busDay = busDay;
-    }
-
-    public Integer getBusDay() 
-    {
-        return busDay;
-    }
-    public void setBusCost(Integer busCost) 
-    {
-        this.busCost = busCost;
-    }
-
-    public Integer getBusCost() 
-    {
-        return busCost;
-    }
-    public void setBusPlus(Integer busPlus) 
-    {
-        this.busPlus = busPlus;
-    }
-
-    public Integer getBusPlus() 
-    {
-        return busPlus;
-    }
-    public void setWoman(Integer woman) 
-    {
-        this.woman = woman;
-    }
-
-    public Integer getWoman() 
-    {
-        return woman;
-    }
-    public void setRun(Integer run) 
-    {
-        this.run = run;
-    }
-
-    public Integer getRun() 
-    {
-        return run;
-    }
-    public void setYe(Integer ye) 
-    {
-        this.ye = ye;
-    }
-
-    public Integer getYe() 
-    {
-        return ye;
-    }
-    public void setKuangji(Integer kuangji) 
-    {
-        this.kuangji = kuangji;
-    }
-
-    public Integer getKuangji() 
-    {
-        return kuangji;
-    }
-    public void setHuliDay(Integer huliDay) 
-    {
-        this.huliDay = huliDay;
-    }
-
-    public Integer getHuliDay() 
-    {
-        return huliDay;
-    }
-    public void setHuliCost(Integer huliCost) 
-    {
-        this.huliCost = huliCost;
-    }
-
-    public Integer getHuliCost() 
-    {
-        return huliCost;
-    }
-    public void setGsDay(Integer gsDay) 
-    {
-        this.gsDay = gsDay;
-    }
-
-    public Integer getGsDay() 
-    {
-        return gsDay;
-    }
-    public void setGsCost(Integer gsCost) 
-    {
-        this.gsCost = gsCost;
-    }
-
-    public Integer getGsCost() 
-    {
-        return gsCost;
-    }
-    public void setTqDay(Integer tqDay) 
-    {
-        this.tqDay = tqDay;
-    }
-
-    public Integer getTqDay() 
-    {
-        return tqDay;
-    }
-    public void setTqCost(Integer tqCost) 
-    {
-        this.tqCost = tqCost;
-    }
-
-    public Integer getTqCost() 
-    {
-        return tqCost;
-    }
-    public void setBingDay(Integer bingDay) 
-    {
-        this.bingDay = bingDay;
-    }
-
-    public Integer getBingDay() 
-    {
-        return bingDay;
-    }
-    public void setBingCost(Integer bingCost) 
-    {
-        this.bingCost = bingCost;
-    }
-
-    public Integer getBingCost() 
-    {
-        return bingCost;
-    }
-    public void setSangDay(Integer sangDay) 
-    {
-        this.sangDay = sangDay;
-    }
-
-    public Integer getSangDay() 
-    {
-        return sangDay;
-    }
-    public void setSangCost(Integer sangCost) 
-    {
-        this.sangCost = sangCost;
-    }
-
-    public Integer getSangCost() 
-    {
-        return sangCost;
-    }
-    public void setSjDay(Integer sjDay) 
-    {
-        this.sjDay = sjDay;
-    }
-
-    public Integer getSjDay() 
-    {
-        return sjDay;
-    }
-    public void setKgDay(Integer kgDay) 
-    {
-        this.kgDay = kgDay;
-    }
-
-    public Integer getKgDay() 
-    {
-        return kgDay;
-    }
-    public void setDgDay(Integer dgDay) 
-    {
-        this.dgDay = dgDay;
-    }
-
-    public Integer getDgDay() 
-    {
-        return dgDay;
-    }
-    public void setOther(Integer other) 
-    {
-        this.other = other;
-    }
-
-    public Integer getOther() 
-    {
-        return other;
-    }
     public void setUserCost(BigDecimal userCost) 
     {
         this.userCost = userCost;
@@ -829,43 +358,6 @@ public class YxDay
     {
         return userCost;
     }
-    
-    
-    public void setUserSum(BigDecimal userSum) 
-    {
-        this.userSum = userSum;
-    }
-
-    public BigDecimal getUserSum() 
-    {
-        return userSum;
-    }
-    
-    
-    public void setFu(BigDecimal fu) 
-    {
-        this.fu = fu;
-    }
-
-    public BigDecimal getFu() 
-    {
-        return fu;
-    }
-    
-    public void setUserMoney(BigDecimal userMoney) 
-    {
-        this.userMoney = userMoney;
-    }
-
-    public BigDecimal getUserMoney() 
-    {
-        return userMoney;
-    }
-    
-
-    
-    
-    
     
     
     public String getCreateTime() {
@@ -912,6 +404,8 @@ public class YxDay
 		return serialVersionUID;
 	}
 
+	
+	
 	@Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -930,52 +424,15 @@ public class YxDay
             .append("workType", getWorkType())
             .append("workClass", getWorkClass())
             .append("workStart", getWorkStart())
+            .append("sanClass", getSanClass())
             .append("workNumber", getWorkNumber())
             .append("workPrice", getWorkPrice())
             .append("workAll", getWorkAll())
             .append("workFen", getWorkFen())
             .append("workSum", getWorkSum())
             .append("workHuo", getWorkHuo())
-            .append("kaohe", getKaohe())
-            .append("meiKaohe", getMeiKaohe())
-            .append("meeting", getMeeting())
-            .append("yearsHolidays", getYearsHolidays())
-            .append("yearsCost", getYearsCost())
-            .append("yearDay", getYearDay())
-            .append("yearCost", getYearCost())
-            .append("yearWork", getYearWork())
-            .append("yearSum", getYearSum())
-            .append("yearPlus", getYearPlus())
-            .append("yearDuty", getYearDuty())
-            .append("workPlus", getWorkPlus())
-            .append("workCost", getWorkCost())
-            .append("lawDay", getLawDay())
-            .append("lawCost", getLawCost())
-            .append("busDay", getBusDay())
-            .append("busCost", getBusCost())
-            .append("busPlus", getBusPlus())
-            .append("woman", getWoman())
-            .append("run", getRun())
-            .append("ye", getYe())
-            .append("kuangji", getKuangji())
-            .append("huliDay", getHuliDay())
-            .append("huliCost", getHuliCost())
-            .append("gsDay", getGsDay())
-            .append("gsCost", getGsCost())
-            .append("tqDay", getTqDay())
-            .append("tqCost", getTqCost())
-            .append("bingDay", getBingDay())
-            .append("bingCost", getBingCost())
-            .append("sangDay", getSangDay())
-            .append("sangCost", getSangCost())
-            .append("sjDay", getSjDay())
-            .append("kgDay", getKgDay())
-            .append("dgDay", getDgDay())
-            .append("other", getOther())
+            .append("workHuo", getWorkDan())
             .append("userCost", getUserCost())
-            .append("userSum", getUserSum())
-            .append("fu", getFu())
-            .append("userMoney", getUserMoney())
             .append("createTime", getCreateTime())
             .append("createBy", getCreateBy())
             .append("updateTime", getUpdateTime())

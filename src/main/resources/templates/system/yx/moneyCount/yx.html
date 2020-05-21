@@ -30,7 +30,7 @@
                             </li>
 
                             <li>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="exprotExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;导出</a>
                                 <a class="btn btn-success btn-rounded btn-sm" onclick="importExcel()"><i class="fa fa-upload"></i>&nbsp;上传</a>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="exprotModel()"><i class="fa fa-download"></i>&nbsp;模板</a>
                             </li>
@@ -57,11 +57,15 @@
                     callBack: doSubmit
                 };
                 $.modal.openOptions(options);
-
         }
 
         function doSubmit(index, layero){
             var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
             if ($.tree.notAllowLastLevel(tree)) {
                 var body = layer.getChildFrame('body', index);
                 $("#treeId").val(body.find('#treeId').val());
@@ -119,21 +123,20 @@
                       LoadingClose();
       			    }
       			});
-      			
-      }
+     	 }
 
-
+/* 
       function exprotExcel(){
       	
       		$.tzLoading({content:'正在导出数据，请稍等...'});
       	    var createTime = $('#createTime').val();
       	    var userOrg  = $('#treeName').val();
       	    
-/*       		if(isEmpty(createTime)){
+      		if($.common.isEmpty(createTime)){
       			alert("请选择导出时间！");
       			LoadingClose();
       			return;
-      		}  */
+      		}  
       		
       		if($.common.isEmpty(userOrg)){
       			alert("请选择组织机构！");
@@ -143,12 +146,42 @@
       	    
       	    window.location.href = prefix + '/exprotExcel?createTime='+createTime+'&userOrg='+userOrg;
       	    	LoadingClose();
-      }
+      } */
       		
         
       
-      function exprotModel(){
+      
+      function exportExcel(){
+			$.tzLoading({content:'正在导出，请稍等...'});
+			var userOrg  = $('#treeName').val();
+			if($.common.isEmpty(userOrg)){
+				alert("请选择组织机构！");
+				LoadingClose();
+				return;
+			} 
+			
+			var formData = new FormData($('#formId')[0]);
+			$.ajax({
+				cache : false,
+				type : "POST",
+				url :prefix +'/exportExcel',
+				data : formData,
+				async : true,
+				processData: false,
+				contentType: false,
+			    error : function(xhr,type) {
+			    },
+			    success:function(data){
+	              $.modal.alertSuccess("导出成功！")
+                LoadingClose();
+			    }
+			});
+		}
 
+
+      
+      
+      function exprotModel(){
      	$.tzLoading({content:'正在导出模板，请稍等...'});
   	    window.location.href = prefix + '/exprotModel';
   	    LoadingClose();

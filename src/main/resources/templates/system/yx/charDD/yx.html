@@ -15,18 +15,16 @@
                                 <input readonly="true" type="text" class="time-input"  id="createTime" name="createTime" >
                             </li>
                             
-                            
     					    <li>
                                 <label>组织机构：</label>
       							<input type="hidden" id="treeId"  name="userOrg" readonly="true"/>
                                 <input  type="text" id="treeName"  name="treeName"onclick="selectDeptTree()" readonly="true">
                             </li>
                             
-                            
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="charDD()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
                             </li>
                             
                             
@@ -38,11 +36,7 @@
 
 
             <div class="col-sm-12">
-  
-  
 					   <div id="box" style="min-width:400px;height:400px;margin-top:20px;"></div>
-		
-                
             </div>
 
 
@@ -59,7 +53,9 @@
 
     <script th:inline="javascript">
 
-    var prefix = ctx + "/system/yx/charDD";
+    var prefix = ctx + "system/yx/charDD";
+    
+    
     /*部门管理-修改-选择部门树*/
     function selectDeptTree() {
             var options = {
@@ -74,6 +70,11 @@
 
     function doSubmit(index, layero){
         var tree = layero.find("iframe")[0].contentWindow.$._tree;
+        if(tree.getSelectedNodes().length==0){
+        	alert("请选择组织机构");
+        	return;
+        }
+        
         if ($.tree.notAllowLastLevel(tree)) {
             var body = layer.getChildFrame('body', index);
             $("#treeId").val(body.find('#treeId').val());
@@ -82,11 +83,7 @@
         }
     }
     
-    
-    
-    
-    
-    
+
 
     $(function () {
 
@@ -275,20 +272,10 @@
 
                     };
 
-                    
-                   	alert(data);
-                    
-                    
-                    if(data==null){
-                    	alert("当日没有工资记录!");
-                    	return;
-                    }
-                    
-
                     option = {
                         title: {
                             text: createTime + '当日工资报表',
-                            subtext:userOrg + '工资总数 ' + data.totalCount + '户 ' + data.totalSum + '元',
+                            //subtext:userOrg + '工资总数 ' + data.totalCount + '户 ' + data.totalSum + '元',
                             left: 'center'
                         },
                         tooltip: {
@@ -308,7 +295,7 @@
                                 selectedMode: 'single',
                                 data:[
                                     {
-                                        value:data.YxSumWorkType1,
+                                        value:data.YxSumWorkClass1,
                                         name: '一线工资',
                                         label: {
                                             normal: {
@@ -316,9 +303,9 @@
                                                     '{title|{b}}{abg|}',
                                                     '  {weatherHead|类型}{valueHead|人数}{rateHead|元}',
                                                     '{hr|}',
-                                                    '  {Cloudy|}{value|'+data.YxCountWorkType1+'}{rate|'+data.YxSumWorkType1+'}',
-                                                    '  {Sunny|}{value|'+data.YxCountWorkType2+'}{rate|'+data.YxSumWorkType2+'}',
-                                                    '  {Showers|}{value|'+data.YxCountWorkType3+'}{rate|'+data.YxSumWorkType3+'}'
+                                                    '  {Cloudy|}{value|'+data.YxCountWorkClass1+'}{rate|'+data.YxSumWorkClass1+'}',
+                                                    '  {Sunny|}{value|'+data.YxCountWorkClass2+'}{rate|'+data.YxSumWorkClass2+'}',
+                                                    '  {Showers|}{value|'+data.YxCountWorkClass3+'}{rate|'+data.YxSumWorkClass3+'}'
                                                 ].join('\n'),
                                                 backgroundColor: '#eee',
                                                 borderColor: '#777',
@@ -394,8 +381,8 @@
                                             }
                                         }
                                     },
-                                    {value:data.YxSumWorkType2, name:'二线工资'},
-                                    {value:data.YxSumWorkType3, name:'三线工资'}
+                                    {value:data.YxSumWorkClass2, name:'二线工资'},
+                                    {value:data.YxSumWorkClass3, name:'三线工资'}
                                 ],
                                 itemStyle: {
                                     emphasis: {
@@ -413,6 +400,54 @@
             });
        	
        }
+    
+    
+    
+    
+    
+    function exportExcel() {
+        $.tzLoading({content: '正在导出，请稍等...'});
+        
+        var createTime = $('#createTime').val();
+        var userOrg  = $('#treeName').val();
+
+        if ($.common.isEmpty(createTime)) {
+            alert("请选择统计时间！");
+            LoadingClose();
+            return;
+        }
+
+        if ($.common.isEmpty(userOrg)) {
+            alert("请选择组织机构！！");
+            LoadingClose();
+            return;
+        }
+
+        var formData = new FormData($('#formId')[0]);
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: prefix + '/exportExcel',
+            data : formData,
+            async: false,
+            processData: false,
+            contentType: false,
+            error: function () {
+            },
+            
+            success: function (data) {
+            	download(data);
+            	LoadingClose();
+            }
+        });
+
+    }
+  
+    function download(data){
+        window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+    }
+    
     </script>
 
 

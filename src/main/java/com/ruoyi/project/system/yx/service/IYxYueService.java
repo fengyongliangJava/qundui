@@ -30,6 +30,8 @@ public interface IYxYueService
     public List<YxYue> selectYxYueList(YxYue yxYue);
     
     public List<YxYue> selectYxAllList(YxYue yxYue);
+    
+    public List<YxYue> selectYxList(YxYue yxYue);
 
     /**
      * 新增牙星公司

@@ -17,15 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.project.system.yx.domain.YxDay;
+import com.ruoyi.project.system.yx.domain.YxUser;
 import com.ruoyi.project.system.yx.domain.YxUpload;
 import com.ruoyi.project.system.yx.service.IYxDayService;
+import com.ruoyi.project.system.yx.service.IYxUserService;
 
 /**
  * 牙星公司Controller
@@ -41,6 +43,9 @@ public class YxmoneyCountController extends BaseController
 
     @Autowired
     private IYxDayService yxDayService;
+    
+    @Autowired
+    private IYxUserService yxUserService;
 
     @RequiresPermissions("system:yx:moneyCount:view")
     @GetMapping()
@@ -50,25 +55,11 @@ public class YxmoneyCountController extends BaseController
     }
 
 
-    /**
-     * 导出牙星公司列表
-     */
-    @RequiresPermissions("system:yx:moneyCount:export")
-    @Log(title = "牙星公司", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(YxDay yxDay)
-    {
-        List<YxDay> list = yxDayService.selectYxList(yxDay);
-        ExcelUtil<YxDay> util = new ExcelUtil<YxDay>(YxDay.class);
-        return util.exportExcel(list, "yx");
-    }
 
-  
     
     
     /**
-     * 导入计件日工资
+               * 导入计件日工资
      */
     @PostMapping("/importExcel")
     @ResponseBody
@@ -82,27 +73,51 @@ public class YxmoneyCountController extends BaseController
         List<YxUpload> userList = util.importExcel(file.getInputStream());
         
         int i = 0;
-        for(YxUpload yxuser : userList) {
+        for(YxUpload yxExcel : userList) {
         	i++;
-        	if(yxuser.getUserId().isEmpty() 
-                || yxuser.getUserName().isEmpty()
-                || yxuser.getWorkStart() == null
-                || yxuser.getWorkNumber() == null
-                || yxuser.getWorkPrice() == null
-                || yxuser.getWorkAll() == null
-                || yxuser.getWorkFen() == null) {
+        	if(yxExcel.getUserId().isEmpty() 
+                || yxExcel.getUserName().isEmpty()
+                || yxExcel.getWorkStart() == null
+                || yxExcel.getWorkNumber() == null
+                || yxExcel.getWorkPrice() == null
+                || yxExcel.getWorkAll() == null
+                || yxExcel.getWorkFen() == null
+                || yxExcel.getWorkHuo() == null 
+        		|| yxExcel.getWorkDan() == null) {
                    return AjaxResult.success("导入第"+i+"条有空数据");
                 }
-    		if(yxDayService.findUserOrgExize(userOrg,yxuser.getUserId()) == null) {
-    			    return AjaxResult.success("导入第"+i+"条员工编号不匹配");
+        
+    		if(yxDayService.findUserOrgExize(userOrg,yxExcel.getUserId(),yxExcel.getUserName())==null) {
+    			    return AjaxResult.success(String.format("导入第%s条数据不匹配(当前部门未找到编号为【%s】 姓名为【%s】的员工)",i,yxExcel.getUserId(),yxExcel.getUserName()));
     		}
         }
+        
+        
+       
+        
+        
         for(YxUpload yxuser : userList) {
         	yxuser.setCreateTime(createTime);
     		yxuser.setUserOrg(userOrg);
     		yxuser.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+    		yxuser.setUpdateTime(DateUtils.getNowDate());
     		yxuser.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
-    		yxuser.setUserCost(new BigDecimal(yxuser.getWorkNumber()).multiply(yxuser.getWorkPrice()).divide(new BigDecimal(yxuser.getWorkAll()),2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(yxuser.getWorkFen())));
+    		
+    		if(yxuser.getWorkNumber() != 0) {
+        		yxuser.setWorkSum(new BigDecimal(yxuser.getWorkNumber()).multiply(yxuser.getWorkPrice()).divide(new BigDecimal(yxuser.getWorkAll()),2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(yxuser.getWorkFen())));
+    		}
+
+     		if(yxuser.getWorkSum() == null) {
+     			yxuser.setWorkSum(new BigDecimal(0));
+    		}
+     		if(yxuser.getWorkHuo() == null) {
+     			yxuser.setWorkHuo(new BigDecimal(0));
+    		}
+     		if(yxuser.getWorkDan() == null) {
+     			yxuser.setWorkDan(new BigDecimal(0));
+    		}
+       		
+    		yxuser.setUserCost(yxuser.getWorkSum().add(yxuser.getWorkHuo()).add(yxuser.getWorkDan()));
     		yxDayService.insertYxUpload(yxuser);
         }
        return AjaxResult.success("上传 "+createTime+"工资信息成功！！！");
@@ -134,11 +149,27 @@ public class YxmoneyCountController extends BaseController
 		return baos.toByteArray();
 
 	}
-
-
     
-    
-    
+	
+	
+		/**
+		     * 导出牙星公司列表
+		 */
+		@Log(title = "牙星公司", businessType = BusinessType.EXPORT)
+		@PostMapping("/exportExcel")
+		@ResponseBody
+		public AjaxResult export(YxUser yxUser)
+		{
+		List<YxUser> list =  yxUserService.selectUserModel(yxUser);
+		ExcelUtil<YxUser> util = new ExcelUtil<YxUser>(YxUser.class);
+		return util.exportExcel(list, "YxUser");
+		}
+	
+	
+	
+	
+	
+	
 }
     
     

@@ -108,17 +108,20 @@
 
     }
 
-    function doSubmit(index, layero){
-        
-        var tree = layero.find("iframe")[0].contentWindow.$._tree;
-        if ($.tree.notAllowLastLevel(tree)) {
-            var body = layer.getChildFrame('body', index);
-            $("#treeId").val(body.find('#treeId').val());
-            $("#treeName").val(body.find('#treeName').val());
-            layer.close(index);
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
         }
-    }
-    
 
         $(function() {
             var options = {

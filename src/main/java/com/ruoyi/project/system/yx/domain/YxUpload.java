@@ -49,7 +49,10 @@ public class YxUpload
     /** 零活工资*/
     @Excel(name = "零活工资")
     private BigDecimal workHuo;
-
+    
+    /** 零活工资*/
+    @Excel(name = "单项工程")
+    private BigDecimal workDan;
   
 
     private BigDecimal workSum;
@@ -69,261 +72,185 @@ public class YxUpload
     
     private BigDecimal userCost;
     
-    
-    public BigDecimal getUserCost() {
-		return userCost;
-	}
-
-	public void setUserCost(BigDecimal userCost) {
-		this.userCost = userCost;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	private String createTime;
     private String createBy;
     private Date updateTime;
     private String updateBy;
-    
-    
-    
-    
-    
-    public String getUserArea() {
-		return userArea;
+	public Long getId() {
+		return id;
 	}
-
-	public void setUserArea(String userArea) {
-		this.userArea = userArea;
+	public void setId(Long id) {
+		this.id = id;
 	}
-
-	public String getCreateTimes() {
-		return createTimes;
+	public String getUserId() {
+		return userId;
 	}
-
-	public void setCreateTimes(String createTimes) {
-		this.createTimes = createTimes;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-
-	public String getSex() {
-		return sex;
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
-	public String getTell() {
-		return tell;
+	public Integer getWorkStart() {
+		return workStart;
 	}
-
-	public void setTell(String tell) {
-		this.tell = tell;
+	public void setWorkStart(Integer workStart) {
+		this.workStart = workStart;
 	}
-
-	public String getCard() {
-		return card;
+	public Integer getWorkNumber() {
+		return workNumber;
 	}
-
-	public void setCard(String card) {
-		this.card = card;
+	public void setWorkNumber(Integer workNumber) {
+		this.workNumber = workNumber;
 	}
-
-	public String getAddress() {
-		return address;
+	public BigDecimal getWorkPrice() {
+		return workPrice;
 	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setWorkPrice(BigDecimal workPrice) {
+		this.workPrice = workPrice;
 	}
-
-	public String getUserGroup() {
-		return userGroup;
+	public Integer getWorkAll() {
+		return workAll;
 	}
-
-	public void setUserGroup(String userGroup) {
-		this.userGroup = userGroup;
+	public void setWorkAll(Integer workAll) {
+		this.workAll = workAll;
 	}
-
-	public String getUserClass() {
-		return userClass;
+	public Integer getWorkFen() {
+		return workFen;
 	}
-
-	public void setUserClass(String userClass) {
-		this.userClass = userClass;
+	public void setWorkFen(Integer workFen) {
+		this.workFen = workFen;
 	}
-
-	public String getStation() {
-		return station;
+	public BigDecimal getWorkHuo() {
+		return workHuo;
 	}
-
-	public void setStation(String station) {
-		this.station = station;
+	public void setWorkHuo(BigDecimal workHuo) {
+		this.workHuo = workHuo;
 	}
-
-	public String getWorkType() {
-		return workType;
+	public BigDecimal getWorkDan() {
+		return workDan;
 	}
-
-	public void setWorkType(String workType) {
-		this.workType = workType;
+	public void setWorkDan(BigDecimal workDan) {
+		this.workDan = workDan;
 	}
-
-	public String getWorkClass() {
-		return workClass;
-	}
-
-	public void setWorkClass(String workClass) {
-		this.workClass = workClass;
-	}
-
-
-	public String getUserOrg() {
-		return userOrg;
-	}
-
-	public void setUserOrg(String userOrg) {
-		this.userOrg = userOrg;
-	}
-
 	public BigDecimal getWorkSum() {
 		return workSum;
 	}
-
 	public void setWorkSum(BigDecimal workSum) {
 		this.workSum = workSum;
 	}
-
-	public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-    
-    
-    public void setUserId(String userId) 
-    {
-        this.userId = userId;
-    }
-
-    public String getUserId() 
-    {
-        return userId;
-    }
-    public void setUserName(String userName) 
-    {
-        this.userName = userName;
-    }
-
-    public String getUserName() 
-    {
-        return userName;
-    }
-  
-    
-    
-    
-    
-    public void setWorkStart(Integer workStart) 
-    {
-        this.workStart = workStart;
-    }
-
-    public Integer getWorkStart() 
-    {
-        return workStart;
-    }
-    
-    
-    public void setWorkNumber(Integer workNumber) 
-    {
-        this.workNumber = workNumber;
-    }
-
-    public Integer getWorkNumber() 
-    {
-        return workNumber;
-    }
-    public void setWorkPrice(BigDecimal workPrice) 
-    {
-        this.workPrice = workPrice;
-    }
-
-    public BigDecimal getWorkPrice() 
-    {
-        return workPrice;
-    }
-    public void setWorkAll(Integer workAll) 
-    {
-        this.workAll = workAll;
-    }
-
-    public Integer getWorkAll() 
-    {
-        return workAll;
-    }
-    public void setWorkFen(Integer workFen) 
-    {
-        this.workFen = workFen;
-    }
-
-    public Integer getWorkFen() 
-    {
-        return workFen;
-    }
-   
-    public void setWorkHuo(BigDecimal workHuo) 
-    {
-        this.workHuo = workHuo;
-    }
-
-    public BigDecimal getWorkHuo() 
-    {
-        return workHuo;
-    }
-    
-    
-
-    
-	public String getCreateTime() {
+	public String getCreateTimes() {
 		return createTimes;
 	}
-
-	public void setCreateTime(String createTime) {
-		this.createTimes = createTime;
+	public void setCreateTimes(String createTimes) {
+		this.createTimes = createTimes;
 	}
-
-
+	public String getUserOrg() {
+		return userOrg;
+	}
+	public void setUserOrg(String userOrg) {
+		this.userOrg = userOrg;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getTell() {
+		return tell;
+	}
+	public void setTell(String tell) {
+		this.tell = tell;
+	}
+	public String getCard() {
+		return card;
+	}
+	public void setCard(String card) {
+		this.card = card;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getUserArea() {
+		return userArea;
+	}
+	public void setUserArea(String userArea) {
+		this.userArea = userArea;
+	}
+	public String getUserGroup() {
+		return userGroup;
+	}
+	public void setUserGroup(String userGroup) {
+		this.userGroup = userGroup;
+	}
+	public String getUserClass() {
+		return userClass;
+	}
+	public void setUserClass(String userClass) {
+		this.userClass = userClass;
+	}
+	public String getStation() {
+		return station;
+	}
+	public void setStation(String station) {
+		this.station = station;
+	}
+	public String getWorkType() {
+		return workType;
+	}
+	public void setWorkType(String workType) {
+		this.workType = workType;
+	}
+	public String getWorkClass() {
+		return workClass;
+	}
+	public void setWorkClass(String workClass) {
+		this.workClass = workClass;
+	}
+	public BigDecimal getUserCost() {
+		return userCost;
+	}
+	public void setUserCost(BigDecimal userCost) {
+		this.userCost = userCost;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
 	public String getCreateBy() {
 		return createBy;
 	}
-
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
-
-	public String getUpdateBy() {
-		return updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
 	public Date getUpdateTime() {
 		return updateTime;
 	}
-
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-   
+	public String getUpdateBy() {
+		return updateBy;
+	}
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
     
+    
+    
+    
+   
 
 }

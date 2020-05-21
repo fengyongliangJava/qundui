@@ -34,7 +34,17 @@ public class YxUserServiceImpl implements IYxUserService
     {
         return yxUserMapper.selectYxUserById(id);
     }
-
+    /**
+                * 查询牙星公司人员
+     * @param id 牙星公司人员ID
+     * @return 牙星公司人员
+     */
+    @Override
+    public List<YxUser> selectUserModel(YxUser yxUser)
+    {
+        return yxUserMapper.selectUserModel(yxUser);
+    }
+    
     /**
      * 查询牙星公司人员列表
      * 
@@ -103,8 +113,8 @@ public class YxUserServiceImpl implements IYxUserService
     
     
 	@Override
-	public String findUserExize(String userOrg, String userId) {
-		return yxUserMapper.findUserExize(userOrg,userId);
+	public String findUserExize(String userOrg, String userId, String userName) {
+		return yxUserMapper.findUserExize(userOrg,userId,userName);
 	}
     
     

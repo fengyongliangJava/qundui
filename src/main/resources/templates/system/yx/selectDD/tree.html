@@ -35,7 +35,13 @@
 			if(top._pid){
 				param = top._pid;
 			}
-			var url = ctx + "system/dept/treeData?parentId="+param;//${dep.deptId}
+			var url = ctx;
+			if(!isNaN(param)){
+				url += "system/dept/treeData?parentId="+param;//${dep.deptId}
+			}else{
+				url += "system/dept/treeData?parentName="+param;//${dep.deptId}
+			}
+			
 			var options = {
 		        url: url,
 		        expandLevel: 2,

@@ -22,7 +22,7 @@ public interface IYxDayService
      * @param id 牙星公司ID
      * @return 牙星公司
      */
-    public YxDay selectYxById(Long id);
+    public YxDay selectYxDayById(Long id);
 
     /**
      * 查询牙星公司列表
@@ -30,7 +30,15 @@ public interface IYxDayService
      * @param yxDay 牙星公司
      * @return 牙星公司集合
      */
-    public List<YxDay> selectYxList(YxDay yxDay);
+    public List<YxDay> selectYxDayList(YxDay yxDay);
+    
+    /**
+     * 查询牙星公司列表
+     * 
+     * @param yxDay 牙星公司
+     * @return 牙星公司集合
+     */
+    public List<YxDay> selectCountMMList(YxDay yxDay);
     
     
     /**
@@ -48,7 +56,7 @@ public interface IYxDayService
      * @param yxDay 牙星公司
      * @return 结果
      */
-    public int insertYx(YxDay yxDay);
+    public int insertYxDay(YxDay yxDay);
     
     /**
      * 新增牙星公司用户
@@ -71,7 +79,7 @@ public interface IYxDayService
      * @param yxDay 牙星公司
      * @return 结果
      */
-    public int updateYx(YxDay yxDay);
+    public int updateYxDay(YxDay yxDay);
 
     /**
      * 批量删除牙星公司
@@ -79,7 +87,7 @@ public interface IYxDayService
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-    public int deleteYxByIds(String ids);
+    public int deleteYxDayByIds(String ids);
 
     /**
      * 删除牙星公司信息
@@ -87,10 +95,12 @@ public interface IYxDayService
      * @param id 牙星公司ID
      * @return 结果
      */
-    public int deleteYxById(Long id);
+    public int deleteYxDayById(Long id);
 
     List<Ztree> selectDeptTree(Dept dept);
 
+    //string ni这返回的是一个string对象啊，三个字段返回怎么可能是一个shring
+    //现在就返回string 就行，返回之后拿 string.split("-")
 
-	public String findUserOrgExize(String userOrg, String userId);
+	public String findUserOrgExize(String userOrg, String userId, String userName);
 }

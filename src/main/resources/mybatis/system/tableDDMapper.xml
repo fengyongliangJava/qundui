@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.yx.mapper.tableDDMapper">
+
+	   <sql id="YxtableDDsql">
+	        select 	
+				ifnull(count(DISTINCT(user_id)), 0) AS userId,
+				ifnull(count(DISTINCT(work_start = 0 or null)),0) AS workStart,
+				ifnull(sum(DISTINCT(work_sum)), 0) AS workSum,
+				ifnull(sum(DISTINCT(work_huo)), 0) AS workHuo,
+				ifnull(sum(DISTINCT(work_dan)), 0) AS workDan,
+				ifnull(sum(DISTINCT(work_number)), 0) AS workNumber,
+				ifnull(sum(DISTINCT(user_cost)), 0) AS userCost
+	          from yx_day as YxDay
+	        left join sys_dept sd on (sd.dept_name = YxDay.user_org or sd.dept_name = YxDay.user_area or sd.dept_name = YxDay.user_group or sd.dept_name = YxDay.user_class)
+	    </sql>
+
+	   
+		<sql id="query_Count_sql_where">
+	            <if test="userOrg != null  and userOrg != ''"> and (sd.dept_id = #{userOrg} or sd.ancestors like concat('%',#{userOrg},'%'))</if>
+	            <if test="userArea != null  and userArea != ''"> and user_area = #{userArea}</if>
+	            <if test="userGroup != null  and userGroup != ''"> and user_group = #{userGroup}</if>
+	            <if test="userClass != null  and userClass != ''"> and user_class = #{userClass}</if>
+	            <if test="createTime != null  and createTime != ''">and YxDay.create_time = #{createTime}</if>
+	            <if test="workClass != null  and workClass != ''">and work_class = #{workClass}</if>
+		</sql>
+
+
+		
+ 		<select id="YxtableDD"  parameterType="YxDay" resultType="java.util.Map" >
+		 <include refid="YxtableDDsql"></include>
+			<where>
+				<include refid="query_Count_sql_where"></include>
+			</where>
+		</select>
+		
+
+
+		
+		
+		
+		
+</mapper>

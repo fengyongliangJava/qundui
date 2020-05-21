@@ -7,9 +7,15 @@
 	    #tableBox1{margin:30px auto;} 
 		#tableBox1 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
 		#tableBox1 tr:hover{background:#fff;}
+		
+	    #tableBox2{margin:30px auto;} 
+		#tableBox2 tr td{width:100px;height:50px;ling-height:50px;text-align:center;}
+		#tableBox2 tr:hover{background:#fff;}
 	</style>
-    
 </head>
+
+
+
 <body class="gray-bg">
      <div class="container-div">
         <div class="row">
@@ -19,23 +25,21 @@
                         <ul>                    
                         	<li>
 								<label>创建日期： </label>
-								<input type="text" class="time-input" id="createTime" name="createTime"  readonly="true"/>
+								<input type="text" class="time-input" id="createTime" name="createTime" data-format="yyyy" readonly="true"/>
 							</li>
-                        
                         
                             <li>
                                 <label>组织机构：</label>
       							<input type="hidden" id="treeId"  name="userOrg" readonly="true"/>
                                 <input  type="text" id="treeName"  name="treeName"onclick="selectDeptTree()" readonly="true">
                             </li>
-
+                            
 
                             <li>
-                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-download"></i>&nbsp;明细</a>
-                                <a class="btn btn-success btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-print"></i>&nbsp;打印</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="YxtableMM()"><i class="fa fa-calculator"></i>&nbsp;统计</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="exportExcel()"><i class="fa fa-download"></i>&nbsp;明细</a>
+                                <a class="btn btn-success btn-rounded btn-sm" onclick="window.print()"><i class="fa fa-print"></i>&nbsp;打印</a>
                             </li>
-                            
                             
                         </ul>
                     </div>
@@ -46,25 +50,19 @@
 
             <div class="col-sm-12">
   
-					
+				<div id="box1" class='box1'>
 					<table  id="tableBox1"  class="table-hover" border = "1" >
-					
 						 <tr>
-						 	<td colspan="14">牙星公司平均工资明细表 </td>
+						 	<td colspan="13">日明细表 </td>
 						 </tr>
-						 
-			
-						 
 						
               		 	 <tr>
-              		 	 	<td rowspan="2">类型</td>
-              		 	 	<td rowspan="2">部门</td>
-                    		<td colspan="4">上月工资(元)</td>
+              		 	 	<td rowspan="2">工作类型</td>
+              		 	 	<td rowspan="2">工资类型</td>
+                    		<td colspan="4">去年工资(元)</td>
                     		<td rowspan="2">平均工资差</td>
         				    <td rowspan="2">产量/进米差</td>
-        				    <td colspan="4">本月工资(元)</td>
-        		
-     
+        				    <td colspan="4">今年工资(元)</td>
                			 </tr>
                			 
              		     <tr>
@@ -78,10 +76,10 @@
 		                   <td>产量/进米</td>
 				  		 </tr>	 
 				  		 
-				  	     <tr>
-				  	       <td rowspan="3">一线</td>
+				  	     <tr id="">
+				  	       <td rowspan="4">计件工资</td>
+				  	       <td>一线</td>
 				  	       <td></td>
-		                   <td></td>
 		                   <td></td>
 		                   <td></td>
 		                   <td></td>
@@ -94,7 +92,7 @@
 				  		 </tr>	
 				  		 
 				  	     <tr>
-				  	       <td></td>
+				  	       <td>二线</td>
 				  	       <td></td>
 		                   <td></td>
 		                   <td></td>
@@ -109,7 +107,7 @@
 		  		 			 
 		  		 			 
 		  		 	     <tr>
-				  	       <td></td>
+				  	       <td>三线</td>
 				  	       <td></td>
 		                   <td></td>
 		                   <td></td>
@@ -121,16 +119,170 @@
 		                   <td></td>
 				  	       <td></td>
 				  		 </tr>	
+				  		 
+				  	    <tr>
+				  	       <td>合计</td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  		 </tr>
+				  		 
+				  		 
+				  	    <tr>
+				  	       <td rowspan="4">月薪工资</td>
+				  	       <td>一线</td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  	       <td></td>
+				  		 </tr>	
+				  		 
+				  	     <tr>
+				  	       <td>二线</td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  		 </tr>	
+		  		 			 
+		  		 			 
+		  		 	     <tr>
+				  	       <td>三线</td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  		 </tr>	
+				  		 
+				  	    <tr>
+				  	       <td>合计</td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  		 </tr>
+				  		 
+				  		 
+				   	    <tr>
+				  	       <td colspan="2">总合计</td>
+				  	       <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+		                   <td></td>
+				  	       <td></td>
+				  		 </tr>
+				  		 
+				  		 
+				  		 
 						 <tr>
 						 	<td colspan="13">总工资:     元</td>
 						 </tr>
 			
 					</table>
+				</div>
 		
 		
-                
-            </div>
+				<div id="box2" class='box2' style="display:none;">
+					<table  id="tableBox2"  class="table-hover" border = "1" >
+					
+						 <tr id="title">
+						 </tr>
+						
+              		 	 <tr>
+              		 	 	<td rowspan="2">工作类型</td>
+              		 	 	<td rowspan="2">工资类型</td>
+                    		<td colspan="4">去年工资(元)</td>
+                    		<td rowspan="2">平均工资差</td>
+        				    <td rowspan="2">产量/进米差</td>
+        				    <td colspan="4">今年工资(元)</td>
+               			 </tr>
+               			 
+             		     <tr>
+		                   <td>总工资</td>
+		                   <td>总人数</td>
+		                   <td>平均工资</td>
+		                   <td>产量/进米</td>
+		      		       <td>总工资</td>
+		                   <td>总人数</td>
+		                   <td>平均工资</td>
+		                   <td>产量/进米</td>
+				  		 </tr>	 
+				  		 
+				  	     <tr id="jone">
+				  		 </tr>	
+				  		 
+				  		 <tr id="jtwo">
+				  		 </tr>	
+				  		 
+				  		 <tr id="jthree">
+				  		 </tr>	
+				  		 
+				  		 <tr id="jall">
+				  		 </tr>	
 
+				   	     <tr id="yone">
+				  		 </tr>	
+				  		 
+				  		 <tr id="ytwo">
+				  		 </tr>	
+				  		 
+				  		 <tr id="ythree">
+				  		 </tr>	
+				  		 
+				  		 <tr id="yall">
+				  		 </tr>	
+				  		
+				  		 <tr id="all">
+				  		 </tr>	
+				  		 
+ 						 <tr id="foot">
+				  		 </tr>	
+				  		 
+					</table>
+				</div>
+		
+		
+		
+		
+		
+		
+            </div>
 
         </div>
     </div>
@@ -138,30 +290,283 @@
 
     <script th:inline="javascript">
 
-    var prefix = ctx + "/system/yx/tableYY";
-    
-    /*部门管理-修改-选择部门树*/
-    function selectDeptTree() {
-            var options = {
-                title: '部门选择',
-                width: "380",
-                url:"/system/yx/selectDD/selectDeptTree",
-                callBack: doSubmit
-            };
-            $.modal.openOptions(options);
+        var prefix = ctx + "system/yx/tableYY";
+        /*部门管理-修改-选择部门树*/
+        function selectDeptTree() {
+                var options = {
+                    title: '部门选择',
+                    width: "380",
+                    url:"/system/yx/selectDD/selectDeptTree",
+                    callBack: doSubmit
+                };
+                $.modal.openOptions(options);
 
-    }
-
-    function doSubmit(index, layero){
-        var tree = layero.find("iframe")[0].contentWindow.$._tree;
-        if ($.tree.notAllowLastLevel(tree)) {
-            var body = layer.getChildFrame('body', index);
-            $("#treeId").val(body.find('#treeId').val());
-            $("#treeName").val(body.find('#treeName').val());
-            layer.close(index);
         }
-    }
+
+        function doSubmit(index, layero){
+            var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
+            if ($.tree.notAllowLastLevel(tree)) {
+                var body = layer.getChildFrame('body', index);
+                $("#treeId").val(body.find('#treeId').val());
+                $("#treeName").val(body.find('#treeName').val());
+                layer.close(index);
+            }
+        }
+
         
+        
+        function YxtableMM() {
+
+            $.tzLoading({content: '正在统计，请稍等...'});
+            
+            var title = document.getElementById("title");
+            var jone = document.getElementById("jone");
+            var jtwo = document.getElementById("jtwo");
+            var jthree = document.getElementById("jthree");
+            var jall = document.getElementById("jall");
+            var yone = document.getElementById("yone");
+            var ytwo = document.getElementById("ytwo");
+            var ythree = document.getElementById("ythree");
+            var yall = document.getElementById("yall");
+            var all = document.getElementById("all");
+            var foot = document.getElementById("foot");
+
+            
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+
+
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/YxtableYY',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (data) {
+        			
+                    var str1 = "";
+                    var str2 = "";
+                    var str3 = "";
+                    var str4 = "";
+                    var str5 = "";
+                    var str6 = "";
+                    var str5 = "";
+                    var str6 = "";
+                    var str7 = "";
+                    var str8 = "";
+                    var str9 = "";
+                    var str10 = "";
+                    var str11 = "";
+                    
+                    
+                    str1 += "<td colspan='13' align='center'>" + createTime+userOrg+"月统计报表</td>";
+                    
+                    str2 += "<td rowspan='4'>计件工资</td>" +
+	                    	"<td>一线工资</td>" +
+	                    	"<td>" + data.userCostj1p + "</td>" +
+	                        "<td>" + data.userIdj1p + "</td>" +
+	                        "<td>" + data.userSumj1p + "</td>" +
+	                        "<td>" + data.workNumberj1p + "</td>" +
+	                        "<td>" + data.moneyChaj1 + "</td>" +
+	                        "<td>" + data.miChaj1 + "</td>" +
+	                       	"<td>" + data.userCostj1 + "</td>" +
+	                        "<td>" + data.userIdj1 + "</td>" +
+	                        "<td>" + data.userSumj1 + "</td>" +
+	                        "<td>" + data.workNumberj1 + "</td>";
+                        
+        		    str3 += "<td>二线工资</td>" +
+		                	"<td>" + data.userCostj2p + "</td>" +
+		                    "<td>" + data.userIdj2p + "</td>" +
+		                    "<td>" + data.userSumj2p + "</td>" +
+		                    "<td>" + data.workNumberj2p + "</td>" +
+		                    "<td>" + data.moneyChaj2 + "</td>" +
+		                    "<td>" + data.miChaj2 + "</td>" +
+		                   	"<td>" + data.userCostj2 + "</td>" +
+		                    "<td>" + data.userIdj2 + "</td>" +
+		                    "<td>" + data.userSumj2 + "</td>" +
+		                    "<td>" + data.workNumberj2 + "</td>";
+        			    
+        		    str4 += "<td>三线工资</td>" +
+		                	"<td>" + data.userCostj3p + "</td>" +
+		                    "<td>" + data.userIdj3p + "</td>" +
+		                    "<td>" + data.userSumj3p + "</td>" +
+		                    "<td>" + data.workNumberj3p + "</td>" +
+		                    "<td>" + data.moneyChaj3 + "</td>" +
+		                    "<td>" + data.miChaj3 + "</td>" +
+		                   	"<td>" + data.userCostj3 + "</td>" +
+		                    "<td>" + data.userIdj3 + "</td>" +
+		                    "<td>" + data.userSumj3 + "</td>" +
+		                    "<td>" + data.workNumberj3 + "</td>";
+
+	                    
+                    str5 += "<td>合计</td>" +
+		                	"<td>" + data.userCostjpAll + "</td>" +
+		                    "<td>" + data.userIdjpAll + "</td>" +
+		                    "<td>" + data.userSumjpAll + "</td>" +
+		                    "<td>" + data.workNumberjpAll + "</td>" +
+		                    "<td>" + data.moneyChajAll + "</td>" +
+		                    "<td>" + data.miChajAll + "</td>" +
+		                	"<td>" + data.userCostjAll + "</td>" +
+		                    "<td>" + data.userIdjAll + "</td>" +
+		                    "<td>" + data.userSumjAll + "</td>" +
+		                    "<td>" + data.workNumberjAll + "</td>";
+	                    
+		                    
+		            str6 += "<td rowspan='4'>月薪工资</td>" +
+	                    	"<td>一线工资</td>" +
+	                    	"<td>" + data.userCosty1p + "</td>" +
+	                        "<td>" + data.userIdy1p + "</td>" +
+	                        "<td>" + data.userSumy1p + "</td>" +
+	                        "<td>" + data.workNumbery1p + "</td>" +
+	                        "<td>" + data.moneyChay1 + "</td>" +
+	                        "<td>" + data.miChay1 + "</td>" +
+	                       	"<td>" + data.userCosty1 + "</td>" +
+	                        "<td>" + data.userIdy1 + "</td>" +
+	                        "<td>" + data.userSumy1 + "</td>" +
+	                        "<td>" + data.workNumbery1 + "</td>";
+                        
+        		    str7 += "<td>二线工资</td>" +
+		                	"<td>" + data.userCosty2p + "</td>" +
+		                    "<td>" + data.userIdy2p + "</td>" +
+		                    "<td>" + data.userSumy2p + "</td>" +
+		                    "<td>" + data.workNumbery2p + "</td>" +
+		                    "<td>" + data.moneyChay2 + "</td>" +
+		                    "<td>" + data.miChay2 + "</td>" +
+		                   	"<td>" + data.userCosty2 + "</td>" +
+		                    "<td>" + data.userIdy2 + "</td>" +
+		                    "<td>" + data.userSumy2 + "</td>" +
+		                    "<td>" + data.workNumbery2 + "</td>";
+        			    
+        		    str8 += "<td>三线工资</td>" +
+		                	"<td>" + data.userCosty3p + "</td>" +
+		                    "<td>" + data.userIdy3p + "</td>" +
+		                    "<td>" + data.userSumy3p + "</td>" +
+		                    "<td>" + data.workNumbery3p + "</td>" +
+		                    "<td>" + data.moneyChay3 + "</td>" +
+		                    "<td>" + data.miChay3 + "</td>" +
+		                   	"<td>" + data.userCosty3 + "</td>" +
+		                    "<td>" + data.userIdy3 + "</td>" +
+		                    "<td>" + data.userSumy3 + "</td>" +
+		                    "<td>" + data.workNumbery3 + "</td>";        
+		                    
+		                    
+		            str9 += "<td>合计</td>" +
+		                	"<td>" + data.userCostypAll + "</td>" +
+		                    "<td>" + data.userIdypAll + "</td>" +
+		                    "<td>" + data.userSumypAll + "</td>" +
+		                    "<td>" + data.workNumberypAll + "</td>" +
+		                    "<td>" + data.moneyChayAll + "</td>" +
+		                    "<td>" + data.miChayAll + "</td>" +
+		                	"<td>" + data.userCostyAll + "</td>" +
+		                    "<td>" + data.userIdyAll + "</td>" +
+		                    "<td>" + data.userSumyAll + "</td>" +
+		                    "<td>" + data.workNumberyAll + "</td>";
+		                    
+		            str10 += "<td colspan='2'>总合计</td>" +
+		                	"<td>" + data.userCostpAll + "</td>" +
+		                    "<td>" + data.userIdpAll + "</td>" +
+		                    "<td>" + data.userSumpAll + "</td>" +
+		                    "<td>" + data.workNumberpAll + "</td>" +
+		                    "<td>" + data.moneyChaAll + "</td>" +
+		                    "<td>" + data.miChaAll + "</td>" +
+		                	"<td>" + data.userCostAll + "</td>" +
+		                    "<td>" + data.userIdAll + "</td>" +
+		                    "<td>" + data.userSumAll + "</td>" +
+		                    "<td>" + data.workNumberAll + "</td>";         
+		                    
+                    str11 += "<td colspan='13' align='center'><div align='center'>当月工资总额:" + data.userCostAll+ "</div></td>";
+
+                        title.innerHTML = str1;
+                        jone.innerHTML = str2;
+                        jtwo.innerHTML = str3;
+                        jthree.innerHTML = str4;
+                        jall.innerHTML = str5;
+                        yone.innerHTML = str6;
+                        ytwo.innerHTML = str7;
+                        ythree.innerHTML = str8;
+                        yall.innerHTML = str9;
+                        all.innerHTML = str10;
+                        foot.innerHTML = str11;    
+	                        
+	                	box2.style.display = 'block';
+	                    box1.style.display = 'none';
+                    
+                	LoadingClose();
+
+                }
+            });
+
+        }
+        
+        
+        function exportExcel() {
+            $.tzLoading({content: '正在导出，请稍等...'});
+            
+            var createTime = $('#createTime').val();
+            var userOrg  = $('#treeName').val();
+
+            if ($.common.isEmpty(createTime)) {
+                alert("请选择统计时间！");
+                LoadingClose();
+                return;
+            }
+            if ($.common.isEmpty(userOrg)) {
+                alert("请选择组织机构！！");
+                LoadingClose();
+                return;
+            }
+            var formData = new FormData($('#formId')[0]);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: prefix + '/exportExcel',
+                data : formData,
+                async: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (data) {
+                	download(data);
+                	LoadingClose();
+                }
+            });
+        }
+        
+        function download(data){
+	        window.location.href = ctx + "common/download?fileName=" + encodeURI(data.msg) + "&delete=" + true;
+        }
+        
+
     </script>
     
     

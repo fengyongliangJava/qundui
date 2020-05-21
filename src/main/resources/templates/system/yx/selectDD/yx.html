@@ -103,11 +103,15 @@
                     callBack: doSubmit
                 };
                 $.modal.openOptions(options);
-
         }
 
         function doSubmit(index, layero){
             var tree = layero.find("iframe")[0].contentWindow.$._tree;
+            if(tree.getSelectedNodes().length==0){
+            	alert("请选择组织机构");
+            	return;
+            }
+            
             if ($.tree.notAllowLastLevel(tree)) {
                 var body = layer.getChildFrame('body', index);
                 $("#treeId").val(body.find('#treeId').val());
@@ -115,6 +119,7 @@
                 layer.close(index);
             }
         }
+        
         $(function() {
 
             var options = {
@@ -231,14 +236,30 @@
 					align : "center",
 					valign : "middle",
 					width:80,
-                    title: '工资种类'
+                    title: '工作类型',
+	    			formatter : function(value, row, index) {
+						if (value == "计件工资") {
+							return '<span class="label label-warning">计件工资</span>';
+						} else if (value == "月薪工资") {
+							return '<span class="label label-success">月薪工资</span>';
+						}
+					}
                 },
                 {
                     field: 'workClass', 
 					align : "center",
 					valign : "middle",
 					width:80,
-                    title: '工资类型'
+                    title: '工资类型',
+	    			formatter : function(value, row, index) {
+						if (value == "一线工资") {
+							return '<span class="label label-primary">一线工资</span>';
+						} else if (value == "二线工资") {
+							return '<span class="label label-info">二线工资</span>';
+						} else if (value == "三线工资") {
+							return '<span class="label label-success">三线工资</span>';
+						}
+					}
                 },
                 
                 
@@ -249,11 +270,41 @@
 					width:80,
                     title: '出勤状态',
 	    			formatter : function(value, row, index) {
-						if (value == 0) {
-							return '<span class="label label-danger">未出勤</span>';
-						} else if (value == 1) {
-							return '<span class="label label-primary">出勤</span>';
+						if (value == "√") {
+							return '<span class="label label-primary">√</span>';
+						} else if (value == "→") {
+							return '<span class="label label-danger">→</span>';
+						} else if (value == "X") {
+							return '<span class="label label-danger">X</span>';
+						} else if (value == "Т") {
+							return '<span class="label label-primary">Т</span>';
+						}else if (value == "力") {
+							return '<span class="label label-primary">力</span>';
+						}else if (value == "↑") {
+							return '<span class="label label-primary">↑</span>';
+						}else if (value == "△") {
+							return '<span class="label label-primary">△</span>';
+						}else if (value == "Φ") {
+							return '<span class="label label-primary">Φ</span>';
+						}else if (value == "+") {
+							return '<span class="label label-primary">+</span>';
+						}else if (value == "○") {
+							return '<span class="label label-primary">○</span>';
+						}else if (value == "产") {
+							return '<span class="label label-primary">产</span>';
+						}else if (value == "J") {
+							return '<span class="label label-primary">J</span>';
+						}else if (value == "∕") {
+							return '<span class="label label-primary">∕</span>';
+						}else if (value == "⊙") {
+							return '<span class="label label-primary">⊙</span>';
+						}else if (value == "*") {
+							return '<span class="label label-primary">*</span>';
+						}else if (value == "Q") {
+							return '<span class="label label-danger">Q</span>';
 						}
+						
+						
 					}
                 
                 
@@ -302,257 +353,19 @@
                     title: '零活工资'
                 },
                 {
-                    field: 'kaohe', 
+                    field: 'workDan', 
 					align : "center",
 					valign : "middle",
 					width:80,
-                    title: '考核'
+                    title: '单项工程'
                 },
+
                 {
-                    field: 'meiKaohe', 
+                    field: 'userCost', 
 					align : "center",
 					valign : "middle",
 					width:80,
-                    title: '煤质考核'
-                },
-                {
-                    field: 'meeting', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '早会'
-                },
-                {
-                    field: 'yearsHolidays',
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '年休假天数'
-                },
-                {
-                    field: 'yearsCost', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '年休假工资'
-                },
-                {
-                    field: 'yearDay', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '春节休假天数'
-                },
-                {
-                    field: 'yearCost',
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '春节休假工资'
-                },
-                {
-                	
-                    field: 'yearWork', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '春节上班'
-                },
-                {
-                    field: 'yearSum', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '春节上班工资'
-                },
-                {
-                    field: 'yearPlus', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '春节值班天数'
-                },
-                {
-                    field: 'yearDuty', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '春节值班工资'
-                },
-                {
-                    field: 'workPlus', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '加班天数'
-                },
-                {
-                    field: 'workCost', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '加班工资'
-                },
-                {
-                    field: 'lawDay', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '法定天数'
-                },
-                {
-                    field: 'lawCost',
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '法定工资'
-                },
-                {
-                    field: 'busDay',
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '公休天数'
-                },
-                {
-                    field: 'busCost', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '公休工资'
-                },
-                {
-                    field: 'busPlus', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '延时加班工资'
-                },
-                {
-                    field: 'woman', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '女工费'
-                },
-                {
-                    field: 'run', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '入井费'
-                },
-                {
-                    field: 'ye', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '夜班补助'
-                },
-                {
-                    field: 'kuangji',
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '矿井处罚'
-                },
-                {
-                    field: 'huliDay', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '护理假天数'
-                },
-                {
-                    field: 'huliCost', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '护理假工资'
-                },
-                {
-                    field: 'gsDay', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '工伤假天数'
-                },
-                {
-                    field: 'gsCost', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '工伤假工资'
-                },
-                {
-                    field: 'tqDay', 
-					align : "center",
-					valign : "middle",
-					width:100,
-                    title: '探亲假天数'
-                },
-                {
-                    field: 'tqCost', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '探亲工资'
-                },
-                {
-                    field: 'bingDay', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '病假天数'
-                },
-                {
-                    field: 'bingCost', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '病假工资'
-                },
-                {
-                    field: 'sangDay', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '丧假天数'
-                },
-                {
-                    field: 'sangCost', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '丧假工资'
-                },
-                {
-                    field: 'sjDay', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '事假天数'
-                },
-                {
-                    field: 'kgDay', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '旷工天数'
-                },
-                {
-                    field: 'dgDay', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '待岗天数'
-                },
-                {
-                    field: 'other', 
-					align : "center",
-					valign : "middle",
-					width:80,
-                    title: '其它补助'
+                    title: '计算工资'
                 },
 
                 {

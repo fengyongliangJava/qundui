@@ -29,7 +29,6 @@ public class YxAll
     @Excel(name = "员工姓名")
     private String userName;
     
-    
     /** 性别 */
     private String sex;
 
@@ -46,7 +45,6 @@ public class YxAll
     private String userOrg;
 
     /** 部门 */
-    @Excel(name = "部门")
     private String userArea;
 
     /** 区队 */
@@ -64,11 +62,6 @@ public class YxAll
     /** 工资类型 */
     private String workClass;
 
-    
-    
-    
-    
-    
     
     
 
@@ -93,9 +86,11 @@ public class YxAll
     @Excel(name = "加班工资")
     private BigDecimal workCost;
     
-    
-  
+    @Excel(name = "其他补助")
     private BigDecimal other;
+    
+    
+    
     private BigDecimal userCost;
     private BigDecimal fu;
     private BigDecimal userMoney;

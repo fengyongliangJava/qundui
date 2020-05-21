@@ -2,6 +2,7 @@ package com.ruoyi.project.system.yx.controller;
 
 import java.util.List;
 
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,7 @@ public class YxYueController extends BaseController
     {
         return prefix + "/yxYue";
     }
+    
 
     /**
      * 查询牙星公司列表
@@ -57,20 +59,6 @@ public class YxYueController extends BaseController
     {
         startPage();
         List<YxYue> list = yxYueService.selectYxYueList(yxYue);
-        return getDataTable(list);
-    }
-
-    
-    /**
-     * 查询牙星公司列表
-     */
-    @RequiresPermissions("system:yxYue:list")
-    @PostMapping("/Alllist")
-    @ResponseBody
-    public TableDataInfo Alllist(YxYue yxYue)
-    {
-        startPage();
-        List<YxYue> list = yxYueService.selectYxAllList(yxYue);
         return getDataTable(list);
     }
     
@@ -135,7 +123,7 @@ public class YxYueController extends BaseController
     }
 
     /**
-     * 删除牙星公司
+              * 删除牙星公司
      */
     @RequiresPermissions("system:yxYue:remove")
     @Log(title = "牙星公司", businessType = BusinessType.DELETE)

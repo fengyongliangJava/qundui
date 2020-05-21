@@ -1,12 +1,15 @@
 package com.ruoyi.project.system.yx.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ruoyi.project.system.yx.mapper.YxDayMapper;
 import com.ruoyi.project.system.yx.mapper.YxYueMapper;
 import com.ruoyi.project.system.yx.domain.YxAll;
 import com.ruoyi.project.system.yx.domain.YxYue;
@@ -24,6 +27,9 @@ public class YxYueServiceImpl implements IYxYueService
 {
     @Autowired
     private YxYueMapper yxYueMapper;
+    
+	@Autowired
+    private YxDayMapper yxDayMapper;
 
     /**
      * 查询牙星公司
@@ -48,13 +54,17 @@ public class YxYueServiceImpl implements IYxYueService
     {
         return yxYueMapper.selectYxYueList(yxYue);
     }
-
-    
     
     @Override
     public List<YxYue> selectYxAllList(YxYue yxYue)
     {
         return yxYueMapper.selectYxAllList(yxYue);
+    }
+    
+    @Override
+    public List<YxYue> selectYxList(YxYue yxYue)
+    {
+        return yxYueMapper.selectYxList(yxYue);
     }
 
     /**
@@ -66,9 +76,9 @@ public class YxYueServiceImpl implements IYxYueService
     @Override
     public int insertYxYue(YxYue yxYue)
     {
-      	 yxYue.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+/*      	 yxYue.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	 yxYue.setUpdateTime(DateUtils.getNowDate());
-    	 yxYue.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+    	 yxYue.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
         return yxYueMapper.insertYxYue(yxYue);
     }
 
@@ -77,10 +87,35 @@ public class YxYueServiceImpl implements IYxYueService
     @Override
     public int insertYxAll(YxAll yxAll)
     {
-      	 yxAll.setCreateBy(ShiroUtils.getSysUser().getLoginName());
-    	 yxAll.setUpdateTime(DateUtils.getNowDate());
-    	 yxAll.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
-        return yxYueMapper.insertYxAll(yxAll);
+
+    	 
+    	 
+     	Map<String, String> selectYx = yxDayMapper.selectYx(yxAll.getUserId());
+    	
+     	if(!(selectYx == null || selectYx.isEmpty())) {
+          yxAll.setSex(selectYx.get("sex"));
+ 	   	 yxAll.setTell(selectYx.get("tell"));
+ 	   	 yxAll.setCard(selectYx.get("card"));
+ 	   	 yxAll.setAddress(selectYx.get("address"));
+ 	   	 yxAll.setUserOrg(selectYx.get("userOrg"));
+ 	   	 yxAll.setUserGroup(selectYx.get("userGroup"));
+ 	   	 yxAll.setUserArea(selectYx.get("userArea"));
+ 	   	 yxAll.setUserClass(selectYx.get("userClass"));
+ 	   	 yxAll.setStation(selectYx.get("userClass"));
+ 	   	 yxAll.setWorkType(selectYx.get("workType"));
+ 	   	 yxAll.setWorkClass(selectYx.get("workClass"));
+/* 	   	 yxAll.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+     	 yxAll.setUpdateTime(DateUtils.getNowDate());
+     	 yxAll.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
+         return yxYueMapper.insertYxAll(yxAll);
+     	}
+     	return  0;
+    	 
+    	 
+    	 
+    	 
+    	 
+    
     }
     
     
@@ -93,9 +128,9 @@ public class YxYueServiceImpl implements IYxYueService
     @Override
     public int updateYxYue(YxYue yxYue)
     {
-      	 yxYue.setCreateBy(ShiroUtils.getSysUser().getLoginName());
+  /*    	 yxYue.setCreateBy(ShiroUtils.getSysUser().getLoginName());
     	 yxYue.setUpdateTime(DateUtils.getNowDate());
-    	 yxYue.setUpdateBy(ShiroUtils.getSysUser().getLoginName());
+    	 yxYue.setUpdateBy(ShiroUtils.getSysUser().getLoginName());*/
         return yxYueMapper.updateYxYue(yxYue);
     }
 
